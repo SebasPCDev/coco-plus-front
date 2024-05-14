@@ -1,3 +1,4 @@
+import { UserProvider } from './components/context';
 import { montserrat } from './ui/fonts';
 import './ui/global.css';
 
@@ -8,7 +9,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} antialiased`}>{children}</body>
+      <UserProvider>
+        <body className={`${montserrat.className} antialiased`}>
+          {children}
+        </body>
+      </UserProvider>
     </html>
   );
 }

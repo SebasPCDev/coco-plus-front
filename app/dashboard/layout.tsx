@@ -1,5 +1,4 @@
-import CardWrapper from '../ui/dashboard/cards';
-import SideNav from '../ui/dashboard/sidenav';
+import SideNav from '../components/Sidebar/sidenav';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
