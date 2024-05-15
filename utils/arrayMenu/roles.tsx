@@ -11,11 +11,19 @@ const roles: Roles = {
       icon: DocumentDuplicateIcon,
     },
   ],
-  admincoworking: [
+  adminCoworking: [
     { name: 'Home', href: '/dashboard', icon: HomeIcon },
     {
       name: 'Ver Coworkings',
-      href: '/dashboard/coworkings',
+      href: '/dashboard/adminCoworking',
+      icon: DocumentDuplicateIcon,
+    },
+  ],
+  adminCompany: [
+    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    {
+      name: 'Ver emleados',
+      href: '/dashboard/adminCompany',
       icon: DocumentDuplicateIcon,
     },
   ],
