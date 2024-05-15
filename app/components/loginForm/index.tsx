@@ -9,6 +9,8 @@ import ILoginErrorForm from '../../../utils/types/loginFormErrorInterface';
 import loginValidation from '../../../utils/formValidation/loginValidation';
 import redirectionByRole from '../../../utils/ redirects/redirectByRole';
 import Swal from 'sweetalert2';
+import { HandleLogin } from '@/actions';
+
 
 const LoginForm = () => {
   const router = useRouter();
@@ -33,8 +35,9 @@ const LoginForm = () => {
     setLoginFormError(errors);
     if (errors.email || errors.password) return;
 
-    const data = await PostLogin(LoginForm);
+    const data = await HandleLogin(LoginForm);
 
+    //const data = await PostLogin(LoginForm);
     if (!data.error) {
       setUser(data.user);
       setToken(data.token);
