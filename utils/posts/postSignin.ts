@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 import { cookies } from 'next/headers';
 
-import ILoginForm from "../types/loginFormInterface";
+import ILoginForm from '../types/loginFormInterface';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostLogin = async (data: ILoginForm) => {
@@ -10,7 +10,7 @@ const PostLogin = async (data: ILoginForm) => {
   try {
     const response = await axios.post(url, data, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -18,18 +18,25 @@ const PostLogin = async (data: ILoginForm) => {
     // seteamos la cookie
     const cookiesStore = cookies();
     const token = response.data.token;
+    const user = response.data.user;
     if (token) {
-      cookiesStore.set("token", token, {
-        path: "/",
+      cookiesStore.set('token', token, {
+        path: '/',
         // expires:
         httpOnly: true,
-        sameSite: 'none'
-      })
+        sameSite: 'none',
+      });
+      cookiesStore.set('user', user, {
+        path: '/',
+        // expires:
+        httpOnly: true,
+        sameSite: 'none',
+      });
     }
 
     return response.data;
   } catch (error: any) {
-    return { error: error.message || "error desconcido" };
+    return { error: error.message || 'error desconcido' };
   }
 };
 
