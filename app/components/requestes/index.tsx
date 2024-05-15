@@ -98,17 +98,17 @@ export default function Requests() {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <div className="mb-2 flex items-center sm:mb-0">
                   <div className="min-w-0">
-                    <p className="truncate font-semibold md:text-base">
+                    <h2 className="truncate font-semibold md:text-2xl">
                       {item.name} {item.lastname}
-                    </p>
+                    </h2>
                     <p className="text-gray-500">{item.email}</p>
                     <p className="text-gray-500">{item.phone}</p>
                   </div>
                 </div>
                 <div className="flex flex-col items-start sm:items-end">
-                  <p className="truncate font-medium md:text-base">
+                  <h2 className="truncate font-medium md:text-2xl">
                     {item.position} - {item.companyName}
-                  </p>
+                  </h2>
                   <p className="text-gray-500">{item.companyEmail}</p>
                   <p className="text-gray-500">{item.companyPhone}</p>
                   <p className="text-gray-500">{item.address}</p>
