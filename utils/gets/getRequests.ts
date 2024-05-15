@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface IParams {
   token: string | undefined;
   params: {
     status: string | null | undefined;
-    type: string;
-  } | null;
+    type: string | null | undefined;
+  };
 }
 
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
@@ -22,9 +22,9 @@ const GetRequests = async ({ token, params }: IParams) => {
     });
 
     return response.data;
-    console.log("la petición ");
+    console.log('la petición ');
   } catch (error) {
-    console.log("hay un error", error);
+    console.log('hay un error', error);
   }
 };
 
