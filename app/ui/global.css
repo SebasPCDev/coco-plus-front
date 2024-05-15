@@ -88,6 +88,13 @@ body {
 .swal2-popup {
   font-size: 1.6rem !important;
 }
+/* Para inputs de tipo phone */
+.react-international-phone-input,
+.react-international-phone-country-selector-button {
+  background-color: rgb(229 231 235) !important;
+  height: 4.5rem !important;
+  padding: 0 1.6rem !important;
+}
 
 .Button_Form {
   @apply rounded-md bg-custom-secondary px-4 py-4 text-white;

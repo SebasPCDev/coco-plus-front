@@ -20,12 +20,12 @@ const OfertaSection: React.FC = () => {
         por lo que usa tu equipo. Sin compromisos.
       </p>
       <div className="flex justify-center space-x-4">
-        <Link href="/coworkingsForm">
+        <Link href="/formRequest/coworkingsForm">
           <button className="rounded-md bg-gray-900 px-8 py-4 text-2xl font-bold text-white hover:bg-green-500">
             Soy Coworking
           </button>
         </Link>
-        <Link href="/companiesForm">
+        <Link href="/formRequest/companiesForm">
           <button className="rounded-md bg-gray-900 px-8 py-4 text-2xl font-bold text-white hover:bg-green-500">
             Soy Empresa
           </button>
