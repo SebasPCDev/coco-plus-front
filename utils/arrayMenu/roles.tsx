@@ -1,6 +1,8 @@
 import { HomeIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
-const roles = {
+import { Roles, RoleItem } from '../types/rolesNavLinkInterface';
+
+const roles: Roles = {
   superadmin: [
     { name: 'Home', href: '/dashboard', icon: HomeIcon },
     {
