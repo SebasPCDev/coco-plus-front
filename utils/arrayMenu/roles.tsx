@@ -4,15 +4,10 @@ import { Roles, RoleItem } from '../types/rolesNavLinkInterface';
 
 const roles: Roles = {
   superadmin: [
-    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Home', href: '/dashboard/superadmin', icon: HomeIcon },
     {
-      name: 'Solicitudes Empresas',
-      href: '/dashboard/superadmin/requestsCompanies',
-      icon: DocumentDuplicateIcon,
-    },
-    {
-      name: 'Solicitudes Coworkings',
-      href: '/dashboard/superadmin/requestsCoworkings',
+      name: 'Solicitudes',
+      href: '/dashboard/superadmin/reuqests',
       icon: DocumentDuplicateIcon,
     },
   ],

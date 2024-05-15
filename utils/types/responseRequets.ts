@@ -1,5 +1,5 @@
 interface IResponseRequest {
-  id: string ;
+  id: string | undefined ;
   name: string | null;
   lastname: string | null;
   phone: string | null;
@@ -20,7 +20,7 @@ interface IResponseRequest {
   message: string | null;
   status: string | null;
   observation: string | null;
-  type: string | null;
+  type: string | null | undefined;
 }
 
 export default IResponseRequest;
