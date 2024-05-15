@@ -50,11 +50,6 @@ ion-icon {
   display: block;
 }
 
-img {
-  width: 100%;
-  height: auto;
-}
-
 input,
 select,
 button {
@@ -90,7 +85,10 @@ body {
   font-size: 16px;
   color: var(--cadet-gray);
 }
+.swal2-popup {
+  font-size: 1.6rem !important;
+}
 
 .Button_Form {
-  @apply bg-custom-secondary rounded-md px-4 py-4 text-white;
+  @apply rounded-md bg-custom-secondary px-4 py-4 text-white;
 }
