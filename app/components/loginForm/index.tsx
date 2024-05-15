@@ -42,7 +42,8 @@ const LoginForm = () => {
         icon: 'success',
         title: 'Bienvenido',
         showConfirmButton: false,
-        timer: 1500,
+        width: '450px',
+        timer: 2000,
       });
       if (data.user) {
         const redirection = redirectionByRole(data.user.role);

@@ -7,12 +7,12 @@ const roles: Roles = {
     { name: 'Home', href: '/dashboard', icon: HomeIcon },
     {
       name: 'Solicitudes Empresas',
-      href: '/dashboard/requestsCompanies',
+      href: '/dashboard/superadmin/requestsCompanies',
       icon: DocumentDuplicateIcon,
     },
     {
       name: 'Solicitudes Coworkings',
-      href: '/dashboard/requestsCoworkings',
+      href: '/dashboard/superadmin/requestsCoworkings',
       icon: DocumentDuplicateIcon,
     },
   ],
