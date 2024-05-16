@@ -4,6 +4,7 @@ import { PowerIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/app/components/context';
 import Cookie from 'js-cookie';
+import { HandleLogout } from '@/actions/auth';
 
 export default function Logout() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function Logout() {
 
   const handleClick = (event: any) => {
     event.preventDefault();
+    HandleLogout();
     setToken(undefined);
     setUser(undefined);
     Cookie.remove('token');

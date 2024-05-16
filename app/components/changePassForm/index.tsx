@@ -1,64 +1,63 @@
 'use client';
-import { LoginFormArray } from '../../../utils/arraysforms/loginForm';
 import React, { useState } from 'react';
-import ILoginForm from '../../../utils/types/loginFormInterface';
-import PostLogin from '../../../utils/posts/postSignin';
 import { useUserContext } from '../context';
 import { useRouter } from 'next/navigation';
-import ILoginErrorForm from '../../../utils/types/loginFormErrorInterface';
-import loginValidation from '../../../utils/formValidation/loginValidation';
 import redirectionByRole from '../../../utils/ redirects/redirectByRole';
 import Swal from 'sweetalert2';
-import { HandleLogin } from '@/actions/auth';
+import { HandleChangePass } from '@/actions/auth';
+import { ChangePassFormArray } from '@/utils/arraysforms/changePassForm';
+import IChangePassForm from '@/utils/types/changePassFormInterface';
+import IChangePassErrorForm from '@/utils/types/changePassFormErrorInterface';
+import changePassValidation from '@/utils/formValidation/changePassValidatio';
 
 
-const LoginForm = () => {
+const ChangePassForm = () => {
   const router = useRouter();
   const { setUser, setToken } = useUserContext();
-  const [LoginForm, setLoginForm] = useState<ILoginForm>({
-    email: '',
+  const [changePassForm, setChangePassForm] = useState<IChangePassForm>({
     password: '',
+    confPassword: ''
   });
 
-  const [LoginFormError, setLoginFormError] = useState<ILoginErrorForm>({
-    email: '',
+  const [changePassFormError, setChangePassFormError] = useState<IChangePassErrorForm>({
     password: '',
+    confPassword: ''
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginForm({ ...LoginForm, [name]: value });
+    setChangePassForm({ ...changePassForm, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = loginValidation(LoginForm);
-    setLoginFormError(errors);
-    if (errors.email || errors.password) return;
+    const errors = changePassValidation(changePassForm);
+    setChangePassFormError(errors);
+    if (errors.password || errors.confPassword) return;
 
-    const data = await HandleLogin(LoginForm);
-
-    //const data = await PostLogin(LoginForm);
+    
+    const data = await HandleChangePass(changePassForm);
+    
     if (!data.error) {
-      setUser(data.user);
-      setToken(data.token);
+      // setUser(data.user);
+      // setToken(data.token);
       await Swal.fire({
-        icon: 'success',
-        title: 'Bienvenido',
-        showConfirmButton: false,
-        width: '450px',
-        timer: 2000,
-      });
-      if (data.user) {
-        const redirection = redirectionByRole(data.user.role);
-        router.push(redirection);
+          icon: 'success',
+          title: 'Contraseña modificada',
+          showConfirmButton: false,
+          width: '450px',
+          timer: 2000,
+        });
+
+      const redirection = redirectionByRole(data.role);
+      router.push(redirection);
+
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error modificando la contraseña',
+        });
       }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Usuario o contraseña incorrectos',
-      });
-    }
   };
 
   return (
@@ -70,11 +69,11 @@ const LoginForm = () => {
             onSubmit={handleSubmit}
           >
             <h1 className="m-6 text-center text-3xl font-bold text-gray-800">
-              Iniciar Sesión
+              Cambiar contraseña
             </h1>
-            {LoginFormArray.map(({ name, label, type, placeholder }) => {
-              const formValue = LoginForm[name as keyof ILoginForm];
-              const formError = LoginFormError[name as keyof ILoginForm];
+            {ChangePassFormArray.map(({ name, label, type, placeholder }) => {
+              const formValue = changePassForm[name as keyof IChangePassForm];
+              const formError = changePassFormError[name as keyof IChangePassForm];
 
               return (
                 <React.Fragment key={name}>
@@ -103,7 +102,7 @@ const LoginForm = () => {
               className="Button_Form mt-4 w-full rounded-2xl py-2 text-[16px] font-bold text-white shadow-lg transition duration-500 ease-in-out hover:bg-lime-600 hover:shadow-xl"
               type="submit"
             >
-              Iniciar Sesión
+              Cambiar contraseña
             </button>
           </form>
         </div>
@@ -112,4 +111,5 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+
+export default ChangePassForm;

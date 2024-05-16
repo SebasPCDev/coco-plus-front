@@ -6,10 +6,19 @@ import { RoleItem } from '@/utils/types/rolesNavLinkInterface';
 import { cookies } from 'next/headers';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { getSession } from '@/app/lib/session';
+import { UserSession } from '@/app/lib/definitions';
 
 export default async function NavLinks() {
-  const user = JSON.parse(cookies().get('user')?.value);
+  // const userData = cookies().get('user')?.value;
+  // if (userData) user = JSON.parse(userData);
+  let user;
 
+ const session = await getSession();
+  if (session) {
+    user = session.user as UserSession
+  }
+  
   const arrayNavLinks = roles[user?.role];
 
   return (
