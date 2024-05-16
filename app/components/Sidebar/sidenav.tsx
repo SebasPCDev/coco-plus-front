@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import NavLinks from './navlinks/nav-links';
-import CocoLogo from '../../ui/coco-logo';
 import Logout from '../logout';
+import CocoLogo from '../Logo/coco-logo';
 
 export default function SideNav() {
   return (

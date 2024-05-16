@@ -9,9 +9,9 @@ export function CreateCoworking() {
   return (
     <Link
       href="/dashboard/invoices/create"
-      className="flex h-12 items-center rounded-lg bg-custom-fourth px-4 font-medium text-custom-primary transition-colors hover:bg-custom-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-primary"
+      className="flex h-12 items-center justify-center rounded-lg bg-custom-fourth px-4 font-medium text-custom-primary transition-colors hover:bg-custom-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-primary"
     >
-      <span className="hidden md:block">Crear Coworking</span>{' '}
+      <span className="hidden  md:block">Crear Coworking</span>{' '}
       <PlusIcon className="h-5 md:ml-4" />
     </Link>
   );
