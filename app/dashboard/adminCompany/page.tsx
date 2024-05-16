@@ -1,3 +1,1 @@
-export default function Page() {
-  return;
-}
+export { default } from '@/app/components/JulianCompany/todo';
