@@ -8,14 +8,12 @@ export default async function NavLinks() {
   // const userData = cookies().get('user')?.value;
   // if (userData) user = JSON.parse(userData);
 
-
   const session = await getSession();
 
   if (!session) return;
 
-  const user = session.user as UserSession
+  const user = session.user as UserSession;
 
-  
   const arrayNavLinks = roles[user?.role];
 
   return (
@@ -26,7 +24,7 @@ export default async function NavLinks() {
           <Link
             key={link?.name}
             href={link?.href}
-            className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+            className=" flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium  hover:bg-custom-primary hover:text-custom-secondary md:flex-none md:justify-start md:p-2 md:px-3"
           >
             <LinkIcon className="w-6" />
             <p className="hidden md:block">{link?.name}</p>
