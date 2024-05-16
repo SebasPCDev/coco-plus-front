@@ -37,7 +37,7 @@ const UserProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (user) {
-      // Cookie.set('user', JSON.stringify(user));
+      Cookie.set('user', JSON.stringify(user));
     }
     if (token) {
       Cookie.set('token', token);

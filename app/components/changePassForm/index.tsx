@@ -36,6 +36,8 @@ const ChangePassForm = () => {
 
     
     const data = await HandleChangePass(changePassForm);
+
+    console.log("DATA", data);
     
     if (!data.error) {
       // setUser(data.user);
