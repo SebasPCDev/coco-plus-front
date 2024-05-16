@@ -1,21 +1,38 @@
-import Image from 'next/image';
-import {
-  UpdateCoworking,
-  DeleteCoworking,
-} from '@/app/components/Buttons/dashboardSuperadmin/buttons';
-
-import GetCoworkings from '@/utils/gets/getCoworkings';
+'use client';
 import Pagination from '../pagination';
-import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
+import GetCompanies from '@/utils/gets/getCompanies';
+import {
+  DeleteCompany,
+  UpdateCompany,
+} from '../../Buttons/dashboardSuperadmin/buttons';
+import CompanyStatus from '../../Status/dashboardSuperadmin/statusCompany';
+import { useUserContext } from '../../context';
+import { useEffect, useState } from 'react';
+import { get } from 'http';
 
-export default async function CoworkingsTable({
+export default function CoworkingsTable({
   query,
   currentPage,
 }: {
   query: string;
   currentPage: number;
 }) {
-  const coworkingsData = await GetCoworkings();
+  const { token } = useUserContext();
+  console.log(token);
+
+  const [companiesData, setCompaniesData] = useState<IResponseCompany[]>([]);
+
+  const getData = async () => {
+    const response = await GetCompanies({ token });
+    if (response) {
+      console.log(response);
+      setCompaniesData(response);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="mt-6 flow-root w-full">
@@ -71,19 +88,16 @@ export default async function CoworkingsTable({
                   Teléfono
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  País
+                  # Beneficiarios
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Provincia
+                  Sector Empresarial
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Ciudad
+                  Tamaño Empresa
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Capacidad
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Estado
+                  Status
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -91,49 +105,46 @@ export default async function CoworkingsTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {coworkingsData.coworking?.map((coworking) => (
+              {companiesData?.map((company) => (
                 <tr
-                  key={coworking.id}
+                  key={company.id}
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap  py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <Image
-                        src={coworking.thumbnail || '/images/placeholder.jpg'}
+                      {/* <Image
+                        src={company.thumbnail || '/images/placeholder.jpg'}
                         className="rounded-full"
                         width={80}
                         height={80}
-                        alt={`${coworking.name}'s profile picture`}
-                      />
-                      <p>{coworking.name}</p>
+                        alt={`${company.name}'s profile picture`}
+                      /> */}
+                      <p>{company.name}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.email}
+                    {company.email}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.phone}
+                    {company.phone}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.country || ''}
+                    {company.quantityBeneficiaries}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.state || ''}
+                    {company.businessSector}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.city || ''}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {coworking.capacity}
+                    {company.size}
                   </td>
 
                   <td className="whitespace-nowrap px-3 py-3">
-                    <CoworkingStatus status={coworking.status} />
+                    <CompanyStatus status={'active'} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateCoworking id={coworking.id} />
-                      <DeleteCoworking id={coworking.id} />
+                      <UpdateCompany id={company.id} />
+                      <DeleteCompany id={company.id} />
                     </div>
                   </td>
                 </tr>
