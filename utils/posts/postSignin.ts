@@ -19,6 +19,7 @@ const PostLogin = async (data: ILoginForm) => {
     const cookiesStore = cookies();
     const token = response.data.token;
     const user = response.data.user;
+    console.log("SET COOKIE");
     if (token) {
       cookiesStore.set('token', token, {
         path: '/',
@@ -26,10 +27,10 @@ const PostLogin = async (data: ILoginForm) => {
         httpOnly: true,
         sameSite: 'none',
       });
-      cookiesStore.set('user', user, {
+      cookiesStore.set('user', JSON.stringify(user), {
         path: '/',
         // expires:
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'none',
       });
     }
