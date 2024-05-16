@@ -38,7 +38,7 @@ export default async function MyCoworkigs() {
                 <td className="border px-4 py-2">{coworking.status}</td>
                 <td className="border px-4 py-2">
                 <div className="flex">
-                  <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 mr-2">
+                  <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">
                     Edit
                   </button>
                   <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">
