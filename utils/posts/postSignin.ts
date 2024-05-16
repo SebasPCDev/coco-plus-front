@@ -19,7 +19,6 @@ const PostLogin = async (data: ILoginForm) => {
     const cookiesStore = cookies();
     const token = response.data.token;
     const user = response.data.user;
-    console.log("SET COOKIE");
     if (token) {
       cookiesStore.set('token', token, {
         path: '/',
