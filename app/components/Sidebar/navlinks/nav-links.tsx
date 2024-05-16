@@ -1,10 +1,5 @@
-import { useUserContext } from '../../context';
 import roles from '@/utils/arrayMenu/roles';
-import { useEffect, useState } from 'react';
-import { RoleItem } from '@/utils/types/rolesNavLinkInterface';
-// import { usePathname } from 'next/navigation';
 import { cookies } from 'next/headers';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { getSession } from '@/app/lib/session';
 import { UserSession } from '@/app/lib/definitions';

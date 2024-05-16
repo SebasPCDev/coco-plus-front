@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from './app/lib/session';
 import { UserSession } from './app/lib/definitions';
-import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 export const config = {
   matcher: [
@@ -37,7 +36,4 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
   }
-
-
-
 }
