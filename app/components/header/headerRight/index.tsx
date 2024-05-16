@@ -41,12 +41,24 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
           </Link>
         </div>
       </div>
-      <div className={` ${visibleProfile} items-center gap-4 `}>
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-custom-primary text-custom-secondary">
-          {firstLetter}
+      <div className={` ${visibleProfile} items-center gap-10`}>
+        <div>
+          <Link href={`/dashboard/${user?.role}`}>
+            <button className="flex gap-4 rounded-full px-6 py-4 text-3xl font-semibold text-zinc-50 transition duration-300 hover:bg-zinc-900 hover:text-zinc-50">
+              <RiMenuLine />
+              Dashboard
+            </button>
+          </Link>
         </div>
-        <div className="text-3xl text-custom-white">{name}</div>
-        <Logout />
+        <div className="flex cursor-pointer items-center rounded-full px-5 transition duration-300 hover:bg-zinc-900 hover:text-zinc-50 ">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-custom-primary text-custom-secondary">
+            {firstLetter}
+          </div>
+          <div className="rounded-md px-6 py-4 text-3xl font-semibold text-zinc-50 transition duration-300 ">
+            {name}
+          </div>
+          <Logout />
+        </div>
       </div>
     </div>
   );

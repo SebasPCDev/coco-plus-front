@@ -18,47 +18,48 @@ export default async function CoworkingsTable({
   const coworkingsData = await GetCoworkings();
 
   return (
-    <div className="mt-6 flow-root w-full">
+    <div className="mt-6 flow-root w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
-        <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-          {/* <div className="md:hidden">
-            {invoices?.map((invoice) => (
+        <div className="founded-lg overflow relative bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            {coworkingsData.coworking?.map((coworking) => (
               <div
-                key={invoice.id}
+                key={coworking.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
-                        src={invoice.image_url}
+                        src={coworking.thumbnail}
                         className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
+                        width={60}
+                        height={60}
+                        alt={`${coworking.name}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <p className="font-bold">{coworking.name}</p>
                     </div>
-                    <p className=" text-gray-500">{invoice.email}</p>
+                    <div className="grid grid-cols-2 gap-x-20 px-1">
+                      <p className="  text-gray-500">{coworking.email}</p>
+                      <p className=" text-gray-500">{coworking.phone}</p>
+                      <p className=" text-gray-500">{coworking.country}</p>
+                      <p className=" text-gray-500">{coworking.state}</p>
+                      <p className=" text-gray-500">{coworking.city}</p>
+                      <p className=" text-gray-500">{coworking.capacity}</p>
+                    </div>
                   </div>
-                  <InvoiceStatus status={invoice.status} />
+                  <CoworkingStatus status={coworking.status} />
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
-                  <div>
-                    <p className="text-xl font-medium">
-                      {formatCurrency(invoice.amount)}
-                    </p>
-                    <p>{formatDateToLocal(invoice.date)}</p>
-                  </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={invoice.id} />
-                    <DeleteInvoice id={invoice.id} />
+                    <UpdateCoworking id={coworking.id} />
+                    <DeleteCoworking id={coworking.id} />
                   </div>
                 </div>
               </div>
             ))}
-          </div> */}
-          <table className="hidden min-w-full text-gray-900 md:table">
+          </div>
+          <table className="hidden min-w-full  text-gray-900 md:table">
             <thead className="rounded-lg text-center  font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -90,44 +91,45 @@ export default async function CoworkingsTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+
+            <tbody className="overflow-x-auto bg-white">
               {coworkingsData.coworking?.map((coworking) => (
                 <tr
                   key={coworking.id}
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="whitespace-nowrap  py-3 pl-6 pr-3">
-                    <div className="flex items-center gap-3">
+                  <td className="max-w-[150px]  truncate whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex items-center justify-center gap-3">
                       <Image
                         src={coworking.thumbnail || '/images/placeholder.jpg'}
                         className="rounded-full"
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={60}
                         alt={`${coworking.name}'s profile picture`}
                       />
                       <p>{coworking.name}</p>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.email}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.phone}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.country || ''}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.state || ''}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.city || ''}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {coworking.capacity}
                   </td>
 
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     <CoworkingStatus status={coworking.status} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
