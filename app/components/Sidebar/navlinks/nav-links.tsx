@@ -7,12 +7,14 @@ import { UserSession } from '@/app/lib/definitions';
 export default async function NavLinks() {
   // const userData = cookies().get('user')?.value;
   // if (userData) user = JSON.parse(userData);
-  let user;
 
- const session = await getSession();
-  if (session) {
-    user = session.user as UserSession
-  }
+
+  const session = await getSession();
+
+  if (!session) return;
+
+  const user = session.user as UserSession
+
   
   const arrayNavLinks = roles[user?.role];
 

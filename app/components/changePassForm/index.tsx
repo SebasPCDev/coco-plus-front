@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../context';
 import { useRouter } from 'next/navigation';
-import redirectionByRole from '../../../utils/ redirects/redirectByRole';
+import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
-import { HandleChangePass } from '@/actions/auth';
+import { HandleChangePass, HandleLogout } from '@/actions/auth';
 import { ChangePassFormArray } from '@/utils/arraysforms/changePassForm';
 import IChangePassForm from '@/utils/types/changePassFormInterface';
 import IChangePassErrorForm from '@/utils/types/changePassFormErrorInterface';
@@ -34,14 +34,12 @@ const ChangePassForm = () => {
     setChangePassFormError(errors);
     if (errors.password || errors.confPassword) return;
 
-    
     const data = await HandleChangePass(changePassForm);
 
-    console.log("DATA", data);
-    
+   
     if (!data.error) {
-      // setUser(data.user);
-      // setToken(data.token);
+      setUser(data.user);
+      setToken(data.token);
       await Swal.fire({
           icon: 'success',
           title: 'Contraseña modificada',
@@ -50,8 +48,12 @@ const ChangePassForm = () => {
           timer: 2000,
         });
 
-      const redirection = redirectionByRole(data.role);
-      router.push(redirection);
+        HandleLogout();
+        setToken(undefined);
+        setUser(undefined);
+        Cookie.remove('token');
+        Cookie.remove('user');
+        router.push('/');
 
       } else {
         Swal.fire({
