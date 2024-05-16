@@ -66,3 +66,22 @@ export function DeleteCompany({ id }: { id: string }) {
     </>
   );
 }
+
+export function UpdateUser({ id }: { id: string }) {
+  return (
+    <Link href="#" className="rounded-md border p-2 hover:bg-gray-100">
+      <PencilIcon className="w-8" />
+    </Link>
+  );
+}
+
+export function InactiveUser({ id }: { id: string }) {
+  return (
+    <>
+      <button className="rounded-md border p-2 hover:bg-gray-100">
+        <span className="sr-only">Delete</span>
+        <DocumentMinusIcon className="w-8" />
+      </button>
+    </>
+  );
+}
