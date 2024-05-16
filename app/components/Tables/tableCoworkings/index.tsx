@@ -99,7 +99,7 @@ export default async function CoworkingsTable({
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="max-w-[150px]  truncate whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex items-center justify-center gap-3">
+                    <div className="flex items-center gap-3">
                       <Image
                         src={coworking.thumbnail || '/images/placeholder.jpg'}
                         className="rounded-full"

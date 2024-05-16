@@ -13,9 +13,9 @@ export default function DashboardCoworkingsLayout({
           <ClipboardDocumentListIcon className="w-16" />
           <h1 className=" text-[36px] font-bold">Lista de Coworkings</h1>
         </div>
-        <div className="!w-[200px]">
+        {/* <div className="!w-[200px]">
           <CreateCoworking />
-        </div>
+        </div> */}
       </div>
       <div>{children}</div>
     </div>
