@@ -18,6 +18,8 @@ export async function middleware(request: NextRequest) {
 
   const session = await getSession();
 
+  console.log("GET SESION", session);
+
   if (session) {
     const { activationDate } = session?.user as UserSession
     if (!activationDate) return NextResponse.redirect(new URL('/change-password', request.url))

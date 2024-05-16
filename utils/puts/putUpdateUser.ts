@@ -1,24 +1,24 @@
 import axios from 'axios';
-import { cookies } from 'next/headers';
 
 import IChangePassForm from '../types/changePassFormInterface';
+import { getSession } from '@/app/lib/session';
+import { UserSession } from '@/app/lib/definitions';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PutUpdateUser = async (data: IChangePassForm) => {
 
-  const cookiesStore = cookies();
-  const token = cookiesStore.get('token')?.value;
-  const dataUser = cookiesStore.get('user')?.value;
+  const session = await getSession();
+  if (!session) throw 'Session not found';
 
   try {
-    if (!dataUser) throw 'User not found';
-    const user = JSON.parse(dataUser)
+
+    const user = session.user as UserSession;
     const url = `${urlBase}/users/${user.id}`;
 
     const response = await axios.put(url, data,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${session.token}`,
         }
       });
 
