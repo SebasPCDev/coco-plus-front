@@ -49,6 +49,17 @@ const roles: Roles = {
       icon: DocumentDuplicateIcon,
     },
   ],
+  employee: [
+    { name: 'Perfil', 
+      href: '/dashboard/employee', 
+      icon: HomeIcon 
+    },
+    {
+      name: 'Coworkings',
+      href: '/dashboard/employee/coworkings',
+      icon: HomeIcon,
+    }
+  ],
 };
 
 export default roles;
