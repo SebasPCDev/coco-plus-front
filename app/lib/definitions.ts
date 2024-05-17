@@ -1,3 +1,23 @@
+
+export type UserSession = {
+  id: string;
+  name: string;
+  lastname: string;
+  phone: string;
+  email: string;
+  identification: string;
+  position: string;
+  recoveryToken: string;
+  activationDate: Date;
+  role: string;
+  status: string;
+  expiresAt: Date;
+}
+
+export type SessionPayload = {
+  user: UserSession;
+  token: string;
+}
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.

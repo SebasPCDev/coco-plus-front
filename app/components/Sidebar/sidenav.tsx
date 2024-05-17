@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import NavLinks from './navlinks/nav-links';
-import CocoLogo from '../../ui/coco-logo';
 import Logout from '../logout';
+import CocoLogo from '../Logo/coco-logo';
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col justify-center px-3 py-4 md:px-2">
+    <div className="fixed flex h-full flex-col justify-center px-3 py-4 md:px-2">
       <Link
         className="mb-2 flex h-20 w-full rounded-md bg-custom-fourth p-4 md:h-40"
-        href="/dashboard"
+        href="/"
       >
         <CocoLogo />
       </Link>

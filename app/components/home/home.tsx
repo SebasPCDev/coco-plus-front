@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import Banner from '../Banner';
 import Service from '../Service';

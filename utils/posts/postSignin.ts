@@ -26,10 +26,10 @@ const PostLogin = async (data: ILoginForm) => {
         httpOnly: true,
         sameSite: 'none',
       });
-      cookiesStore.set('user', user, {
+      cookiesStore.set('user', JSON.stringify(user), {
         path: '/',
         // expires:
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'none',
       });
     }
