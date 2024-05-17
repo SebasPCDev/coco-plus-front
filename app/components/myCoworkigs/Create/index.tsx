@@ -4,8 +4,11 @@ import { arrayNewCoworkingForm } from '@/utils/arraysforms/arrayNewCoworking';
 import PostNewCoworking from '@/utils/posts/postNewCoworking';
 import { useState } from 'react';
 import { useUserContext } from '../../context';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 const CoworkingForm = () => {
+  const router = useRouter();
   const initialState = {
     name: '',
     phone: '',
@@ -44,7 +47,25 @@ const CoworkingForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await Swal.fire({
+      title: 'seguro deseasn crear este coworking?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'si, crear',
+      denyButtonText: `no`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Se ha creado', '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire('se cancelo', '', 'info');
+        router.push('/dashboard/adminCoworking/myCoworkings');
+        return;
+      }
+    });
+
     const response = await PostNewCoworking({ formData, token });
+    router.push('/dashboard/adminCoworking/myCoworkings');
 
     console.log(response);
   };
@@ -94,21 +115,3 @@ const CoworkingForm = () => {
 };
 
 export default CoworkingForm;
-
-//   const [formData, setFormData] = useState({
-//     name: '',
-//     phone: '',
-//     email: '',
-//     open: '',
-//     close: '',
-//     address: '',
-//     country: '',
-//     state: '',
-//     city: '',
-//     lat: '',
-//     long: '',
-//     capacity: '',
-//     message: '',
-//     status: '',
-//     thumbnail: '',
-//   });
