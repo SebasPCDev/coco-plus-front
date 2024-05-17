@@ -1,20 +1,12 @@
+'use client';
 import roles from '@/utils/arrayMenu/roles';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { getSession } from '@/app/lib/session';
-import { UserSession } from '@/app/lib/definitions';
+import { usePathname } from 'next/navigation';
 
-export default async function NavLinks() {
-  // const userData = cookies().get('user')?.value;
-  // if (userData) user = JSON.parse(userData);
-
-  const session = await getSession();
-
-  if (!session) return;
-
-  const user = session.user as UserSession;
-
-  const arrayNavLinks = roles[user?.role];
+export default function NavLinks() {
+  const pathname = usePathname();
+  const role = pathname.split('/')[2];
+  const arrayNavLinks = roles[role];
 
   return (
     <>
@@ -24,9 +16,17 @@ export default async function NavLinks() {
           <Link
             key={link?.name}
             href={link?.href}
-            className=" flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium  hover:bg-custom-primary hover:text-custom-secondary md:flex-none md:justify-start md:p-2 md:px-3"
+            className={`mb-3 flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium  hover:bg-custom-primary hover:text-custom-secondary md:flex-none md:justify-start md:p-2 md:px-3 
+            
+            ${
+              pathname === link?.href
+                ? ' !bg-custom-primary !text-custom-secondary'
+                : ''
+            }`}
           >
-            <LinkIcon className="w-6" />
+            <div className="w-8">
+              <LinkIcon />
+            </div>
             <p className="hidden md:block">{link?.name}</p>
           </Link>
         );
