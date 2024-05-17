@@ -10,6 +10,7 @@ import Modal from '../Modals/ModalNewUser';
 import arrayFormNewUserCoworking from '@/utils/arraysforms/NewUserRecepCoworking';
 import PostNewUserReceptCoworking from '@/utils/posts/postNewUserReceptCoworking';
 import ImagesContent from './imagescontent';
+import Swal from 'sweetalert2';
 
 interface User {
   id: string;
@@ -102,8 +103,8 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
     const { name, value } = e.target;
 
     if (name === 'capacity') {
-      setCoworking({ ...coworking, [name]: parseInt(value) });
-      setNewInfo({ ...newInfo, [name]: parseInt(value) });
+      setCoworking({ ...coworking, [name]: Number(value) });
+      setNewInfo({ ...newInfo, [name]: Number(value) });
     } else {
       setCoworking({ ...coworking, [name]: value });
       setNewInfo({ ...newInfo, [name]: value });
@@ -113,7 +114,24 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
   };
 
   const handleClick = async () => {
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No'No guardar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('guardado', '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+        return;
+      }
+    });
     const response = await PutUpdateCoworking({ id, newInfo, token });
+
+    getData();
     console.log(newInfo);
 
     console.log(response);
@@ -178,7 +196,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.address || ''}
+                  value={coworking.address}
                   name="address"
                   placeholder="Dirección"
                 />
@@ -188,7 +206,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.city || ''}
+                  value={coworking.city}
                   name="city"
                   placeholder="Ciudad"
                 />
@@ -196,7 +214,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.state || ''}
+                  value={coworking.state}
                   name="state"
                   placeholder="Estado"
                 />
@@ -204,7 +222,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.country || ''}
+                  value={coworking.country}
                   placeholder="Pais"
                   name="country"
                 />
@@ -220,8 +238,9 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.open || 'Horario de apertura'}
+                  value={coworking.open  }
                   name="open"
+                  placeholder='Apertura'
                 />
               </div>
               <div className="flex">
@@ -232,8 +251,9 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.close || 'Horario de cierre'}
+                  value={coworking.close}
                   name="close"
+                  placeholder='Cierre'
                 />
               </div>
             </div>
@@ -248,8 +268,9 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.capacity || 'Capacidad'}
+                  value={coworking.capacity}
                   name="capacity"
+                  placeholder='Capacidad'
                 />
               </div>
               <div className="flex">
@@ -260,7 +281,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.status || 'Estatus'}
+                  value={coworking.status}
                   name="status"
                 />
               </div>

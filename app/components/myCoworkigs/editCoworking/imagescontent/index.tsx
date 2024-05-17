@@ -4,8 +4,10 @@ import Modal from '../../Modals/ModalNewUser';
 import { useState } from 'react';
 import axios from 'axios';
 import { useUserContext } from '@/app/components/context';
+import { useRouter } from 'next/navigation';
 
 const ImagesContent = ({ coworking }: { coworking: any }) => {
+  const router = useRouter();
   const id = coworking.id;
   const { token } = useUserContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +38,7 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
 
       if (response.status === 200) {
         console.log('Imagen enviada con éxito');
+        router.push(`/dashboard/adminCoworking/myCoworkings/${id}`);
         // Aquí podrías actualizar el estado o realizar cualquier otra acción necesaria
       } else {
         console.error('Error al enviar la imagen');
@@ -43,7 +46,8 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
     } catch (error) {
       console.error('Error en la solicitud', error);
     } finally {
-      setIsModalOpen(false); // Cierra el modal después de enviar la imagen
+      setIsModalOpen(false);
+      // Cierra el modal después de enviar la imagen
     }
   };
 

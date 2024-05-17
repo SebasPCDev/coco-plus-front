@@ -20,9 +20,6 @@ export default async function MyCoworkingDetail({ id }: { id: string }) {
             {<InfoCoworking coworking={coworking} />}
 
             <div className="col-span-2 rounded-lg border p-4 shadow-sm">
-              <button className="mt-4 block w-full rounded-lg border bg-gray-100 md:w-1/2">
-                agregar recepcionista
-              </button>
               <h2 className="text-xl font-semibold">Administratores</h2>
               {coworking.user.map((user: any) => {
                 return <InfoUsersAdmins key={user.id} user={user} />;
@@ -33,9 +30,7 @@ export default async function MyCoworkingDetail({ id }: { id: string }) {
         {/* contenedor 2 */}
         <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-1/3">
           <h2 className=" mb-2 text-xl font-semibold">imagen portada</h2>
-          <button className="mt-4 block w-full rounded-lg border bg-gray-100">
-            {coworking.thumbnail ? 'Cambiar imagen' : 'Agregar imagen'}
-          </button>
+
           {coworking.thumbnail && (
             <Image
               src={coworking.thumbnail}
@@ -48,9 +43,6 @@ export default async function MyCoworkingDetail({ id }: { id: string }) {
 
           <h2 className="my-4 text-xl font-semibold">Images secundarias</h2>
           <div className="flex flex-col space-y-4">
-            <button className="mt-4 rounded-lg border bg-gray-100">
-              Agregar Imagenes
-            </button>
             {coworking.images.map((image) => (
               <Image
                 key={image.id}
