@@ -34,31 +34,28 @@ const roles: Roles = {
     },
   ],
   adminCoworking: [
-    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Home', href: '/dashboard/adminCoworking', icon: HomeIcon },
     {
-      name: 'Ver Coworkings',
-      href: '/dashboard/adminCoworking',
+      name: 'Mis Coworkings',
+      href: '/dashboard/adminCoworking/myCoworkings',
       icon: DocumentDuplicateIcon,
     },
   ],
   adminCompany: [
-    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Home', href: '/dashboard/adminCompany', icon: HomeIcon },
     {
       name: 'Ver emleados',
-      href: '/dashboard/adminCompany',
+      href: '/dashboard/adminCompany/verEmpleados',
       icon: DocumentDuplicateIcon,
     },
   ],
   employee: [
-    { name: 'Perfil', 
-      href: '/dashboard/employee', 
-      icon: HomeIcon 
-    },
+    { name: 'Perfil', href: '/dashboard/employee', icon: HomeIcon },
     {
       name: 'Coworkings',
       href: '/dashboard/employee/coworkings',
       icon: HomeIcon,
-    }
+    },
   ],
 };
 
