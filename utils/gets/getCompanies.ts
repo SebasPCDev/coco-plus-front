@@ -7,7 +7,7 @@ interface IParams {
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const GetCompanies = async ({ token }: IParams) => {
-  const url = `${urlBase}/companies`;
+  const url = `${urlBase}/companies?page=1&limit=35`;
 
   try {
     const response = await axios.get(url, {
