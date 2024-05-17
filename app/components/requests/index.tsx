@@ -14,6 +14,7 @@ import IResponseRequest from '@/utils/types/responseRequets';
 
 export default function Requests() {
   const { token } = useUserContext();
+  console.log(token);
   const [params, setParams] = useState({
     status: null,
     type: null,

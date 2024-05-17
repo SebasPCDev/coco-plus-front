@@ -9,7 +9,7 @@ import ILoginErrorForm from '../../../utils/types/loginFormErrorInterface';
 import loginValidation from '../../../utils/formValidation/loginValidation';
 import redirectionByRole from '../../../utils/ redirects/redirectByRole';
 import Swal from 'sweetalert2';
-import { HandleLogin } from '@/actions';
+import { HandleLogin } from '@/actions/auth';
 
 
 const LoginForm = () => {
