@@ -18,14 +18,12 @@ export default function CoworkingsTable({
   currentPage: number;
 }) {
   const { token } = useUserContext();
-  console.log(token);
 
   const [companiesData, setCompaniesData] = useState<IResponseCompany[]>([]);
 
   const getData = async () => {
     const response = await GetCompanies({ token });
     if (response) {
-      console.log(response);
       setCompaniesData(response);
     }
   };

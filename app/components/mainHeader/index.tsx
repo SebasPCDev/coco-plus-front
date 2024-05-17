@@ -4,9 +4,9 @@ import ImageCoworkMobile from '../imageCoworkMobile';
 
 const HeaderMain: React.FC = () => {
   return (
-    <div className="flex">
+    <div className="mx-[100px] mb-20 flex">
       <div className="flex w-full flex-col items-center md:flex-row">
-        <div className="px-50  mb-8 w-full md:mb-0 md:mr-4 md:w-1/2">
+        <div className=" mb-8 w-full md:mb-0 md:mr-4 md:w-1/2">
           {/* Agregamos un margen derecho para separar los componentes */}
           <OfertaSection />
         </div>

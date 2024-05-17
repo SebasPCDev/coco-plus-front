@@ -16,7 +16,7 @@ export default function NavLinks() {
           <Link
             key={link?.name}
             href={link?.href}
-            className={`mb-3 flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium  hover:bg-custom-primary hover:text-custom-secondary md:flex-none md:justify-start md:p-2 md:px-3 
+            className={`mb-3 flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 font-medium transition ease-in hover:bg-custom-primary hover:text-custom-secondary md:flex-none md:justify-start md:p-2 md:px-3 
             
             ${
               pathname === link?.href

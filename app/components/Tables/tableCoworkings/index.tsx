@@ -16,6 +16,7 @@ export default async function CoworkingsTable({
   currentPage: number;
 }) {
   const coworkingsData = await GetCoworkings();
+  console.log(coworkingsData);
 
   return (
     <div className="mt-6 flow-root w-full overflow-x-auto">
@@ -40,7 +41,7 @@ export default async function CoworkingsTable({
                       <p className="font-bold">{coworking.name}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-x-20 px-1">
-                      <p className="  text-gray-500">{coworking.email}</p>
+                      <p className=" text-gray-500">{coworking.email}</p>
                       <p className=" text-gray-500">{coworking.phone}</p>
                       <p className=" text-gray-500">{coworking.country}</p>
                       <p className=" text-gray-500">{coworking.state}</p>
