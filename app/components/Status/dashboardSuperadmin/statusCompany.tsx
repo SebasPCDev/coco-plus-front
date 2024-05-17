@@ -10,6 +10,7 @@ export default function CompanyStatus({ status }: { status: string }) {
           'bg-gray-100 text-gray-500': status === 'pending',
           'bg-green-500 text-white': status === 'active',
           'bg-red-600 text-white': status === 'inactive',
+          'bg-orange-500 text-white': status === 'close',
         },
       )}
     >
@@ -28,6 +29,12 @@ export default function CompanyStatus({ status }: { status: string }) {
       {status === 'inactive' ? (
         <>
           Inactivo
+          <CheckIcon className="ml-1 w-4 text-white" />
+        </>
+      ) : null}
+      {status === 'close' ? (
+        <>
+          Cerrado
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
