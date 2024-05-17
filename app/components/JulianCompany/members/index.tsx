@@ -1,8 +1,8 @@
 // Todo.tsx
 import Breadcrumb from '@/app/components/JulianCompany/breadCrumb';
-import UserProfile from '@/app/components/JulianCompany/userProfile';
-import Header from '@/app/components/JulianCompany/header';
-import MemberCard from '@/app/components/JulianCompany/memberCard';
+import UserProfile from '@/app/components/JulianCompany/members/userProfile';
+import Header from '@/app/components/JulianCompany/members/header';
+import MemberCard from '@/app/components/JulianCompany/members/memberCard';
 
 const Todo = () => {
   // Datos de los miembros

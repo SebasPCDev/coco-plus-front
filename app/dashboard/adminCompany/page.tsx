@@ -1,1 +1,1 @@
-export { default } from '@/app/components/JulianCompany/todo';
+export { default } from '@/app/components/JulianCompany/addMembers/index';
