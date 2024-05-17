@@ -11,7 +11,6 @@ import redirectionByRole from '../../../utils/ redirects/redirectByRole';
 import Swal from 'sweetalert2';
 import { HandleLogin } from '@/actions/auth';
 
-
 const LoginForm = () => {
   const router = useRouter();
   const { setUser, setToken } = useUserContext();
@@ -100,7 +99,7 @@ const LoginForm = () => {
               );
             })}
             <button
-              className="Button_Form mt-4 w-full rounded-2xl py-2 text-[16px] font-bold text-white shadow-lg transition duration-500 ease-in-out hover:bg-lime-600 hover:shadow-xl"
+              className="Button_Form mt-4 w-full rounded-2xl py-2 text-[16px] font-bold text-white shadow-lg transition duration-500 ease-in-out hover:bg-custom-primary hover:shadow-xl"
               type="submit"
             >
               Iniciar Sesión

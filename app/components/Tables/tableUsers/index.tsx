@@ -27,7 +27,6 @@ export default function UsersTable({
   const getData = async () => {
     const response = await GetUsers({ token });
     if (response) {
-      console.log(response);
       setUsersData(response);
     }
   };

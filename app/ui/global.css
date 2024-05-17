@@ -77,7 +77,7 @@ address {
 
 html {
   font-size: 13px;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 body {
