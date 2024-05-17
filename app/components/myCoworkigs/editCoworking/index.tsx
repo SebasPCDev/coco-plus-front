@@ -3,9 +3,13 @@ import { useUserContext } from '../../context';
 import GetCoworkingDetailForAdmin from '@/utils/gets/getCoworkingDetailForAdmisn';
 import InfoUsersAdmins from '../MyCoworkingDetail/componentsDetail/users';
 import InfoCoworking from '../MyCoworkingDetail/componentsDetail/infoContact';
-import Image from 'next/image';
+
 import { useEffect, useState } from 'react';
 import PutUpdateCoworking from '@/utils/puts/putUpdateCoworking';
+import Modal from '../Modals/ModalNewUser';
+import arrayFormNewUserCoworking from '@/utils/arraysforms/NewUserRecepCoworking';
+import PostNewUserReceptCoworking from '@/utils/posts/postNewUserReceptCoworking';
+import ImagesContent from './imagescontent';
 
 interface User {
   id: string;
@@ -50,6 +54,7 @@ type NewInfo = Omit<Coworking, 'id' | 'user' | 'images' | 'thumbnail'>;
 
 export default function MyCoworkingDetailEdit({ id }: { id: string }) {
   const { token } = useUserContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [newInfo, setNewInfo] = useState({});
 
   const [coworking, setCoworking] = useState<Coworking>({
@@ -72,6 +77,26 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
     user: [],
     images: [],
   });
+  const [newUserForm, setNewUserForm] = useState({
+    name: '',
+    lastname: '',
+    phone: '',
+    email: '',
+    identification: '',
+    position: '',
+    role: 'coworking',
+    status: 'active',
+    coworkingId: id,
+  });
+  const getData = async () => {
+    const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
+    setCoworking(coworkingData);
+  };
+  const handlechangeNewUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewUserForm({ ...newUserForm, [name]: value });
+    console.log(newUserForm);
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -94,9 +119,12 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
     console.log(response);
   };
 
-  const getData = async () => {
-    const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
-    setCoworking(coworkingData);
+  const handleClickNewUser = async (e: MouseEvent) => {
+    e.preventDefault();
+    const response = await PostNewUserReceptCoworking({ newUserForm, token });
+    console.log(response);
+    setIsModalOpen(false);
+    getData();
   };
 
   useEffect(() => {
@@ -150,8 +178,9 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.address || 'Dirección'}
+                  value={coworking.address || ''}
                   name="address"
+                  placeholder="Dirección"
                 />
               </div>
               <div className="flex">
@@ -159,21 +188,24 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.city || 'Ciudad'}
+                  value={coworking.city || ''}
                   name="city"
+                  placeholder="Ciudad"
                 />
                 <input
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.state || 'Provincia'}
+                  value={coworking.state || ''}
                   name="state"
+                  placeholder="Estado"
                 />
                 <input
                   onChange={handleChange}
                   className=" bg-gray-100"
                   type="text"
-                  value={coworking.country || 'Pais'}
+                  value={coworking.country || ''}
+                  placeholder="Pais"
                   name="country"
                 />
               </div>
@@ -241,9 +273,40 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
             </button>
 
             <div className="col-span-2 rounded-lg border p-4 shadow-sm">
-              <button className="mt-4 block w-full rounded-lg border bg-gray-100 md:w-1/2">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="mt-4 block w-full rounded-lg border bg-gray-100 md:w-1/2"
+              >
                 Agregar Recepcionista
               </button>
+              <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                {arrayFormNewUserCoworking.map((field) => (
+                  <div key={field.name} className="flex flex-col">
+                    <label
+                      htmlFor={field.name}
+                      className="mb-2 text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type={field.type}
+                      value={(newUserForm as any)[field.name]} // TypeScript might need this cast
+                      onChange={handlechangeNewUser}
+                      className="rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                ))}
+
+                <button
+                  className="rounded bg-red-600 px-4 py-2 text-white"
+                  onClick={handleClickNewUser}
+                >
+                  Crear usuario
+                </button>
+              </Modal>
+
               <h2 className="text-xl font-semibold">Administradores</h2>
               {coworking.user.map((user) => (
                 <InfoUsersAdmins key={user.id} user={user} />
@@ -252,38 +315,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
           </div>
         </div>
         {/* Contenedor 2 */}
-        <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-1/3">
-          <h2 className="mb-2 text-xl font-semibold">Imagen de Portada</h2>
-          <button className="mt-4 block w-full rounded-lg border bg-gray-100">
-            {coworking.thumbnail ? 'Cambiar Imagen' : 'Agregar Imagen'}
-          </button>
-          {coworking.thumbnail && (
-            <Image
-              src={coworking.thumbnail}
-              alt={coworking.name || 'Coworking'}
-              width={500}
-              height={500}
-              className="rounded-lg shadow-sm"
-            />
-          )}
-
-          <h2 className="my-4 text-xl font-semibold">Imágenes Secundarias</h2>
-          <div className="flex flex-col space-y-4">
-            <button className="mt-4 rounded-lg border bg-gray-100">
-              Agregar Imágenes
-            </button>
-            {coworking.images.map((image) => (
-              <Image
-                key={image.id}
-                src={image.secure_url}
-                alt="Coworking space"
-                className="rounded-lg shadow-sm"
-                width={500}
-                height={500}
-              />
-            ))}
-          </div>
-        </div>
+        <ImagesContent coworking={coworking} />
       </div>
     </div>
   );
