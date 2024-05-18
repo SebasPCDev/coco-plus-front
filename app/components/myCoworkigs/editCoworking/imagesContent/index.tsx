@@ -1,61 +1,22 @@
 'use client';
 import Image from 'next/image';
 import Modal from '../../Modals/ModalNewUser';
-import { useState } from 'react';
-import { useUserContext } from '@/app/components/context';
-import { useRouter } from 'next/navigation';
-import PutImageThumbnail from '@/utils/puts/putImageThumbnail';
+import useImagesContent from './useImagesContent';
 
 const ImagesContent = ({ coworking }: { coworking: any }) => {
-  const router = useRouter();
-  const id = coworking.id;
-  const { token } = useUserContext();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setSelectedFile(event.target.files[0]);
-    }
-  };
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!selectedFile) return;
-
-    const imageThumbnail = new FormData();
-    imageThumbnail.append('image', selectedFile);
-
-    try {
-      const response = await PutImageThumbnail({
-        id,
-        token,
-        imageThumbnail,
-      });
-
-      if (response.status === 200) {
-        console.log('Imagen enviada con éxito');
-
-        // Aquí podrías actualizar el estado o realizar cualquier otra acción necesaria
-      } else {
-        console.error('Error al enviar la imagen');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud', error);
-    } finally {
-      setIsModalOpen(false);
-      // Cierra el modal después de enviar la imagen
-    }
-  };
+  const { isModalOpen, handleFileChange, handleSubmit, onModalClick } =
+    useImagesContent({ coworking: coworking } );
 
   return (
     <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-1/3">
       <h2 className="mb-2 text-xl font-semibold">Imagen de Portada</h2>
       <button
-        onClick={() => setIsModalOpen(true)}
+        onClick={onModalClick}
         className="mt-4 block w-full rounded-lg border bg-gray-100"
       >
         {coworking.thumbnail ? 'Cambiar Imagen' : 'Agregar Imagen'}
       </button>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onClose={onModalClick}>
         <form onSubmit={handleSubmit} action="">
           <label htmlFor="image">Agrega la Imagen</label>
           <input
