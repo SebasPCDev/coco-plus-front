@@ -65,6 +65,7 @@ const LoginForm = () => {
       <div className="relative h-screen bg-[url('../../public/LoginMobile.png')] bg-cover bg-center md:bg-[url('../../public/FondoLoginCoco1.png')]">
         <div className="relative h-full w-full sm:w-1/2 md:w-1/2 lg:w-1/2">
           <form
+            noValidate
             className="md:3/4 absolute left-0 top-0 mb-4 flex w-1/2 translate-x-1/2 translate-y-1/2 transform flex-col gap-4 rounded-2xl bg-custom-white px-8 pb-8 pt-6 shadow-lg sm:w-full lg:w-1/2 "
             onSubmit={handleSubmit}
           >
