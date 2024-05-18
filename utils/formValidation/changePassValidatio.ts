@@ -1,5 +1,5 @@
-import IChangePassForm from '../types/changePassFormInterface';
-import IChangePassErrorForm from '../types/changePassFormErrorInterface';
+import IChangePassForm from '../types/auth/changePassFormInterface';
+import IChangePassErrorForm from '../types/auth/changePassFormErrorInterface';
 
 export default function changePassValidation(values: IChangePassForm): IChangePassErrorForm {
   let errors: IChangePassErrorForm = {};

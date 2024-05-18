@@ -1,5 +1,5 @@
-import ILoginForm from "../types/loginFormInterface";
-import ILoginErrorForm from "../types/loginFormErrorInterface";
+import ILoginForm from "../types/auth/loginFormInterface";
+import ILoginErrorForm from "../types/auth/loginFormErrorInterface";
 
 export default function loginValidation(values: ILoginForm): ILoginErrorForm {
     let errors: ILoginErrorForm = {};
@@ -9,7 +9,7 @@ export default function loginValidation(values: ILoginForm): ILoginErrorForm {
         errors.email = "El email es inválido";
     } else if (!values.password) {
         errors.password = "La contraseña es requerida";
-    } 
-    return errors;    
+    }
+    return errors;
 }
 

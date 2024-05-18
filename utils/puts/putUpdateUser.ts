@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import IChangePassForm from '../types/changePassFormInterface';
+import IChangePassForm from '../types/auth/changePassFormInterface';
 import { getSession } from '@/app/lib/session';
 import { UserSession } from '@/app/lib/definitions';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
