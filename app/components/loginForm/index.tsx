@@ -62,13 +62,14 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="relative h-screen bg-[url('../../public/LoginMobile.png')] bg-cover bg-center md:bg-[url('../../public/FondoLoginCoco1.png')]">
-        <div className="relative h-full w-full sm:w-1/2 md:w-1/2 lg:w-1/2">
+      <div className="relative h-screen w-full bg-[url('../../public/LoginMobile.png')] bg-cover bg-center md:bg-[url('../../public/FondoLoginCoco1.png')]">
+        <div className="flex justify-center items-center h-full w-full md:w-1/2">
           <form
             noValidate
-            className="md:3/4 absolute left-0 top-0 mb-4 flex w-1/2 translate-x-1/2 translate-y-1/2 transform flex-col gap-4 rounded-2xl bg-custom-white px-8 pb-8 pt-6 shadow-lg sm:w-full lg:w-1/2 "
+            className="flex flex-col gap-4 rounded-2xl bg-custom-white mx-10 md:ml-12 px-8 pb-8 pt-6 shadow-lg max-w-[400px] w-full"
             onSubmit={handleSubmit}
           >
+
             <h1 className="m-6 text-center text-3xl font-bold text-gray-800">
               Iniciar Sesión
             </h1>
