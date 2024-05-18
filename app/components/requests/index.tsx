@@ -21,13 +21,6 @@ import DeclineRequest from '@/utils/posts/putDeclineRequest';
 import Swal from 'sweetalert2';
 
 export default function Requests() {
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger',
-    },
-    buttonsStyling: false,
-  });
   const { token } = useUserContext();
   const [params, setParams] = useState({
     status: null,

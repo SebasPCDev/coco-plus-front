@@ -1,4 +1,3 @@
-import { CreateCoworking } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
 import { ClipboardDocumentListIcon } from '@heroicons/react/24/outline';
 
 export default function DashboardCoworkingsLayout({
