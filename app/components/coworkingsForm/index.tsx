@@ -1,133 +1,18 @@
 "use client";
 
 import React from 'react';
-// impotamos el array que mapearemos para crear los inputs y los labels del formulario
-import { formDataCoworkings } from "../../../utils/arraysforms/coworkingsForms";
-// importamos los hooks
-import { useState, useEffect } from "react";
-
-// importamos la interface para tipar el estado del formulario
-import ICoworkingsInfo from "../../../utils/types/coworkingsFormInterface";
-
-// importamos la petición post a requests/coworking
-import PostCoworkings from "../../../utils/posts/postCoworkings";
-
-// importamos la validacion de formularios
-import coworkingValidation from "../../../utils/formValidation/coworkingValidation";
-import ICoworkingsErrorInfo from "../../../utils/types/coworkingFormErrorInterface";
-import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
 import { PhoneInput } from "react-international-phone";
-import 'react-international-phone/style.css'; 
+import 'react-international-phone/style.css';
+
+import { formDataCoworkings } from "@/utils/arraysforms/coworkingsForms";
+import ICoworkingsInfo from "@/utils/types/requests/coworkingsFormInterface";
+import useCoworkingsForm from './useCoworkingsForm';
+import Footer from '../JulianCompany/home/footerHome';
 
 
 const CoworkingsForm = () => {
-  const router = useRouter();
-  const [coworkingInfo, setCoworkingInfo] = useState<ICoworkingsInfo>({
-    name: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    identification: "",
-    position: "",
-    companyName: "",
-    companyEmail: "",
-    companyPhone: "",
-    address: "",
-    website: "",
-    open: "",
-    close: "",
-    capacity: 0,
-    status: "pending",
-    observation: "Esto es una observacion",
-    message: "",
-    type: "",
-  });
 
-  const [coworkingInfoError, setCoworkingInfoError] =
-    useState<ICoworkingsErrorInfo>({
-      name: "",
-      lastname: "",
-      phone: "",
-      email: "",
-      identification: "",
-      position: "",
-      companyName: "",
-      companyEmail: "",
-      companyPhone: "",
-      address: "",
-      website: "",
-      open: "",
-      close: "",
-      capacity: "",
-      status: "pending",
-      observation: "Esto es una observacion",
-      message: "",
-      type: "",
-    });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setCoworkingInfo({
-      ...coworkingInfo,
-      [name]: value,
-    });
-
-    console.log(coworkingInfo);
-  };
-
-  const handleChangeTime = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setCoworkingInfo({
-      ...coworkingInfo,
-      [name]: value,
-    });
-
-    console.log(coworkingInfo);
-  };
-
-  const handleChangePhone = (name: string, value: string) => {
-    setCoworkingInfo({
-      ...coworkingInfo,
-      [name]: value,
-    });
-  }
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(coworkingInfo);
-    try {
-      const response = await PostCoworkings(coworkingInfo);
-      Swal.fire({
-        title: response.responseCowork,
-        text: "la respuesta se enviara a tu correo electronico",
-        icon: "success",
-      });
-      router.push("/");
-    } catch (error) {
-      console.log("hubo un error", error);
-    }
-  };
-
-  useEffect(() => {
-    const errors = coworkingValidation(coworkingInfo);
-    setCoworkingInfoError(errors);
-    console.log(errors);
-  }, [coworkingInfo]);
-
-  //* Generador de horas cada 30 minutos con el horario establecido *****************
-  const generateTimeOptions = () => {
-    const options: string[] = [];// Aquí especificamos que options es un array de strings
-    for (let hour = 6; hour < 24; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const formattedHour = hour.toString().padStart(2, "0");
-        const formattedMinute = minute.toString().padStart(2, "0");
-        options.push(`${formattedHour}:${formattedMinute}`);
-      }
-    }
-    return options;
-  };
+  const { coworkingInfo, coworkingInfoError, handleChange, handleChangePhone, handleSubmit, handleCancel, generateTimeOptions } = useCoworkingsForm();
 
   return (
     <>
@@ -143,24 +28,23 @@ const CoworkingsForm = () => {
             ({ name, label, type, placeholder, required }) => (
               <div
                 key={name}
-                className={`flex flex-col ${
-                  name === "message" ? "md:col-span-2" : ""
-                }`}
+                className={`flex flex-col ${name === "message" ? "md:col-span-2" : ""
+                  }`}
               >
                 <label
                   htmlFor={name}
-                  className="block text-gray-700 font-bold mb-2 text-lg"
+                  className="label-form"
                 >
                   {label}
                 </label>
-                
+
                 {name === "open" || name === "close" ? (
                   <div className="relative">
                     <select
                       name={name}
                       required={required}
-                      className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-6 px-8 rounded-lg text-xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      onChange={handleChangeTime}
+                      className="input-form"
+                      onChange={handleChange}
                       value={coworkingInfo[name as keyof ICoworkingsInfo]}
                     >
                       <option value="">Selecciona una hora</option>
@@ -181,11 +65,11 @@ const CoworkingsForm = () => {
                     </div>
                   </div>
                 ) : (name === "phone" || name === "companyPhone") ? (
-                  <PhoneInput                    
+                  <PhoneInput
                     defaultCountry="ar"
                     name={name}
                     value={coworkingInfo[name as keyof ICoworkingsInfo].toString()}
-                    onChange= { (phone) => {handleChangePhone(name, phone)}}
+                    onChange={(phone) => { handleChangePhone(name, phone) }}
                   />
                 ) : (
                   <input
@@ -193,25 +77,35 @@ const CoworkingsForm = () => {
                     name={name}
                     placeholder={placeholder}
                     required={required}
-                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-6 px-8 rounded-lg text-xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="input-form"
                     onChange={handleChange}
                     value={coworkingInfo[name as keyof ICoworkingsInfo]}
                   />
                 )}
-                <p className="text-red-500 mt-2 text-lg">
+                <p className="input-error">
                   {coworkingInfoError[name as keyof ICoworkingsInfo]}
                 </p>
               </div>
             )
           )}
         </div>
-        <button
-          className="w-full bg-lime-400 hover:bg-lime-500 text-white font-bold py-4 px-8 rounded-lg text-xl focus:outline-none focus:shadow-outline mt-8"
-          type="submit"
-        >
-          Enviar Solicitud
-        </button>
+        <div className='mt-8 flex justify-between'>
+          <button
+            onClick={handleCancel}
+            className="btn btn-cancel"
+          >
+            Cancelar
+          </button>
+          <button
+            className="btn btn-confirm"
+            type="submit"
+          >
+            Enviar Solicitud
+          </button>
+        </div>
+
       </form>
+      <Footer />
     </>
   );
 };

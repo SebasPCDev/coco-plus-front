@@ -15,7 +15,7 @@ const GetCoworkingsFilter = async ({ filter }: { filter: IFilterOptions }) => {
       params: filter, // Esto agregará los parámetros como una cadena de consulta
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching coworkings:", error);
