@@ -3,7 +3,7 @@ import styles from './Banner.module.css';
 
 export const Banner = () => {
   return (
-    <section className={` ${styles.hero}`} aria-label="hero">
+    <section className={`${styles.hero}`} aria-label="hero">
       <div className={styles.container}>
         <div className={styles.herobg}>
           <div className={styles.herocontent}>

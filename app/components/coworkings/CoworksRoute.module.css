@@ -1,4 +1,10 @@
-  .containercoworks{
+.grid__coworkings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+
+.containercoworks{
     padding: 1rem;
   }
 

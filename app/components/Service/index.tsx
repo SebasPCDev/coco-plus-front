@@ -5,11 +5,12 @@ export const Service: React.FC<{ id: string }> = (props) => {
   return (
     <section
       id={props.id}
-      className="section service flex justify-center"
+      className="max-w-[1024px] mx-auto flex justify-between w-full px-12"
       aria-label="service"
     >
-      <div className={styles.container}>
-        <h2 className={`${styles.h2} ${styles.sectiontitle} `}>
+      {/* {`${styles.h2} ${styles.sectiontitle} `}> */}
+      <div className="mt-20">
+        <h2 className="text-[#161c2c] text-4xl font-bold text-center">
           Como reservar
         </h2>
 
@@ -80,7 +81,7 @@ export const Service: React.FC<{ id: string }> = (props) => {
           </li>
         </ul>
       </div>
-    </section>
+    </section >
   );
 };
 
