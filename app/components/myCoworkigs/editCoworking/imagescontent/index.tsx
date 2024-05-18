@@ -2,9 +2,9 @@
 import Image from 'next/image';
 import Modal from '../../Modals/ModalNewUser';
 import { useState } from 'react';
-import axios from 'axios';
 import { useUserContext } from '@/app/components/context';
 import { useRouter } from 'next/navigation';
+import PutImageThumbnail from '@/utils/puts/putImageThumbnail';
 
 const ImagesContent = ({ coworking }: { coworking: any }) => {
   const router = useRouter();
@@ -21,24 +21,19 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
     event.preventDefault();
     if (!selectedFile) return;
 
-    const formData = new FormData();
-    formData.append('image', selectedFile);
+    const imageThumbnail = new FormData();
+    imageThumbnail.append('image', selectedFile);
 
     try {
-      const response = await axios.put(
-        `http://localhost:3000/files/upload-thumbnail-coworking/${id}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await PutImageThumbnail({
+        id,
+        token,
+        imageThumbnail,
+      });
 
       if (response.status === 200) {
         console.log('Imagen enviada con éxito');
-        router.push(`/dashboard/adminCoworking/myCoworkings/${id}`);
+
         // Aquí podrías actualizar el estado o realizar cualquier otra acción necesaria
       } else {
         console.error('Error al enviar la imagen');
