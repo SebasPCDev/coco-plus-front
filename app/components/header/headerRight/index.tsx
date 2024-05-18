@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import { RiMenuLine, RiUserLine } from '@remixicon/react';
 import Link from 'next/link';
 import { useUserContext } from '../../context';
@@ -27,6 +28,7 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
       setVisibleLogin('block');
       setVisibleProfile('hidden');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
@@ -34,14 +36,14 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
       <div className={visibleLogin}>
         <div className="hidden md:block">
           <Link href="/login">
-            <button className="flex rounded-full bg-green-500 px-10 py-5 text-3xl font-bold text-white hover:bg-green-600">
-              <RiUserLine color="#ffffff" />
-              Login
+            <button className="flex rounded-full bg-custom-primary px-6 py-4 text-2xl font-bold text-gray-900 hover:bg-custom-tertiary">
+              <RiUserLine color="#111827" />
+              <span className='ml-4'>Login</span>
             </button>
           </Link>
         </div>
       </div>
-      <div className={` ${visibleProfile} items-center gap-10`}>
+      <div className={` ${visibleProfile} items-center gap-3`}>
         <div>
           <Link href={`/dashboard/${user?.role}`}>
             <button className="flex gap-4 rounded-full px-6 py-4 text-3xl font-semibold text-zinc-50 transition duration-300 hover:bg-zinc-900 hover:text-zinc-50">
@@ -50,13 +52,16 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
             </button>
           </Link>
         </div>
-        <div className="flex cursor-pointer items-center rounded-full px-5 transition duration-300 hover:bg-zinc-900 hover:text-zinc-50 ">
+        <div className="flex items-center">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-custom-primary text-custom-secondary">
             {firstLetter}
           </div>
-          <div className="rounded-md px-6 py-4 text-3xl font-semibold text-zinc-50 transition duration-300 ">
+          <div className="rounded-md px-3 py-4 text-3xl font-semibold text-zinc-50 transition duration-300 ">
             {name}
           </div>
+        </div>
+
+        <div className="flex cursor-pointer items-center rounded-lg px-5 py-5 transition duration-300 hover:bg-zinc-900 hover:text-zinc-50 ">
           <Logout />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import ICoworkingsInfo from "../types/coworkingsFormInterface";
+import ICoworkingsInfo from "../types/requests/coworkingsFormInterface";
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostCoworkings = async (data: ICoworkingsInfo) => {

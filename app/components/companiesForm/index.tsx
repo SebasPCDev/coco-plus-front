@@ -1,107 +1,18 @@
 "use client";
 import React from 'react';
 
-// impotamos el array que mapearemos para crear los inputs y los labels del formulario
-import { formDataCompanies } from "../../../utils/arraysforms/companysForm";
-
-// importamos los hooks
-import { useState, useEffect } from "react";
-
-// importamos la interface para tipar el estado del formulario
-import ICompaniesInfo from "../../../utils/types/companiesFormInterface";
-
-// importamos la petición post a requests/company
-import PostCompany from "../../../utils/posts/postCompany";
-
-// importamos la validacion de formularios
-import companyValidation from "../../../utils/formValidation/companyValidation";
-import ICompaniesErrorInfo from "../../../utils/types/companiesFormErrorInterface";
-
-import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
 import { PhoneInput } from "react-international-phone";
-import 'react-international-phone/style.css'; 
+import 'react-international-phone/style.css';
+
+import { formDataCompanies } from "@/utils/arraysforms/companysForm";
+import ICompaniesInfo from "@/utils/types/requests/companiesFormInterface";
+import useCompaniesForm from './useCompaniesForm';
+import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
+import Footer from '../JulianCompany/home/footerHome';
 
 const CompaniesForm = () => {
-  const router = useRouter();
-  const [companiesInfo, setCompaniesInfo] = useState<ICompaniesInfo>({
-    name: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    identification: "",
-    position: "",
-    companyName: "",
-    companyEmail: "",
-    companyPhone: "",
-    quantityBeneficiaries: 0,
-    businessSector: "",
-    size: 0,
-    message: "",
-    status: "pending",
-    observation: "Esto es una observacion",
-    type: "",
-  });
 
-  //el estado para los errores aun no se sta utilizando
-  const [companiesInfoError, setCompaniesInfoError] =
-    useState<ICompaniesErrorInfo>({
-      name: "",
-      lastname: "",
-      phone: "",
-      email: "",
-      identification: "",
-      role: "",
-      companyName: "",
-      companyEmail: "",
-      companyPhone: "",
-      quantityBeneficiaries: "",
-      businessSector: "",
-      size: "",
-      message: "",
-      type: "",
-    });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setCompaniesInfo({
-      ...companiesInfo,
-      [name]: value,
-    });
-    console.log(companiesInfo);
-  };
-
-  const handleChangePhone = (name: string, value: string) => {
-    setCompaniesInfo({
-      ...companiesInfo,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log(companiesInfo);
-
-    try {
-      const response = await PostCompany(companiesInfo);
-      Swal.fire({
-        title: response.responseCompany,
-        text: "la respuesta se enviara a tu correo electronico",
-        icon: "success",
-      });
-      router.push("/");
-    } catch (error) {
-      console.log("Hubo un error en la petición", error);
-    }
-  };
-
-  useEffect(() => {
-    const errors = companyValidation(companiesInfo);
-    setCompaniesInfoError(errors);
-    console.log(errors);
-  }, [companiesInfo]);
+  const { companiesInfo, companiesInfoError, handleChange, handleChangePhone, handleSubmit, handleCancel } = useCompaniesForm();
 
   return (
     <>
@@ -110,40 +21,75 @@ const CompaniesForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {formDataCompanies.map(({ name, label, type, placeholder, required }) => (
             <div key={name} className={`flex flex-col ${name === "message" ? "md:col-span-2" : ""}`}>
-              <label htmlFor={name} className="block text-gray-700 font-bold mb-2 text-lg">
+              <label htmlFor={name} className="label-form">
                 {label}
               </label>
               {name === "phone" || name === "companyPhone" ? (
-                <PhoneInput                    
+                <PhoneInput
                   defaultCountry="ar"
                   name={name}
                   value={companiesInfo[name as keyof ICompaniesInfo].toString()}
                   onChange={(phone) => handleChangePhone(name, phone)}
                 />
+              ) : ((name === "size") ? (
+                <div className="relative">
+                  <select
+                    name={name}
+                    required={required}
+                    className="input-form"
+                    onChange={handleChange}
+                    value={companiesInfo[name as keyof ICompaniesInfo]}
+                  >
+                    <option value="">Selecciona una cantidad</option>
+                    {COMPANY_SIZE.map((size) => (
+                      <option key={size.id} value={size.id}>
+                        {size.value}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg
+                      className="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </div>
+                </div>
               ) : (
                 <input
                   type={type}
                   name={name}
                   placeholder={placeholder}
                   required={required}
-                  className={`block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-6 px-8 rounded-lg text-xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ${
-                    name === "message" ? "md:col-span-2" : ""
-                  }`}
+                  className={`input-form ${name === "message" ? "md:col-span-2" : ""
+                    }`}
                   onChange={handleChange}
                   value={companiesInfo[name as keyof ICompaniesInfo]}
                 />
-              )}
-              <p className="text-red-500 mt-2 text-lg">{companiesInfoError[name as keyof ICompaniesInfo]}</p>
+              ))}
+              <p className="input-error">{companiesInfoError[name as keyof ICompaniesInfo]}</p>
             </div>
           ))}
         </div>
-        <button
-          className="w-full bg-lime-400 hover:bg-lime-500 text-white font-bold py-4 px-8 rounded-lg text-xl focus:outline-none focus:shadow-outline mt-8"
-          type="submit"
-        >
-          Enviar Solicitud
-        </button>
+
+        <div className='mt-8 flex justify-between'>
+          <button
+            onClick={handleCancel}
+            className="btn btn-cancel"
+          >
+            Cancelar
+          </button>
+          <button
+            className="btn btn-confirm"
+            type="submit"
+          >
+            Enviar Solicitud
+          </button>
+        </div>
       </form>
+      <Footer />
     </>
   );
 };

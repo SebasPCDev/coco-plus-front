@@ -16,7 +16,7 @@
 
 .h2,
 .h3 {
-  color: hsl(224, 34%, 13%);
+  color: #161c2c;
   line-height: 1.5;
 }
 
@@ -88,6 +88,7 @@
 
 .servicecard .cardtitle {
   margin-block: 25px 12px;
+  font-weight: bold;
 }
 
 .servicecard .cardtext {
@@ -98,7 +99,7 @@
   .container {
     max-width: 600px;
     width: 100%;
-    margin-inline: auto;
+    margin: 0px 200px 0px 200px;
     text-align: center;
   }
 }

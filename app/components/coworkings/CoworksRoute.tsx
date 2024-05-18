@@ -9,10 +9,6 @@ import GetCoworkingsFilter from '../../../utils/gets/getCoworkingsFilter';
 import getoptions from '../../../utils/gets/getoptionsFilter';
 import Link from 'next/link';
 
-/////////////
-// Santiago
-////////////
-
 export const CoworksRoute: React.FC = () => {
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
   const [countries, setCountries] = useState<any[]>([]);
@@ -23,12 +19,12 @@ export const CoworksRoute: React.FC = () => {
   useEffect(() => {
     const getCountries = async () => {
       const countries = await getCountriesfilter();
-      console.log(countries);
       const currentcoworkings = await GetCoworkingsFilter({ filter });
       setCoworkings(currentcoworkings.coworking);
       setCountries(countries);
     };
     getCountries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -232,25 +228,25 @@ export const CoworksRoute: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-9">
-            <div className={styles.containercoworks}>
-              <ul className={styles.coworklist}>
-                {coworkings.map((cowork) => {
-                  return (
-                    <li key={cowork.name}>
-                      <Link
-                        href={`http://localhost:3001/coworkings/${cowork.id}`}
-                      >
-                        <CoworkCard cowork={cowork} />
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
+
+          {/* <div className={styles.containercoworks}> */}
+          {/* <ul className={styles.coworklist}> */}
+          <ul className={styles.grid__coworkings}>
+            {coworkings.map((cowork) => {
+              return (
+                <li key={cowork.name}>
+                  <Link
+                    href={`http://localhost:3001/coworkings/${cowork.id}`}
+                  >
+                    <CoworkCard cowork={cowork} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
+      {/* </div> */}
     </section>
   );
 };
