@@ -9,8 +9,8 @@ const HeaderLeft = () => {
       <div className="flex items-center">
         <Link href="/">
           <Image
-            width={180}
-            height={192}
+            width={190}
+            height={210}
             src="/cocoproject/LimaSinFondo.png"
             alt="Coco+"
           />

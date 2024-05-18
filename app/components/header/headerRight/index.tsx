@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import { RiMenuLine, RiUserLine } from '@remixicon/react';
 import Link from 'next/link';
 import { useUserContext } from '../../context';
@@ -27,6 +28,7 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
       setVisibleLogin('block');
       setVisibleProfile('hidden');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
@@ -34,9 +36,9 @@ const HeaderRight = ({ initialToken }: { initialToken: string }) => {
       <div className={visibleLogin}>
         <div className="hidden md:block">
           <Link href="/login">
-            <button className="flex rounded-full bg-custom-primary px-10 py-5 text-3xl font-bold text-white hover:bg-custom-tertiary">
-              <RiUserLine color="#ffffff" />
-              Login
+            <button className="flex rounded-full bg-custom-primary px-6 py-4 text-2xl font-bold text-gray-900 hover:bg-custom-tertiary">
+              <RiUserLine color="#111827" />
+              <span className='ml-4'>Login</span>
             </button>
           </Link>
         </div>
