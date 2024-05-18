@@ -3,23 +3,20 @@ import {
   UpdateCoworking,
   DeleteCoworking,
 } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
-
-import GetCoworkings from '@/utils/gets/getCoworkings';
-import Pagination from '../pagination';
 import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
 
 export default async function CoworkingsTable({
-  query,
-  currentPage,
+  coworkingsData,
 }: {
-  query: string;
-  currentPage: number;
+  coworkingsData?: {
+    page: number;
+    limit: number;
+    total: number;
+    coworking: [];
+  };
 }) {
-  const coworkingsData = await GetCoworkings();
-  console.log(coworkingsData);
-
   return (
-    <div className="mt-6 flow-root w-full overflow-x-auto">
+    <div className="mt-6 flow-root h-[450px] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg overflow relative bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
@@ -97,17 +94,17 @@ export default async function CoworkingsTable({
               {coworkingsData.coworking?.map((coworking) => (
                 <tr
                   key={coworking.id}
-                  className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full border-b py-3 text-center last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="max-w-[150px]  truncate whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex items-center gap-3">
-                      <Image
+                  <td className="max-w-[150px] truncate whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex items-center justify-center gap-3">
+                      {/* <Image
                         src={coworking.thumbnail || '/images/placeholder.jpg'}
                         className="rounded-full"
                         width={60}
                         height={60}
                         alt={`${coworking.name}'s profile picture`}
-                      />
+                      /> */}
                       <p>{coworking.name}</p>
                     </div>
                   </td>
@@ -143,7 +140,6 @@ export default async function CoworkingsTable({
               ))}
             </tbody>
           </table>
-          <Pagination totalPages={5} />
         </div>
       </div>
     </div>

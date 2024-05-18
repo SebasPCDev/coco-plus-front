@@ -8,30 +8,12 @@ import {
 import CompanyStatus from '../../Status/dashboardSuperadmin/statusCompany';
 import { useUserContext } from '../../context';
 import { useEffect, useState } from 'react';
-import { get } from 'http';
 
-export default function CoworkingsTable({
-  query,
-  currentPage,
+export default function CompaniesTable({
+  companiesRawData,
 }: {
-  query: string;
-  currentPage: number;
+  companiesRawData?: any;
 }) {
-  const { token } = useUserContext();
-
-  const [companiesData, setCompaniesData] = useState<IResponseCompany[]>([]);
-
-  const getData = async () => {
-    const response = await GetCompanies({ token });
-    if (response) {
-      setCompaniesData(response);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   return (
     <div className="mt-6 flow-root w-full">
       <div className="inline-block min-w-full align-middle">
@@ -103,13 +85,13 @@ export default function CoworkingsTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {companiesData?.map((company) => (
+              {companiesRawData?.map((company) => (
                 <tr
                   key={company.id}
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap  py-3 pl-6 pr-3">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       {/* <Image
                         src={company.thumbnail || '/images/placeholder.jpg'}
                         className="rounded-full"
