@@ -23,12 +23,12 @@ export const CoworksRoute: React.FC = () => {
   useEffect(() => {
     const getCountries = async () => {
       const countries = await getCountriesfilter();
-      console.log(countries);
       const currentcoworkings = await GetCoworkingsFilter({ filter });
       setCoworkings(currentcoworkings.coworking);
       setCountries(countries);
     };
     getCountries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

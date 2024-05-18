@@ -5,6 +5,7 @@ import Service from '../Service';
 import Coworks from '../Cowoks';
 import HeaderMain from '../mainHeader';
 import Header from '../header';
+import Footer from '../JulianCompany/home/footerHome';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <HeaderMain />
       <Service id="Service" />
       <Coworks id="Coworks" />
+      <Footer />
     </div>
   );
 };

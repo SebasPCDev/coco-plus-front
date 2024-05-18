@@ -1,4 +1,4 @@
-interface ICompaniesInfo {
+interface ICoworkingsInfo {
   name: string;
   lastname: string;
   phone: string;
@@ -8,13 +8,12 @@ interface ICompaniesInfo {
   companyName: string;
   companyEmail: string;
   companyPhone: string;
-  quantityBeneficiaries: number;
-  businessSector: string;
-  size: number;
+  address: string;
+  website: string;
+  open: string;
+  close: string;
+  capacity: number;
   message: string;
-  type: string;
-  status: string;
-  observation: string;
 }
 
-export default ICompaniesInfo;
+export default ICoworkingsInfo;

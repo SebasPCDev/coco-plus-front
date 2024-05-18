@@ -1,5 +1,5 @@
 import axios from "axios";
-import ICompaniesInfo from "../types/companiesFormInterface";
+import ICompaniesInfo from "../types/requests/companiesFormInterface";
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostActivateCowork = async ({

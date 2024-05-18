@@ -1,0 +1,31 @@
+export const INITIAL_COMPANIES_INFO = {
+  name: "",
+  lastname: "",
+  phone: "+54",
+  email: "",
+  identification: "",
+  position: "",
+  companyName: "",
+  companyEmail: "",
+  companyPhone: "+54",
+  quantityBeneficiaries: 0,
+  businessSector: "",
+  size: "",
+  message: "",
+}
+
+export const INITIAL_COMPANIES_INFO_ERROR = {
+  name: "",
+  lastname: "",
+  phone: "",
+  email: "",
+  identification: "",
+  role: "",
+  companyName: "",
+  companyEmail: "",
+  companyPhone: "",
+  quantityBeneficiaries: "",
+  businessSector: "",
+  size: "",
+  message: "",
+}
