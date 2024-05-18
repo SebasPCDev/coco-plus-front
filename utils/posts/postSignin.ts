@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 
-import ILoginForm from '../types/loginFormInterface';
+import ILoginForm from '../types/auth/loginFormInterface';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostLogin = async (data: ILoginForm) => {
