@@ -151,7 +151,7 @@ export default function Requests() {
             >
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div className="mb-2">
-                  <h2 className="truncate font-semibold md:text-2xl">
+                  <h2 className="font-semibold md:text-2xl">
                     {item.name} {item.lastname}
                   </h2>
                   <p className="text-gray-500">{item.email}</p>
@@ -166,7 +166,7 @@ export default function Requests() {
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
-                  <h2 className="truncate font-medium md:text-2xl">
+                  <h2 className=" font-medium md:text-2xl">
                     {item.position} - {item.companyName}
                   </h2>
                   <p className="text-gray-500">{item.companyEmail}</p>

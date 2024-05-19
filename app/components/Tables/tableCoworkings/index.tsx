@@ -21,7 +21,7 @@ export default async function CoworkingsTable({
   return (
     <div className="mt-6 flow-root h-[35rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
-        <div className="founded-lg overflow relative bg-gray-50 p-2 md:pt-0">
+        <div className="founded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
             {coworkingsData?.coworking?.map((coworking: any) => (
               <div

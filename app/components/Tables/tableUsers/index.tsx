@@ -36,7 +36,7 @@ export default function UsersTable({
   }, []);
 
   return (
-    <div className="mt-6 flow-root w-full">
+    <div className="mt-6 flow-root w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
           {/* <div className="md:hidden">
@@ -108,13 +108,13 @@ export default function UsersTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="overflow-x-auto bg-white">
               {usersData?.map((user) => (
                 <tr
                   key={user.id}
-                  className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full border-b py-3 text-center  last-of-type:border-none  hover:bg-gray-100 [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="whitespace-nowrap  py-3 pl-6 pr-3">
+                  <td className="max-w-[150px]  truncate whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
                         src={'/customers/evil-rabbit.png'}
@@ -126,22 +126,28 @@ export default function UsersTable({
                       <p>{user.name}</p>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {user.lastname}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">{user.phone}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{user.email}</td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                    {user.phone}
+                  </td>
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                    {user.email}
+                  </td>
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {user.identification}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
                     {user.position}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">{user.role}</td>
+                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                    {user.role}
+                  </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     <UserStatus status={user.status} />
                   </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateUser id={user.id} />
                       <InactiveUser id={user.id} />
