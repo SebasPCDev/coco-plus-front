@@ -29,7 +29,7 @@ export default function NavbarDashboard() {
           <div className="flex w-full justify-end px-2 sm:px-6 lg:px-10">
             <div className="relative flex h-16 items-center justify-between gap-3">
               <h2 className="font-bold text-custom-white">
-                {user?.name || 'Dashboard'} {user?.lastname || ''}
+                {user!.name} {user!.lastname}
               </h2>
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}

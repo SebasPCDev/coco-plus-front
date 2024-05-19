@@ -1,5 +1,4 @@
-'use client';
-
+import { cookies } from 'next/headers';
 import {
   InactiveCompany,
   UpdateCompany,
@@ -16,6 +15,8 @@ export default function CompaniesTable({
     companies: [];
   };
 }) {
+  const cookie = cookies();
+  const token = cookie.get('token')?.value;
   return (
     <div className="mt-6 flow-root h-[35rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
@@ -119,7 +120,7 @@ export default function CompaniesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateCompany id={company.id} />
-                      <InactiveCompany id={company.id} />
+                      <InactiveCompany id={company.id} token={token} />
                     </div>
                   </td>
                 </tr>
