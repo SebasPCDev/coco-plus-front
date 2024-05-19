@@ -7,7 +7,7 @@ import {
   BookmarkIcon,
 } from '@heroicons/react/24/outline';
 
-import { Roles, RoleItem } from '../types/rolesNavLinkInterface';
+import { Roles } from '../types/rolesNavLinkInterface';
 
 const roles: Roles = {
   superadmin: [
