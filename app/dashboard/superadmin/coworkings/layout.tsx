@@ -6,7 +6,7 @@ export default function DashboardCoworkingsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full">
+    <div className="mt-2 w-full">
       <div className="flex items-center justify-between rounded-lg bg-gray-50 p-2 md:pt-0">
         <div className="flex items-center">
           <ClipboardDocumentListIcon className="w-16" />

@@ -36,13 +36,14 @@ export const formDataCompanies: elementForm[] = [
     required: true,
   },
   ,
-  /*   {
-    name: "identification",
-    label: "Número de documento",
-    type: "text",
-    placeholder: "Número de documento",
+  {
+    name: 'identification',
+    label: 'Número de documento',
+    type: 'text',
+    placeholder: 'Número de documento',
     required: true,
-  } */ {
+  },
+  {
     name: 'position',
     label: 'Cargo',
     type: 'text',
@@ -56,34 +57,34 @@ export const formDataCompanies: elementForm[] = [
     placeholder: 'Nombre de la empresa',
     required: true,
   },
-  /*   {
-    name: "companyEmail",
-    label: "Email de la empresa",
-    type: "email",
-    placeholder: "Email de la empresa",
+  {
+    name: 'companyEmail',
+    label: 'Email de la empresa',
+    type: 'email',
+    placeholder: 'Email de la empresa',
     required: true,
   },
   {
-    name: "companyPhone",
-    label: "Teléfono de la empresa",
-    type: "text",
-    placeholder: "Teléfono de la empresa",
+    name: 'companyPhone',
+    label: 'Teléfono de la empresa',
+    type: 'text',
+    placeholder: 'Teléfono de la empresa',
     required: true,
-  }, */
-  /*   {
-    name: "quantityBeneficiaries",
-    label: "Cantidad de beneficiarios",
-    type: "number",
-    placeholder: "Cantidad de empleados con el beneficio",
+  },
+  {
+    name: 'quantityBeneficiaries',
+    label: 'Cantidad de beneficiarios',
+    type: 'number',
+    placeholder: 'Cantidad de empleados con el beneficio',
     required: false,
   },
   {
-    name: "businessSector",
-    label: "Sector empresarial",
-    type: "text",
-    placeholder: "Sector empresarial",
+    name: 'businessSector',
+    label: 'Sector empresarial',
+    type: 'text',
+    placeholder: 'Sector empresarial',
     required: false,
-  }, */
+  },
   {
     name: 'size',
     label: 'Tamaño de la empresa (empleados)',

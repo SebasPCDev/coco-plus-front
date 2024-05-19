@@ -1,21 +1,24 @@
-'use client';
-import Pagination from '../pagination';
-import GetCompanies from '@/utils/gets/getCompanies';
+import { cookies } from 'next/headers';
 import {
-  DeleteCompany,
+  InactiveCompany,
   UpdateCompany,
 } from '../../Buttons/dashboardSuperadmin/buttons';
 import CompanyStatus from '../../Status/dashboardSuperadmin/statusCompany';
-import { useUserContext } from '../../context';
-import { useEffect, useState } from 'react';
 
 export default function CompaniesTable({
   companiesRawData,
 }: {
-  companiesRawData?: any;
+  companiesRawData?: {
+    page: number;
+    limit: number;
+    total: number;
+    companies: [];
+  };
 }) {
+  const cookie = cookies();
+  const token = cookie.get('token')?.value;
   return (
-    <div className="mt-6 flow-root w-full">
+    <div className="mt-6 flow-root h-[35rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
           {/* <div className="md:hidden">
@@ -85,20 +88,13 @@ export default function CompaniesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {companiesRawData?.map((company) => (
+              {companiesRawData?.companies?.map((company: any) => (
                 <tr
                   key={company.id}
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap  py-3 pl-6 pr-3">
                     <div className="flex items-center justify-center gap-3">
-                      {/* <Image
-                        src={company.thumbnail || '/images/placeholder.jpg'}
-                        className="rounded-full"
-                        width={80}
-                        height={80}
-                        alt={`${company.name}'s profile picture`}
-                      /> */}
                       <p>{company.name}</p>
                     </div>
                   </td>
@@ -119,19 +115,18 @@ export default function CompaniesTable({
                   </td>
 
                   <td className="whitespace-nowrap px-3 py-3">
-                    <CompanyStatus status={'active'} />
+                    <CompanyStatus status={company.status} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateCompany id={company.id} />
-                      <DeleteCompany id={company.id} />
+                      <InactiveCompany id={company.id} token={token} />
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <Pagination totalPages={5} />
         </div>
       </div>
     </div>

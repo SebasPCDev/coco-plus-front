@@ -8,34 +8,35 @@ import Swal from 'sweetalert2';
 
 export const ProfileViewEmployee = () => {
   // CONTENIDO DE INFO PERSONAL
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState<string | null>(null);
+  const [userData, setUserData] = useState<any>(null);
+  const [error, setError] = useState<any>(null);
 
   // ACTUALIZACION DE CONTENIDO DE FORMULARIO
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [position, setPosition] = useState('');
-  const [identification, setIdentification] = useState('');
-  const [errors, setErrors] = useState<string | null>(null);
-  const [success, setSuccess] = useState<boolean>(false);
+  const [name, setName] = useState<any>('');
+  const [lastname, setLastname] = useState<any>('');
+  const [email, setEmail] = useState<any>('');
+  const [phone, setPhone] = useState<any>('');
+  const [position, setPosition] = useState<any>('');
+  const [identification, setIdentification] = useState<any>('');
+  const [errors, setErrors] = useState<any>(null);
+  const [success, setSuccess] = useState<any>(false);
 
   // extra---
-  const lastCowork = 20;
+  const lastCowork: any = 20;
 
   // SETEO Y ENVIO DE INFORMACION DE DE CONTENIDO (logica de put de datos personales)
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const token = Cookie.get('token');
-    const user = JSON.parse(Cookie.get('user'));
-    const id = user.id;
+    const token: any = Cookie.get('token');
+    const user: any = JSON.parse(Cookie.get('user') as string);
+    
+    const id: any = user.id;
 
     if (!token) {
       setErrors('No se encontró el token');
       return;
     }
-    const newData = {
+    const newData: any = {
       name,
       lastname,
       email,
@@ -57,7 +58,7 @@ export const ProfileViewEmployee = () => {
         });
         return;
       }
-      const dataUpdate = await putDataUserEmployee(token, newData, id);
+      const dataUpdate: any = await putDataUserEmployee(token, newData, id);
       if (dataUpdate) {
         Swal.fire({
           title: '¿Seguro que quieres actualizar tus datos?',
@@ -66,7 +67,7 @@ export const ProfileViewEmployee = () => {
           confirmButtonColor: '#222B2D',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Si, actualizar!',
-        }).then((result) => {
+        }).then((result: any) => {
           if (result.isConfirmed) {
             Swal.fire({
               title: 'Datos actualizados!',
@@ -91,9 +92,9 @@ export const ProfileViewEmployee = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = Cookie.get('token');
+        const token: any = Cookie.get('token');
         if (token) {
-          const data = await getDataUserEmployee(token);
+          const data: any = await getDataUserEmployee(token);
           setUserData(data);
         } else {
           setError('No se encontró el token');
@@ -114,7 +115,7 @@ export const ProfileViewEmployee = () => {
     return (
       <div className="flex w-full flex-col">
         <section className="relative justify-between pb-5 pt-40">
-          <div className=" absolute left-0 top-0 z-0 h-60 w-full rounded-lg bg-gray-300"></div>
+          <div className="absolute left-0 top-0 z-0 h-60 w-full rounded-lg bg-gray-300"></div>
           <div className="mx-auto w-full max-w-7xl md:px-8">
             <div className="relative z-10 mb-5 flex items-center justify-center sm:justify-start">
               <div className="h-40 w-40 rounded-full border-4 border-solid border-white bg-gray-300"></div>
