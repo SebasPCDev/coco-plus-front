@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const GetProfile = async ({ token }: { token: string | undefined }) => {
@@ -11,14 +9,10 @@ const GetProfile = async ({ token }: { token: string | undefined }) => {
     const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
-      }
-      
+      },
     });
-      console.log(response.data);
-      
 
     return response.data;
-    
   } catch (error) {
     console.log('hay un error', error);
   }

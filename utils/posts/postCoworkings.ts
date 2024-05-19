@@ -1,5 +1,5 @@
-import axios from "axios";
-import ICoworkingsInfo from "../types/requests/coworkingsFormInterface";
+import axios from 'axios';
+import ICoworkingsInfo from '../types/requests/coworkingsFormInterface';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostCoworkings = async (data: ICoworkingsInfo) => {
@@ -11,14 +11,14 @@ const PostCoworkings = async (data: ICoworkingsInfo) => {
   try {
     const response = await axios.post(url, datasend, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
-    console.log(response.data);
+
     return response.data;
-    console.log("la peticion fue exitosa");
+    console.log('la peticion fue exitosa');
   } catch (error) {
-    console.log("hay un error", error);
+    console.log('hay un error', error);
   }
 };
 

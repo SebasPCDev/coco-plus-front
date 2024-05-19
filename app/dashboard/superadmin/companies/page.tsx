@@ -23,10 +23,7 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const companiesData = await GetCompanies({ token });
-
-  console.log(companiesData);
-  const totalPages = 2;
-  //const totalPages = Math.ceil(companiesData.total / companiesData.limit);
+  const totalPages = Math.ceil(companiesData.total / companiesData.limit);
 
   return (
     <div className="w-full">
