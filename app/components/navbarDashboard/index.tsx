@@ -22,27 +22,14 @@ export default function NavbarDashboard() {
   return (
     <Disclosure
       as="nav"
-      className="flex h-[7rem] items-center rounded-lg bg-custom-fourth"
+      className="flex h-[7rem] items-center bg-custom-fourth md:rounded-lg"
     >
       {({ open }) => (
         <>
           <div className="flex w-full justify-end px-2 sm:px-6 lg:px-10">
             <div className="relative flex h-16 items-center justify-between gap-3">
-              <h2 className="font-bold text-custom-white">
-                {user!.name} {user!.lastname}
-              </h2>
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
+              <h2 className="font-bold text-custom-white"></h2>
+
               <div className="flex ">
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
