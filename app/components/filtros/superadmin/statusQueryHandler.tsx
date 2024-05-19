@@ -1,17 +1,9 @@
 'use client';
 
-import GetCoworkings from '@/utils/gets/getCoworkings';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from 'react';
 
-export default function StatusCoworkings() {
+export default function StatusHandler() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
