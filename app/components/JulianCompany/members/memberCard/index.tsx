@@ -5,8 +5,8 @@ interface MemberCardProps {
   name: string;
   email: string;
   role: 'Admin' | 'Empleado';
-  totalBookings: number;
-  monthlyTokenLimit: number | null;
+  passes: number;
+  passesAvailable: number | null;
 }
 
 const MemberCard: React.FC<MemberCardProps> = ({
@@ -14,8 +14,8 @@ const MemberCard: React.FC<MemberCardProps> = ({
   name,
   email,
   role,
-  totalBookings,
-  monthlyTokenLimit,
+  passes,
+  passesAvailable,
 }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-4">
@@ -41,10 +41,10 @@ const MemberCard: React.FC<MemberCardProps> = ({
           <p className="text-gray-600">{email}</p>
           <div className="border-b border-gray-200 my-2"></div>
           <div className="text-gray-600">
-            <p>Total pases: {totalBookings}</p>
+            <p>Total pases: {passes}</p>
             <p>
-              Límite de pases mensuales:{' '}
-              {monthlyTokenLimit !== null ? monthlyTokenLimit : 'N/A'}
+              Límite de pases disponibles:{' '}
+              {passesAvailable !== null ? passesAvailable : 'N/A'}
             </p>
           </div>
         </div>

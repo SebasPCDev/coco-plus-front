@@ -1,3 +1,1 @@
-export default function Page() {
-  return <h1>esta es la home de admin company</h1>;
-}
+export { default } from '@/app/components/JulianCompany/home';
