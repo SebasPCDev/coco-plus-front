@@ -3,9 +3,9 @@ import { InvoicesTableSkeleton } from '@/app/components/skeletons/superadmin/ske
 import { Suspense } from 'react';
 import CoworkingsTable from '@/app/components/Tables/tableCoworkings';
 import GetCoworkings from '@/utils/gets/getCoworkings';
-import StatusCoworkings from '@/app/components/filtros/superadmin/statusCoworkings';
+import StatusHandler from '@/app/components/filtros/superadmin/statusQueryHandler';
 
-export default async function Page({
+export default async function PageCoworkings({
   searchParams,
 }: {
   searchParams?: {
@@ -22,7 +22,7 @@ export default async function Page({
 
   return (
     <div className="w-full">
-      <StatusCoworkings />
+      <StatusHandler />
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <CoworkingsTable coworkingsData={coworkingsData} />
       </Suspense>

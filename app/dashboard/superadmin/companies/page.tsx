@@ -1,36 +1,41 @@
 import Pagination from '@/app/components/pagination/pagination';
 import { InvoicesTableSkeleton } from '@/app/components/skeletons/superadmin/skeletons';
-import { Suspense, useEffect, useState } from 'react';
-import CoworkingsTable from '@/app/components/Tables/tableCoworkings';
-import GetCoworkings from '@/utils/gets/getCoworkings';
+import { Suspense } from 'react';
 import CompaniesTable from '@/app/components/Tables/tableCompanies';
 import GetCompanies from '@/utils/gets/getCompanies';
-import { useUserContext } from '@/app/components/context';
 import { cookies } from 'next/headers';
+import StatusHandler from '@/app/components/filtros/superadmin/statusQueryHandler';
 
-export default async function Page({
+export default async function PageCompanies({
   searchParams,
 }: {
   searchParams?: {
     query?: string;
     page?: string;
+    status?: string;
   };
 }) {
   const cookie = cookies();
   const token = cookie.get('token')?.value;
-  /* const { token } = useUserContext(); */
 
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
-  const companiesData = await GetCompanies({ token });
+  const status = searchParams?.status || '';
+  console.log(currentPage, status);
+  const companiesData = await GetCompanies({
+    token,
+    params: { page: currentPage, status },
+  });
+  console.log(companiesData);
   const totalPages = Math.ceil(companiesData.total / companiesData.limit);
 
   return (
     <div className="w-full">
+      <StatusHandler />
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <CompaniesTable companiesRawData={companiesData} />
       </Suspense>
-      <div className="mt-5 flex w-full justify-center">
+      <div className="flex w-full ">
         <Pagination totalPages={totalPages} />
       </div>
     </div>

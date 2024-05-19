@@ -1,12 +1,9 @@
-import Image from 'next/image';
 import {
   UpdateCoworking,
   InactiveCoworking,
 } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
 import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
 import { cookies } from 'next/headers';
-import { CheckCircleIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import StatusCoworkings from '../../filtros/superadmin/statusCoworkings';
 
 export default async function CoworkingsTable({
   coworkingsData,

@@ -1,5 +1,5 @@
 'use client';
-import { ChangeStatusCoworking } from '@/app/lib/actions';
+import { ChangeStatusCompany, ChangeStatusCoworking } from '@/app/lib/actions';
 import {
   DocumentMinusIcon,
   PencilIcon,
@@ -44,11 +44,15 @@ export function InactiveCoworking({
       confirmButtonColor: '#222B2D',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sí, desactivar',
+      confirmButtonText: 'Desactivar',
     }).then((result) => {
       if (result.isConfirmed) {
-        ChangeStatusCoworking({ id, token });
-        Swal.fire(`El coworking ha sido inactivado.`, '', 'success');
+        try {
+          if (token) {
+            /* ChangeStatusCoworking({ id, token }); */ //PENDIENTE
+            Swal.fire(`ESTO NO HACE NADA`, '', 'success');
+          }
+        } catch (error) {}
       }
     });
   };
@@ -85,12 +89,31 @@ export function UpdateCompany({ id }: { id: string }) {
   );
 }
 
-export function DeleteCompany({ id }: { id: string }) {
+export function InactiveCompany({ id, token }: { id: string; token?: string }) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer inactivar esta empresa?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Desactivar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        ChangeStatusCompany({ id, token });
+        Swal.fire(`La empresa ha sido inactivada.`, '', 'success');
+      }
+    });
+  };
   return (
     <>
-      <button className="rounded-md border p-2 hover:bg-gray-100">
+      <button
+        onClick={handleClick}
+        className="rounded-md border p-2 hover:bg-red-50"
+      >
         <span className="sr-only">Delete</span>
-        <DocumentMinusIcon className="w-8" />
+        <XCircleIcon className="w-8 text-red-600 " />
       </button>
     </>
   );
