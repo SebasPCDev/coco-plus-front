@@ -3,6 +3,7 @@ import { InvoicesTableSkeleton } from '@/app/components/skeletons/superadmin/ske
 import { Suspense } from 'react';
 import CoworkingsTable from '@/app/components/Tables/tableCoworkings';
 import GetCoworkings from '@/utils/gets/getCoworkings';
+import StatusCoworkings from '@/app/components/filtros/superadmin/statusCoworkings';
 
 export default async function Page({
   searchParams,
@@ -10,19 +11,22 @@ export default async function Page({
   searchParams?: {
     query?: string;
     page?: string;
+    status?: string;
   };
 }) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
-  const coworkingsData = await GetCoworkings(currentPage);
+  const status = searchParams?.status || '';
+  const coworkingsData = await GetCoworkings(currentPage, status);
   const totalPages = Math.ceil(coworkingsData.total / coworkingsData.limit);
 
   return (
     <div className="w-full">
+      <StatusCoworkings />
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <CoworkingsTable coworkingsData={coworkingsData} />
       </Suspense>
-      <div className="mt-5 flex w-full">
+      <div className="flex w-full">
         <Pagination totalPages={totalPages} />
       </div>
     </div>

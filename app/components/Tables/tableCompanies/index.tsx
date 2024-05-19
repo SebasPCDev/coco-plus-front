@@ -12,7 +12,12 @@ import { useEffect, useState } from 'react';
 export default function CompaniesTable({
   companiesRawData,
 }: {
-  companiesRawData?: any;
+  companiesRawData?: {
+    page: number;
+    limit: number;
+    total: number;
+    companies: [];
+  };
 }) {
   return (
     <div className="mt-6 flow-root w-full">
@@ -85,7 +90,7 @@ export default function CompaniesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {companiesRawData?.map((company) => (
+              {companiesRawData?.companies?.map((company) => (
                 <tr
                   key={company.id}
                   className="w-full border-b py-3 text-center  last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -131,7 +136,6 @@ export default function CompaniesTable({
               ))}
             </tbody>
           </table>
-          <Pagination totalPages={5} />
         </div>
       </div>
     </div>

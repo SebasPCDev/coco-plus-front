@@ -5,12 +5,7 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import {
-  ButtonHTMLAttributes,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import GetRequests from '@/utils/gets/getRequests';
 import { useUserContext } from '../context';
 import PostActivateRequest from '@/utils/posts/postActivateRequest';
