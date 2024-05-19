@@ -15,6 +15,7 @@ interface ICoworking {
   long?: string | null;
   capacity?: number;
   message?: string;
+  status?: string|null;
 }
 
 const PutUpdateCoworking = async ({

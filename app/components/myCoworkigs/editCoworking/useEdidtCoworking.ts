@@ -5,8 +5,10 @@ import PutUpdateCoworking from '@/utils/puts/putUpdateCoworking';
 import Swal from 'sweetalert2';
 import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
 import { initialCoworking } from '@/utils/constants/editCoworking/editInfo/initialCoworking';
+import { useMyCoworkingContext } from '../myCoworkingConstext';
 
 const useEdidtCoworking = ({ id }: { id: string }) => {
+  const { Mycoworking, setMyCoworking } = useMyCoworkingContext();
   const { token } = useUserContext();
   const [newInfo, setNewInfo] = useState({});
 
@@ -15,6 +17,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   const getData = async () => {
     const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
     setCoworking(coworkingData);
+    setMyCoworking(coworkingData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +34,17 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
     console.log(newInfo);
   };
+  useEffect(() => {
+    setNewInfo({
+      ...newInfo,
+      country: Mycoworking?.country,
+      state: Mycoworking?.state,
+      city: Mycoworking?.city,
+      address: Mycoworking?.address,
+      lat: Mycoworking?.lat,
+      long: Mycoworking?.long,
+    });
+  }, [Mycoworking]);
 
   const handleClick = async () => {
     Swal.fire({
@@ -58,6 +72,13 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   useEffect(() => {
     getData();
   }, []);
+  const onClickActivate = async () => {
+    const newInfo = {
+      status: 'active',
+    };
+    const response = await PutUpdateCoworking({ id, newInfo, token });
+    console.log(response);
+  };
 
   return {
     handleClick,
@@ -65,6 +86,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     coworking,
     setNewInfo,
     newInfo,
+    onClickActivate,
   };
 };
 
