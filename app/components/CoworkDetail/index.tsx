@@ -10,13 +10,13 @@ const slides = [
     { url: "https://assets-global.website-files.com/605baba32d94435376625d33/650cb9a6f4a5283dccb4288d_ho_chi_minh_city_cowork-sharespace_vietnam.jpg", title: "Imagen cowork 4" },
   ];
 
-  const containerStyles = {
+  const containerStyles : any= {
     width: "500px",
     height: "400px",
     margin: "0 auto",
   };
 
-  const slideStyles = {
+  const slideStyles : any= {
     width: "100%",
     height: "100%",
     borderRadius: "10px",
@@ -25,7 +25,7 @@ const slides = [
     backgroundPosition: "center",
   };
   
-  const rightArrowStyles = {
+  const rightArrowStyles : any= {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
@@ -41,7 +41,7 @@ const slides = [
     marginRight: "-2.4rem",
   };
   
-  const leftArrowStyles = {
+  const leftArrowStyles : any= {
     position: "absolute",
     top: "50%",
     transform: "translate(0, -50%)",
@@ -57,19 +57,19 @@ const slides = [
     marginLeft: "-2.4rem",
   };
   
-  const sliderStyles = {
+  const sliderStyles : any= {
     position: "relative",
     height: "100%",
     boxShadow: "0px 0px 26px -7px rgba(0, 0, 0, 0.44)", 
     borderRadius: "10px",
 };
   
-  const dotsContainerStyles = {
+  const dotsContainerStyles : any= {
     display: "flex",
     justifyContent: "center",
   };
   
-  const dotStyle = {
+  const dotStyle : any= {
     margin: "0 3px",
     cursor: "pointer",
     fontSize: "20px",
@@ -93,7 +93,7 @@ export const CoworkDetail =({...cowork})=>{
       const newIndex = isLastSlide ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
     };
-    const goToSlide = (slideIndex) => {
+    const goToSlide = (slideIndex : any) => {
       setCurrentIndex(slideIndex);
     };
     const slideStylesWidthBackground = {
