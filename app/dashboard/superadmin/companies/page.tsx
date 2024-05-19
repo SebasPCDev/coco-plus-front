@@ -21,12 +21,11 @@ export default async function PageCompanies({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const status = searchParams?.status || '';
-  console.log(currentPage, status);
   const companiesData = await GetCompanies({
     token,
     params: { page: currentPage, status },
   });
-  console.log(companiesData);
+
   const totalPages = Math.ceil(companiesData.total / companiesData.limit);
 
   return (

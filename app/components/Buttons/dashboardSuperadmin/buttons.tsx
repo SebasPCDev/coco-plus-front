@@ -9,18 +9,6 @@ import {
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 
-export function CreateCoworking() {
-  return (
-    <Link
-      href="#"
-      className="flex h-12 items-center justify-center rounded-lg bg-custom-fourth px-4 font-medium text-custom-primary transition-colors hover:bg-custom-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-primary"
-    >
-      <span className="hidden md:block">Crear Coworking</span>{' '}
-      <PlusIcon className="h-5 md:ml-4" />
-    </Link>
-  );
-}
-
 export function UpdateCoworking({ id }: { id: string }) {
   return (
     <Link href="#" className="rounded-md border p-2 hover:bg-gray-100">
@@ -49,8 +37,12 @@ export function InactiveCoworking({
       if (result.isConfirmed) {
         try {
           if (token) {
-            /* ChangeStatusCoworking({ id, token }); */ //PENDIENTE
-            Swal.fire(`ESTO NO HACE NADA`, '', 'success');
+            ChangeStatusCoworking({ id, token }); //PENDIENTE
+            Swal.fire(
+              `Se ha inactivado el coworking correctamente`,
+              '',
+              'success',
+            );
           }
         } catch (error) {}
       }
