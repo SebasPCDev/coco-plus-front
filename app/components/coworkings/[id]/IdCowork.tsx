@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 // import { IProduct } from "@/components/Card/types";
 // import { Params } from './types';
-import { CoworkDetail } from '@/components/CoworkDetail';
+// import { CoworkDetail } from '@/components/CoworkDetail';
 import getCowork from './getCowork';
+import CoworkDetail from '../../CoworkDetail';
 
 export const IdCowork = ({ params }) => {
-    
+
     const [cowork, setCowork] = useState(null);
     const [redirect, setRedirect] = useState<boolean>(false);
 
@@ -18,7 +19,7 @@ export const IdCowork = ({ params }) => {
 
         fetchCowork();
         console.log(cowork);
-        
+
     }, [params.id]);
 
     useEffect(() => {
@@ -36,16 +37,16 @@ export const IdCowork = ({ params }) => {
         <div>
             {cowork ? (
                 <div className="">
-                    <CoworkDetail {...cowork}/>
+                    <CoworkDetail {...cowork} />
                 </div>
             ) : (
                 <div className="flex h-[40rem] w-full items-center justify-center">
                     <div className="flex-col gap-4 w-full flex items-center justify-center">
-                      <div className="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-green-600 rounded-full">
-                
-                      </div>
+                        <div className="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-green-600 rounded-full">
+
+                        </div>
                     </div>
-                  </div>
+                </div>
             )}
         </div>
     );

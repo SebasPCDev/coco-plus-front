@@ -3,7 +3,7 @@ import { createSession, deleteSession } from '@/app/lib/session';
 import PostLogin from '@/utils/posts/postSignin';
 import PutUpdateUser from '@/utils/puts/putUpdateUser';
 import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
-import ILoginForm from '@/utils/types/loginFormInterface';
+import ILoginForm from '@/utils/types/auth/loginFormInterface';
 
 export const HandleLogin = async (credentials: ILoginForm) => {
 
