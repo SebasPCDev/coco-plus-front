@@ -76,34 +76,34 @@ export default function UsersTable({
               </div>
             ))}
           </div> */}
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-center  font-normal">
+          <table className="hidden min-w-full text-sm text-gray-900 md:table">
+            <thead className="rounded-lg text-center font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                   Nombre
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Apellido
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Teléfono
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Email
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Identificación
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Cargo
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Rol
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                <th scope="col" className=" py-5 font-medium">
                   Status
                 </th>
-                <th scope="col" className="relative py-3 pl-6 pr-3">
+                <th scope="col" className="relative  pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -112,42 +112,35 @@ export default function UsersTable({
               {usersData?.map((user) => (
                 <tr
                   key={user.id}
-                  className="w-full border-b py-3 text-center  last-of-type:border-none  hover:bg-gray-100 [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full border-b  text-center  last-of-type:border-none  hover:bg-gray-100 [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="max-w-[150px]  truncate whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src={'/customers/evil-rabbit.png'}
-                        className="rounded-full object-contain shadow-md"
-                        width={35}
-                        height={35}
-                        alt={`${user.name}'s profile picture`}
-                      />
+                  <td className="max-w-[150px]  truncate whitespace-nowrap pl-3 pr-3 ">
+                    <div className="flex items-center justify-center gap-3">
                       <p>{user.name}</p>
                     </div>
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.lastname}
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.phone}
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.email}
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.identification}
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.position}
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap px-3 py-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  ">
                     {user.role}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  <td className="whitespace-nowrap  ">
                     <UserStatus status={user.status} />
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap py-3 pl-6 pr-3">
+                  <td className="max-w-[150px] truncate whitespace-nowrap  pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateUser id={user.id} />
                       <InactiveUser id={user.id} />

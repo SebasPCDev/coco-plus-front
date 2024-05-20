@@ -6,10 +6,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <MyCoworkingProvider>
       <div className="md-overflow-hidden flex h-screen flex-col md:flex-row">
-        <div className="w-full flex-none md:w-96">
+        <div className="w-full flex-none md:w-60">
           <SideNav />
         </div>
-        <div className="grow md:p-3">
+        <div className="grow md:p-4">
           <NavbarDashboard />
           {children}
         </div>

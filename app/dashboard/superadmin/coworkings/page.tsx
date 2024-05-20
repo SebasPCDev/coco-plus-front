@@ -26,7 +26,7 @@ export default async function PageCoworkings({
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <CoworkingsTable coworkingsData={coworkingsData} />
       </Suspense>
-      <div className="flex w-full">
+      <div className="flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div>
     </div>

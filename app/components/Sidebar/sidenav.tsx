@@ -5,9 +5,9 @@ import CocoLogo from '../Logo/coco-logo';
 
 export default function SideNav() {
   return (
-    <div className="flex flex-col items-center justify-center px-3 py-4 md:fixed md:h-full md:px-2">
+    <div className="flex flex-col items-center justify-center px-3 py-4 md:fixed md:h-full md:w-56 md:px-2">
       <Link
-        className="mb-2 hidden h-20 w-full rounded-md bg-custom-fourth p-4 md:flex md:h-40"
+        className="mb-2 hidden w-full rounded-md bg-custom-fourth p-4 md:flex md:h-28 md:items-center md:justify-center"
         href="/"
       >
         <CocoLogo />
