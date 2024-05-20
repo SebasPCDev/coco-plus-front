@@ -88,9 +88,8 @@ export const CoworkDetail = ({ id }: { id: string }) => {
     const fetchCowork = async () => {
       try {
         const item = await getCowork(id);
-        console.log("Item", item);
-        if (!item)
-          setCowork(item);
+        if (!item) window.location.href = '/404';
+        setCowork(item);
       } catch (error) {
         console.error('Error fetching cowork:', error);
         setCowork(null);
