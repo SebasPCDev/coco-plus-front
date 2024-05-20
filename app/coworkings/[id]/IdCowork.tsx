@@ -1,51 +1,24 @@
-"use client";
-import { useState, useEffect } from 'react';
 import CoworkDetail from '@/app/components/CoworkDetail';
 import getCowork from './getCowork';
 import Header from '@/app/components/header';
 
-interface Cowork {
-    id: string;
-    name: string;
-    description: string;
-}
+// interface Cowork {
+//     id: string;
+//     name: string;
+//     description: string;
+// }
 
-export const IdCowork = ({ params }: { params: { id: string } }) => {
-    const [cowork, setCowork] = useState<Cowork | null>(null);
-    const [redirect, setRedirect] = useState<boolean>(false);
+export const IdCowork = async ({ params }: { params: { id: string } }) => {
 
-    useEffect(() => {
-        const fetchCowork = async () => {
-            try {
-                const item = await getCowork(params.id);
-                setCowork(item);
-            } catch (error) {
-                console.error('Error fetching cowork:', error);
-                setCowork(null);
-            }
-        };
-
-        fetchCowork();
-    }, [params.id]);
-
-    useEffect(() => {
-        if (cowork === undefined) {
-            setRedirect(true);
-        }
-    }, [cowork]);
-
-    if (redirect) {
-        window.location.href = '/404';
-        return null;
-    }
-
+    const cowork = await getCowork(params.id);
     return (
         <div>
-            {cowork ? (
+            {cowork ? (<>
+                <Header />
                 <div className="">
-                    {/* <Header/> */}
                     <CoworkDetail {...cowork} />
                 </div>
+            </>
             ) : (
                 <div className="flex h-[40rem] w-full items-center justify-center">
                     <div className="flex-col gap-4 w-full flex items-center justify-center">
