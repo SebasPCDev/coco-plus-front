@@ -58,27 +58,30 @@ const CoworkingForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await Swal.fire({
-      title: 'seguro deseasn crear este coworking?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'si, crear',
-      denyButtonText: `no`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('Se ha creado', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('se cancelo', '', 'info');
-        router.push('/dashboard/adminCoworking/myCoworkings');
-        return;
-      }
-    });
 
-    const response = await PostNewCoworking({ formData, token });
-    router.push('/dashboard/adminCoworking/myCoworkings');
-
-    console.log(response);
+    try {
+      const response = await PostNewCoworking({ formData, token });
+      console.log(response);
+      await Swal.fire({
+        title: 'seguro deseasn crear este coworking?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'si, crear',
+        denyButtonText: `no`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Se ha creado', '', 'success');
+          router.push('/dashboard/adminCoworking/myCoworkings');
+        } else if (result.isDenied) {
+          Swal.fire('se cancelo', '', 'info');
+          router.push('/dashboard/adminCoworking/myCoworkings');
+          return;
+        }
+      });
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   };
 
   return (

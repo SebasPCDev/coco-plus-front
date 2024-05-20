@@ -11,17 +11,15 @@ const PostNewCoworking = async ({
 }) => {
   const url = `${urlBase}/coworkings`;
 
-  try {
-    const response = await axios.post(url, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const response = await axios.post(url, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    return response.data;
-  } catch (error) {
-    console.error('Error al activar el coworking:', error);
-  }
+  return response.data;
+
+  
 };
 
 export default PostNewCoworking;
