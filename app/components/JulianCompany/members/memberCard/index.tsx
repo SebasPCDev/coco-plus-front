@@ -5,6 +5,7 @@ interface MemberCardProps {
   name: string;
   email: string;
   role: 'Admin' | 'Empleado';
+  identification: string;
   passes: number;
   passesAvailable: number | null;
 }
@@ -14,6 +15,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
   name,
   email,
   role,
+  identification,
   passes,
   passesAvailable,
 }) => {
@@ -38,6 +40,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
               {role}
             </span>
           </div>
+          <p className="text-gray-600">{identification}</p>
           <p className="text-gray-600">{email}</p>
           <div className="border-b border-gray-200 my-2"></div>
           <div className="text-gray-600">
