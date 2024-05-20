@@ -1,13 +1,14 @@
 import HeaderLeft from './headerLeft';
+import HeaderCenter from './headercenter';
 import HeaderRight from './headerRight';
 
 const Header = () => {
+
   return (
-    <header className="bg-zinc-950 font-sans shadow">
-      <div className="mx-auto flex flex-row items-center justify-between px-4 sm:px-6 lg:px-8">
-        <HeaderLeft />
-        <HeaderRight />
-      </div>
+    <header className="flex flex-row items-center justify-between bg-zinc-950 font-sans shadow pr-10">
+      <HeaderLeft />
+      <HeaderCenter />
+      <HeaderRight />
     </header>
   );
 };

@@ -76,13 +76,11 @@ address {
 }
 
 html {
-  font-size: 13px;
   scroll-behavior: smooth !important;
 }
 
 body {
   background-color: var(--white);
-  font-size: 16px;
   color: var(--cadet-gray);
 }
 .swal2-popup {

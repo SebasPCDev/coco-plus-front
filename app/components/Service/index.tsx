@@ -1,87 +1,45 @@
+import { SERVICES } from '@/utils/constants';
 import Image from 'next/image';
-import styles from './Service.module.css';
 
-export const Service: React.FC<{ id: string }> = (props) => {
+export const Service: React.FC = () => {
   return (
     <section
-      id={props.id}
-      className="max-w-[1024px] mx-auto flex justify-between w-full px-12"
+      id="Service"
+      className="max-w-[1024px] mx-auto w-full"
       aria-label="service"
     >
-      {/* {`${styles.h2} ${styles.sectiontitle} `}> */}
-      <div className="mt-20">
-        <h2 className="text-[#161c2c] text-4xl font-bold text-center">
-          Como reservar
-        </h2>
+      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-40">
+        Como reservar
+      </h2>
 
-        <ul className={styles.servicelist}>
-          <li>
-            <div className={styles.servicecard}>
-              <div className={styles.cardicon}>
+      <div className="flex flex-wrap justify-center gap-4 mt-20 text-center">
+        {SERVICES.map((service) => (
+          <article key={service.id} className='max-w-[300px]'>
+
+            <div className="flex justify-center items-center">
+              <div className='bg-[#f4faf7] rounded-full'>
                 <Image
-                  src={'/cocoproject/research.png'}
+                  className='w-24 h-24 p-6'
+                  src={service.src}
                   alt="1"
                   width={50}
                   height={50}
                 />
               </div>
-
-              <h3 className={`${styles.h3} ${styles.cardtitle} text-[20px]`}>
-                Encuentra tu espacio ideal
-              </h3>
-
-              <p className={styles.cardtext}>
-                Ingresa a la aplicación y busca el espacio que más se ajuste a
-                tus necesidades
-              </p>
             </div>
-          </li>
 
-          <li>
-            <div className={styles.servicecard}>
-              <div className={styles.cardicon}>
-                <Image
-                  src={'/cocoproject/booking.png'}
-                  alt="1"
-                  width={50}
-                  height={50}
-                />
-              </div>
+            <h3 className="font-bold py-6 text-xl text-[#161c2c]" >
+              {service.title}
+            </h3>
 
-              <h3 className={`${styles.h3} ${styles.cardtitle} text-[20px]`}>
-                Haz una reserva
-              </h3>
+            <p className="leading-6">
+              {service.paragraph}
+            </p>
+          </article>
+        ))}
 
-              <p className={styles.cardtext}>
-                Selecciona el espacio y día que deseas reservar.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div className={styles.servicecard}>
-              <div className={styles.cardicon}>
-                <Image
-                  src={'/cocoproject/conversation.png'}
-                  alt="1"
-                  width={50}
-                  height={50}
-                />
-              </div>
-
-              <h3 className={`${styles.h3} ${styles.cardtitle} text-[20px]`}>
-                Coordina el encuentro
-              </h3>
-
-              <p className={styles.cardtext}>
-                Comparte el código de reserva en el lugar y disfruta de tu
-                espacio.
-              </p>
-            </div>
-          </li>
-        </ul>
       </div>
-    </section >
+    </section>
   );
 };
 
