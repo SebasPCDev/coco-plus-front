@@ -46,7 +46,7 @@ const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string 
         ))}
 
         <button
-          className="rounded bg-red-600 px-4 py-2 text-white"
+          className="rounded bg-custom-primary px-4 py-2 text-white"
           onClick={handleClickNewUser}
         >
           Crear usuario

@@ -39,7 +39,7 @@ const useImagesContent = ({ coworking }: { coworking: any }) => {
         console.error('Error al enviar la imagen');
       }
     } catch (error) {
-      console.error('Error en la solicitud', error);
+      alert(error.response.data.message);
     } finally {
       setIsModalOpen(false);
       // Cierra el modal después de enviar la imagen

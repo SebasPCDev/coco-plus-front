@@ -150,54 +150,7 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
     }
   };
 
-  // const handleChangelocation = async (
-  //   e: React.ChangeEvent<HTMLInputElement>,
-  // ) => {
-  //   e.preventDefault();
-  //   const { name, value } = e.target;
-  //   if (name === 'address') {
-  //     console.log(address);
-  //     setAddress({ ...address, [name]: value });
-  //     const { country, state, city } = address;
-  //     const freeAddress = `${value} ${city} ${state} ${country}`;
-  //     const response = await GetAddressFree({ address: { q: freeAddress } });
-  //     if (response.length == 1) {
-  //       const corde = { lat: response[0].lat, long: response[0].lon };
-  //       setCorder(corde);
-  //     } else if (response.length > 1) {
-  //       const options = (response as ResponseItem[]).map((option) => ({
-  //         name: option.name,
-  //         display_name: option.display_name,
-  //       }));
 
-  //       setOptions(options);
-  //       setIsModalOpen(true);
-  //     }
-  //   } else {
-  //     try {
-  //       const updatedAddress = { ...address, [name]: value };
-  //       const response = await GetAddressByParams({ address: updatedAddress });
-  //       if (response.length == 1) {
-  //         const standardname = { ...address, [name]: response[0].name };
-  //         setAddress(standardname);
-  //       } else if (response.length > 1) {
-  //         const options = (response as ResponseItem[]).map((option) => ({
-  //           name: option.name,
-  //           display_name: option.display_name,
-  //         }));
-
-  //         setOptions(options);
-  //         console.log('estas son las opciones', options);
-  //         console.log('estas son las respuestas', response);
-
-  //         setCurrentName(name);
-  //         setIsModalOpen(true);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error updating options:', error);
-  //     }
-  //   }
-  // };
   const arrayLocation = [
     {
       name: 'country',
@@ -266,9 +219,9 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
         </div>
         <button
           onClick={() => setIsModalOpen(false)}
-          className="mt-4 rounded-md bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700"
+          className="mt-4 rounded-md bg-custom-primary px-4 py-2 font-semibold text-white hover:bg-blue-700"
         >
-          Cerrar
+          Aceptar
         </button>
       </Modal>
     </div>
