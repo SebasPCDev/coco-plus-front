@@ -2,78 +2,29 @@
 import React from 'react';
 
 import useCoworkings from './useCoworkings';
-import SearchIcon from '@/app/components/icons/SearchIcon';
 import Coworking from './coworking';
+import SearchCoworking from './searchCoworking';
 
 export const Coworkings: React.FC = () => {
 
   const { coworkings, countries, states, cities, handleChange } = useCoworkings();
 
   return (
-    <section className='py-16'>
-      <div className='flex flex-wrap justify-center gap-4 w-full'>
-        <div className='relative group w-[300px]'>
-          <SearchIcon className="search-icon" />
-          <select
-            className='select-form'
-            name='country'
-            id='country'
-            onChange={handleChange}
-          >
-            <option className='select-option' value="">País</option>
-            {countries.map((country, index) => (
-              <option className='select-option'
-                value={country} key={`${country}-${index}`}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='relative group w-[300px]'>
-          <SearchIcon className='search-icon' />
-          <select
-            className='select-form'
-            name='state'
-            id='state'
-            onChange={handleChange}
-          >
-            <option className='select-option' value="">Estado/Provincia</option>
-            {states.map((state, index) => (
-              <option className='select-option'
-                value={state} key={`${state}-${index}`}>
-                {state}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='relative group w-[300px]'>
-          <SearchIcon className='search-icon' />
+    <section id="coworkings">
+      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-40">
+        Nuestras oficinas
+      </h2>
 
-          <select
-            className='select-form'
-            name='city'
-            id='city'
-            onChange={handleChange}
-          >
-            <option className='select-option' value="">Ciudad</option>
-            {cities.map((city, index) => (
-              <option className='select-option'
-                value={city} key={`${city}-${index}`}>
-                {city}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      <SearchCoworking countries={countries} states={states} cities={cities} handleChange={handleChange} />
 
-      <div className="w-full mt-16">
 
-        <section className="flex flex-wrap justify-center gap-8">
+      <main className="w-full mt-20">
+        <section className="flex flex-wrap justify-center gap-4">
           {coworkings.map((coworking) => {
             return (<Coworking key={coworking.id} coworking={coworking} />)
           })}
         </section>
-      </div>
+      </main>
     </section>
   );
 };

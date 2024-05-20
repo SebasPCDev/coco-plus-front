@@ -1,11 +1,13 @@
-import { SERVICES } from '@/utils/constants';
 import Image from 'next/image';
+
+import { SERVICES } from '@/utils/constants';
+import styles from './Services.module.css';
 
 export const Service: React.FC = () => {
   return (
     <section
-      id="Service"
-      className="max-w-[1024px] mx-auto w-full"
+      id="services"
+      className="w-full"
       aria-label="service"
     >
       <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-40">
@@ -14,7 +16,7 @@ export const Service: React.FC = () => {
 
       <div className="flex flex-wrap justify-center gap-4 mt-20 text-center">
         {SERVICES.map((service) => (
-          <article key={service.id} className='max-w-[300px]'>
+          <article key={service.id} className={`max-w-[300px] ${styles.article}`}>
 
             <div className="flex justify-center items-center">
               <div className='bg-[#f4faf7] rounded-full'>
@@ -39,7 +41,7 @@ export const Service: React.FC = () => {
         ))}
 
       </div>
-    </section>
+    </section >
   );
 };
 
