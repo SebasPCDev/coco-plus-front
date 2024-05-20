@@ -27,7 +27,7 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
           />
           <button
             type="submit"
-            className="rounded bg-red-600 px-4 py-2 text-white"
+            className="rounded bg-custom-primary px-4 py-2 text-white"
           >
             agregar imagen
           </button>
