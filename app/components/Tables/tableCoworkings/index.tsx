@@ -1,6 +1,8 @@
 import {
   UpdateCoworking,
   InactiveCoworking,
+  ReactivateCoworking,
+  ChangeStatus,
 } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
 import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
 import { cookies } from 'next/headers';
@@ -122,7 +124,11 @@ export default async function CoworkingsTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-center gap-6">
                       <UpdateCoworking id={coworking.id} />
-                      <InactiveCoworking id={coworking.id} token={token} />
+                      <ChangeStatus
+                        id={coworking.id}
+                        token={token}
+                        currentStatus={coworking.status}
+                      />
                     </div>
                   </td>
                 </tr>

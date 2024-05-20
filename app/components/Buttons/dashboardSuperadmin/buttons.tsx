@@ -17,12 +17,57 @@ export function UpdateCoworking({ id }: { id: string }) {
   );
 }
 
-export function InactiveCoworking({
+export function ReactivateCoworking({
   id,
   token,
 }: {
   id: string;
   token?: string;
+  currentStatus?: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer reactivar este Coworking?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Reactivar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          if (token) {
+            ChangeStatusCoworking({ id, token });
+            Swal.fire(
+              `Se ha reactivado el coworking correctamente`,
+              '',
+              'success',
+            );
+          }
+        } catch (error) {}
+      }
+    });
+  };
+  return (
+    <button
+      onClick={handleClick}
+      className="rounded-md border p-2 hover:bg-green-50"
+    >
+      <span className="sr-only">Delete</span>
+      <PlusIcon className="w-8 text-green-600 " />
+    </button>
+  );
+}
+
+export function InactiveCoworking({
+  id,
+  token,
+  currentStatus,
+}: {
+  id: string;
+  token?: string;
+  currentStatus?: string;
 }) {
   const handleClick = () => {
     Swal.fire({
@@ -37,7 +82,7 @@ export function InactiveCoworking({
       if (result.isConfirmed) {
         try {
           if (token) {
-            ChangeStatusCoworking({ id, token }); //PENDIENTE
+            ChangeStatusCoworking({ id, token, currentStatus }); //PENDIENTE
             Swal.fire(
               `Se ha inactivado el coworking correctamente`,
               '',
@@ -56,6 +101,62 @@ export function InactiveCoworking({
       >
         <span className="sr-only">Delete</span>
         <XCircleIcon className="w-8 text-red-600 " />
+      </button>
+    </>
+  );
+}
+
+export function ChangeStatus({
+  id,
+  token,
+  currentStatus,
+}: {
+  id: string;
+  token?: string;
+  currentStatus?: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title:
+        currentStatus === 'active'
+          ? '¿Estás seguro de querer inactivar este Coworking?'
+          : '¿Estás seguro de querer reactivar este Coworking?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText:
+        currentStatus === 'active' ? 'Desactivar' : 'Reactivar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          if (token) {
+            ChangeStatusCoworking({ id, token, currentStatus });
+            Swal.fire(
+              currentStatus === 'active'
+                ? `Se ha inactivado el coworking correctamente`
+                : `Se ha reactivado el coworking correctamente`,
+              '',
+              'success',
+            );
+          }
+        } catch (error) {}
+      }
+    });
+  };
+  return (
+    <>
+      <button
+        onClick={handleClick}
+        className="rounded-md border p-2 hover:bg-red-50"
+      >
+        <span className="sr-only">Delete</span>
+        {currentStatus === 'active' ? (
+          <XCircleIcon className="w-8 text-red-600 " />
+        ) : (
+          <PlusIcon className="w-8 text-green-600 " />
+        )}
       </button>
     </>
   );
