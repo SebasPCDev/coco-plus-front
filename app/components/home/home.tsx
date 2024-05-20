@@ -1,10 +1,8 @@
-// 'use client';
-
-import Banner from '../Banner';
-import Service from '../Service';
-import Coworks from '../Cowoks';
-import HeaderMain from '../mainHeader';
 import Header from '../header';
+import Banner from '../Banner';
+import HeaderMain from '../mainHeader';
+import Service from '../Service';
+import Coworkings from '../coworkings2';
 import Footer from '../JulianCompany/home/footerHome';
 
 const Home = () => {
@@ -12,9 +10,11 @@ const Home = () => {
     <div>
       <Header />
       <Banner />
-      <HeaderMain />
-      <Service id="Service" />
-      <Coworks id="Coworks" />
+      <main className='mx-auto max-w-[1024px] p-10'>
+        <HeaderMain />
+        <Service />
+        <Coworkings />
+      </main>
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
-import { LoginFormArray } from '../../../utils/arraysforms/loginForm';
+import { LoginFormArray } from '@/utils/arraysforms/loginForm';
 import React from 'react';
-import ILoginForm from '../../../utils/types/auth/loginFormInterface';
+import ILoginForm from '@/utils/types/auth/loginFormInterface';
 import useLoginForm from './useLoginForm';
 
 const LoginForm = () => {

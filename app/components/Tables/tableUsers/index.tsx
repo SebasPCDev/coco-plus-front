@@ -13,13 +13,7 @@ import IUser from '@/utils/types/userResponseInterface';
 import Image from 'next/image';
 import UserStatus from '../../Status/dashboardSuperadmin/statusUser';
 
-export default function UsersTable({
-  query,
-  currentPage,
-}: {
-  query: string;
-  currentPage: number;
-}) {
+export default function UsersTable() {
   const { token } = useUserContext();
 
   const [usersData, setUsersData] = useState<IUser[]>([]);

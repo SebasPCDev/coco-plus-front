@@ -8,6 +8,8 @@ import getCountriesfilter from '../../../utils/gets/countriesFilter';
 import GetCoworkingsFilter from '../../../utils/gets/getCoworkingsFilter';
 import getoptions from '../../../utils/gets/getoptionsFilter';
 import Link from 'next/link';
+import Image from 'next/image';
+import SearchIcon from '@/app/ui/searchIcon';
 
 export const CoworksRoute: React.FC = () => {
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
@@ -71,10 +73,64 @@ export const CoworksRoute: React.FC = () => {
   };
 
   return (
-    <section className="relative py-8">
-      <div className="mx-auto w-full px-4 md:px-8">
-        <div className="">
-          <div className="col-span-12 w-full max-md:mx-auto max-md:max-w-md md:col-span-3">
+    <section className='py-16 mx-auto'>
+      <div className='flex flex-wrap justify-center gap-8 w-full'>
+        <div className='relative group min-w-[180px] max-w-[300px]'>
+          <SearchIcon className="search-icon" />
+          <select
+            className='select-form'
+            name='country'
+            id='country'
+            onChange={handleChange}
+          >
+            <option className='select-option' value="">País</option>
+            {countries.map((country, index) => (
+              <option className='select-option'
+                value={country} key={`${country}-${index}`}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='relative group min-w-[180px] max-w-[300px]'>
+          <SearchIcon className='search-icon' />
+          <select
+            className='select-form'
+            name='state'
+            id='state'
+            onChange={handleChange}
+          >
+            <option className='select-option' value="">Estado/Provincia</option>
+            {states.map((state, index) => (
+              <option className='select-option'
+                value={state} key={`${state}-${index}`}>
+                {state}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='relative group min-w-[180px] max-w-[300px]'>
+          <SearchIcon className='search-icon' />
+
+          <select
+            className='select-form'
+            name='city'
+            id='city'
+            onChange={handleChange}
+          >
+            <option className='select-option' value="">Ciudad</option>
+            {cities.map((city, index) => (
+              <option className='select-option'
+                value={city} key={`${city}-${index}`}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="w-full mt-16">
+        {/* <div className="col-span-12 w-full max-md:mx-auto max-md:max-w-md md:col-span-3">
             <div className="box w-full  rounded-xl bg-white p-6">
               <div className="mb-5 items-center gap-1">
                 <div className="input-container my-2 !flex w-full justify-evenly">
@@ -227,24 +283,23 @@ export const CoworksRoute: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* <div className={styles.containercoworks}> */}
-          {/* <ul className={styles.coworklist}> */}
-          <ul className={styles.grid__coworkings}>
-            {coworkings.map((cowork) => {
-              return (
-                <li key={cowork.name}>
-                  <Link
-                    href={`http://localhost:3001/coworkings/${cowork.id}`}
-                  >
-                    <CoworkCard cowork={cowork} />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {/* <div className={styles.containercoworks}> */}
+        {/* <ul className={styles.coworklist}> */}
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8">
+          {coworkings.map((cowork) => {
+            return (
+              <li key={cowork.name}>
+                <Link
+                  href={`http://localhost:3001/coworkings/${cowork.id}`}
+                >
+                  <CoworkCard cowork={cowork} />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
       {/* </div> */}
     </section>
