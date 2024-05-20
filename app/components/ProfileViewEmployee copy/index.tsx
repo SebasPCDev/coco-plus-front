@@ -161,7 +161,9 @@ export const ProfileViewEmployee = () => {
                 className=" w-48 rounded-full border-4 border-solid border-white"
               />
             </div>
-            <div className="mb-5 flex flex-col items-center justify-center max-sm:gap-5 sm:flex-row sm:justify-between">
+
+
+            <div className="mb-10 flex flex-col items-center justify-center max-sm:gap-5 sm:flex-row sm:justify-evenly">
               <div className="block">
                 <h3 className="mb-1 text-[30px] font-bold text-gray-900 max-sm:text-center">
                   {`${userData.name} ${userData.lastname}`}
@@ -211,7 +213,9 @@ export const ProfileViewEmployee = () => {
                   </p>
                 </div>
               </div>
-              <div className="rounded-2xl bg-custom-primary p-5">
+            </div>
+            <div className="w-[60rem] mx-auto">
+            <div className="rounded-2xl bg-custom-primary p-5">
                 <h2 className=" text-[20px] font-semibold leading-7 text-gray-900">
                   Información
                 </h2>
@@ -243,9 +247,6 @@ export const ProfileViewEmployee = () => {
         </div>
       </section>
 
-      {/*##################################################################################################################*/}
-
-      {/*##################################################################################################################*/}
       <div>
         <form onSubmit={handleSubmit}>
           <div className="mt-10 space-y-12 ">

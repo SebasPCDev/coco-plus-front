@@ -168,7 +168,11 @@ export const CoworkDetail =({...cowork})=>{
                           </div>
 
                           <p className={styles.textbody}>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga, quis possimus dignissimos ex ut libero quasi voluptatum recusandae sapiente odit veritatis corrupti neque 
+                          <div> 
+                            <b>
+                              {cowork.country}, {cowork.state}, {cowork.city}
+                            </b>
+                          </div>
                           </p>
 
                           <div className={styles.tags}>
@@ -187,70 +191,6 @@ export const CoworkDetail =({...cowork})=>{
                       </div>
                   </div>
                 </section>
-
-                <section className={styles.inmueblecaract}>
-                    <div className={styles.contenedor}>
-                      <div className={styles.contgeneralcaract}>
-                        <div className={styles.caractinfbasica}>
-                          <h3 className={styles.caracttitle}>Ubicacion</h3>
-                        </div>
-
-                        <div className={styles.contgeneralcaractchecks}> 
-                          <p className={styles.caractchecks}>
-                            <i className="fa-solid fa-check"></i> Pais: {cowork.country}<br/>
-                            <i className="fa-solid fa-check"></i> Estado/Provincia: {cowork.state}<br/>
-                            <i className="fa-solid fa-check"></i> Ciudad: {cowork.city}<br/>
-                          </p>
-                        </div>
-
-                        <div className={styles.contgeneralcaractchecks2}>
-                          <p className={styles.caractchecks}>
-                            <i className="fa-solid fa-check"></i> extra: 1 <br/>
-                            <i className="fa-solid fa-check"></i> extra: 4<br/>
-                            <i className="fa-solid fa-check"></i> extra <br/>
-                            <i className="fa-solid fa-check"></i> extra <br/>
-                          </p>
-                        </div>
-
-                        <div className={styles.contgeneralcaractsup}>
-                          <h3 className={styles.caracttitle}>Informacion extra</h3>
-                        </div>
-
-                        <div className={styles.contgeneralcaractsupchecks}>
-                                          <p className={styles.caractchecks}>
-                            <i className="fa-solid fa-ruler-combined"></i> extra extra extra<br/>
-                          </p>
-                        </div>
-
-                        <div className={styles.contgeneralcaractdesc}> 
-                          <h3 className="caract-title">Descripción</h3>
-                        </div>
-
-                        <div className={styles.contgeneralcaractdesccont}>
-                          <p className={styles.caractdescripcion}>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, similique. Aperiam quae harum eos? Natus, autem! Voluptatibus quos amet veritatis veniam, maxime quo ipsam sequi, reiciendis fugit ducimus culpa doloribus!
-                          </p>
-                        </div>
-
-                        <div className={styles.contgeneralcaractserv}>
-                          <p className={styles.caractchecks}>
-                            <h3 className={styles.caracttitle}>Informacion extra</h3>
-                          </p>
-                        </div>
-
-                        <div className={styles.contgeneralcaractservchecks}>
-                          <p className={styles.caractchecks}>
-                            <i className="fa-solid fa-bolt"></i> extra <br/>
-                            <i className="fa-solid fa-faucet-drip"></i> extra extra<br/>
-                            <i className="fa-solid fa-fire-flame-simple"></i> extra extra <br/>
-                            <i className="fa-solid fa-toilet"></i> extra <br/>
-                          </p>
-                        </div>
-
-                      </div>
-                    </div>
-                </section>
-
                 <section className={styles.mapadireccion}>
                   <div className={styles.contenedor}>
                     <h2 className={styles.mapatitulo}>Ubicación (ejemplo)</h2>
