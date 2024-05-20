@@ -6,19 +6,27 @@ import { redirect } from 'next/navigation';
 export async function ChangeStatusCoworking({
   id,
   token,
+  currentStatus,
 }: {
   id: string;
   token?: string;
+  currentStatus?: string;
 }) {
+  console.log(currentStatus);
   const response = await fetch(`http://localhost:3000/coworkings/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ status: 'inactive' }),
+    body: JSON.stringify(
+      currentStatus === 'active'
+        ? { status: 'inactive' }
+        : { status: 'active' },
+    ),
   });
   const data = await response.json();
+  console.log(data);
 
   revalidatePath('/dashboard/superadmin/coworkings');
   redirect('/dashboard/superadmin/coworkings');
