@@ -1,6 +1,8 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CoworkDetail.module.css"
+import getCowork from '../coworkings/[id]/getCowork';
+import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
 
 const slides = [
   { url: "https://www.thedigitalnomad.asia/wp-content/uploads/2022/02/Coworking-spaces.jpeg", title: "Imagen cowork 1" },
@@ -78,9 +80,25 @@ const dotStyle: any = {
 
 
 
-export const CoworkDetail = ({ ...cowork }) => {
+export const CoworkDetail = ({ id }: { id: string }) => {
 
+  const [cowork, setCowork] = useState<Coworking | null>(null);
 
+  useEffect(() => {
+    const fetchCowork = async () => {
+      try {
+        const item = await getCowork(id);
+        console.log("Item", item);
+        if (!item)
+          setCowork(item);
+      } catch (error) {
+        console.error('Error fetching cowork:', error);
+        setCowork(null);
+      }
+    };
+
+    fetchCowork();
+  }, [id]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const goToPrevious = () => {
@@ -140,55 +158,57 @@ export const CoworkDetail = ({ ...cowork }) => {
 
               </div>
             </div>
+            {cowork && (
+              <div className={styles.prodmincontent}>
 
-            <div className={styles.prodmincontent}>
 
+                <h2 style={{ marginBottom: "1rem" }} className={`${styles.h2} ${styles.sectiontitle}`}>{cowork.name}</h2>
 
-              <h2 style={{ marginBottom: "1rem" }} className={`${styles.h2} ${styles.sectiontitle}`}>{cowork.name}</h2>
-
-              <article className={styles.jobcard}>
-                <div>
-                  <p className={styles.texttitle}>{cowork.address}</p>
-                  <p className={styles.postdate}>Posted on 23 Dec, 2023</p>
-                </div>
-
-                <div className={styles.budgetexp}>
+                <article className={styles.jobcard}>
                   <div>
-                    <p className={styles.value}>Apertura</p>
-                    <p className={styles.label}>{cowork.open}</p>
+                    <p className={styles.texttitle}>{cowork.address}</p>
+                    <p className={styles.postdate}>Posted on 23 Dec, 2023</p>
                   </div>
-                  <div>
-                    <p className={styles.value}>Cierre</p>
-                    <p className={styles.label}>{cowork.open}</p>
-                  </div>
-                  <div>
-                    <p className={styles.value}>Capacidad</p>
-                    <p className={styles.label}>{cowork.capacity}</p>
-                  </div>
-                </div>
 
-                <p className={styles.textbody}>
-                  <div>
-                    <b>
-                      {cowork.country}, {cowork.state}, {cowork.city}
-                    </b>
+                  <div className={styles.budgetexp}>
+                    <div>
+                      <p className={styles.value}>Apertura</p>
+                      <p className={styles.label}>{cowork.open}</p>
+                    </div>
+                    <div>
+                      <p className={styles.value}>Cierre</p>
+                      <p className={styles.label}>{cowork.open}</p>
+                    </div>
+                    <div>
+                      <p className={styles.value}>Capacidad</p>
+                      <p className={styles.label}>{cowork.capacity}</p>
+                    </div>
                   </div>
-                </p>
 
-                <div className={styles.tags}>
-                  <article>
-                    <p>{cowork.phone}</p>
-                    <p>{cowork.email}</p>
-                  </article>
-                </div>
+                  <p className={styles.textbody}>
+                    <div>
+                      <b>
+                        {cowork.country}, {cowork.state}, {cowork.city}
+                      </b>
+                    </div>
+                  </p>
 
-                <div>
-                  <a href="/job/<%= job._id %>">
-                    <button className={styles.cardbtn}>Reservar</button>
-                  </a>
-                </div>
-              </article>
-            </div>
+                  <div className={styles.tags}>
+                    <article>
+                      <p>{cowork.phone}</p>
+                      <p>{cowork.email}</p>
+                    </article>
+                  </div>
+
+                  <div>
+                    <a href="/job/<%= job._id %>">
+                      <button className={styles.cardbtn}>Reservar</button>
+                    </a>
+                  </div>
+                </article>
+              </div>
+
+            )}
           </div>
         </section>
         <section className={styles.mapadireccion}>
