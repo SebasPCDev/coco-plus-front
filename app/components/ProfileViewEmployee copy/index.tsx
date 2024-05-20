@@ -29,7 +29,7 @@ export const ProfileViewEmployee = () => {
     event.preventDefault();
     const token: any = Cookie.get('token');
     const user: any = JSON.parse(Cookie.get('user') as string);
-    
+
     const id: any = user.id;
 
     if (!token) {
@@ -147,21 +147,15 @@ export const ProfileViewEmployee = () => {
   return (
     <main className="flex w-full flex-col">
       <section className="relative justify-between pb-5 pt-40">
-        <img
-          src="https://img.freepik.com/fotos-premium/diseno-fondo-abstracto-hd-color-verde-maximo_851755-27257.jpg"
-          alt="cover-image"
-          className="absolute left-0 top-0 z-0 h-60 w-full rounded-lg"
-        />
         <div>
           <div className="w-full justify-start">
             <div className="relative z-10 mb-5 flex items-center justify-center sm:justify-start">
-              <img
+              {/* <img
                 src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                 alt="user-avatar-image"
                 className=" w-48 rounded-full border-4 border-solid border-white"
-              />
+              /> */}
             </div>
-
 
             <div className="mb-10 flex flex-col items-center justify-center max-sm:gap-5 sm:flex-row sm:justify-evenly">
               <div className="block">
@@ -214,8 +208,8 @@ export const ProfileViewEmployee = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[60rem] mx-auto">
-            <div className="rounded-2xl bg-custom-primary p-5">
+            <div className="mx-auto w-[60rem]">
+              <div className="rounded-2xl bg-custom-primary p-5">
                 <h2 className=" text-[20px] font-semibold leading-7 text-gray-900">
                   Información
                 </h2>

@@ -50,10 +50,10 @@ const roles: Roles = {
     },
   ],
   employee: [
-    { name: 'Perfil', href: '/dashboard/employee', icon: HomeIcon },
+    { name: 'Perfil', href: '/dashboard/employee/profile', icon: HomeIcon },
     {
-      name: 'Coworkings',
-      href: '/dashboard/employee/coworkings',
+      name: 'Gestionar Reservas',
+      href: '/dashboard/employee/bookings',
       icon: HomeIcon,
     },
   ],

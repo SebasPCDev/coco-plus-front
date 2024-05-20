@@ -76,8 +76,12 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     const newInfo = {
       status: 'active',
     };
-    const response = await PutUpdateCoworking({ id, newInfo, token });
-    console.log(response);
+    try {
+      const response = await PutUpdateCoworking({ id, newInfo, token });
+      console.log(response);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   };
 
   return {

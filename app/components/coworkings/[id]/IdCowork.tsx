@@ -5,14 +5,14 @@ import getCowork from './getCowork';
 
 // Define a type for the cowork object
 interface Cowork {
-  // Define the properties of the Cowork object here
-  id: string;
-  name: string;
-  description: string;
-  // Add other properties as needed
+    // Define the properties of the Cowork object here
+    id: string;
+    name: string;
+    description: string;
+    // Add other properties as needed
 }
 
-export const IdCowork = ({ params } : { params: { id: string } }) => {
+export const IdCowork = ({ params }: { params: { id: string } }) => {
     const [cowork, setCowork] = useState<Cowork | null>(null);
     const [redirect, setRedirect] = useState<boolean>(false);
 
@@ -45,15 +45,15 @@ export const IdCowork = ({ params } : { params: { id: string } }) => {
         <div>
             {cowork ? (
                 <div className="">
-                    <CoworkDetail {...cowork}/>
+                    <CoworkDetail {...cowork} />
                 </div>
             ) : (
                 <div className="flex h-[40rem] w-full items-center justify-center">
                     <div className="flex-col gap-4 w-full flex items-center justify-center">
-                      <div className="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-green-600 rounded-full">
-                      </div>
+                        <div className="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-green-600 rounded-full">
+                        </div>
                     </div>
-                  </div>
+                </div>
             )}
         </div>
     );

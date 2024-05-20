@@ -5,6 +5,8 @@ const redirectionByRole = (role: string) => {
     return '/dashboard/adminCoworking';
   } else if (role === 'adminCompany') {
     return '/dashboard/adminCompany';
+  } else if (role === 'employee') {
+    return '/dashboard/employee';
   } else {
     return '/';
   }

@@ -104,8 +104,8 @@ export default function Requests() {
   };
 
   return (
-    <div className="flex w-full flex-col md:col-span-4">
-      <div className="my-4 flex gap-8">
+    <div className="md: flex w-full flex-col text-sm md:col-span-4">
+      <div className="my-4 flex gap-8 text-sm">
         <p className="flex items-center font-bold">Filtrar por:</p>
         <div className="relative rounded-full border-2 border-gray-300">
           <select
@@ -151,7 +151,7 @@ export default function Requests() {
             >
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div className="mb-2">
-                  <h2 className="font-semibold md:text-2xl">
+                  <h2 className="font-semibold md:text-xl">
                     {item.name} {item.lastname}
                   </h2>
                   <p className="text-gray-500">{item.email}</p>
@@ -166,7 +166,7 @@ export default function Requests() {
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
-                  <h2 className=" font-medium md:text-2xl">
+                  <h2 className=" font-medium md:text-xl">
                     {item.position} - {item.companyName}
                   </h2>
                   <p className="text-gray-500">{item.companyEmail}</p>
@@ -192,9 +192,9 @@ export default function Requests() {
                   onClick={handleDecline}
                   className={`${
                     item.status !== 'close'
-                      ? 'mt-4 w-60 rounded-lg bg-custom-tertiary px-6 py-3 font-bold text-custom-secondary hover:bg-custom-primary hover:text-custom-primary'
-                      : 'mt-4 w-60 cursor-not-allowed rounded-lg bg-gray-300 px-6 py-3 opacity-50'
-                  }}`}
+                      ? 'mt-4 w-40 rounded-lg bg-custom-tertiary px-6 py-3 font-bold text-custom-secondary hover:bg-custom-primary hover:text-custom-primary'
+                      : 'btn btn-disabled'
+                  }`}
                   id={item.id}
                   disabled={item.status === 'close'}
                 >
@@ -205,9 +205,9 @@ export default function Requests() {
                   className={`
                   ${
                     item.status !== 'close'
-                      ? 'mt-4 w-60 rounded-lg bg-custom-fourth px-6 py-3 font-bold text-custom-primary hover:bg-custom-secondary hover:text-custom-primary'
-                      : 'mt-4 w-60  cursor-not-allowed rounded-lg  bg-gray-300  px-6  py-3 opacity-50'
-                  }}`}
+                      ? 'mt-4 w-40 rounded-lg bg-custom-fourth px-6 py-3 font-bold text-custom-primary hover:bg-custom-secondary hover:text-custom-primary'
+                      : 'btn btn-disabled'
+                  }`}
                   id={item.id}
                   disabled={item.status === 'close'}
                 >

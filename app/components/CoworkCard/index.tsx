@@ -6,8 +6,8 @@ export const CoworkCard = ({ cowork }: { cowork: IResponseCoworking }) => {
 
     return (
         <div className={styles.propertycard}>
-            <figure className={`${styles.cardbanner} ${styles.imgholder}`} style={{ width: "800", height: "533" }}>
-                <Image src={cowork.thumbnail || ''} width="800" height="533"
+            <figure className={`${styles.cardbanner} ${styles.imgholder}`} style={{ width: "400", height: "300" }}>
+                <Image src={cowork.thumbnail || ''} width="400" height="300"
                     alt={cowork.name || ''} className={styles.imgcover} />
             </figure>
             <div className={styles.cardcontent}>
@@ -21,11 +21,11 @@ export const CoworkCard = ({ cowork }: { cowork: IResponseCoworking }) => {
                         <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                     </li>
                     <li className="carditem">
-                        <span className={styles.itemtext}>{cowork.open}am</span>
+                        <span className={styles.itemtext}>{cowork.open?.slice(0, 5)} am</span>
                     </li>
                     <span>-</span>
                     <li className="carditem">
-                        <span className={styles.itemtext}>{cowork.close}pm</span>
+                        <span className={styles.itemtext}>{cowork.close?.slice(0, 5)} pm</span>
                     </li>
                 </ul>
                 <div className={styles.cardmeta}>

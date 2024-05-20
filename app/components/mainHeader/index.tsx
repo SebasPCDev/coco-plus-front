@@ -9,7 +9,7 @@ const HeaderMain: React.FC = () => {
         <div className="w-full md:w-2/3">
           <OfertaSection />
         </div>
-        <div className="w-full md:ml-4 md:w-1/3">
+        <div className="w-full md:w-1/3">
           <ImageCoworkMobile />
         </div>
       </div>

@@ -34,7 +34,7 @@ export default async function PageCompanies({
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <CompaniesTable companiesRawData={companiesData} />
       </Suspense>
-      <div className="flex w-full ">
+      <div className="mb-10 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div>
     </div>

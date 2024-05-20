@@ -5,10 +5,13 @@
     overflow: hidden;
     transition: 0.25s ease;
     border: 1px solid #838383;
+    width: 280px;
+    margin: 0 auto;
+    min-height: 375px;
+    background: #d1d1d1;
   }
   
-  .propertycard:is(:hover, :focus-within) { box-shadow: 0 20px 25px -5px hsla(214, 19%, 29%, 0.10),
-                0 10px 10px -5px hsla(214, 19%, 29%, 0.10);; }
+  .propertycard:is(:hover, :focus-within) { box-shadow: 0 20px 25px -5px hsla(214, 19%, 29%, 0.10), 0 10px 10px -5px hsla(214, 19%, 29%, 0.10);; }
   
   .propertycard .cardactionbtn {
     position: absolute;
