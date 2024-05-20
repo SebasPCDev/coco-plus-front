@@ -5,7 +5,7 @@ import HeaderRight from './headerRight';
 const Header = () => {
 
   return (
-    <header className="flex flex-row items-center justify-between bg-zinc-950 font-sans shadow pr-10">
+    <header className="fixed w-full h-[65px] lg:h-auto lg:relative flex flex-row items-center justify-between bg-zinc-950 font-sans shadow pr-10 z-50">
       <HeaderLeft />
       <HeaderCenter />
       <HeaderRight />
