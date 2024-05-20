@@ -1,5 +1,5 @@
 // Todo.tsx
-// import Breadcrumb from '@/app/components/JulianCompany/breadCrumb';
+
 import UserProfile from '@/app/components/JulianCompany/members/userProfile';
 import Header from '@/app/components/JulianCompany/members/header';
 import MemberCard from '@/app/components/JulianCompany/members/memberCard';
@@ -120,16 +120,9 @@ const Todo = () => {
 
   return (
     <div className="w-full">
-      {/* UserProfile y Breadcrumb */}
-      {/* <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row items-start md:items-center mb-6">
-        <UserProfile photoUrl="/property-1.jpg" name="Nombre del usuario" />
-        <Breadcrumb />
-      </div> */}
       <div className="col-span-1 mb-6 flex flex-col items-start md:col-span-2 md:flex-row md:items-center">
         <Header />
       </div>
-
-      {/* MemberCards */}
       <div className="col-span-1 grid grid-cols-1 gap-6 md:col-span-3 md:grid-cols-2 lg:grid-cols-3">
         {members.map((member, index) => (
           <MemberCard

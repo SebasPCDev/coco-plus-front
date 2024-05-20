@@ -191,7 +191,7 @@ export function InvoicesMobileSkeleton() {
 
 export function InvoicesTableSkeleton() {
   return (
-    <div className="h-[450px] w-full">
+    <div className="mt-6 h-[35rem] w-full ">
       <div className="mt-6 flow-root">
         <div className="inline-block min-w-full align-middle">
           <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
@@ -235,7 +235,7 @@ export function InvoicesTableSkeleton() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white text-center">
+              <tbody className=" bg-white text-center">
                 <TableRowSkeleton />
                 <TableRowSkeleton />
                 <TableRowSkeleton />

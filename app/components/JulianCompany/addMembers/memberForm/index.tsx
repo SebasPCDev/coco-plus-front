@@ -1,3 +1,7 @@
+'use client';
+import { useUserContext } from '@/app/components/context';
+import GetProfile from '@/utils/gets/getProfile';
+import PostCreateEmployee from '@/utils/posts/postCreateEmployee';
 import React, { useState } from 'react';
 
 interface MemberFormProps {
@@ -14,6 +18,7 @@ interface MemberFormProps {
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
+  const { token } = useUserContext();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,11 +26,42 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
   const [jobRole, setJobRole] = useState('');
   const [postcode, setPostcode] = useState('');
   const [userType, setUserType] = useState('Member');
-  const [monthlyTokenLimit, setMonthlyTokenLimit] = useState<number | undefined>(undefined);
+  const [monthlyTokenLimit, setMonthlyTokenLimit] = useState<
+    number | undefined
+  >(undefined);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit({ firstName, lastName, email, phone, jobRole, postcode, userType, monthlyTokenLimit });
+    if (!token) return;
+    const profile = await GetProfile({token});
+    const companyId = profile?.employee.company?.id;
+    console.log(profile)
+    const newEmployee = {
+      name: firstName,
+      lastname:lastName,
+      email,
+      phone,
+      identification: '11111111',
+      position: jobRole,
+      role: 'employee',
+      status: 'active',
+      passes: Number(10),
+      passesAvailable: Number(10),
+      companyId,
+    };
+    console.log("newEmployee", newEmployee);
+    const data =await PostCreateEmployee(newEmployee, token);
+    console.log("data", data);
+    onSubmit({
+      firstName,
+      lastName,
+      email,
+      phone,
+      jobRole,
+      postcode,
+      userType,
+      monthlyTokenLimit,
+    });
     // Reiniciar los campos del formulario después de enviar
     setFirstName('');
     setLastName('');
@@ -39,10 +75,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="container mx-auto py-8">
-      <div><h2 className="text-lg font-semibold mb-3 mt-4">Nombre</h2></div>
+      <div>
+        <h2 className="mb-3 mt-4 text-lg font-semibold">Nombre</h2>
+      </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="firstName" className="block font-semibold mb-1">
+          <label htmlFor="firstName" className="mb-1 block font-semibold">
             Nombre*
           </label>
           <input
@@ -51,11 +89,11 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
         <div>
-          <label htmlFor="lastName" className="block font-semibold mb-1">
+          <label htmlFor="lastName" className="mb-1 block font-semibold">
             Apellido*
           </label>
           <input
@@ -64,107 +102,121 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
+            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
       </div>
-      <div><h2 className="text-lg font-semibold mb-1 mt-10">Detalles Contacto</h2></div>
-      <div className="grid grid-cols-2 gap-4">        
+      <div>
+        <h2 className="mb-1 mt-10 text-lg font-semibold">Detalles Contacto</h2>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-            <label htmlFor="email" className="block font-semibold mb-1">
+          <label htmlFor="email" className="mb-1 block font-semibold">
             Email*
-            </label>
-            <input
+          </label>
+          <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
-            />
+            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
         </div>
         <div className="mt-4">
-            <label htmlFor="phone" className="block font-semibold mb-1">
+          <label htmlFor="phone" className="mb-1 block font-semibold">
             Teléfono (optional)
-            </label>
-            <input
+          </label>
+          <input
             type="tel"
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
-            />
+            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
         </div>
       </div>
-      <div><h2 className="text-lg font-semibold mb-1 mt-10">Contacto Adicional</h2></div> 
-      <div className="grid grid-cols-2 gap-4">         
+      <div>
+        <h2 className="mb-1 mt-10 text-lg font-semibold">Contacto Adicional</h2>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-            <label htmlFor="jobRole" className="block font-semibold mb-1">
+          <label htmlFor="jobRole" className="mb-1 block font-semibold">
             Cargo
-            </label>
-            <input
+          </label>
+          <input
             type="text"
             id="jobRole"
             value={jobRole}
             onChange={(e) => setJobRole(e.target.value)}
             required
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
-            />
+            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
         </div>
-        <div className="mt-4">
-            <label htmlFor="postcode" className="block font-semibold mb-1">
+        {/* <div className="mt-4">
+          <label htmlFor="postcode" className="mb-1 block font-semibold">
             Dirección (optional)
-            </label>
-            <input
+          </label>
+          <input
             type="text"
             id="postcode"
             value={postcode}
             onChange={(e) => setPostcode(e.target.value)}
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-full bg-gray-100"
-            />
-        </div>
+            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
+        </div> */}
       </div>
-      <div><h2 className="text-lg font-semibold mb-1 mt-10">Permisos</h2></div>
-      <div>    
+      <div>
+        <h2 className="mb-1 mt-10 text-lg font-semibold">Permisos</h2>
+      </div>
+      <div>
         <div className="mt-4">
-            <label htmlFor="monthlyTokenLimit" className="block font-semibold mb-1">
+          <label
+            htmlFor="monthlyTokenLimit"
+            className="mb-1 block font-semibold"
+          >
             Límite de pases mensuales (opcional)
-            </label>
-            <input
+          </label>
+          <input
             type="number"
             id="monthlyTokenLimit"
             value={monthlyTokenLimit || ''}
-            onChange={(e) => setMonthlyTokenLimit(e.target.value ? Number(e.target.value) : undefined)}
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-1/2 bg-gray-100"
-            />
+            onChange={(e) =>
+              setMonthlyTokenLimit(
+                e.target.value ? Number(e.target.value) : undefined,
+              )
+            }
+            className="w-1/2 rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
         </div>
+        {/*
         <div className="mt-4">
-            <label htmlFor="userType" className="block font-semibold mb-1">
+          <label htmlFor="userType" className="mb-1 block font-semibold">
             Tipo de usuario
-            </label>
-            <select
+          </label>
+          <select
             id="userType"
             value={userType}
             onChange={(e) => setUserType(e.target.value)}
-            className="border border-gray-300 rounded-3xl px-3 py-2 w-1/2 bg-gray-100"
-            >
+            className="w-1/2 rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          >
             <option value="Member">Empleado</option>
-            {/* Agrega más opciones según tus necesidades */}
-            </select>
-        </div>
-      </div>  
-      <div className="mt-6 flex justify-end">
+            
+          </select> 
+          </div>*/}
+      </div>
+      <div className="mt-6 flex justify-end gap-4">
         <button
           type="button"
           onClick={() => {}}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4  font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancelar
         </button>
         <button
           type="submit"
-          className="bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded"
-          >        
+          className="flex h-10 items-center rounded-lg bg-lime-500 px-4 py-2 font-semibold text-white hover:bg-lime-600"
+        >
           Agregar
         </button>
       </div>

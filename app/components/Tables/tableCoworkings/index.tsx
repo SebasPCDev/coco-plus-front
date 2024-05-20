@@ -1,9 +1,11 @@
-import Image from 'next/image';
 import {
   UpdateCoworking,
-  DeleteCoworking,
+  InactiveCoworking,
+  ReactivateCoworking,
+  ChangeStatus,
 } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
 import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
+import { cookies } from 'next/headers';
 
 export default async function CoworkingsTable({
   coworkingsData,
@@ -15,12 +17,15 @@ export default async function CoworkingsTable({
     coworking: [];
   };
 }) {
+  const cookie = cookies();
+  const token = cookie.get('token')?.value;
+
   return (
-    <div className="mt-6 flow-root h-[450px] w-full overflow-x-auto">
+    <div className="mt-6 flow-root h-[35rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
-        <div className="founded-lg overflow relative bg-gray-50 p-2 md:pt-0">
+        <div className="founded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {coworkingsData.coworking?.map((coworking) => (
+            {coworkingsData?.coworking?.map((coworking: any) => (
               <div
                 key={coworking.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
@@ -28,13 +33,6 @@ export default async function CoworkingsTable({
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
-                      <Image
-                        src={coworking.thumbnail}
-                        className="mr-2 rounded-full"
-                        width={60}
-                        height={60}
-                        alt={`${coworking.name}'s profile picture`}
-                      />
                       <p className="font-bold">{coworking.name}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-x-20 px-1">
@@ -51,7 +49,7 @@ export default async function CoworkingsTable({
                 <div className="flex w-full items-center justify-between pt-4">
                   <div className="flex justify-end gap-2">
                     <UpdateCoworking id={coworking.id} />
-                    <DeleteCoworking id={coworking.id} />
+                    <InactiveCoworking id={coworking.id} token={token} />
                   </div>
                 </div>
               </div>
@@ -91,20 +89,13 @@ export default async function CoworkingsTable({
             </thead>
 
             <tbody className="overflow-x-auto bg-white">
-              {coworkingsData.coworking?.map((coworking) => (
+              {coworkingsData?.coworking?.map((coworking: any) => (
                 <tr
                   key={coworking.id}
-                  className="w-full border-b py-3 text-center last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full border-b py-3 text-center last-of-type:border-none hover:bg-gray-100 [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="max-w-[150px] truncate whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center justify-center gap-3">
-                      {/* <Image
-                        src={coworking.thumbnail || '/images/placeholder.jpg'}
-                        className="rounded-full"
-                        width={60}
-                        height={60}
-                        alt={`${coworking.name}'s profile picture`}
-                      /> */}
                       <p>{coworking.name}</p>
                     </div>
                   </td>
@@ -131,9 +122,13 @@ export default async function CoworkingsTable({
                     <CoworkingStatus status={coworking.status} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
+                    <div className="flex justify-center gap-6">
                       <UpdateCoworking id={coworking.id} />
-                      <DeleteCoworking id={coworking.id} />
+                      <ChangeStatus
+                        id={coworking.id}
+                        token={token}
+                        currentStatus={coworking.status}
+                      />
                     </div>
                   </td>
                 </tr>

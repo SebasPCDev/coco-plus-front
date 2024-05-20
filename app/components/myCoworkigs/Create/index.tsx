@@ -23,11 +23,22 @@ const CoworkingForm = () => {
     long: '',
     capacity: 0,
     message: '',
-    status: 'active',
+    status: 'pending',
   };
 
   const { token } = useUserContext();
   const [formData, setFormData] = useState(initialState);
+  const generateTimeOptions = () => {
+    const options: string[] = []; // Aquí especificamos que options es un array de strings
+    for (let hour = 6; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const formattedHour = hour.toString().padStart(2, '0');
+        const formattedMinute = minute.toString().padStart(2, '0');
+        options.push(`${formattedHour}:${formattedMinute}`);
+      }
+    }
+    return options;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -47,27 +58,29 @@ const CoworkingForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await Swal.fire({
-      title: 'seguro deseasn crear este coworking?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'si, crear',
-      denyButtonText: `no`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('Se ha creado', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('se cancelo', '', 'info');
-        router.push('/dashboard/adminCoworking/myCoworkings');
-        return;
-      }
-    });
+    try {
+      const response = await PostNewCoworking({ formData, token });
+      console.log(response);
+      await Swal.fire({
+        title: 'seguro deseasn crear este coworking?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'si, crear',
+        denyButtonText: `no`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Se ha creado', '', 'success');
+          router.push('/dashboard/adminCoworking/myCoworkings');
+        } else if (result.isDenied) {
+          Swal.fire('se cancelo', '', 'info');
 
-    const response = await PostNewCoworking({ formData, token });
-    router.push('/dashboard/adminCoworking/myCoworkings');
-
-    console.log(response);
+          return;
+        }
+      });
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   };
 
   return (
@@ -80,7 +93,11 @@ const CoworkingForm = () => {
         {arrayNewCoworkingForm.map((section, index) => (
           <div
             key={index}
-            className={section.name === 'message' ? 'col-span-2' : 'col-span-1'}
+            className={
+              section.name === 'message'
+                ? 'col-span-2'
+                : 'col-span-2 md:col-span-1'
+            }
           >
             <label
               htmlFor={section.name}
@@ -88,17 +105,34 @@ const CoworkingForm = () => {
             >
               {section.label}
             </label>
-
-            <input
-              type={section.type}
-              id={section.name}
-              name={section.name}
-              placeholder={section.placeholder}
-              required={section.required}
-              value={formData[section.name] || ''}
-              onChange={handleChange}
-              className="block w-full rounded-lg border px-4 py-4 shadow focus:border-blue-500 focus:outline-none"
-            />
+            {section.name === 'open' || section.name === 'close' ? (
+              <select
+                id={section.name}
+                name={section.name}
+                required={section.required}
+                value={formData[section.name] || ''}
+                onChange={handleChange}
+                className="block w-full rounded-lg border px-4 py-4 shadow focus:border-blue-500 focus:outline-none"
+              >
+                <option value="">-- Seleccione --</option>
+                {generateTimeOptions().map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={section.type}
+                id={section.name}
+                name={section.name}
+                placeholder={section.placeholder}
+                required={section.required}
+                value={formData[section.name] || ''}
+                onChange={handleChange}
+                className="block w-full rounded-lg border px-4 py-4 shadow focus:border-blue-500 focus:outline-none"
+              />
+            )}
           </div>
         ))}
         <div className="col-span-2 mt-6">

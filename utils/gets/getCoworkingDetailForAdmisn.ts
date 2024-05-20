@@ -18,8 +18,6 @@ const GetCoworkingDetailForAdmin = async ({
       },
     });
 
-    console.log(response.data);
-
     return response.data;
   } catch (error) {
     console.log('esto e slo que se envio', id, token);
