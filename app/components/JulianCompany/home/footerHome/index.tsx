@@ -2,8 +2,8 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-800 py-8 mt-8">
-      <div className="container mx-auto text-center text-white">
+    <footer className="bg-gray-800 py-8 mt-8 max-w-[1024px]">
+      <div className="container mx-auto text-center text-white text-sm">
         <p>&copy; 2023 WorkspaceApp. All rights reserved.</p>
         <nav className="mt-4">
           <ul className="flex justify-center space-x-4">

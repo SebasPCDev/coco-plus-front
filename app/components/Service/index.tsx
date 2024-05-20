@@ -7,10 +7,10 @@ export const Service: React.FC = () => {
   return (
     <section
       id="services"
-      className="w-full"
+      className="w-full relative pt-[65px] -mt-[65px] lg:pt-0 lg:mt-0"
       aria-label="service"
     >
-      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-40">
+      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-10 lg:mt-40">
         Como reservar
       </h2>
 

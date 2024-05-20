@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export const Banner = () => {
   return (
-    <section className="pt-[65px] lg:pt-0 relative w-full bg-[url('/cocoproject/coco-banner.jpg')] bg-no-repeat bg-cover bg-center -z-10" aria-label="hero">
+    <section className="relative w-full bg-[url('/cocoproject/coco-banner.jpg')] bg-no-repeat bg-cover bg-center -z-10" aria-label="hero">
       <div className='absolute w-full h-full bg-black/60 z-0'></div>
       <div className="max-w-[1024px] relative w-full h-full py-16 px-10 md:px-10 mx-auto md:mx-70 z-10">
 

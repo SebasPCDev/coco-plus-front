@@ -10,8 +10,9 @@ export const Coworkings: React.FC = () => {
   const { coworkings, countries, states, cities, handleChange } = useCoworkings();
 
   return (
-    <section id="coworkings">
-      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-40">
+    <section
+      className='pt-[65px] -mt-[65px] lg:pt-0 lg:mt-0' id="coworkings">
+      <h2 className="text-[#161c2c] text-4xl font-bold text-center mt-10 lg:mt-40">
         Nuestras oficinas
       </h2>
 
