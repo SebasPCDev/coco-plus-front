@@ -137,6 +137,7 @@ const Todo = () => {
             key={member.id}
             photoUrl="https://cdn.vectorstock.com/i/2000v/15/78/male-avatar-profile-picture-green-earth-volunteer-vector-5351578.avifile.jpg"
             name={member.user.name + " " + member.user.lastname}
+            identification={member.user.identification}
             email={member.user.email}
             role={member.user.role}
             passes={member.passes}
