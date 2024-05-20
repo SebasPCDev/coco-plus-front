@@ -76,13 +76,11 @@ address {
 }
 
 html {
-  font-size: 13px;
   scroll-behavior: smooth !important;
 }
 
 body {
   background-color: var(--white);
-  font-size: 16px;
   color: var(--cadet-gray);
 }
 .swal2-popup {
@@ -131,4 +129,17 @@ body {
 
 .btn-cancel {
   @apply bg-gray-300 hover:bg-gray-300/70
+}
+
+/* select  */
+.select-form {
+  @apply text-gray-600 border border-solid border-gray-400 bg-gray-100 font-bold block p-2.5 rounded-full h-16 text-base pl-4 focus:border-gray-400 focus:ring-1 focus:ring-gray-300 bg-gradient-to-r from-transparent from-60% via-amber-100 via-80% to-green-200 to-90%
+}
+
+.select-option {
+  @apply bg-gray-100 text-gray-700 font-semibold p-2  hover:bg-gray-300  
+}
+
+.search-icon {
+  @apply absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-700 w-10 transition-transform duration-300 group-hover:rotate-45
 }

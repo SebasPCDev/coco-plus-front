@@ -1,1 +1,1 @@
-export { default } from '@/app/components/changePassForm';
+export { default } from '@/app/components/auth/changePassForm';
