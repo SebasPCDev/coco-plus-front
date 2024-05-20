@@ -238,7 +238,7 @@ export const CoworksRoute: React.FC = () => {
                 {coworkings.map((cowork) => {
                   return (
                     <li key={cowork.name}>
-                      <Link href={`${urlBase}/coworkings/${cowork.id}`}>
+                      <Link href={`/coworkings/${cowork.id}`}>
                         <CoworkCard cowork={cowork} />
                       </Link>
                     </li>
