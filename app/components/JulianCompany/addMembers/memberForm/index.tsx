@@ -2,6 +2,8 @@
 import { useUserContext } from '@/app/components/context';
 import GetProfile from '@/utils/gets/getProfile';
 import PostCreateEmployee from '@/utils/posts/postCreateEmployee';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface MemberFormProps {
@@ -18,10 +20,12 @@ interface MemberFormProps {
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
+  const router = useRouter();
   const { token } = useUserContext();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [identification, setIdentification] = useState('');
   const [phone, setPhone] = useState('');
   const [jobRole, setJobRole] = useState('');
   const [postcode, setPostcode] = useState('');
@@ -41,12 +45,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       lastname:lastName,
       email,
       phone,
-      identification: '11111111',
+      identification: identification,
       position: jobRole,
       role: 'employee',
       status: 'active',
-      passes: Number(10),
-      passesAvailable: Number(10),
+      passes: Number(monthlyTokenLimit),
+      passesAvailable: Number(monthlyTokenLimit),
       companyId,
     };
     console.log("newEmployee", newEmployee);
@@ -71,6 +75,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
     setPostcode('');
     setUserType('Member');
     setMonthlyTokenLimit(undefined);
+    router.push('/dashboard/adminCompany/empleados');
   };
 
   return (
@@ -78,7 +83,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       <div>
         <h2 className="mb-3 mt-4 text-lg font-semibold">Nombre</h2>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">        
         <div>
           <label htmlFor="firstName" className="mb-1 block font-semibold">
             Nombre*
@@ -89,7 +94,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-full cursor-pointer rounded-3xl border-custom-secondary  bg-gray-100 px-3 py-2"
           />
         </div>
         <div>
@@ -102,9 +107,9 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
-            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
-        </div>
+        </div>        
       </div>
       <div>
         <h2 className="mb-1 mt-10 text-lg font-semibold">Detalles Contacto</h2>
@@ -120,7 +125,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
         <div className="mt-4">
@@ -132,12 +137,30 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+          />
+        </div>
+      </div>      
+      <div>
+        <br />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="mt-4">
+          <label htmlFor="jobRole" className="mb-1 block font-semibold">
+            Identificación
+          </label>
+          <input
+            type="text"
+            id="identification"
+            value={identification}
+            onChange={(e) => setIdentification(e.target.value)}
+            required
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
       </div>
       <div>
-        <h2 className="mb-1 mt-10 text-lg font-semibold">Contacto Adicional</h2>
+        <h2 className="mb-1 mt-10 text-lg font-semibold">Información Adicional</h2>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
@@ -150,7 +173,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={jobRole}
             onChange={(e) => setJobRole(e.target.value)}
             required
-            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
         {/* <div className="mt-4">
@@ -178,6 +201,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             Límite de pases mensuales (opcional)
           </label>
           <input
+            name='passes'
             type="number"
             id="monthlyTokenLimit"
             value={monthlyTokenLimit || ''}
@@ -186,7 +210,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
                 e.target.value ? Number(e.target.value) : undefined,
               )
             }
-            className="w-1/2 rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="w-1/2 cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
           />
         </div>
         {/*
@@ -212,13 +236,13 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4  font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancelar
-        </button>
+        </button>        
         <button
           type="submit"
-          className="flex h-10 items-center rounded-lg bg-lime-500 px-4 py-2 font-semibold text-white hover:bg-lime-600"
+          className="flex h-10 items-center rounded-lg bg-custom-secondary px-4 py-2 font-semibold text-custom-white hover:bg-custom-primary hover:text-custom-secondary"
         >
           Agregar
-        </button>
+        </button>        
       </div>
     </form>
   );
