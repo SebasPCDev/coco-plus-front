@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import CoworkDetail from '@/app/components/CoworkDetail';
 import getCowork from './getCowork';
+import Header from '@/app/components/header';
 
 interface Cowork {
   id: string;
@@ -42,6 +43,7 @@ export const IdCowork = ({ params } : { params: { id: string } }) => {
         <div>
             {cowork ? (
                 <div className="">
+                    <Header/>
                     <CoworkDetail {...cowork}/>
                 </div>
             ) : (
