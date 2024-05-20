@@ -23,9 +23,9 @@ const CompanySettings: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='w-full'>
       <Navbar />
-      <ImportCSV />
+      {/* <ImportCSV /> */}
       <MemberForm onSubmit={handleMemberSubmit} />
     </div>
   );
