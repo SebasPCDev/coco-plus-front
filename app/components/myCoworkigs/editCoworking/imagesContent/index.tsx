@@ -18,7 +18,7 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
       </button>
       <Modal isOpen={isModalOpen} onClose={onModalClick}>
         <form onSubmit={handleSubmit} action="">
-          <label htmlFor="image">Agrega la Imagen</label>
+          <label htmlFor="image" className="label-form">Agrega la Imagen</label>
           <input
             onChange={handleFileChange}
             type="file"

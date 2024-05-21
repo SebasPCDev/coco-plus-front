@@ -101,7 +101,7 @@ const CoworkingForm = () => {
           >
             <label
               htmlFor={section.name}
-              className="mb-2 block font-semibold text-gray-700"
+              className="label-form"
             >
               {section.label}
             </label>
