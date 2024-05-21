@@ -10,12 +10,12 @@ export const ChangePassFormArray: IChangePassForm[] = [
     name: "password",
     label: "Contraseña",
     type: "password",
-    placeholder: "Password",
+    placeholder: "Contraseña",
   },
   {
     name: "confPassword",
     label: "Confirmación contraseña",
     type: "password",
-    placeholder: "Conf Password",
+    placeholder: "Conf contraseña",
   },
 ];

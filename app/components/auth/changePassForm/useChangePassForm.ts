@@ -35,7 +35,6 @@ const useChangePassForm = () => {
 
     const data = await HandleChangePass(changePassForm);
 
-
     if (!data.error) {
       setUser(data.user);
       setToken(data.token);
@@ -58,7 +57,7 @@ const useChangePassForm = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Error modificando la contraseña',
+        text: data.error,
       });
     }
   };
