@@ -211,7 +211,7 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
                 onChange={handleCheck}
                 className="form-checkbox h-5 w-5 text-blue-600"
               />
-              <label htmlFor={option.name} className="ml-2 text-gray-700">
+              <label htmlFor={option.name} className="label-form">
                 {option.display_name}
               </label>
             </div>

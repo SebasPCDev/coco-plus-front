@@ -9,7 +9,7 @@ const Header = () => {
         <h1 className="text-3xl font-semibold text-gray-800">Empleados de la Compañía</h1>
         <div className="flex space-x-6">
         <Link href="/dashboard/adminCompany/agregarEmpleados">
-          <button className=" bg-custom-secondary px-4 py-2 font-semibold text-custom-white hover:bg-custom-primary hover:text-custom-secondary rounded-lg">
+          <button className="btn bg-custom-secondary px-4 py-2 font-semibold text-custom-white hover:bg-custom-primary hover:text-custom-secondary rounded-lg">
             Agregar Empleados
           </button>
         </Link>

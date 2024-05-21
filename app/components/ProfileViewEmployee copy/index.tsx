@@ -254,7 +254,7 @@ export const ProfileViewEmployee = () => {
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-2 sm:col-start-1">
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Nombre:
                   </label>
                   <div className="mt-2">
@@ -269,7 +269,7 @@ export const ProfileViewEmployee = () => {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Apellido:
                   </label>
                   <div className="mt-2">
@@ -284,7 +284,7 @@ export const ProfileViewEmployee = () => {
                 </div>
 
                 <div className="sm:col-span-4">
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Email
                   </label>
                   <div className="mt-2">
@@ -297,7 +297,7 @@ export const ProfileViewEmployee = () => {
                     />
                   </div>
                   <br />
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Teléfono
                   </label>
                   <div className="mt-2">
@@ -312,7 +312,7 @@ export const ProfileViewEmployee = () => {
                 </div>
 
                 <div className="sm:col-span-2 sm:col-start-1">
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Posición:
                   </label>
                   <div className="mt-2">
@@ -327,7 +327,7 @@ export const ProfileViewEmployee = () => {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block  font-medium leading-6 text-gray-900">
+                  <label className="label-form">
                     Nº de identificación
                   </label>
                   <div className="mt-2">

@@ -85,7 +85,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       </div>
       <div className="grid grid-cols-2 gap-4">        
         <div>
-          <label htmlFor="firstName" className="mb-1 block font-semibold">
+          <label  htmlFor="firstName" className="label-form">
             Nombre*
           </label>
           <input
@@ -94,11 +94,11 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border-custom-secondary  bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
         <div>
-          <label htmlFor="lastName" className="mb-1 block font-semibold">
+          <label htmlFor="lastName" className="label-form">
             Apellido*
           </label>
           <input
@@ -107,7 +107,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>        
       </div>
@@ -116,7 +116,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-          <label htmlFor="email" className="mb-1 block font-semibold">
+          <label htmlFor="email" className="label-form">
             Email*
           </label>
           <input
@@ -125,11 +125,11 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
         <div className="mt-4">
-          <label htmlFor="phone" className="mb-1 block font-semibold">
+          <label htmlFor="phone" className="label-form">
             Teléfono (optional)
           </label>
           <input
@@ -137,7 +137,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
       </div>      
@@ -146,7 +146,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-          <label htmlFor="jobRole" className="mb-1 block font-semibold">
+          <label htmlFor="jobRole" className="label-form">
             Identificación
           </label>
           <input
@@ -155,7 +155,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={identification}
             onChange={(e) => setIdentification(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
       </div>
@@ -164,7 +164,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-          <label htmlFor="jobRole" className="mb-1 block font-semibold">
+          <label htmlFor="jobRole" className="label-form">
             Cargo
           </label>
           <input
@@ -173,11 +173,11 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             value={jobRole}
             onChange={(e) => setJobRole(e.target.value)}
             required
-            className="w-full cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
         {/* <div className="mt-4">
-          <label htmlFor="postcode" className="mb-1 block font-semibold">
+          <label htmlFor="postcode" className="label-form">
             Dirección (optional)
           </label>
           <input
@@ -185,18 +185,18 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             id="postcode"
             value={postcode}
             onChange={(e) => setPostcode(e.target.value)}
-            className="w-full rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div> */}
       </div>
       <div>
         <h2 className="mb-1 mt-10 text-lg font-semibold">Permisos</h2>
       </div>
-      <div>
+      <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
           <label
             htmlFor="monthlyTokenLimit"
-            className="mb-1 block font-semibold"
+            className="label-form"
           >
             Límite de pases mensuales (opcional)
           </label>
@@ -210,12 +210,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
                 e.target.value ? Number(e.target.value) : undefined,
               )
             }
-            className="w-1/2 cursor-pointer rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+            className="input-form"
           />
         </div>
         {/*
         <div className="mt-4">
-          <label htmlFor="userType" className="mb-1 block font-semibold">
+          <label htmlFor="userType" className="label-form">
             Tipo de usuario
           </label>
           <select
@@ -233,13 +233,13 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
         <button
           type="button"
           onClick={() => {}}
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4  font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          className="btn btn-cancel "
         >
           Cancelar
         </button>        
         <button
           type="submit"
-          className="flex h-10 items-center rounded-lg bg-custom-secondary px-4 py-2 font-semibold text-custom-white hover:bg-custom-primary hover:text-custom-secondary"
+          className="btn btn-confirm"
         >
           Agregar
         </button>        

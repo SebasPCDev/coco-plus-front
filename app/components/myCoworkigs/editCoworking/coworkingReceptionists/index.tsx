@@ -30,7 +30,7 @@ const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string 
           <div key={field.name} className="flex flex-col">
             <label
               htmlFor={field.name}
-              className="mb-2 text-sm font-medium text-gray-700"
+              className="label-form"
             >
               {field.label}
             </label>
