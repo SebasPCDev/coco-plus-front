@@ -17,6 +17,6 @@ export const LoginFormArray: IRegisterForm[] = [
     name: "password",
     label: "Contraseña",
     type: "password",
-    placeholder: "Password",
+    placeholder: "Contraseña",
   },
 ];

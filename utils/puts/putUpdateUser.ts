@@ -21,8 +21,13 @@ const PutUpdateUser = async (data: IChangePassForm) => {
 
     return response.data;
   } catch (error: any) {
-    console.log('error', error);
-    return { error: error.message || 'error desconcido' };
+    let message = ''
+    if (error.response.data.message) {
+      message = error.response.data.message;
+    } else {
+      message = error.message
+    }
+    return { error: message || 'Error desconcido' };
   }
 };
 
