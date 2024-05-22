@@ -1,5 +1,5 @@
 "use server"
-import { createSession, deleteSession } from '@/app/lib/session';
+import { createSession, deleteSession, getSession } from '@/app/lib/session';
 import PostLogin from '@/utils/posts/postSignin';
 import PutUpdateUser from '@/utils/puts/putUpdateUser';
 import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
@@ -18,6 +18,12 @@ export const HandleChangePass = async (credentials: IChangePassForm) => {
   const data = await PutUpdateUser(credentials);
   if (!data.error) await createSession(data);
 
+  return data;
+}
+
+export const getServerSession = async () => {
+
+  const data = await getSession();
   return data;
 }
 

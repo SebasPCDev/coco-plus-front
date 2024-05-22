@@ -1,1 +1,1 @@
-export { default } from '@/app/components/companiesForm';
+export { default } from '@/app/components/requests/companiesForm';

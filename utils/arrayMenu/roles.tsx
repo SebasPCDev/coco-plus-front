@@ -49,6 +49,11 @@ const roles: Roles = {
   adminCompany: [
     { name: 'Home', href: '/dashboard/adminCompany', icon: HomeIcon },
     {
+      name: 'Perfil empresa',
+      href: '/dashboard/adminCompany/companyProfile',
+      icon: DocumentDuplicateIcon,
+    },
+    {
       name: 'Empleados',
       href: '/dashboard/adminCompany/empleados',
       icon: DocumentDuplicateIcon,

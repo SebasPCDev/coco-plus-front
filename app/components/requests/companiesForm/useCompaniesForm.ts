@@ -16,7 +16,6 @@ const useCompaniesForm = () => {
   const router = useRouter();
   const [companiesInfo, setCompaniesInfo] = useState<ICompaniesInfo>(INITIAL_COMPANIES_INFO);
 
-  //el estado para los errores aun no se sta utilizando
   const [companiesInfoError, setCompaniesInfoError] =
     useState<ICompaniesErrorInfo>(INITIAL_COMPANIES_INFO_ERROR);
 
@@ -51,22 +50,21 @@ const useCompaniesForm = () => {
     try {
       const response = await PostCompany(companiesInfo);
       Swal.fire({
-        title: response.responseCompany,
-        text: "la respuesta se enviara a tu correo electronico",
+        title: 'Solicitud enviada',
+        text: "La respuesta se enviara a tu correo electronico",
         icon: "success",
+        width: '32em'
       });
       router.push("/");
     } catch (error: any) {
       console.log("Error", error);
       Swal.fire({
         title: "Error enviando la solicitud",
-        text: error.response.data.message || error.message,
+        text: error,
         icon: "error",
       });
     }
   };
-
-
 
   return { companiesInfo, companiesInfoError, handleChange, handleChangePhone, handleSubmit, handleCancel }
 }
