@@ -1,8 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 interface IFilterOptions {
   country?: string;
   state?: string;
   city?: string;
+  page?: number;
+  limit?: number;
 }
 
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
@@ -18,7 +20,7 @@ const GetCoworkingsFilter = async ({ filter }: { filter: IFilterOptions }) => {
     // console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error("Error fetching coworkings:", error);
+    console.error('Error fetching coworkings:', error);
     throw error;
   }
 };

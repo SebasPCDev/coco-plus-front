@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const urlBase = process.env.API_URL;
 
-const GetCoworkingDetail = async (id: string) => {
-  const url = `${urlBase}/coworkings/${id}`;
+const GetCoworkingBooking = async (limit: number) => {
+  const url = `${urlBase}/coworkings?limit=${limit}`;
 
   try {
     const response = await axios.get(url);
@@ -14,4 +14,4 @@ const GetCoworkingDetail = async (id: string) => {
   }
 };
 
-export default GetCoworkingDetail;
+export default GetCoworkingBooking;
