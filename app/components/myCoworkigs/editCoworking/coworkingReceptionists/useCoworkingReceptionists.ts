@@ -5,7 +5,10 @@ import { initialNewReceptionistForm } from '@/utils/constants/editCoworking/addR
 const UseCoworkingReceptionists = ({ id }: { id: string }) => {
   const { token } = useUserContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newUserForm, setNewUserForm] = useState({...initialNewReceptionistForm, id});
+  const [newUserForm, setNewUserForm] = useState({
+    ...initialNewReceptionistForm,
+    coworkingId: id,
+  });
   const handlechangeNewUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUserForm({ ...newUserForm, [name]: value });
@@ -13,6 +16,7 @@ const UseCoworkingReceptionists = ({ id }: { id: string }) => {
   };
   const handleClickNewUser = async (e: MouseEvent) => {
     e.preventDefault();
+    console.log(newUserForm);
     const response = await PostNewUserReceptCoworking({
       newUserForm,
       token,
@@ -21,7 +25,13 @@ const UseCoworkingReceptionists = ({ id }: { id: string }) => {
     setIsModalOpen(false);
     //   getData();
   };
-  return { newUserForm, handlechangeNewUser, handleClickNewUser, isModalOpen, setIsModalOpen };
+  return {
+    newUserForm,
+    handlechangeNewUser,
+    handleClickNewUser,
+    isModalOpen,
+    setIsModalOpen,
+  };
 };
 
 export default UseCoworkingReceptionists;
