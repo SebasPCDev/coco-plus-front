@@ -40,6 +40,11 @@ const roles: Roles = {
       href: '/dashboard/adminCoworking/myCoworkings',
       icon: DocumentDuplicateIcon,
     },
+    {
+      name: 'Mis Reservas',
+      href: '/dashboard/adminCoworking/bookingsList',
+      icon: DocumentDuplicateIcon,
+    },
   ],
   adminCompany: [
     { name: 'Home', href: '/dashboard/adminCompany', icon: HomeIcon },

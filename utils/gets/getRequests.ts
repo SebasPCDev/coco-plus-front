@@ -22,7 +22,6 @@ const GetRequests = async ({ token, params }: IParams) => {
     });
 
     return response.data;
-    console.log('la petición ');
   } catch (error) {
     console.log('hay un error', error);
   }
