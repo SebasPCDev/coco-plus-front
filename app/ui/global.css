@@ -148,3 +148,11 @@ body {
 .search-icon {
   @apply pointer-events-none absolute right-4 top-1/2 w-10 -translate-y-1/2 transform text-slate-700 transition-transform duration-300 group-hover:rotate-45;
 }
+
+.select-form-booking {
+  @apply block h-10 rounded-full border border-solid border-gray-400 bg-gray-100 bg-gradient-to-r from-transparent from-60% via-amber-100 via-80% to-green-200 to-90% p-2.5 pl-4 text-sm font-bold text-gray-600 focus:border-gray-400 focus:ring-1 focus:ring-gray-300;
+}
+
+.search-icon-booking {
+  @apply pointer-events-none absolute right-4 top-1/2 w-6 -translate-y-1/2 transform text-slate-700 transition-transform duration-300 group-hover:rotate-45;
+}

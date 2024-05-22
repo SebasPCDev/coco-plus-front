@@ -1,5 +1,5 @@
-import axios from "axios";
-import ICompaniesInfo from "../types/requests/companiesFormInterface";
+import axios from 'axios';
+
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const PostActivateCowork = async ({
@@ -23,7 +23,7 @@ const PostActivateCowork = async ({
 
     return response.data;
   } catch (error) {
-    console.error("Error al activar el coworking:", error);
+    console.error('Error al activar el coworking:', error);
   }
 };
 

@@ -1,20 +1,25 @@
 'use client';
 import React from 'react';
-
 import useCoworkings from './useCoworkings';
 import Coworking from './coworking';
 import SearchCoworking from './searchCoworking';
+import Pagination from '../pagination/pagination';
 
-export const Coworkings: React.FC = () => {
-  const { coworkings, countries, states, cities, handleChange } =
-    useCoworkings();
+export default function CoworkingsBooking() {
+  const {
+    coworkings,
+    countries,
+    states,
+    cities,
+    handleChange,
+    totalCoworkings,
+  } = useCoworkings();
+
+  const totalPages = Math.ceil(totalCoworkings / 3);
+  console.log(totalPages);
 
   return (
     <section className="-mt-[65px] pt-[65px] lg:mt-0 lg:pt-0" id="coworkings">
-      <h2 className="mt-10 text-center text-4xl font-bold text-[#161c2c] lg:mt-40">
-        Nuestras oficinas
-      </h2>
-
       <SearchCoworking
         countries={countries}
         states={states}
@@ -22,15 +27,16 @@ export const Coworkings: React.FC = () => {
         handleChange={handleChange}
       />
 
-      <main className="mt-20 w-full">
-        <section className="flex flex-wrap justify-center gap-4">
+      <main className="mt-5 w-full">
+        <section className="flex flex-wrap justify-center gap-2">
           {coworkings.map((coworking) => {
             return <Coworking key={coworking.id} coworking={coworking} />;
           })}
         </section>
       </main>
+      <div className="mb-10 mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
     </section>
   );
-};
-
-export default Coworkings;
+}
