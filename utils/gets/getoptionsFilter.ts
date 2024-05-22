@@ -4,10 +4,11 @@ interface IFilterOptions {
   country?: string;
   state?: string;
   city?: string;
+  page?: number;
 }
 
 const getoptions = async ({ filter }: { filter: IFilterOptions }) => {
-  const { country, state, city } = filter;
+  const { country, state, city, page } = filter;
 
   let url = `${urlBase}/coworkings`;
 
@@ -21,6 +22,10 @@ const getoptions = async ({ filter }: { filter: IFilterOptions }) => {
 
   if (city) {
     url += `/city/${city}`;
+  }
+
+  if (page) {
+    url += `?page=${page}`;
   }
 
   const response = await fetch(url);

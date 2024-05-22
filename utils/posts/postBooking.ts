@@ -1,17 +1,23 @@
 import axios from 'axios';
-import ICompaniesInfo from '../types/requests/companiesFormInterface';
+
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
-const PostActivateCompany = async ({
-  Id,
+const postBooking = async ({
+  coworkingId,
+  reservationTime,
+  reservationDate,
   token,
 }: {
-  Id: string;
+  coworkingId: string;
+  reservationTime: string;
+  reservationDate: string;
   token: string | undefined;
 }) => {
-  const url = `${urlBase}/companies/activate`;
+  const url = `${urlBase}/bookings`;
   const objetId = {
-    id: Id,
+    coworkingId: coworkingId,
+    reservationTime: reservationTime,
+    reservationDate: reservationDate,
   };
 
   try {
@@ -20,6 +26,7 @@ const PostActivateCompany = async ({
         Authorization: `Bearer ${token}`,
       },
     });
+
     return response.data;
   } catch (error: any) {
     let message = '';
@@ -32,4 +39,4 @@ const PostActivateCompany = async ({
   }
 };
 
-export default PostActivateCompany;
+export default postBooking;

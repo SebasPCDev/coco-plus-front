@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <Header />
       <Banner />
-      <main className='mx-auto max-w-[1024px] p-10'>
+      <main className="mx-auto max-w-[1024px] p-10">
         <HeaderMain />
         <Service />
         <Coworkings />
