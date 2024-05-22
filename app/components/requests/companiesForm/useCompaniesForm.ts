@@ -50,7 +50,7 @@ const useCompaniesForm = () => {
     try {
       const response = await PostCompany(companiesInfo);
       Swal.fire({
-        title: 'Solcitud enviada',
+        title: 'Solicitud enviada',
         text: "La respuesta se enviara a tu correo electronico",
         icon: "success",
         width: '32em'

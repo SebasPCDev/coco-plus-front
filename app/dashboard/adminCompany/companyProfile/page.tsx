@@ -1,6 +1,1 @@
-const companyProfile = () => {
-  return (
-    <div>companyProfile</div>
-  )
-}
-export default companyProfile
+export { default } from '@/app/components/JulianCompany/companyProfile';
