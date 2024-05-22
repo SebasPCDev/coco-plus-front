@@ -32,6 +32,7 @@ export default function Requests() {
 
   useEffect(() => {
     getDarata();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -190,11 +191,10 @@ export default function Requests() {
               <div className="flex gap-3">
                 <button
                   onClick={handleDecline}
-                  className={`${
-                    item.status !== 'close'
+                  className={`${item.status !== 'close'
                       ? 'mt-4 w-40 rounded-lg bg-custom-tertiary px-6 py-3 font-bold text-custom-secondary hover:bg-custom-primary hover:text-custom-primary'
                       : 'btn btn-disabled'
-                  }`}
+                    }`}
                   id={item.id}
                   disabled={item.status === 'close'}
                 >
@@ -203,11 +203,10 @@ export default function Requests() {
                 <button
                   onClick={handleAcept}
                   className={`
-                  ${
-                    item.status !== 'close'
+                  ${item.status !== 'close'
                       ? 'mt-4 w-40 rounded-lg bg-custom-fourth px-6 py-3 font-bold text-custom-primary hover:bg-custom-secondary hover:text-custom-primary'
                       : 'btn btn-disabled'
-                  }`}
+                    }`}
                   id={item.id}
                   disabled={item.status === 'close'}
                 >

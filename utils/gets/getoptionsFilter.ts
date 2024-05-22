@@ -7,6 +7,7 @@ interface IFilterOptions {
 }
 
 const getoptions = async ({ filter }: { filter: IFilterOptions }) => {
+
   const { country, state, city } = filter;
 
   let url = `${urlBase}/coworkings`;

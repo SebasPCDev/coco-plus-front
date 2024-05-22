@@ -25,7 +25,7 @@ export const formDataCompanies: elementForm[] = [
     name: 'phone',
     label: 'Teléfono',
     type: 'text',
-    placeholder: 'Teléfono',
+    placeholder: '+54',
     required: true,
   },
   {
@@ -33,14 +33,6 @@ export const formDataCompanies: elementForm[] = [
     label: 'Correo electronico',
     type: 'email',
     placeholder: 'Email',
-    required: true,
-  },
-  ,
-  {
-    name: 'identification',
-    label: 'Número de documento',
-    type: 'text',
-    placeholder: 'Número de documento',
     required: true,
   },
   {
@@ -56,34 +48,6 @@ export const formDataCompanies: elementForm[] = [
     type: 'text',
     placeholder: 'Nombre de la empresa',
     required: true,
-  },
-  {
-    name: 'companyEmail',
-    label: 'Email de la empresa',
-    type: 'email',
-    placeholder: 'Email de la empresa',
-    required: true,
-  },
-  {
-    name: 'companyPhone',
-    label: 'Teléfono de la empresa',
-    type: 'text',
-    placeholder: 'Teléfono de la empresa',
-    required: true,
-  },
-  {
-    name: 'quantityBeneficiaries',
-    label: 'Cantidad de beneficiarios',
-    type: 'number',
-    placeholder: 'Cantidad de empleados con el beneficio',
-    required: false,
-  },
-  {
-    name: 'businessSector',
-    label: 'Sector empresarial',
-    type: 'text',
-    placeholder: 'Sector empresarial',
-    required: false,
   },
   {
     name: 'size',

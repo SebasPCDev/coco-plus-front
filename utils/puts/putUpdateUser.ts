@@ -27,7 +27,7 @@ const PutUpdateUser = async (data: IChangePassForm) => {
     } else {
       message = error.message
     }
-    return { error: message || 'Error desconcido' };
+    return { error: message || 'Error actualizando el usuario' };
   }
 };
 

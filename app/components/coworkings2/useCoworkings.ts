@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client'
 import React, { useState, useEffect } from 'react';
 
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
@@ -13,6 +15,22 @@ const useCoworkings = () => {
   const [cities, setCities] = useState<any[]>([]);
   const [filter, setFilter] = useState({ country: '', state: '', city: '' });
 
+  const getOptions = async () => {
+    const options = await getoptions({ filter });
+    if (filter.city) {
+      const currentcoworkings = await GetCoworkingsFilter({ filter });
+      setCoworkings(currentcoworkings.coworking);
+    } else if (filter.state) {
+      setCities(options);
+      const currentcoworkings = await GetCoworkingsFilter({ filter });
+      setCoworkings(currentcoworkings.coworking);
+    } else {
+      if (filter.country) setStates(options);
+      const currentcoworkings = await GetCoworkingsFilter({ filter });
+      setCoworkings(currentcoworkings.coworking);
+    }
+  };
+
   useEffect(() => {
     const getCountries = async () => {
       const countries = await getCountriesfilter();
@@ -25,21 +43,6 @@ const useCoworkings = () => {
   }, []);
 
   useEffect(() => {
-    const getOptions = async () => {
-      const options = await getoptions({ filter });
-      if (filter.city) {
-        const currentcoworkings = await GetCoworkingsFilter({ filter });
-        setCoworkings(currentcoworkings.coworking);
-      } else if (filter.state) {
-        setCities(options);
-        const currentcoworkings = await GetCoworkingsFilter({ filter });
-        setCoworkings(currentcoworkings.coworking);
-      } else {
-        if (filter.country) setStates(options);
-        const currentcoworkings = await GetCoworkingsFilter({ filter });
-        setCoworkings(currentcoworkings.coworking);
-      }
-    };
     getOptions();
   }, [filter]);
 

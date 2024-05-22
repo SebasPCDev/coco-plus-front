@@ -1,15 +1,12 @@
-export const INITIAL_COMPANIES_INFO = {
+import ICompaniesInfo from '@/utils/types/requests/companiesFormInterface'
+
+export const INITIAL_COMPANIES_INFO: ICompaniesInfo = {
   name: "",
   lastname: "",
   phone: "+54",
   email: "",
-  identification: "",
   position: "",
   companyName: "",
-  companyEmail: "",
-  companyPhone: "+54",
-  quantityBeneficiaries: 0,
-  businessSector: "",
   size: "",
   message: "",
 }
@@ -19,13 +16,8 @@ export const INITIAL_COMPANIES_INFO_ERROR = {
   lastname: "",
   phone: "",
   email: "",
-  identification: "",
   role: "",
   companyName: "",
-  companyEmail: "",
-  companyPhone: "",
-  quantityBeneficiaries: "",
-  businessSector: "",
   size: "",
   message: "",
 }

@@ -1,1 +1,1 @@
-export { default } from '@/app/components/coworkingsForm';
+export { default } from '@/app/components/requests/coworkingsForm';

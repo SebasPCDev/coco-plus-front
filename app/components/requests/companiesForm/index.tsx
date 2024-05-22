@@ -8,7 +8,8 @@ import { formDataCompanies } from "@/utils/arraysforms/companysForm";
 import ICompaniesInfo from "@/utils/types/requests/companiesFormInterface";
 import useCompaniesForm from './useCompaniesForm';
 import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
-import Footer from '../JulianCompany/home/footerHome';
+import Footer from '@/app/components/JulianCompany/home/footerHome';
+
 
 const CompaniesForm = () => {
 
@@ -20,7 +21,7 @@ const CompaniesForm = () => {
         <h1 className="text-4xl font-bold text-center mb-8 col-span-2">Soy una Empresa</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {formDataCompanies.map(({ name, label, type, placeholder, required }) => (
-            <div key={name} className={`flex flex-col ${name === "message" ? "md:col-span-2" : ""}`}>
+            <div key={name} className={`flex flex-col ${["message", "position"].includes(name) ? "md:col-span-2" : ""}`}>
               <label htmlFor={name} className="label-form">
                 {label}
               </label>
@@ -63,8 +64,7 @@ const CompaniesForm = () => {
                   name={name}
                   placeholder={placeholder}
                   required={required}
-                  className={`input-form ${name === "message" ? "md:col-span-2" : ""
-                    }`}
+                  className="input-form"
                   onChange={handleChange}
                   value={companiesInfo[name as keyof ICompaniesInfo]}
                 />
