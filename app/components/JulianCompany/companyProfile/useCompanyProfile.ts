@@ -3,11 +3,14 @@
 import updProfileCompany from '@/utils/api/company/updProfileCompany';
 import getProfile from '@/utils/api/users/getProfile';
 import { INITIAL_PROFILE_COMPANY, INITIAL_PROFILE_COMPANY_ERROR } from '@/utils/constants/companies/initialProfileCompany';
+import profileCompanyValidation from '@/utils/formValidation/profileCompanyValidation';
 import { ICompanyProfile } from '@/utils/types/companies/companyProfile';
 import ICompanyProfileFormError from '@/utils/types/companies/companyProfileFormError';
+import { CompanyStatus } from '@/utils/types/companies/companyStatus.enum';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+
 
 const useCompanyProfile = () => {
   const router = useRouter();
@@ -16,14 +19,27 @@ const useCompanyProfile = () => {
     useState<ICompanyProfileFormError>(INITIAL_PROFILE_COMPANY_ERROR);
 
   const getData = async () => {
-    const data = await getProfile();
-    console.log("data.employee.company", data.employee.company);
-    setCompanyProfile(data.employee.company)
+    try {
+      const data = await getProfile();
+      setCompanyProfile(data.employee.company)
+    } catch (error: any) {
+      await Swal.fire({
+        title: "Error obteniendo los datos",
+        text: error,
+        icon: "error",
+      });
+    }
   }
 
   useEffect(() => {
     getData();
   }, [])
+
+  useEffect(() => {
+    const errors = profileCompanyValidation(companyProfile);
+    setCompanyProfileError(errors);
+  }, [companyProfile]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -42,18 +58,22 @@ const useCompanyProfile = () => {
   };
 
   const handleCancel = () => {
-    router.push("/");
+    router.push("/dashboard/adminCompany");
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Data", companyProfile);
-
     const { id, totalPasses, ...data } = companyProfile
+
+    if (data.status === CompanyStatus.ACEPTED) {
+      const errors = profileCompanyValidation(companyProfile);
+      if (Object.keys(errors).length === 0) {
+        data.status = CompanyStatus.COMPLETED
+      }
+    }
 
     try {
       const response = await updProfileCompany(companyProfile.id, data);
-      console.log("response", response);
       await Swal.fire({
         title: 'Perfil modificado',
         // text: 'Perfil modificado',
@@ -62,7 +82,6 @@ const useCompanyProfile = () => {
       });
       router.push("/dashboard/adminCompany");
     } catch (error: any) {
-      console.log("Error", error);
       Swal.fire({
         title: "Error enviando la solicitud",
         text: error,
