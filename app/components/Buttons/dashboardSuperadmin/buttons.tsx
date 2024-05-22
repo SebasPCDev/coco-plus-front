@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 
 export function UpdateCoworking({ id }: { id: string }) {
   return (
-    <Link href="#" className="rounded-md border p-2 hover:bg-gray-100">
+    <Link href={`coworkings/edit/${id}`} className="rounded-md border p-2 hover:bg-gray-100">
       <PencilIcon className="w-8" />
     </Link>
   );
