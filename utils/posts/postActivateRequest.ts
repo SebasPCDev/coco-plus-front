@@ -23,9 +23,18 @@ const PostActivateRequest = async ({
       },
     });
 
+    console.log("RESPONSE", response);
+
     return response.data;
-  } catch (error) {
-    console.error('Error al activar el coworking:', error);
+  } catch (error: any) {
+    console.log("ERRROR", error);
+    let message = ''
+    if (error.response.data.message) {
+      message = error.response.data.message;
+    } else {
+      message = error.message
+    }
+    throw message;
   }
 };
 
