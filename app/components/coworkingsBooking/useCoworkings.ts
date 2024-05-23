@@ -54,7 +54,6 @@ const useCoworkings = () => {
         setCoworkings(currentcoworkings.coworking);
         setTotalCoworkings(currentcoworkings.total);
       } else if (filter.country) {
-        console.log(filter);
         setStates(options);
         const currentcoworkings = await GetCoworkingsFilter({ filter });
         setCoworkings(currentcoworkings.coworking);

@@ -3,12 +3,18 @@
 import React from 'react';
 import { ChangePassFormArray } from '@/utils/arraysforms/changePassForm';
 import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
-import useChangePassForm from './useChangePassForm';
+
 import EyeIcon from '../../icons/eye';
 import EyeSlashIcon from '../../icons/eyeSlash';
+import useRecoveryPasswordForm from './useRecoveryPasswordForm';
 
-const ChangePassForm = () => {
-  const { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword, togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility } = useChangePassForm();
+
+const RecoveryPasswordForm = ({ searchParams }: { searchParams: { token: string } }) => {
+
+  const token = searchParams.token;
+
+  const { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword,
+    togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility } = useRecoveryPasswordForm(token as string);
 
   return (
     <>
@@ -77,7 +83,7 @@ const ChangePassForm = () => {
               className="btn btn-confirm"
               type="submit"
             >
-              Cambiar contraseña
+              Recuperar contraseña
             </button>
           </form>
         </div>
@@ -86,4 +92,4 @@ const ChangePassForm = () => {
   );
 };
 
-export default ChangePassForm;
+export default RecoveryPasswordForm;
