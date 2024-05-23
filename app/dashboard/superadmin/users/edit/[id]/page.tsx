@@ -9,3 +9,4 @@ const UserSuperAdminDetailView = ({ params }: { params: { id: string } }) => {
 };
 
 export default UserSuperAdminDetailView;
+ 
