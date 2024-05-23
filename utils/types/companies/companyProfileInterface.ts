@@ -5,7 +5,7 @@ export interface ICompanyProfile {
   phone: string;
   quantityBeneficiaries: number;
   businessSector: string;
-  size: string;
+  size: number;
   totalPasses: number;
 }
 

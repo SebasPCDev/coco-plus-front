@@ -1,4 +1,4 @@
-import { ICompanyProfileUpdDto } from '@/utils/types/companies/companyProfile';
+import { ICompanyProfileUpdDto } from '@/utils/types/companies/companyProfileInterface';
 import { axiosApi } from '../api';
 
 const updProfileCompany = async (id: string, changes: ICompanyProfileUpdDto) => {
