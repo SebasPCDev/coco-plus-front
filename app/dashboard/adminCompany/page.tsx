@@ -1,1 +1,1 @@
-export { default } from '@/app/components/JulianCompany/home';
+export { default } from '@/app/components/JulianCompany/home/homeEstadistico/2workspaceStatistics';

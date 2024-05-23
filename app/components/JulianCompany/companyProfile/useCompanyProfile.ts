@@ -3,13 +3,13 @@
 import updProfileCompany from '@/utils/api/company/updProfileCompany';
 import getProfile from '@/utils/api/users/getProfile';
 import { INITIAL_PROFILE_COMPANY, INITIAL_PROFILE_COMPANY_ERROR } from '@/utils/constants/companies/initialProfileCompany';
-import profileCompanyValidation from '@/utils/formValidation/profileCompanyValidation';
-import { ICompanyProfile } from '@/utils/types/companies/companyProfile';
+import { ICompanyProfile } from '@/utils/types/companies/companyProfileInterface';
 import ICompanyProfileFormError from '@/utils/types/companies/companyProfileFormError';
 import { CompanyStatus } from '@/utils/types/companies/companyStatus.enum';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import profileCompanyValidation from '@/utils/formValidation/profileCompanyValidation';
 
 
 const useCompanyProfile = () => {

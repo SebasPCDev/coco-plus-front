@@ -1,4 +1,4 @@
-import { ICompanyProfile } from '@/utils/types/companies/companyProfile'
+import { ICompanyProfile }  from '@/utils/types/companies/companyProfileInterface'
 
 export const INITIAL_PROFILE_COMPANY: ICompanyProfile = {
   id: "",
