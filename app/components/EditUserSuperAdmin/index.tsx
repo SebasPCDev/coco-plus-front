@@ -1,36 +1,36 @@
 "use client";
 import { useState } from "react";
-import putDataCoworking from "./putDataCoworking";
+import putDataUserEmployee from "../ProfileViewEmployee copy/putDataUserEmployee";
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 
-export const EditCoworkSuperAdmin = ({ id }) => {
+export const EditUserSuperAdmin = ({ id }) => {
   const token = Cookie.get('token');
 
-  const [newData, setNewData] = useState({
+  const [newData, setNewData] : any = useState({
     name: "",
+    lastname: "",
     phone: "",
     email: "",
-    open: "",
-    address: "",
-    country: "",
-    state: "",
-    city: "",
-    status: ""
+    identification: "",
+    position: "",
+    role: "",
+    password: "",
+    confPassword: ""
   });
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setNewData((prevData) => ({
+    setNewData((prevData: any) => ({
       ...prevData,
       [name]: name === "capacity" ? Number(value) : value
     }));
   };
 
-  const handleClick = async (event) => {
+  const handleClick = async (event: any) => {
     event.preventDefault();
     
-    const modifiedData = {};
+    const modifiedData : any = {};
     for (const key in newData) {
       if (newData[key] !== "" && newData[key] !== 0) {
         modifiedData[key] = newData[key];
@@ -48,7 +48,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const updatedData = await putDataCoworking(token, modifiedData, id);
+          const updatedData = await putDataUserEmployee(token, modifiedData, id);
           console.log("Datos actualizados:", updatedData);
           Swal.fire(
             'Datos actualizados exitosamente',
@@ -73,7 +73,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
-              Editar información del coworking
+              Editar información del Usuario
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4">
               <div className="sm:col-span-2 sm:col-start-1">
@@ -89,11 +89,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="label-form">Teléfono:</label>
+                <label className="label-form">Apellido:</label>
                 <div className="mt-2">
                   <input
-                    name="phone"
-                    type="number"
+                    name="lastname"
+                    type="text"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -101,7 +101,19 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-4">
-                <label className="label-form">Email:</label>
+                <label className="label-form">Phone</label>
+                <div className="mt-2">
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Correro electionico:</label>
                 <div className="mt-2">
                   <input
                     type="email"
@@ -113,83 +125,59 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Hora de Apertura:</label>
-                <div className="mt-2">
-                  <input
-                    type="time"
-                    name="open"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Hora de Cierre:</label>
-                <div className="mt-2">
-                  <input
-                    type="time"
-                    name="close"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">País:</label>
-                <div className="mt-2">
-                  <input
-                    name="country"
-                    type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Estado / Provincia:</label>
-                <div className="mt-2">
-                  <input
-                    name="state"
-                    type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Ciudad:</label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="city"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Capacidad:</label>
+                <label className="label-form">Numero de identificación:</label>
                 <div className="mt-2">
                   <input
                     type="number"
-                    name="capacity"
+                    name="identification"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
 
-              <div className="sm:col-span-4">
-                <label className="label-form">Dirección:</label>
+              <div className="sm:col-span-2">
+                <label className="label-form">Posicion:</label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="address"
+                    name="position"
+                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Rol:</label>
+                <div className="mt-2">
+                  <input
+                    name="role"
+                    type="text"
+                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="label-form">Contraseña:</label>
+                <div className="mt-2">
+                  <input
+                    name="password"
+                    type="password"
+                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Confirmar Contraseña:</label>
+                <div className="mt-2">
+                  <input
+                    type="password"
+                    name="confPassword"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -212,4 +200,4 @@ export const EditCoworkSuperAdmin = ({ id }) => {
   );
 };
 
-export default EditCoworkSuperAdmin;
+export default EditUserSuperAdmin;
