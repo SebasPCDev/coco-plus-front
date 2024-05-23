@@ -1,5 +1,8 @@
-"use client";
+// components/yourPath/CompanyProfile.tsx
 
+'use client';
+
+import { useState } from 'react';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { formProfileCompany } from '@/utils/arraysforms/profileCompany';
@@ -9,7 +12,59 @@ import ICompanyProfileFormError from '@/utils/types/companies/companyProfileForm
 import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
 
 const CompanyProfile = () => {
-  const { companyProfile, companyProfileError, handleChange, handleChangePhone, handleCancel, handleSubmit } = useCompanyProfile();
+  const { 
+    companyProfile, 
+    companyProfileError, 
+    handleChange, 
+    handleChangePhone, 
+    handleCancel, 
+  } = useCompanyProfile();
+
+  const [touchedFields, setTouchedFields] = useState<{ [key: string]: boolean }>({});
+
+  const handleBlur = (name: string) => {
+    // Marcar el campo actual como tocado
+    setTouchedFields((prevTouchedFields) => ({
+      ...prevTouchedFields,
+      [name]: true,
+    }));
+
+    // Marcar todos los campos que aún no se han tocado
+    const untouchedFields = formProfileCompany
+      .map(({ name }) => name)
+      .filter((fieldName) => !touchedFields[fieldName]);
+
+    const newTouchedFields = untouchedFields.reduce(
+      (acc, fieldName) => ({
+        ...acc,
+        [fieldName]: true,
+      }),
+      touchedFields
+    );
+
+    setTouchedFields(newTouchedFields);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Verificar si todos los campos requeridos están llenos
+    const requiredFieldsFilled = formProfileCompany.every(({ name, required }) => {
+      if (required) {
+        return Boolean(companyProfile[name as keyof ICompanyProfile]);
+      }
+      return true;
+    });
+
+    if (!requiredFieldsFilled) {
+      alert("Por favor, completa todos los campos requeridos.");
+      return;
+    }
+
+    // Si todos los campos requeridos están llenos, enviar el formulario
+    // Aquí puedes hacer la lógica para enviar el formulario, por ejemplo:
+    // enviarFormulario(companyProfile);
+  };
 
   return (
     <form className="max-w-4xl mx-auto p-8 rounded-lg shadow-lg bg-white" onSubmit={handleSubmit} >
@@ -21,12 +76,12 @@ const CompanyProfile = () => {
               {label}
             </label>
             {name === "phone" || name === "companyPhone" ? (
-
               <PhoneInput
                 defaultCountry="ar"
                 name={name}
                 value={companyProfile[name as keyof ICompanyProfile].toString()}
                 onChange={(phone) => handleChangePhone(name, phone)}
+                onBlur={() => handleBlur(name)}
               />
             ) : ((name === "size") ? (
               <div className="relative">
@@ -35,6 +90,7 @@ const CompanyProfile = () => {
                   required={required}
                   className="input-form"
                   onChange={handleChange}
+                  onBlur={() => handleBlur(name)}
                   value={companyProfile[name as keyof ICompanyProfile]}
                 >
                   <option value="">Selecciona una cantidad</option>
@@ -62,10 +118,13 @@ const CompanyProfile = () => {
                 required={required}
                 className="input-form"
                 onChange={handleChange}
+                onBlur={() => handleBlur(name)}
                 value={companyProfile[name as keyof ICompanyProfile]}
               />
             ))}
-            <p className="input-error">{companyProfileError[name as keyof ICompanyProfileFormError]}</p>
+            {touchedFields[name] && (
+              <p className="input-error text-red-600">{companyProfileError[name as keyof ICompanyProfileFormError]}</p>
+            )}
           </div>
         ))}
       </div>
@@ -85,7 +144,7 @@ const CompanyProfile = () => {
         </button>
       </div>
     </form>
-  )
-}
-export default CompanyProfile
+  );
+};
 
+export default CompanyProfile;
