@@ -1,9 +1,9 @@
-"use client";
+'use client';
 import { useEffect, useState } from 'react';
 import GetAddressByParams from '@/utils/gets/apiNominatim/getByParams';
 import GetAddressFree from '@/utils/gets/apiNominatim/getAadressFree';
 import { useMyCoworkingContext } from '../../myCoworkingConstext';
-import { geocodeAddress } from '@/utils/geocodeAdress';
+import { geocodeAddress } from '@/utils/geocodeAdressAndReverse';
 const UseEditLocation = () => {
   const { setMyCoworking, Mycoworking } = useMyCoworkingContext();
   const [options, setOptions] = useState<any>([]);
@@ -120,25 +120,33 @@ const UseEditLocation = () => {
     } else if (name == 'address') {
       setAddress({ ...address, [name]: value });
       const freeAddress = `${value} ${address.city} ${address.state} ${address.country}`;
-      const responseGeocode = await geocodeAddress(freeAddress);
-      
-      const response = await GetAddressFree({ address: { q: freeAddress } });
+      const responseGoogle = await geocodeAddress(freeAddress);
+      console.log(freeAddress);
 
-      if (responseGeocode.length == 0) {
+      console.log('imprimiendo desde coworkinglocation', responseGoogle);
+
+      if (responseGoogle.length == 0) {
         alert('no se encontraron resultados  buelva a ingresar un ' + name);
-      } else if (response.length == 1) {
-        console.log('log 1');
-        console.log('geocode address', responseGeocode);
-        console.log('log 2');
-
-        // const corde = { lat: response[0].lat, long: response[0].lon };
-        // setCorder(corde);
-        // setMyCoworking({ ...Mycoworking, ...address, ...corde });
-      } else if (responseGeocode.length > 1) {
+      } else if (responseGoogle.length == 1) {
+        const corde = {
+          lat: String(responseGoogle[0].geometry.location.lat()),
+          long: String(responseGoogle[0].geometry.location.lng()),
+        };
+        setAddress({
+          ...address,
+          address: responseGoogle[0].formatted_address,
+        });
+        setCorder(corde);
+        setMyCoworking({
+          ...Mycoworking,
+          ...address,
+          address: responseGoogle[0].formatted_address,
+          ...corde,
+        });
+      } else if (responseGoogle.length > 1) {
         setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option) => ({
-          name: option.name,
-          display_name: option.display_name,
+        const options = responseGoogle.map((option) => ({
+          name: option.formatted_address,
         }));
         setOptions(options);
         setIsModalOpen(true);
@@ -151,9 +159,22 @@ const UseEditLocation = () => {
     setAddress({ ...address, [currentName]: newValue });
     if (currentName == 'address') {
       const freeAddress = `${newValue} ${address.city} ${address.state} ${address.country}`;
-      const response = await GetAddressFree({ address: { q: freeAddress } });
-      const corde = { lat: response[0].lat, long: response[0].lon };
-      setMyCoworking({ ...Mycoworking, ...address, ...corde });
+      const responseGoogle = await geocodeAddress(freeAddress);
+      const corde = {
+        lat: String(responseGoogle[0].geometry.location.lat()),
+        long: String(responseGoogle[0].geometry.location.lng()),
+      };
+      setAddress({
+        ...address,
+        address: responseGoogle[0].formatted_address,
+      });
+      setCorder(corde);
+      setMyCoworking({
+        ...Mycoworking,
+        ...address,
+        address: responseGoogle[0].formatted_address,
+        ...corde,
+      });
     }
   };
 
