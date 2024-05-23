@@ -1,8 +1,7 @@
 export const putDataUser = async (token: string, modifiedData, id: string) => {
   try {
     const urlBase = process.env.NEXT_PUBLIC_API_URL;
-    console.log("ID:", id);
-    console.log("Datos enviados:", modifiedData);
+
     const response = await fetch(`${urlBase}/users/${id}`, {
       method: 'PUT',
       headers: {
@@ -12,9 +11,6 @@ export const putDataUser = async (token: string, modifiedData, id: string) => {
       body: JSON.stringify(modifiedData),
     });
 
-
-    console.log("Respuesta del servidor:", response);
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -23,7 +19,6 @@ export const putDataUser = async (token: string, modifiedData, id: string) => {
     }
 
     const updatedData = await response.json();
-    console.log("Datos actualizados:", updatedData);
 
     return updatedData;
   } catch (error) {

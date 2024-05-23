@@ -30,14 +30,6 @@ const useImagesContent = ({ coworking }: { coworking: any }) => {
         token,
         imageThumbnail,
       });
-
-      if (response.status === 200) {
-        console.log('Imagen enviada con éxito');
-
-        // Aquí podrías actualizar el estado o realizar cualquier otra acción necesaria
-      } else {
-        console.error('Error al enviar la imagen');
-      }
     } catch (error) {
       alert(error.response.data.message);
     } finally {
