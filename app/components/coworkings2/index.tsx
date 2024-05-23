@@ -22,6 +22,7 @@ export const Coworkings: React.FC = () => {
         cities={cities}
         handleChange={handleChange}
       />
+      <MapCoworking filter={filter} coworkings={coworkings} />
 
       <main className="mt-20 w-full">
         <section className="flex flex-wrap justify-center gap-4">
@@ -30,9 +31,6 @@ export const Coworkings: React.FC = () => {
           })}
         </section>
       </main>
-      <MapCoworking filter={filter} coworkings={coworkings} />
-
-
     </section>
   );
 };

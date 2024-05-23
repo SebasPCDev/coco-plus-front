@@ -54,7 +54,7 @@ const MapCoworking = ({ filter, coworkings }) => {
         setCameraProps((prevProps) => ({
           ...prevProps,
           center: { lat: Number(lat), lng: Number(lng) },
-          zoom: 6,
+          zoom: 5,
         }));
       }
     }
