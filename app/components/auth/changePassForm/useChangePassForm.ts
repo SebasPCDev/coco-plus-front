@@ -17,11 +17,21 @@ const useChangePassForm = () => {
     password: '',
     confPassword: ''
   });
-
   const [changePassFormError, setChangePassFormError] = useState<IChangePassErrorForm>({
     password: '',
     confPassword: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfPasswordVisibility = () => {
+    setShowConfPassword(!showConfPassword);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setChangePassForm({ ...changePassForm, [name]: value });
@@ -62,6 +72,6 @@ const useChangePassForm = () => {
     }
   };
 
-  return { changePassForm, changePassFormError, handleChange, handleSubmit }
+  return { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword, togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility }
 }
 export default useChangePassForm

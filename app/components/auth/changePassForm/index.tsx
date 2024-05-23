@@ -4,9 +4,11 @@ import React from 'react';
 import { ChangePassFormArray } from '@/utils/arraysforms/changePassForm';
 import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
 import useChangePassForm from './useChangePassForm';
+import EyeIcon from '../../icons/eye';
+import EyeSlashIcon from '../../icons/eyeSlash';
 
 const ChangePassForm = () => {
-  const { changePassForm, changePassFormError, handleChange, handleSubmit } = useChangePassForm();
+  const { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword, togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility } = useChangePassForm();
 
   return (
     <>
@@ -16,7 +18,7 @@ const ChangePassForm = () => {
             className="flex flex-col gap-4 rounded-2xl bg-custom-white mx-10 md:ml-12 px-8 pb-8 pt-6 shadow-lg max-w-[400px] w-full"
             onSubmit={handleSubmit}
           >
-            <h1 className="m-6 text-center text-3xl font-bold text-gray-800">
+            <h1 className="m-6 text-center text-2xl font-bold text-gray-800">
               Cambiar contraseña
             </h1>
             {ChangePassFormArray.map(({ name, label, type, placeholder }) => {
@@ -26,20 +28,45 @@ const ChangePassForm = () => {
               return (
                 <React.Fragment key={name}>
                   <div className="mb-4 flex flex-col gap-4">
-                    <label className="text-[16px] text-gray-700" htmlFor={name}>
+                    <label className="label-form" htmlFor={name}>
                       {label}
                     </label>
-                    <div className="flex items-center justify-center gap-2 rounded-lg border-2 bg-custom-white">
+                    <div className="relative flex items-center justify-center gap-2 rounded-lg border-2 bg-custom-white">
                       <input
-                        type={type}
+                        type={(name === 'password' && showPassword || name === 'confPassword' && showConfPassword) ? 'text' : type}
                         name={name}
                         placeholder={placeholder}
-                        className="w-full rounded-2xl bg-custom-white px-4 py-4 text-[16px] focus:outline-none"
+                        className="input-form"
                         onChange={handleChange}
                         value={formValue}
                       />
+                      {name === 'password' && (
+                        <button
+                          type="button"
+                          onClick={togglePasswordVisibility}
+                          className="absolute right-3 text-gray-700 px-2 py-1 rounded"
+                        >
+                          {showPassword ?
+                            <EyeIcon className='' />
+                            : <EyeSlashIcon className='' />
+                          }
+
+                        </button>
+                      )}
+                      {name === 'confPassword' && (
+                        <button
+                          type="button"
+                          onClick={toggleConfPasswordVisibility}
+                          className="absolute right-3 text-gray-700 px-2 py-1 rounded"
+                        >
+                          {showConfPassword ?
+                            <EyeIcon className='' />
+                            : <EyeSlashIcon className='' />
+                          }
+                        </button>
+                      )}
                     </div>
-                    <p className="mt-1 px-2 text-sm text-red-500">
+                    <p className="input-error">
                       {formError}
                     </p>
                   </div>
@@ -47,7 +74,7 @@ const ChangePassForm = () => {
               );
             })}
             <button
-              className="Button_Form mt-4 w-full rounded-2xl py-2 text-[16px] font-bold text-white shadow-lg transition duration-500 ease-in-out hover:bg-lime-600 hover:shadow-xl"
+              className="btn btn-confirm"
               type="submit"
             >
               Cambiar contraseña
