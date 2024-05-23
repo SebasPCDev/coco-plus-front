@@ -15,7 +15,6 @@ const Home = () => {
         <HeaderMain />
         <Service />
         <Coworkings />
-        <MapCoworking />
       </main>
       <Footer />
     </div>

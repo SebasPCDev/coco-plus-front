@@ -4,9 +4,10 @@ import React from 'react';
 import useCoworkings from './useCoworkings';
 import Coworking from './coworking';
 import SearchCoworking from './searchCoworking';
+import MapCoworking from './mapCoworkings';
 
 export const Coworkings: React.FC = () => {
-  const { coworkings, countries, states, cities, handleChange } =
+  const { coworkings, countries, states, cities, handleChange, filter } =
     useCoworkings();
 
   return (
@@ -29,6 +30,9 @@ export const Coworkings: React.FC = () => {
           })}
         </section>
       </main>
+      <MapCoworking filter={filter} coworkings={coworkings} />
+
+
     </section>
   );
 };
