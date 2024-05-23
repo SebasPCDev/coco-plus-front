@@ -150,7 +150,6 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
     }
   };
 
-
   const arrayLocation = [
     {
       name: 'country',

@@ -11,7 +11,10 @@ import Swal from 'sweetalert2';
 
 export function UpdateCoworking({ id }: { id: string }) {
   return (
-    <Link href={`coworkings/edit/${id}`} className="rounded-md border p-2 hover:bg-gray-100">
+    <Link
+      href={`coworkings/edit/${id}`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
       <PencilIcon className="w-8" />
     </Link>
   );
@@ -176,7 +179,10 @@ export function CreateCompany() {
 
 export function UpdateCompany({ id }: { id: string }) {
   return (
-    <Link href={`companies/edit/${id}`} className="rounded-md border p-2 hover:bg-gray-100">
+    <Link
+      href={`companies/edit/${id}`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
       <PencilIcon className="w-8" />
     </Link>
   );
@@ -214,7 +220,10 @@ export function InactiveCompany({ id, token }: { id: string; token?: string }) {
 
 export function UpdateUser({ id }: { id: string }) {
   return (
-    <Link href={`users/edit/${id}`} className="rounded-md border p-2 hover:bg-gray-100">
+    <Link
+      href={`users/edit/${id}`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
       <PencilIcon className="w-8" />
     </Link>
   );

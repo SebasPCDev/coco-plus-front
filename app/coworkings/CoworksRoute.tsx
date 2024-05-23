@@ -1,12 +1,12 @@
-"use client";
-import styles from "../coworkings/CoworksRoute.module.css";
-import React, { useState, useEffect } from "react";
-import CoworkCard from "../components/CoworkCard";
-import IResponseCoworking from "@/utils/types/coworkingsResponse";
-import getCountriesfilter from "@/utils/gets/countriesFilter";
-import GetCoworkingsFilter from "@/utils/gets/getCoworkingsFilter";
-import getoptions from "@/utils/gets/getoptionsFilter";
-import Link from "next/link";
+'use client';
+import styles from '../coworkings/CoworksRoute.module.css';
+import React, { useState, useEffect } from 'react';
+import CoworkCard from '../components/CoworkCard';
+import IResponseCoworking from '@/utils/types/coworkingsResponse';
+import getCountriesfilter from '@/utils/gets/countriesFilter';
+import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
+import getoptions from '@/utils/gets/getoptionsFilter';
+import Link from 'next/link';
 
 /////////////
 // Santiago
@@ -18,12 +18,12 @@ export const CoworksRoute: React.FC = () => {
   const [countries, setCountries] = useState<any[]>([]);
   const [states, setStates] = useState<any[]>([]);
   const [cities, setCities] = useState<any[]>([]);
-  const [filter, setFilter] = useState({ country: "", state: "", city: "" });
+  const [filter, setFilter] = useState({ country: '', state: '', city: '' });
 
   useEffect(() => {
     const getCountries = async () => {
       const countries = await getCountriesfilter();
-      console.log(countries);
+
       const currentcoworkings = await GetCoworkingsFilter({ filter });
       setCoworkings(currentcoworkings.coworking);
       setCountries(countries);
@@ -52,21 +52,21 @@ export const CoworksRoute: React.FC = () => {
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
-    const newfilter = { country: "", state: "", city: "" };
-    if (name === "country") {
+    const newfilter = { country: '', state: '', city: '' };
+    if (name === 'country') {
       newfilter.country = value;
-      newfilter.state = "";
-      newfilter.city = "";
+      newfilter.state = '';
+      newfilter.city = '';
       setCities([]);
       setStates([]);
     }
-    if (name === "state") {
+    if (name === 'state') {
       newfilter.country = filter.country;
       newfilter.state = value;
-      newfilter.city = "";
+      newfilter.city = '';
       setCities([]);
     }
-    if (name === "city") {
+    if (name === 'city') {
       newfilter.country = filter.country;
       newfilter.state = filter.state;
       newfilter.city = value;
@@ -75,15 +75,15 @@ export const CoworksRoute: React.FC = () => {
   };
 
   return (
-    <section className="py-8 relative">
-      <div className="w-full mx-auto px-4 md:px-8">
+    <section className="relative py-8">
+      <div className="mx-auto w-full px-4 md:px-8">
         <div className="">
-          <div className="col-span-12 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
-            <div className="box rounded-xl  bg-white p-6 w-full">
-              <div className="items-center mb-5 gap-1">
-                <div className="input-container w-full my-2 !flex justify-evenly">
+          <div className="col-span-12 w-full max-md:mx-auto max-md:max-w-md md:col-span-3">
+            <div className="box w-full  rounded-xl bg-white p-6">
+              <div className="mb-5 items-center gap-1">
+                <div className="input-container my-2 !flex w-full justify-evenly">
                   <div className="input-wrapper my-2 w-80">
-                    <div className="h-15 rounded-full relative group w-full bg-gray-100 overflow-hidden before:absolute before:w-14 before:h-12 before:content[''] before:right-0 before:bg-green-300 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8] border border-gray-300 border-solid">
+                    <div className="h-15 before:content[''] group relative w-full overflow-hidden rounded-full border border-solid border-gray-300 bg-gray-100 before:absolute before:right-0 before:h-12 before:w-14 before:rounded-full before:bg-green-300 before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8]">
                       <svg
                         y="0"
                         xmlns="http://www.w3.org/2000/svg"
@@ -92,12 +92,12 @@ export const CoworksRoute: React.FC = () => {
                         viewBox="0 0 100 100"
                         preserveAspectRatio="xMidYMid meet"
                         height="100"
-                        className="absolute right-0 -rotate-45 stroke-gray-700 top-1.5 group-hover:rotate-0 duration-300"
+                        className="absolute right-0 top-1.5 -rotate-45 stroke-gray-700 duration-300 group-hover:rotate-0"
                         style={{
-                          width: "3rem",
-                          height: "3rem",
-                          marginRight: ".5rem",
-                          marginTop: "1px",
+                          width: '3rem',
+                          height: '3rem',
+                          marginRight: '.5rem',
+                          marginTop: '1px',
                         }}
                       >
                         <path
@@ -106,16 +106,16 @@ export const CoworksRoute: React.FC = () => {
                           strokeLinecap="round"
                           fill="none"
                           d="M60.7,53.6,50,64.3m0,0L39.3,53.6M50,64.3V35.7m0,46.4A32.1,32.1,0,1,1,82.1,50,32.1,32.1,0,0,1,50,82.1Z"
-                          className="w-16 h-16 svg-stroke-primary"
+                          className="svg-stroke-primary h-16 w-16"
                         ></path>
                       </svg>
                       <select
-                        className=" appearance-none hover:placeholder-shown:bg-emerald-500 relative text-gray-600 bg-transparent ring-0 outline-none border border-neutral-500 placeholder-violet-700 font-bold focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
+                        className=" relative block w-full appearance-none border border-neutral-500 bg-transparent p-2.5 font-bold text-gray-600 placeholder-violet-700 outline-none ring-0 hover:placeholder-shown:bg-emerald-500 focus:border-violet-500 focus:ring-violet-500"
                         style={{
-                          height: "4rem",
-                          fontSize: "13px",
-                          paddingLeft: "17px",
-                          borderRadius: "99px",
+                          height: '4rem',
+                          fontSize: '13px',
+                          paddingLeft: '17px',
+                          borderRadius: '99px',
                         }}
                         name="country"
                         id="country"
@@ -131,8 +131,8 @@ export const CoworksRoute: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className= {`my-2 w-80`}>
-                    <div className="h-15 rounded-full relative group w-full bg-gray-100 overflow-hidden before:absolute before:w-14 before:h-12 before:content[''] before:right-0 before:bg-green-300 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8] border border-gray-300 border-solid before:rotate-45">
+                  <div className={`my-2 w-80`}>
+                    <div className="h-15 before:content[''] group relative w-full overflow-hidden rounded-full border border-solid border-gray-300 bg-gray-100 before:absolute before:right-0 before:h-12 before:w-14 before:rotate-45 before:rounded-full before:bg-green-300 before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8]">
                       <svg
                         y="0"
                         xmlns="http://www.w3.org/2000/svg"
@@ -141,12 +141,12 @@ export const CoworksRoute: React.FC = () => {
                         viewBox="0 0 100 100"
                         preserveAspectRatio="xMidYMid meet"
                         height="100"
-                        className="absolute right-0 -rotate-45 stroke-gray-700 top-1.5 group-hover:rotate-0 duration-300"
+                        className="absolute right-0 top-1.5 -rotate-45 stroke-gray-700 duration-300 group-hover:rotate-0"
                         style={{
-                          width: "3rem",
-                          height: "3rem",
-                          marginRight: ".5rem",
-                          marginTop: "1px",
+                          width: '3rem',
+                          height: '3rem',
+                          marginRight: '.5rem',
+                          marginTop: '1px',
                         }}
                       >
                         <path
@@ -155,16 +155,16 @@ export const CoworksRoute: React.FC = () => {
                           strokeLinecap="round"
                           fill="none"
                           d="M60.7,53.6,50,64.3m0,0L39.3,53.6M50,64.3V35.7m0,46.4A32.1,32.1,0,1,1,82.1,50,32.1,32.1,0,0,1,50,82.1Z"
-                          className="w-16 h-16 svg-stroke-primary"
+                          className="svg-stroke-primary h-16 w-16"
                         ></path>
                       </svg>
                       <select
-                        className=" appearance-none hover:placeholder-shown:bg-emerald-500 relative text-gray-600 bg-transparent ring-0 outline-none border border-neutral-500 placeholder-violet-700 font-bold focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
+                        className=" relative block w-full appearance-none border border-neutral-500 bg-transparent p-2.5 font-bold text-gray-600 placeholder-violet-700 outline-none ring-0 hover:placeholder-shown:bg-emerald-500 focus:border-violet-500 focus:ring-violet-500"
                         style={{
-                          height: "4rem",
-                          fontSize: "13px",
-                          paddingLeft: "17px",
-                          borderRadius: "99px",
+                          height: '4rem',
+                          fontSize: '13px',
+                          paddingLeft: '17px',
+                          borderRadius: '99px',
                         }}
                         id="state"
                         name="state"
@@ -181,7 +181,7 @@ export const CoworksRoute: React.FC = () => {
                   </div>
 
                   <div className="my-2 w-80">
-                    <div className="h-15 rounded-full relative group w-full bg-gray-100 overflow-hidden before:absolute before:w-14 before:h-12 before:content[''] before:right-0 before:bg-green-300 before:rounded-full before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8] border border-gray-300 border-solid before:rotate-180">
+                    <div className="h-15 before:content[''] group relative w-full overflow-hidden rounded-full border border-solid border-gray-300 bg-gray-100 before:absolute before:right-0 before:h-12 before:w-14 before:rotate-180 before:rounded-full before:bg-green-300 before:blur-lg before:[box-shadow:-60px_20px_10px_10px_#f7fac8]">
                       <svg
                         y="0"
                         xmlns="http://www.w3.org/2000/svg"
@@ -190,12 +190,12 @@ export const CoworksRoute: React.FC = () => {
                         viewBox="0 0 100 100"
                         preserveAspectRatio="xMidYMid meet"
                         height="100"
-                        className="absolute right-0 -rotate-45 stroke-gray-700 top-1.5 group-hover:rotate-0 duration-300"
+                        className="absolute right-0 top-1.5 -rotate-45 stroke-gray-700 duration-300 group-hover:rotate-0"
                         style={{
-                          width: "3rem",
-                          height: "3rem",
-                          marginRight: ".5rem",
-                          marginTop: "1px",
+                          width: '3rem',
+                          height: '3rem',
+                          marginRight: '.5rem',
+                          marginTop: '1px',
                         }}
                       >
                         <path
@@ -204,16 +204,16 @@ export const CoworksRoute: React.FC = () => {
                           strokeLinecap="round"
                           fill="none"
                           d="M60.7,53.6,50,64.3m0,0L39.3,53.6M50,64.3V35.7m0,46.4A32.1,32.1,0,1,1,82.1,50,32.1,32.1,0,0,1,50,82.1Z"
-                          className="w-16 h-16 svg-stroke-primary"
+                          className="svg-stroke-primary h-16 w-16"
                         ></path>
                       </svg>
                       <select
-                        className=" appearance-none hover:placeholder-shown:bg-emerald-500 relative text-gray-600 bg-transparent ring-0 outline-none border border-neutral-500 placeholder-violet-700 font-bold focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5"
+                        className=" relative block w-full appearance-none border border-neutral-500 bg-transparent p-2.5 font-bold text-gray-600 placeholder-violet-700 outline-none ring-0 hover:placeholder-shown:bg-emerald-500 focus:border-violet-500 focus:ring-violet-500"
                         style={{
-                          height: "4rem",
-                          fontSize: "13px",
-                          paddingLeft: "17px",
-                          borderRadius: "99px",
+                          height: '4rem',
+                          fontSize: '13px',
+                          paddingLeft: '17px',
+                          borderRadius: '99px',
                         }}
                         id="city"
                         name="city"

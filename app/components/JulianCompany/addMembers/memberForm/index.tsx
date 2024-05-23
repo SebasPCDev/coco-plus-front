@@ -37,12 +37,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!token) return;
-    const profile = await GetProfile({token});
+    const profile = await GetProfile({ token });
     const companyId = profile?.employee.company?.id;
-    console.log(profile)
+
     const newEmployee = {
       name: firstName,
-      lastname:lastName,
+      lastname: lastName,
       email,
       phone,
       identification: identification,
@@ -53,9 +53,9 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       passesAvailable: Number(monthlyTokenLimit),
       companyId,
     };
-    console.log("newEmployee", newEmployee);
-    const data =await PostCreateEmployee(newEmployee, token);
-    console.log("data", data);
+
+    const data = await PostCreateEmployee(newEmployee, token);
+
     onSubmit({
       firstName,
       lastName,
@@ -83,9 +83,9 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       <div>
         <h2 className="mb-3 mt-4 text-lg font-semibold">Nombre</h2>
       </div>
-      <div className="grid grid-cols-2 gap-4">        
+      <div className="grid grid-cols-2 gap-4">
         <div>
-          <label  htmlFor="firstName" className="label-form">
+          <label htmlFor="firstName" className="label-form">
             Nombre*
           </label>
           <input
@@ -109,7 +109,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             required
             className="input-form"
           />
-        </div>        
+        </div>
       </div>
       <div>
         <h2 className="mb-1 mt-10 text-lg font-semibold">Detalles Contacto</h2>
@@ -140,7 +140,7 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
             className="input-form"
           />
         </div>
-      </div>      
+      </div>
       <div>
         <br />
       </div>
@@ -160,7 +160,9 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
         </div>
       </div>
       <div>
-        <h2 className="mb-1 mt-10 text-lg font-semibold">Información Adicional</h2>
+        <h2 className="mb-1 mt-10 text-lg font-semibold">
+          Información Adicional
+        </h2>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
@@ -194,14 +196,11 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mt-4">
-          <label
-            htmlFor="monthlyTokenLimit"
-            className="label-form"
-          >
+          <label htmlFor="monthlyTokenLimit" className="label-form">
             Límite de pases mensuales (opcional)
           </label>
           <input
-            name='passes'
+            name="passes"
             type="number"
             id="monthlyTokenLimit"
             value={monthlyTokenLimit || ''}
@@ -230,19 +229,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
           </div>*/}
       </div>
       <div className="mt-6 flex justify-end gap-4">
-        <button
-          type="button"
-          onClick={() => {}}
-          className="btn btn-cancel "
-        >
+        <button type="button" onClick={() => {}} className="btn btn-cancel ">
           Cancelar
-        </button>        
-        <button
-          type="submit"
-          className="btn btn-confirm"
-        >
+        </button>
+        <button type="submit" className="btn btn-confirm">
           Agregar
-        </button>        
+        </button>
       </div>
     </form>
   );

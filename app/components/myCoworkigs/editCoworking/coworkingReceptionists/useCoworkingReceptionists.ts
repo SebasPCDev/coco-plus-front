@@ -12,16 +12,15 @@ const UseCoworkingReceptionists = ({ id }: { id: string }) => {
   const handlechangeNewUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUserForm({ ...newUserForm, [name]: value });
-    console.log(newUserForm);
   };
   const handleClickNewUser = async (e: MouseEvent) => {
     e.preventDefault();
-    console.log(newUserForm);
+
     const response = await PostNewUserReceptCoworking({
       newUserForm,
       token,
     });
-    console.log(response);
+
     setIsModalOpen(false);
     //   getData();
   };

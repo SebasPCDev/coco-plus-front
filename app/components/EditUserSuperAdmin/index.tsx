@@ -1,6 +1,6 @@
-"use client";
-import { useState } from "react";
-import putDataUser from "./putDataUser";
+'use client';
+import { useState } from 'react';
+import putDataUser from './putDataUser';
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 
@@ -8,32 +8,32 @@ export const EditUserSuperAdmin = ({ id }) => {
   const token = Cookie.get('token');
 
   const [newData, setNewData] = useState({
-    name: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    identification: "",
-    position: "",
-    activationDate: "",
-    role: "",
-    password: "",
-    confPassword: ""
+    name: '',
+    lastname: '',
+    phone: '',
+    email: '',
+    identification: '',
+    position: '',
+    activationDate: '',
+    role: '',
+    password: '',
+    confPassword: '',
   });
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setNewData((prevData) => ({
       ...prevData,
-      [name]: name === "capacity" ? Number(value) : value
+      [name]: name === 'capacity' ? Number(value) : value,
     }));
   };
 
   const handleClick = async (event) => {
     event.preventDefault();
-    
+
     const modifiedData = {};
     for (const key in newData) {
-      if (newData[key] !== "" && newData[key] !== 0) {
+      if (newData[key] !== '' && newData[key] !== 0) {
         modifiedData[key] = newData[key];
       }
     }
@@ -50,19 +50,11 @@ export const EditUserSuperAdmin = ({ id }) => {
       if (result.isConfirmed) {
         try {
           const updatedData = await putDataUser(token, modifiedData, id);
-          console.log("Datos actualizados:", updatedData);
-          Swal.fire(
-            'Datos actualizados exitosamente',
-            '',
-            'success'
-          );
+
+          Swal.fire('Datos actualizados exitosamente', '', 'success');
         } catch (error) {
-          console.error("Error al actualizar los datos del coworking:", error);
-          Swal.fire(
-            'Error al actualizar los datos del coworking',
-            '',
-            'error'
-          );
+          console.error('Error al actualizar los datos del coworking:', error);
+          Swal.fire('Error al actualizar los datos del coworking', '', 'error');
         }
       }
     });
@@ -83,7 +75,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     name="name"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -95,7 +87,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     name="lastname"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -107,7 +99,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     type="number"
                     name="phone"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -119,7 +111,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     type="number"
                     name="identification"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -131,7 +123,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="position"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -143,7 +135,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     name="activationDate"
                     type="date"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -155,7 +147,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     name="role"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -167,7 +159,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="password"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -178,7 +170,7 @@ export const EditUserSuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="address"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -190,7 +182,7 @@ export const EditUserSuperAdmin = ({ id }) => {
           <button
             type="submit"
             onClick={handleClick}
-            className="rounded-md bg-custom-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-custom-senary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-secondary"
+            className="hover:bg-custom-senary rounded-md bg-custom-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-secondary"
           >
             Guardar
           </button>

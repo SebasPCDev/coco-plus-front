@@ -19,7 +19,7 @@ export default async function Page({
     return coworking.id === headquarter;
   });
   const bookings = await GetBookingsById({ token, id: currentCoworking[0].id });
-  console.log(bookings);
+
   return (
     <div className={'mt-5'}>
       <HeadquartersCoworkings headquarters={user.coworkings} />
