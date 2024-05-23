@@ -1,26 +1,11 @@
-import GetBookingsById from '@/utils/gets/getBookingsByID';
-import GetProfile from '@/utils/gets/getProfile';
-import { cookies } from 'next/headers';
 import CoworkingStatus from '../myCoworkigs/statusCoworking.tsx';
 import {
   ChangeStatus,
   UpdateCoworking,
 } from '../Buttons/dashboardSuperadmin/buttons';
+import { UserCircleIcon } from '@heroicons/react/24/outline';
 
-export default async function BookingList() {
-  const cookie = cookies();
-  const token = cookie.get('token')?.value;
-
-  const user = await GetProfile({ token });
-  console.log(user);
-  console.log(user.coworkings[0].id); //PENDIENTE
-
-  const bookings = await GetBookingsById({ token, id: user.coworkings[0].id });
-
-  console.log(bookings);
-
-  //const bookings = await GetBookingsById();
-
+export default async function BookingList({ bookings }: { bookings: any }) {
   return (
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
@@ -60,10 +45,7 @@ export default async function BookingList() {
             <thead className="rounded-lg text-center  font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Nombre
-                </th>
-                <th scope="col" className=" py-5 font-medium">
-                  Apellido
+                  Nombre Completo
                 </th>
                 <th scope="col" className=" py-5 font-medium">
                   Teléfono
@@ -91,12 +73,12 @@ export default async function BookingList() {
                 >
                   <td className="max-w-[150px] truncate whitespace-nowrap py-1 pl-6 pr-3">
                     <div className="flex items-center justify-center gap-3">
-                      <p>{booking.user.name}</p>
+                      <p>
+                        {booking.user.name} {booking.user.lastname}
+                      </p>
                     </div>
                   </td>
-                  <td className="max-w-[150px] truncate whitespace-nowrap  py-1">
-                    {booking.user.lastname}
-                  </td>
+
                   <td className="max-w-[150px] truncate whitespace-nowrap  py-1">
                     {booking.user.phone}
                   </td>

@@ -1,3 +1,5 @@
+import { CompanyStatus } from './companyStatus.enum';
+
 export interface ICompanyProfile {
   id: string;
   name: string;
@@ -5,8 +7,9 @@ export interface ICompanyProfile {
   phone: string;
   quantityBeneficiaries: number;
   businessSector: string;
-  size: number;
+  size: string;
   totalPasses: number;
+  status: string;
 }
 
 export interface ICompanyProfileUpdDto extends Partial<Omit<ICompanyProfile, 'id'>> { }
