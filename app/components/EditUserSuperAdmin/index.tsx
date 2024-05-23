@@ -1,22 +1,23 @@
 "use client";
 import { useState } from "react";
-import putDataCoworking from "./putDataCoworking";
+import putDataUser from "./putDataUser";
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 
-export const EditCoworkSuperAdmin = ({ id }) => {
+export const EditUserSuperAdmin = ({ id }) => {
   const token = Cookie.get('token');
 
   const [newData, setNewData] = useState({
     name: "",
+    lastname: "",
     phone: "",
     email: "",
-    open: "",
-    address: "",
-    country: "",
-    state: "",
-    city: "",
-    status: ""
+    identification: "",
+    position: "",
+    activationDate: "",
+    role: "",
+    password: "",
+    confPassword: ""
   });
 
   const handleInputChange = (e: any) => {
@@ -48,7 +49,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const updatedData = await putDataCoworking(token, modifiedData, id);
+          const updatedData = await putDataUser(token, modifiedData, id);
           console.log("Datos actualizados:", updatedData);
           Swal.fire(
             'Datos actualizados exitosamente',
@@ -73,7 +74,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
-              Editar información del coworking
+              Editar información del Usuario
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4">
               <div className="sm:col-span-2 sm:col-start-1">
@@ -89,11 +90,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="label-form">Teléfono:</label>
+                <label className="label-form">Apellido:</label>
                 <div className="mt-2">
                   <input
-                    name="phone"
-                    type="number"
+                    name="lastname"
+                    type="text"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -101,11 +102,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-4">
-                <label className="label-form">Email:</label>
+                <label className="label-form">Phone</label>
                 <div className="mt-2">
                   <input
-                    type="email"
-                    name="email"
+                    type="number"
+                    name="phone"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -113,11 +114,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Hora de Apertura:</label>
+                <label className="label-form">Numero de identificación:</label>
                 <div className="mt-2">
                   <input
-                    type="time"
-                    name="open"
+                    type="number"
+                    name="identification"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -125,11 +126,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="label-form">Hora de Cierre:</label>
+                <label className="label-form">Posicion:</label>
                 <div className="mt-2">
                   <input
-                    type="time"
-                    name="close"
+                    type="text"
+                    name="position"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -137,11 +138,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">País:</label>
+                <label className="label-form">Fecha de activacion:</label>
                 <div className="mt-2">
                   <input
-                    name="country"
-                    type="text"
+                    name="activationDate"
+                    type="date"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -152,7 +153,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                 <label className="label-form">Estado / Provincia:</label>
                 <div className="mt-2">
                   <input
-                    name="state"
+                    name="role"
                     type="text"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
@@ -161,29 +162,16 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Ciudad:</label>
+                <label className="label-form">Contraseña:</label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="city"
+                    name="password"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Capacidad:</label>
-                <div className="mt-2">
-                  <input
-                    type="number"
-                    name="capacity"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
               <div className="sm:col-span-4">
                 <label className="label-form">Dirección:</label>
                 <div className="mt-2">
@@ -212,4 +200,4 @@ export const EditCoworkSuperAdmin = ({ id }) => {
   );
 };
 
-export default EditCoworkSuperAdmin;
+export default EditUserSuperAdmin;
