@@ -1,20 +1,19 @@
 "use client";
 import { useState } from "react";
-import putDataUser from "./putDataUser";
+import putDataUserEmployee from "../ProfileViewEmployee copy/putDataUserEmployee";
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 
 export const EditUserSuperAdmin = ({ id }) => {
   const token = Cookie.get('token');
 
-  const [newData, setNewData] = useState({
+  const [newData, setNewData] : any = useState({
     name: "",
     lastname: "",
     phone: "",
     email: "",
     identification: "",
     position: "",
-    activationDate: "",
     role: "",
     password: "",
     confPassword: ""
@@ -22,16 +21,16 @@ export const EditUserSuperAdmin = ({ id }) => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setNewData((prevData) => ({
+    setNewData((prevData: any) => ({
       ...prevData,
       [name]: name === "capacity" ? Number(value) : value
     }));
   };
 
-  const handleClick = async (event) => {
+  const handleClick = async (event: any) => {
     event.preventDefault();
     
-    const modifiedData = {};
+    const modifiedData : any = {};
     for (const key in newData) {
       if (newData[key] !== "" && newData[key] !== 0) {
         modifiedData[key] = newData[key];
@@ -49,7 +48,7 @@ export const EditUserSuperAdmin = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const updatedData = await putDataUser(token, modifiedData, id);
+          const updatedData = await putDataUserEmployee(token, modifiedData, id);
           console.log("Datos actualizados:", updatedData);
           Swal.fire(
             'Datos actualizados exitosamente',
@@ -105,8 +104,20 @@ export const EditUserSuperAdmin = ({ id }) => {
                 <label className="label-form">Phone</label>
                 <div className="mt-2">
                   <input
-                    type="number"
+                    type="tel"
                     name="phone"
+                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Correro electionico:</label>
+                <div className="mt-2">
+                  <input
+                    type="email"
+                    name="email"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
@@ -138,19 +149,7 @@ export const EditUserSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Fecha de activacion:</label>
-                <div className="mt-2">
-                  <input
-                    name="activationDate"
-                    type="date"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Estado / Provincia:</label>
+                <label className="label-form">Rol:</label>
                 <div className="mt-2">
                   <input
                     name="role"
@@ -161,23 +160,24 @@ export const EditUserSuperAdmin = ({ id }) => {
                 </div>
               </div>
 
-              <div className="sm:col-span-2 sm:col-start-1">
+              <div className="sm:col-span-2">
                 <label className="label-form">Contraseña:</label>
                 <div className="mt-2">
                   <input
-                    type="text"
                     name="password"
+                    type="password"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
-              <div className="sm:col-span-4">
-                <label className="label-form">Dirección:</label>
+
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Confirmar Contraseña:</label>
                 <div className="mt-2">
                   <input
-                    type="text"
-                    name="address"
+                    type="password"
+                    name="confPassword"
                     className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
                     onChange={handleInputChange}
                   />
