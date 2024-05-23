@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const urlBase = process.env.API_URL;
+const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const GetCoworkingDetail = async (id: string) => {
   const url = `${urlBase}/coworkings/${id}`;
+  console.log(urlBase);
+  console.log(id);
 
   try {
     const response = await axios.get(url);

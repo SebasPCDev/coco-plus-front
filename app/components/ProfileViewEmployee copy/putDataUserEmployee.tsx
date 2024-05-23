@@ -5,7 +5,7 @@ export const putDataUserEmployee = async (
 ) => {
   try {
     const urlBase = process.env.NEXT_PUBLIC_API_URL;
-    console.log(newData);
+
     const response = await fetch(`${urlBase}/users/${id}`, {
       method: 'PUT',
       headers: {

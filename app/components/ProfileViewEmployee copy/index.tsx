@@ -15,7 +15,6 @@ export const ProfileViewEmployee = () => {
   // CONTENIDO DE INFO PERSONAL
   const [userData, setUserData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
-  console.log(userData);
 
   // ACTUALIZACION DE CONTENIDO DE FORMULARIO
   const [name, setName] = useState<any>('');

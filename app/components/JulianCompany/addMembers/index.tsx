@@ -1,4 +1,4 @@
-"use client";
+'use client';
 // CompanySettings.tsx
 import React from 'react';
 import Navbar from './navbarAddMembers';
@@ -19,11 +19,10 @@ interface MemberData {
 const CompanySettings: React.FC = () => {
   const handleMemberSubmit = (memberData: MemberData) => {
     // Aquí puedes realizar alguna acción con los datos del nuevo miembro, como enviarlos a un servidor
-    console.log('Nuevo miembro:', memberData);
   };
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Navbar />
       {/* <ImportCSV /> */}
       <MemberForm onSubmit={handleMemberSubmit} />

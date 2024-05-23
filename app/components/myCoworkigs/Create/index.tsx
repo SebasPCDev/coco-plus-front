@@ -53,14 +53,13 @@ const CoworkingForm = () => {
       toSet = { ...formData, [name]: value };
     }
     setFormData(toSet);
-    console.log(formData);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await PostNewCoworking({ formData, token });
-      console.log(response);
+
       await Swal.fire({
         title: 'seguro deseasn crear este coworking?',
         showDenyButton: true,
@@ -99,10 +98,7 @@ const CoworkingForm = () => {
                 : 'col-span-2 md:col-span-1'
             }
           >
-            <label
-              htmlFor={section.name}
-              className="label-form"
-            >
+            <label htmlFor={section.name} className="label-form">
               {section.label}
             </label>
             {section.name === 'open' || section.name === 'close' ? (
