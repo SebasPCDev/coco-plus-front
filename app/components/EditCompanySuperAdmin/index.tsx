@@ -1,37 +1,42 @@
 "use client";
-import { useState } from "react";
-import putDataCoworking from "./putDataCoworking";
+import { useState, ChangeEvent, MouseEvent } from "react";
+import putDataCompany from "./putDataCompany";
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-export const EditCoworkSuperAdmin = ({ id }) => {
-  const token = Cookie.get('token');
+export const EditCompanySuperAdmin = ({ id }) => {
   const router = useRouter();
+  const token = Cookie.get('token');
 
   const [newData, setNewData] = useState({
     name: "",
     phone: "",
     email: "",
-    open: "",
-    address: "",
-    country: "",
-    state: "",
-    city: "",
-    status: ""
+    businessSector: "",
+    status: "pending", // Valor por defecto
+    quantityBeneficiaries: 0,
+    size: "",
+    totalPasses: 0,
   });
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setNewData((prevData: any) => ({
+    setNewData((prevData) => ({
       ...prevData,
-      [name]: name === "capacity" ? Number(value) : value
+      [name]: name === "quantityBeneficiaries" || name === "totalPasses" ? Number(value) : value
     }));
   };
 
-  const handleClick = async (event) => {
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    
+
+    // Validación del email
+    if (newData.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(newData.email)) {
+      Swal.fire('Error', 'Ingrese un email válido.', 'error');
+      return;
+    }
+
     const modifiedData = {};
     for (const key in newData) {
       if (newData[key] !== "" && newData[key] !== 0) {
@@ -40,7 +45,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
     }
 
     Swal.fire({
-      title: '¿Estás seguro de querer actualizar este coworking?',
+      title: '¿Estás seguro de querer actualizar esta compañía?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#222B2D',
@@ -50,36 +55,28 @@ export const EditCoworkSuperAdmin = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const updatedData = await putDataCoworking(token, modifiedData, id);
+          const updatedData = await putDataCompany(token, modifiedData, id);
           console.log("Datos actualizados:", updatedData);
-          Swal.fire(
-            'Datos actualizados exitosamente',
-            '',
-            'success'
-          );
+          Swal.fire('Datos actualizados exitosamente', '', 'success');
         } catch (error) {
-          console.error("Error al actualizar los datos del coworking:", error);
-          Swal.fire(
-            'Error al actualizar los datos del coworking',
-            '',
-            'error'
-          );
+          console.error("Error al actualizar los datos de la compañía:", error);
+          Swal.fire('Error al actualizar los datos de la compañía', '', 'error');
         }
       }
     });
   };
 
   const handleCancel = () => {
-    router.push("/dashboard/superadmin/coworkings");
+    router.push("/dashboard/superadmin/companies");
   }
 
   return (
     <div>
-      <form className="p-10 mx-auto">
+      <form className="p-10 mx-auto"> 
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
-              Editar información del coworking
+              Editar información de la compañía
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4">
               <div className="sm:col-span-2 sm:col-start-1">
@@ -100,7 +97,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     name="phone"
                     type="number"
-                    className="react-international-phone-input "
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -119,11 +116,11 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Hora de Apertura:</label>
+                <label className="label-form">Sector:</label>
                 <div className="mt-2">
                   <input
-                    type="time"
-                    name="open"
+                    type="text"
+                    name="businessSector"
                     className="input-form"
                     onChange={handleInputChange}
                   />
@@ -131,74 +128,54 @@ export const EditCoworkSuperAdmin = ({ id }) => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="label-form">Hora de Cierre:</label>
-                <div className="mt-2">
-                  <input
-                    type="time"
-                    name="close"
-                    className="input-form"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">País:</label>
-                <div className="mt-2">
-                  <input
-                    name="country"
-                    type="text"
-                    className="input-form"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Estado / Provincia:</label>
-                <div className="mt-2">
-                  <input
-                    name="state"
-                    type="text"
-                    className="input-form"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label className="label-form">Ciudad:</label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="city"
-                    className="input-form"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="label-form">Capacidad:</label>
+                <label className="label-form">Cantidad de beneficiarios:</label>
                 <div className="mt-2">
                   <input
                     type="number"
-                    name="capacity"
+                    name="quantityBeneficiaries"
                     className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
 
-              <div className="sm:col-span-4">
-                <label className="label-form">Dirección:</label>
+              <div className="sm:col-span-2 sm:col-start-1">
+                <label className="label-form">Tamaño:</label>
                 <div className="mt-2">
                   <input
+                    name="size"
                     type="text"
-                    name="address"
                     className="input-form"
                     onChange={handleInputChange}
                   />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="label-form">Pases Totales:</label>
+                <div className="mt-2">
+                  <input
+                    name="totalPasses"
+                    type="number"
+                    className="input-form"
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="label-form">Estado:</label>
+                <div className="mt-2">
+                  <select
+                    name="status"
+                    className="input-form"
+                    onChange={handleInputChange}
+                    value={newData.status}
+                  >
+                    <option value="pending">Pendiente</option>
+                    <option value="inactive">Inactivo</option>
+                    <option value="active">Activo</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -212,7 +189,6 @@ export const EditCoworkSuperAdmin = ({ id }) => {
           >
             Cancelar
           </button>
-
           <button
             type="submit"
             onClick={handleClick}
@@ -224,6 +200,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
       </form>
     </div>
   );
-};
+  
+}
 
-export default EditCoworkSuperAdmin;
+export default EditCompanySuperAdmin;
