@@ -1,6 +1,6 @@
 'use client';
 import postBooking from '@/utils/posts/postBooking';
-import useCoworkingsForm from '../coworkingsForm/useCoworkingsForm';
+import useCoworkingsForm from '../requests/coworkingsForm/useCoworkingsForm';
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
@@ -97,7 +97,7 @@ export default function CoworkingBookingForm({
       <form onSubmit={handleSubmit}>
         <div className="mt-5 flex flex-col justify-center gap-4 p-5 md:w-full md:text-center">
           <div>
-            <label htmlFor="name" className="label-form">
+            <label htmlFor="name" className="label-form text-start">
               Fecha
             </label>
             <input
