@@ -3,9 +3,11 @@ import { useState } from "react";
 import putDataCoworking from "./putDataCoworking";
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 export const EditCoworkSuperAdmin = ({ id }) => {
   const token = Cookie.get('token');
+  const router = useRouter();
 
   const [newData, setNewData] = useState({
     name: "",
@@ -21,7 +23,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setNewData((prevData) => ({
+    setNewData((prevData: any) => ({
       ...prevData,
       [name]: name === "capacity" ? Number(value) : value
     }));
@@ -67,9 +69,13 @@ export const EditCoworkSuperAdmin = ({ id }) => {
     });
   };
 
+  const handleCancel = () => {
+    router.push("/dashboard/superadmin/coworkings");
+  }
+
   return (
     <div>
-      <form>
+      <form className="p-10 mx-auto">
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
@@ -82,7 +88,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     name="name"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -94,7 +100,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     name="phone"
                     type="number"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="react-international-phone-input "
                     onChange={handleInputChange}
                   />
                 </div>
@@ -106,7 +112,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="email"
                     name="email"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -118,7 +124,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="time"
                     name="open"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -130,7 +136,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="time"
                     name="close"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -142,7 +148,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     name="country"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -154,7 +160,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     name="state"
                     type="text"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -166,7 +172,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="city"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -178,7 +184,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="number"
                     name="capacity"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -190,7 +196,7 @@ export const EditCoworkSuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="address"
-                    className="sm:block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -199,10 +205,18 @@ export const EditCoworkSuperAdmin = ({ id }) => {
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
+
+          <button
+          className="btn btn-cancel"
+          onClick={handleCancel}
+          >
+            Cancelar
+          </button>
+
           <button
             type="submit"
             onClick={handleClick}
-            className="rounded-md bg-custom-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-custom-senary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-secondary"
+            className="btn btn-confirm"
           >
             Guardar
           </button>
