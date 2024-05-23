@@ -1,5 +1,6 @@
 import forgotPassword from '@/utils/api/auth/forgotPassword';
 import { useState } from 'react'
+import Swal from 'sweetalert2';
 
 const useForgotPassForm = () => {
   const [email, setEmail] = useState('')
@@ -21,8 +22,24 @@ const useForgotPassForm = () => {
       return;
     }
 
-    const response = await forgotPassword(email)
-    console.log("response", response);
+    try {
+      const response = await forgotPassword(email)
+      console.log("response", response);
+      /* recovery-password */
+      await Swal.fire({
+        icon: 'success',
+        title: 'Te enviamos un email',
+        text: 'Sigue las intrucciones del email para cambiar la contraseña',
+        showConfirmButton: true,
+        width: '450px',
+      });
+    } catch (error: any) {
+        Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error,
+      });
+    }
   }
   
   return {email, emailError, handleChange, handleSubmit}
