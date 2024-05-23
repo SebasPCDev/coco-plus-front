@@ -8,7 +8,7 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
     useImagesContent({ coworking: coworking } );
 
   return (
-    <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-1/3">
+    <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg xl:w-1/3">
       <h2 className="mb-2 text-xl font-semibold">Imagen de Portada</h2>
       <button
         onClick={onModalClick}
