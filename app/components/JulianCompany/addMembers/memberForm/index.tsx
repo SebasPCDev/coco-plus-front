@@ -1,242 +1,224 @@
 'use client';
-import { useUserContext } from '@/app/components/context';
-import GetProfile from '@/utils/gets/getProfile';
-import PostCreateEmployee from '@/utils/posts/postCreateEmployee';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+import { formDataCompaniesAddEmployee } from '@/utils/arraysforms/companyAddEmployeeForm';
+import useCompaniesFormAddEmployee from '@/app/components/requests/companiesForm/useCompaniesAddMemberForm';
+import IAddEmployeeInfo from '@/utils/types/requests/companiesFormAddEmployeeInterface';
+import IAddMembersErrorInfo from '@/utils/types/requests/companiesFormAddEmployeeErrorInterface';
 
-interface MemberFormProps {
-  onSubmit: (member: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone?: string;
-    jobRole: string;
-    postcode?: string;
-    userType: string;
-    monthlyTokenLimit?: number;
-  }) => void;
-}
+const MemberForm: React.FC = () => {
+  const {
+    companiesInfoAddEmployee,
+    companiesInfoErrorAddEmployee,
+    handleChange,
+    handleChangePhone,
+    handleSubmit,
+    handleCancel,
+  } = useCompaniesFormAddEmployee();
 
-const MemberForm: React.FC<MemberFormProps> = ({ onSubmit }) => {
-  const router = useRouter();
-  const { token } = useUserContext();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [identification, setIdentification] = useState('');
-  const [phone, setPhone] = useState('');
-  const [jobRole, setJobRole] = useState('');
-  const [postcode, setPostcode] = useState('');
-  const [userType, setUserType] = useState('Member');
-  const [monthlyTokenLimit, setMonthlyTokenLimit] = useState<
-    number | undefined
-  >(undefined);
+  const [touchedFields, setTouchedFields] = useState<{
+    [key: string]: boolean;
+  }>({});
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!token) return;
-    const profile = await GetProfile({ token });
-    const companyId = profile?.employee.company?.id;
-
-    const newEmployee = {
-      name: firstName,
-      lastname: lastName,
-      email,
-      phone,
-      identification: identification,
-      position: jobRole,
-      role: 'employee',
-      status: 'active',
-      passes: Number(monthlyTokenLimit),
-      passesAvailable: Number(monthlyTokenLimit),
-      companyId,
-    };
-
-    const data = await PostCreateEmployee(newEmployee, token);
-
-    onSubmit({
-      firstName,
-      lastName,
-      email,
-      phone,
-      jobRole,
-      postcode,
-      userType,
-      monthlyTokenLimit,
-    });
-    // Reiniciar los campos del formulario después de enviar
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPhone('');
-    setJobRole('');
-    setPostcode('');
-    setUserType('Member');
-    setMonthlyTokenLimit(undefined);
-    router.push('/dashboard/adminCompany/empleados');
+  const handleBlur = (name: string) => {
+    setTouchedFields((prevTouchedFields) => ({
+      ...prevTouchedFields,
+      [name]: true,
+    }));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container mx-auto py-8">
-      <div>
-        <h2 className="mb-3 mt-4 text-lg font-semibold">Nombre</h2>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+    <>
+      <form className="container mx-auto py-8" onSubmit={handleSubmit}>
+        <h2 className="mb-3 mt-4 text-lg font-semibold">Nuevo Empleado</h2>
+
         <div>
-          <label htmlFor="firstName" className="label-form">
-            Nombre*
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-            className="input-form"
-          />
+          <h3 className="mb-1 mt-4 text-lg font-semibold">Nombre</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {formDataCompaniesAddEmployee
+              .slice(0, 2)
+              .map(({ name, label, type, placeholder, required }) => (
+                <div key={name} className="mt-4">
+                  <label htmlFor={name} className="label-form">
+                    {label}
+                    {required && '*'}
+                  </label>
+                  <input
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                    className="input-form"
+                    onChange={handleChange}
+                    onBlur={() => handleBlur(name)}
+                    value={
+                      companiesInfoAddEmployee[
+                        name as keyof IAddEmployeeInfo
+                      ] || ''
+                    }
+                  />
+                  {touchedFields[name] && (
+                    <p className="input-error">
+                      {
+                        companiesInfoErrorAddEmployee[
+                          name as keyof IAddMembersErrorInfo
+                        ]
+                      }
+                    </p>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
+
         <div>
-          <label htmlFor="lastName" className="label-form">
-            Apellido*
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-            className="input-form"
-          />
+          <h3 className="mb-1 mt-4 text-lg font-semibold">Detalles Contacto</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {formDataCompaniesAddEmployee
+              .slice(2, 4)
+              .map(({ name, label, type, placeholder, required }) => (
+                <div key={name} className="mt-4">
+                  <label htmlFor={name} className="label-form">
+                    {label}
+                    {required && '*'}
+                  </label>
+                  {name === 'phone' ? (
+                    <PhoneInput
+                      defaultCountry="ar"
+                      name={name}
+                      value={
+                        companiesInfoAddEmployee[
+                          name as keyof IAddEmployeeInfo
+                        ]?.toString() || ''
+                      }
+                      onChange={(phone) => handleChangePhone(name, phone)}
+                      onBlur={() => handleBlur(name)}
+                    />
+                  ) : (
+                    <input
+                      type={type}
+                      name={name}
+                      placeholder={placeholder}
+                      required={required}
+                      className="input-form"
+                      onChange={handleChange}
+                      onBlur={() => handleBlur(name)}
+                      value={
+                        companiesInfoAddEmployee[
+                          name as keyof IAddEmployeeInfo
+                        ] || ''
+                      }
+                    />
+                  )}
+                  {touchedFields[name] && (
+                    <p className="input-error">
+                      {
+                        companiesInfoErrorAddEmployee[
+                          name as keyof IAddMembersErrorInfo
+                        ]
+                      }
+                    </p>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <h2 className="mb-1 mt-10 text-lg font-semibold">Detalles Contacto</h2>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="mt-4">
-          <label htmlFor="email" className="label-form">
-            Email*
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="input-form"
-          />
+
+        <div>
+          <h3 className="mb-1 mt-4 text-lg font-semibold">
+            Información Adicional
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            {formDataCompaniesAddEmployee
+              .slice(4, 5)
+              .map(({ name, label, type, placeholder, required }) => (
+                <div key={name} className="mt-4">
+                  <label htmlFor={name} className="label-form">
+                    {label}
+                    {required && '*'}
+                  </label>
+                  <input
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                    className="input-form"
+                    onChange={handleChange}
+                    onBlur={() => handleBlur(name)}
+                    value={
+                      companiesInfoAddEmployee[
+                        name as keyof IAddEmployeeInfo
+                      ] || ''
+                    }
+                  />
+                  {touchedFields[name] && (
+                    <p className="input-error">
+                      {
+                        companiesInfoErrorAddEmployee[
+                          name as keyof IAddMembersErrorInfo
+                        ]
+                      }
+                    </p>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
-        <div className="mt-4">
-          <label htmlFor="phone" className="label-form">
-            Teléfono (optional)
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="input-form"
-          />
+
+        <div>
+          <h3 className="mb-1 mt-4 text-lg font-semibold">Permisos</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {formDataCompaniesAddEmployee
+              .slice(5)
+              .map(({ name, label, type, placeholder, required }) => (
+                <div key={name} className="mt-4">
+                  <label htmlFor={name} className="label-form">
+                    {label}
+                    {required && '*'}
+                  </label>
+                  <input
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                    className="input-form"
+                    onChange={handleChange}
+                    onBlur={() => handleBlur(name)}
+                    value={
+                      companiesInfoAddEmployee[
+                        name as keyof IAddEmployeeInfo
+                      ] || ''
+                    }
+                  />
+                  {touchedFields[name] && (
+                    <p className="input-error">
+                      {
+                        companiesInfoErrorAddEmployee[
+                          name as keyof IAddMembersErrorInfo
+                        ]
+                      }
+                    </p>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <br />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="mt-4">
-          <label htmlFor="jobRole" className="label-form">
-            Identificación
-          </label>
-          <input
-            type="text"
-            id="identification"
-            value={identification}
-            onChange={(e) => setIdentification(e.target.value)}
-            required
-            className="input-form"
-          />
-        </div>
-      </div>
-      <div>
-        <h2 className="mb-1 mt-10 text-lg font-semibold">
-          Información Adicional
-        </h2>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="mt-4">
-          <label htmlFor="jobRole" className="label-form">
-            Cargo
-          </label>
-          <input
-            type="text"
-            id="jobRole"
-            value={jobRole}
-            onChange={(e) => setJobRole(e.target.value)}
-            required
-            className="input-form"
-          />
-        </div>
-        {/* <div className="mt-4">
-          <label htmlFor="postcode" className="label-form">
-            Dirección (optional)
-          </label>
-          <input
-            type="text"
-            id="postcode"
-            value={postcode}
-            onChange={(e) => setPostcode(e.target.value)}
-            className="input-form"
-          />
-        </div> */}
-      </div>
-      <div>
-        <h2 className="mb-1 mt-10 text-lg font-semibold">Permisos</h2>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="mt-4">
-          <label htmlFor="monthlyTokenLimit" className="label-form">
-            Límite de pases mensuales (opcional)
-          </label>
-          <input
-            name="passes"
-            type="number"
-            id="monthlyTokenLimit"
-            value={monthlyTokenLimit || ''}
-            onChange={(e) =>
-              setMonthlyTokenLimit(
-                e.target.value ? Number(e.target.value) : undefined,
-              )
-            }
-            className="input-form"
-          />
-        </div>
-        {/*
-        <div className="mt-4">
-          <label htmlFor="userType" className="label-form">
-            Tipo de usuario
-          </label>
-          <select
-            id="userType"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-            className="w-1/2 rounded-3xl border border-gray-300 bg-gray-100 px-3 py-2"
+
+        <div className="mt-6 flex justify-end gap-4">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="btn btn-cancel"
           >
-            <option value="Member">Empleado</option>
-            
-          </select> 
-          </div>*/}
-      </div>
-      <div className="mt-6 flex justify-end gap-4">
-        <button type="button" onClick={() => {}} className="btn btn-cancel ">
-          Cancelar
-        </button>
-        <button type="submit" className="btn btn-confirm">
-          Agregar
-        </button>
-      </div>
-    </form>
+            Cancelar
+          </button>
+          <button type="submit" className="btn btn-confirm">
+            Agregar
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

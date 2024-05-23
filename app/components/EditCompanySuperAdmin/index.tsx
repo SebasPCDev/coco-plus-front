@@ -3,8 +3,10 @@ import { useState, ChangeEvent, MouseEvent } from 'react';
 import putDataCompany from './putDataCompany';
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 export const EditCompanySuperAdmin = ({ id }) => {
+  const router = useRouter();
   const token = Cookie.get('token');
 
   const [newData, setNewData] = useState({
@@ -76,9 +78,13 @@ export const EditCompanySuperAdmin = ({ id }) => {
     });
   };
 
+  const handleCancel = () => {
+    router.push('/dashboard/superadmin/companies');
+  };
+
   return (
     <div>
-      <form>
+      <form className="mx-auto p-10">
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
@@ -91,7 +97,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     name="name"
                     type="text"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -103,7 +109,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     name="phone"
                     type="number"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -115,7 +121,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     type="email"
                     name="email"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -127,7 +133,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     type="text"
                     name="businessSector"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -139,7 +145,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     type="number"
                     name="quantityBeneficiaries"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -151,7 +157,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     name="size"
                     type="text"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -163,7 +169,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                   <input
                     name="totalPasses"
                     type="number"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                   />
                 </div>
@@ -174,7 +180,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
                 <div className="mt-2">
                   <select
                     name="status"
-                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-secondary sm:block sm:leading-6"
+                    className="input-form"
                     onChange={handleInputChange}
                     value={newData.status}
                   >
@@ -188,10 +194,13 @@ export const EditCompanySuperAdmin = ({ id }) => {
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
+          <button className="btn btn-cancel" onClick={handleCancel}>
+            Cancelar
+          </button>
           <button
             type="submit"
             onClick={handleClick}
-            className="hover:bg-custom-senary rounded-md bg-custom-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-secondary"
+            className="btn btn-confirm"
           >
             Guardar
           </button>

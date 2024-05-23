@@ -9,7 +9,7 @@ export interface ICompanyProfile {
   businessSector: string;
   size: string;
   totalPasses: number;
-  status: CompanyStatus;
+  status: string;
 }
 
 export interface ICompanyProfileUpdDto extends Partial<Omit<ICompanyProfile, 'id'>> { }

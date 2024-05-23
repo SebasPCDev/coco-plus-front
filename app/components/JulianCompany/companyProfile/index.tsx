@@ -4,8 +4,8 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { formProfileCompany } from '@/utils/arraysforms/profileCompany';
 import useCompanyProfile from './useCompanyProfile';
-import { ICompanyProfile } from '@/utils/types/companies/companyProfile';
-import ICompanyProfileFormError from '@/utils/types/companies/companyProfileFormError';
+import { ICompanyProfile } from '@/utils/types/companies/companyProfileInterface';
+import ICompanyProfileFormError from '@/utils/types/companies/companyProfileFormErrorInterface';
 import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
 
 const CompanyProfile = () => {

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.9",
@@ -17,6 +18,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.0",
+    "@vis.gl/react-google-maps": "^1.0.0",
     "autoprefixer": "10.4.15",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",

@@ -1,6 +1,6 @@
-import IProfileCompany from '@/utils/types/companies/companyProfile'
+import { ICompanyProfile }  from '@/utils/types/companies/companyProfileInterface'
 
-export const INITIAL_PROFILE_COMPANY: IProfileCompany = {
+export const INITIAL_PROFILE_COMPANY: ICompanyProfile = {
   id: "",
   name: "",
   email: "",
@@ -8,6 +8,8 @@ export const INITIAL_PROFILE_COMPANY: IProfileCompany = {
   quantityBeneficiaries: 0,
   businessSector: "",
   size: "",
+  totalPasses: 0,
+  status: "",
 }
 
 export const INITIAL_PROFILE_COMPANY_ERROR = {

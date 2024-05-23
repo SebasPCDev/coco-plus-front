@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 export const EditCoworkSuperAdmin = ({ id }: { id: string }) => {
   const token = Cookie.get('token');
   const router = useRouter();
+  const router = useRouter();
 
   const { generateTimeOptions } = useCoworkingsForm();
   const [newData, setNewData] = useState({
@@ -60,7 +61,7 @@ export const EditCoworkSuperAdmin = ({ id }: { id: string }) => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setNewData((prevData) => ({
+    setNewData((prevData: any) => ({
       ...prevData,
       [name]: name === 'capacity' ? Number(value) : value,
     }));
@@ -106,6 +107,10 @@ export const EditCoworkSuperAdmin = ({ id }: { id: string }) => {
         }
       }
     });
+  };
+
+  const handleCancel = () => {
+    router.push('/dashboard/superadmin/coworkings');
   };
 
   return (
