@@ -63,7 +63,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
       }
     });
     const response = await PutUpdateCoworking({ id, newInfo, token });
-    getData();
+    await getData();
     console.log(newInfo);
 
     console.log(response);
