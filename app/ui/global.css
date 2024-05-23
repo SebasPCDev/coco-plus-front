@@ -106,7 +106,7 @@ body {
 /***************/
 /* label */
 .label-form {
-  @apply mb-2 block text-sm font-bold text-gray-700;
+  @apply block text-sm font-bold text-gray-700;
 }
 
 /* input */
@@ -115,7 +115,7 @@ body {
 }
 
 .input-error {
-  @apply mt-2 text-sm text-red-500;
+  @apply text-sm text-red-500;
 }
 
 /* buttons */
