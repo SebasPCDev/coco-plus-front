@@ -1,6 +1,3 @@
-import GetBookingsById from '@/utils/gets/getBookingsByID';
-import GetProfile from '@/utils/gets/getProfile';
-import { cookies } from 'next/headers';
 import CoworkingStatus from '../myCoworkigs/statusCoworking.tsx';
 import {
   ChangeStatus,

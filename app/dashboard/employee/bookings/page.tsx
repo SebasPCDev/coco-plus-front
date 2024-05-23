@@ -1,6 +1,5 @@
 import CoworkingBookingForm from '@/app/components/coworkingBookingForm';
 import CoworkingsBooking from '@/app/components/coworkingsBooking';
-import Pagination from '@/app/components/pagination/pagination';
 import GetCoworkingDetail from '@/utils/gets/getCoworkingDetail';
 import { cookies } from 'next/headers';
 
