@@ -22,6 +22,8 @@ export const Coworkings: React.FC = () => {
         cities={cities}
         handleChange={handleChange}
       />
+
+      
       <MapCoworking filter={filter} coworkings={coworkings} />
 
       <main className="mt-20 w-full">
