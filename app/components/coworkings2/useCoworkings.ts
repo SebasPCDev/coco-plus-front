@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import getCountriesfilter from '@/utils/gets/countriesFilter';
 import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
 import getoptions from '@/utils/gets/getoptionsFilter';
-
 
 const useCoworkings = () => {
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
@@ -68,12 +67,11 @@ const useCoworkings = () => {
       newfilter.city = value;
     }
     setFilter(newfilter);
-    console.log("filter", filter);
-    console.log("newfilter", newfilter);
-    
-    
+    console.log('filter', filter);
+    console.log('newfilter', newfilter);
+    console.log(coworkings);
   };
 
   return { coworkings, countries, states, cities, handleChange, filter };
-}
-export default useCoworkings
+};
+export default useCoworkings;
