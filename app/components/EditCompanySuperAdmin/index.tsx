@@ -1,30 +1,35 @@
-"use client";
-import { useState, ChangeEvent, MouseEvent } from "react";
-import putDataCompany from "./putDataCompany";
+'use client';
+import { useState, ChangeEvent, MouseEvent } from 'react';
+import putDataCompany from './putDataCompany';
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export const EditCompanySuperAdmin = ({ id }) => {
   const router = useRouter();
   const token = Cookie.get('token');
 
   const [newData, setNewData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    businessSector: "",
-    status: "pending", // Valor por defecto
+    name: '',
+    phone: '',
+    email: '',
+    businessSector: '',
+    status: 'pending', // Valor por defecto
     quantityBeneficiaries: 0,
-    size: "",
+    size: '',
     totalPasses: 0,
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setNewData((prevData) => ({
       ...prevData,
-      [name]: name === "quantityBeneficiaries" || name === "totalPasses" ? Number(value) : value
+      [name]:
+        name === 'quantityBeneficiaries' || name === 'totalPasses'
+          ? Number(value)
+          : value,
     }));
   };
 
@@ -32,14 +37,17 @@ export const EditCompanySuperAdmin = ({ id }) => {
     event.preventDefault();
 
     // Validación del email
-    if (newData.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(newData.email)) {
+    if (
+      newData.email &&
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(newData.email)
+    ) {
       Swal.fire('Error', 'Ingrese un email válido.', 'error');
       return;
     }
 
     const modifiedData = {};
     for (const key in newData) {
-      if (newData[key] !== "" && newData[key] !== 0) {
+      if (newData[key] !== '' && newData[key] !== 0) {
         modifiedData[key] = newData[key];
       }
     }
@@ -56,23 +64,27 @@ export const EditCompanySuperAdmin = ({ id }) => {
       if (result.isConfirmed) {
         try {
           const updatedData = await putDataCompany(token, modifiedData, id);
-          console.log("Datos actualizados:", updatedData);
+
           Swal.fire('Datos actualizados exitosamente', '', 'success');
         } catch (error) {
-          console.error("Error al actualizar los datos de la compañía:", error);
-          Swal.fire('Error al actualizar los datos de la compañía', '', 'error');
+          console.error('Error al actualizar los datos de la compañía:', error);
+          Swal.fire(
+            'Error al actualizar los datos de la compañía',
+            '',
+            'error',
+          );
         }
       }
     });
   };
 
   const handleCancel = () => {
-    router.push("/dashboard/superadmin/companies");
-  }
+    router.push('/dashboard/superadmin/companies');
+  };
 
   return (
     <div>
-      <form className="p-10 mx-auto"> 
+      <form className="mx-auto p-10">
         <div className="mt-10 space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-[20px] font-semibold text-gray-900">
@@ -182,11 +194,7 @@ export const EditCompanySuperAdmin = ({ id }) => {
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
-
-          <button
-          className="btn btn-cancel"
-          onClick={handleCancel}
-          >
+          <button className="btn btn-cancel" onClick={handleCancel}>
             Cancelar
           </button>
           <button
@@ -200,7 +208,6 @@ export const EditCompanySuperAdmin = ({ id }) => {
       </form>
     </div>
   );
-  
-}
+};
 
 export default EditCompanySuperAdmin;

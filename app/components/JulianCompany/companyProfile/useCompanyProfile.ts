@@ -41,14 +41,13 @@ const useCompanyProfile = () => {
   }, [companyProfile]);
 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setCompanyProfile({
-      ...companyProfile,
+  const handleChange = (name: string, value: string) => {
+    setCompanyProfile((prevProfile) => ({
+      ...prevProfile,
       [name]: value,
-    });
+    }));
   };
+  
 
   const handleChangePhone = (name: string, value: string) => {
     setCompanyProfile({

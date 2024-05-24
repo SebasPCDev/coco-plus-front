@@ -68,8 +68,12 @@ const useCoworkings = () => {
       newfilter.city = value;
     }
     setFilter(newfilter);
+    console.log("filter", filter);
+    console.log("newfilter", newfilter);
+    
+    
   };
 
-  return { coworkings, countries, states, cities, handleChange }
+  return { coworkings, countries, states, cities, handleChange, filter };
 }
 export default useCoworkings

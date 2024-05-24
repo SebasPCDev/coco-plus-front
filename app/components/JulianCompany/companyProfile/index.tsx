@@ -1,5 +1,3 @@
-// components/yourPath/CompanyProfile.tsx
-
 'use client';
 
 import { useState } from 'react';
@@ -12,24 +10,22 @@ import ICompanyProfileFormError from '@/utils/types/companies/companyProfileForm
 import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
 
 const CompanyProfile = () => {
-  const { 
-    companyProfile, 
-    companyProfileError, 
-    handleChange, 
-    handleChangePhone, 
-    handleCancel, 
+  const {
+    companyProfile,
+    companyProfileError,
+    handleChange,
+    handleChangePhone,
+    handleCancel,
   } = useCompanyProfile();
 
   const [touchedFields, setTouchedFields] = useState<{ [key: string]: boolean }>({});
 
   const handleBlur = (name: string) => {
-    // Marcar el campo actual como tocado
     setTouchedFields((prevTouchedFields) => ({
       ...prevTouchedFields,
       [name]: true,
     }));
 
-    // Marcar todos los campos que aún no se han tocado
     const untouchedFields = formProfileCompany
       .map(({ name }) => name)
       .filter((fieldName) => !touchedFields[fieldName]);
@@ -39,7 +35,7 @@ const CompanyProfile = () => {
         ...acc,
         [fieldName]: true,
       }),
-      touchedFields
+      touchedFields,
     );
 
     setTouchedFields(newTouchedFields);
@@ -48,34 +44,39 @@ const CompanyProfile = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Verificar si todos los campos requeridos están llenos
-    const requiredFieldsFilled = formProfileCompany.every(({ name, required }) => {
-      if (required) {
-        return Boolean(companyProfile[name as keyof ICompanyProfile]);
-      }
-      return true;
-    });
+    const requiredFieldsFilled = formProfileCompany.every(
+      ({ name, required }) => {
+        if (required) {
+          return Boolean(companyProfile[name as keyof ICompanyProfile]);
+        }
+        return true;
+      },
+    );
 
     if (!requiredFieldsFilled) {
-      alert("Por favor, completa todos los campos requeridos.");
+      alert('Por favor, completa todos los campos requeridos.');
       return;
     }
-
-    // Si todos los campos requeridos están llenos, enviar el formulario
-    // Aquí puedes hacer la lógica para enviar el formulario, por ejemplo:
-    // enviarFormulario(companyProfile);
   };
 
   return (
-    <form className="max-w-4xl mx-auto p-8 rounded-lg shadow-lg bg-white" onSubmit={handleSubmit} >
-      <h1 className="text-4xl font-bold text-center mb-8 col-span-2">Perfil de la Empresa</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form
+      className="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-lg"
+      onSubmit={handleSubmit}
+    >
+      <h1 className="col-span-2 mb-8 text-center text-4xl font-bold">
+        Perfil de la Empresa
+      </h1>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {formProfileCompany.map(({ name, label, type, placeholder, required }) => (
-          <div key={name} className={`flex flex-col ${["message", "position"].includes(name) ? "md:col-span-2" : ""}`}>
+          <div
+            key={name}
+            className={`flex flex-col ${['message', 'position'].includes(name) ? 'md:col-span-2' : ''}`}
+          >
             <label htmlFor={name} className="label-form">
               {label}
             </label>
-            {name === "phone" || name === "companyPhone" ? (
+            {name === 'phone' || name === 'companyPhone' ? (
               <PhoneInput
                 defaultCountry="ar"
                 name={name}
@@ -83,15 +84,14 @@ const CompanyProfile = () => {
                 onChange={(phone) => handleChangePhone(name, phone)}
                 onBlur={() => handleBlur(name)}
               />
-            ) : ((name === "size") ? (
+            ) : name === 'size' ? (
               <div className="relative">
                 <select
                   name={name}
                   required={required}
                   className="input-form"
-                  onChange={handleChange}
-                  onBlur={() => handleBlur(name)}
-                  value={companyProfile[name as keyof ICompanyProfile]}
+                  onChange={(event) => handleChange(name, event.target.value)}
+                  value={companyProfile[name as keyof ICompanyProfile].toString()}
                 >
                   <option value="">Selecciona una cantidad</option>
                   {COMPANY_SIZE.map((size) => (
@@ -102,7 +102,7 @@ const CompanyProfile = () => {
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
-                    className="fill-current h-4 w-4"
+                    className="h-4 w-4 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
@@ -117,29 +117,25 @@ const CompanyProfile = () => {
                 placeholder={placeholder}
                 required={required}
                 className="input-form"
-                onChange={handleChange}
+                onChange={(event) => handleChange(name, event.target.value)}
                 onBlur={() => handleBlur(name)}
-                value={companyProfile[name as keyof ICompanyProfile]}
+                value={companyProfile[name as keyof ICompanyProfile].toString()}
               />
-            ))}
+            )}
             {touchedFields[name] && (
-              <p className="input-error text-red-600">{companyProfileError[name as keyof ICompanyProfileFormError]}</p>
+              <p className="input-error text-red-600">
+                {companyProfileError[name as keyof ICompanyProfileFormError]}
+              </p>
             )}
           </div>
         ))}
       </div>
 
-      <div className='mt-8 flex justify-between'>
-        <button
-          onClick={handleCancel}
-          className="btn btn-cancel"
-        >
+      <div className="mt-8 flex justify-between">
+        <button type="button" onClick={handleCancel} className="btn btn-cancel">
           Cancelar
         </button>
-        <button
-          className="btn btn-confirm"
-          type="submit"
-        >
+        <button className="btn btn-confirm" type="submit">
           Modificar perfil
         </button>
       </div>

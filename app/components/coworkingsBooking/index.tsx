@@ -16,7 +16,6 @@ export default function CoworkingsBooking() {
   } = useCoworkings();
 
   const totalPages = Math.ceil(totalCoworkings / 3);
-  console.log(totalPages);
 
   return (
     <section className="-mt-[65px] pt-[65px] lg:mt-0 lg:pt-0" id="coworkings">

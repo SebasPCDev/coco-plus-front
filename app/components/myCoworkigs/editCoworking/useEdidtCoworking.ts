@@ -31,8 +31,6 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
       setCoworking({ ...coworking, [name]: value });
       setNewInfo({ ...newInfo, [name]: value });
     }
-
-    console.log(newInfo);
   };
   useEffect(() => {
     setNewInfo({
@@ -78,7 +76,6 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     };
     try {
       const response = await PutUpdateCoworking({ id, newInfo, token });
-      console.log(response);
     } catch (error) {
       alert(error.response.data.message);
     }

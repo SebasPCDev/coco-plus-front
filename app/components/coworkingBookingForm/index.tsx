@@ -65,7 +65,7 @@ export default function CoworkingBookingForm({
               reservationDate: selectedDate,
               token: token,
             });
-            console.log(response);
+
             Swal.fire(
               `Tu reserva se ha registrado. Te avisaremos por correo electrónico cuando sea aprobado.`,
               '',

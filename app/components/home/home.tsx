@@ -4,6 +4,7 @@ import HeaderMain from '../mainHeader';
 import Service from '../Service';
 import Coworkings from '../coworkings2';
 import Footer from '../JulianCompany/home/footerHome';
+import MapCoworking from '../coworkings2/mapCoworkings';
 
 const Home = () => {
   return (
