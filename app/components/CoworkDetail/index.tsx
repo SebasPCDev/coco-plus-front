@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./CoworkDetail.module.css"
 import getCowork from '../coworkings/[id]/getCowork';
 import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
+import MapCoworking from "../coworkings2/mapCoworkings";
+import MapSingleItem from "./MapSingleItem";
 
 const slides = [
   { url: "https://www.thedigitalnomad.asia/wp-content/uploads/2022/02/Coworking-spaces.jpeg", title: "Imagen cowork 1" },
@@ -212,9 +214,9 @@ export const CoworkDetail = ({ id }: { id: string }) => {
         </section>
         <section className={styles.mapadireccion}>
           <div className={styles.contenedor}>
-            <h2 className={styles.mapatitulo}>Ubicación (ejemplo)</h2>
+            <h2 className={styles.mapatitulo}>Nueva Ubicacion</h2>
             <div className={styles.googlemapslink}>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.2606598425305!2d-58.353735624866346!3d-34.673370261178974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3331dcd68fd89%3A0x92dfdde0df93960a!2sAv.%20Bartolom%C3%A9%20Mitre%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1691671696243!5m2!1ses!2sar" ></iframe>
+              <MapSingleItem item={cowork}/>
             </div>
           </div>
         </section>
