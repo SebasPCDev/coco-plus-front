@@ -1,4 +1,5 @@
 'use client';
+import styles from "./navbarDashboard.module.css"
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -22,7 +23,7 @@ export default function NavbarDashboard() {
   return (
     <Disclosure
       as="nav"
-      className="flex h-[7rem] items-center bg-custom-fourth md:rounded-lg"
+      className={`${styles.responsiveNone} flex h-[7rem] items-center bg-custom-fourth md:rounded-lg`}
     >
       {({ open }) => (
         <>

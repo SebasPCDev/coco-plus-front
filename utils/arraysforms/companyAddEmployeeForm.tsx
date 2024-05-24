@@ -8,14 +8,14 @@ export interface ElementForm {
   
   export const formDataCompaniesAddEmployee: ElementForm[] = [
     {
-      name: 'firstName',
+      name: 'name',
       label: 'Nombre',
       type: 'text',
       placeholder: 'Nombre',
       required: true,
     },
     {
-      name: 'lastName',
+      name: 'lastname',
       label: 'Apellido',
       type: 'text',
       placeholder: 'Apellido',
@@ -43,14 +43,14 @@ export interface ElementForm {
       required: true,
     },
     {
-      name: 'jobRole',
+      name: 'position',
       label: 'Cargo',
       type: 'text',
       placeholder: 'Cargo dentro de la empresa',
       required: true,
     },
     {
-      name: 'monthlyTokenLimit',
+      name: 'passes',
       label: 'Límite de pases mensuales (opcional)',
       type: 'number',
       placeholder: 'Límite de pases mensuales',
