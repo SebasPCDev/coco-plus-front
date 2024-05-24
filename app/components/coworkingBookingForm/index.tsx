@@ -4,15 +4,18 @@ import useCoworkingsForm from '../requests/coworkingsForm/useCoworkingsForm';
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import MapCoworking from '@/app/components/coworkings2/mapCoworkings';
-import useCoworkings from '@/app/components/coworkings2/useCoworkings';
+import MapCoworking from '@/app/dashboard/employee/mapCoworkings';
 
 export default function CoworkingBookingForm({
   coworking,
   token,
+  filter,
+  coworkings,
 }: {
   coworking: IResponseCoworking;
   token: string | undefined;
+  filter: { country: string; state: string; city: string };
+  coworkings: IResponseCoworking;
 }) {
   const { generateTimeOptions } = useCoworkingsForm();
   const currentDate = new Date().toISOString().split('T')[0];
@@ -97,8 +100,11 @@ export default function CoworkingBookingForm({
         <h2 className="text-2xl font-bold">Reservar Coworking</h2>
         <form onSubmit={handleSubmit}>
           <div className=" flex flex-col  gap-4  md:w-full md:text-center">
-            <div className="mt-5 flex justify-start gap-2">
+            <div className="mt-5 flex max-w-[25rem] flex-col justify-start gap-2">
               <div>
+                <label htmlFor="name" className="label-form mb-2 text-start">
+                  Fecha
+                </label>
                 <input
                   type="date"
                   name="name"
@@ -107,10 +113,9 @@ export default function CoworkingBookingForm({
                   placeholder="Nombre"
                   className={'input-form'}
                   onChange={handleChangeDate}
-                  disabled={coworking.id ? false : true}
                 />
               </div>
-
+              <label className="label-form text-start">Hora</label>
               <select className="input-form" onChange={handleChangeTime}>
                 <option value="">Selecciona una hora</option>
                 {generateTimeOptions().map((time) => (
@@ -127,6 +132,9 @@ export default function CoworkingBookingForm({
             </div>
           </div>
         </form>
+        <div className="mt-4">
+          <MapCoworking filter={filter} coworkings={coworkings.coworking} />
+        </div>
       </div>
     </div>
   );

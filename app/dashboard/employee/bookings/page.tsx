@@ -1,6 +1,5 @@
 import CoworkingBookingForm from '@/app/components/coworkingBookingForm';
-import MapCoworking from '@/app/components/coworkings2/mapCoworkings';
-
+import MapCoworking from '../mapCoworkings/index';
 import CoworkingsBooking from '@/app/components/coworkingsBooking';
 import GetCoworkingDetail from '@/utils/gets/getCoworkingDetail';
 import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
@@ -27,7 +26,6 @@ export default async function Page({
   const filter = { country, state, city };
   const coworking = await GetCoworkingDetail(id);
   const coworkings = await GetCoworkingsFilter({ filter: filter });
-  console.log(filter, coworkings.coworking);
 
   return (
     <div className="gap-4 xl:grid xl:grid-cols-2 xl:grid-rows-1">
@@ -35,8 +33,12 @@ export default async function Page({
         <CoworkingsBooking />
       </div>
       <div className="mt-10 px-2">
-        <CoworkingBookingForm coworking={coworking} token={token} />
-        <MapCoworking filter={filter} coworkings={coworkings.coworking} />
+        <CoworkingBookingForm
+          coworking={coworking}
+          token={token}
+          filter={filter}
+          coworkings={coworkings.coworking}
+        />
       </div>
     </div>
   );
