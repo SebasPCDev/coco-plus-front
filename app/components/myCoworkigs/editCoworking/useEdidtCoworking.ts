@@ -76,6 +76,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     };
     try {
       const response = await PutUpdateCoworking({ id, newInfo, token });
+      await getData();
     } catch (error) {
       alert(error.response.data.message);
     }
