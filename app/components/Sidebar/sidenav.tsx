@@ -31,6 +31,10 @@ export default function SideNav() {
 
   const handleOnLinked=()=>{
     setActiveNav(styles.noActive)
+
+    setClose(styles.close);
+    setCloseBur("");
+    setCloseBurA("")
   }
 
   return (
