@@ -21,15 +21,10 @@ const MapCoworking = ({ filter, coworkings }) => {
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
 
-  console.log(filter);
-
-  useEffect(() => {
-    console.log(filter);
-  }, [filter]);
+  useEffect(() => {}, [filter]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
     setCameraProps(ev.detail);
-    console.log(ev);
   };
   const responseCenter = async () => {
     if (filter.country) {
@@ -75,18 +70,13 @@ const MapCoworking = ({ filter, coworkings }) => {
       setMarkersCoworking(await Promise.all(arrayMarkersCoworkings));
     }
   };
-  
+
   useEffect(() => {
     responseMarker();
-    
   }, [coworkings]);
 
-
-
   useEffect(() => {
-    console.log(filter);
-    responseCenter();
-    console.log(coworkings);
+    if (filter.country) responseCenter();
   }, [filter]);
 
   return (
