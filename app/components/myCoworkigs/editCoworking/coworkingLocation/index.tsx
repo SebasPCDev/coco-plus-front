@@ -47,13 +47,13 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
         <h2 className="mb-4 text-xl font-bold">Seleccionar Opciones</h2>
         <div className="space-y-2">
           {options.map((option) => (
-            <div key={option.name} className="flex items-center">
+            <div key={option.id} className="flex items-center">
               <input
                 type="checkbox"
-                id={option.name}
+                id={option.id}
                 name={option.name}
                 value={option.name}
-                checked={address[currentName] === option.name}
+                // checked={address[currentName] === option.name}
                 onChange={handleCheck}
                 className="form-checkbox h-5 w-5 text-blue-600"
               />
