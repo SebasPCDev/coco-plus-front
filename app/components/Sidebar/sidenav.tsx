@@ -9,7 +9,6 @@ import { useState } from 'react';
 export default function SideNav() {
 
   const [activeNav, setActiveNav] = useState(styles.noActive);
-  
   const [close, setClose] = useState(styles.close);
   const [closeBur, setCloseBur] = useState("");
   const [closeBurA, setCloseBurA] = useState("");
@@ -73,6 +72,7 @@ export default function SideNav() {
           </form>
         </div>
       </div>
+      <div className={styles.spaceextra}></div>
     </div>
   );
 }
