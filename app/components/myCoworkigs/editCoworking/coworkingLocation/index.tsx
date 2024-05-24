@@ -53,12 +53,12 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
                 id={option.id}
                 name={option.name}
                 value={option.name}
-                // checked={address[currentName] === option.name}
+                // checked={idCheck === option.id}
                 onChange={handleCheck}
                 className="form-checkbox h-5 w-5 text-blue-600"
               />
               <label htmlFor={option.name} className="ml-2">
-                {option.display_name}
+                {option.display_name},{option.name}
               </label>
             </div>
           ))}

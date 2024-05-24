@@ -201,6 +201,7 @@ const UseEditLocation = () => {
     currentName,
     setCurrentName,
     setCorder,
+    
   };
 };
 
