@@ -43,7 +43,7 @@ const UseEditLocation = () => {
       address: Mycoworking?.address,
     });
   }, [, Mycoworking]);
-  
+
   useEffect(() => {
     console.log('este es mi coworking context', Mycoworking);
   }, [Mycoworking]);
@@ -56,6 +56,9 @@ const UseEditLocation = () => {
   const handleBlur = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
+    if (value == '') {
+      return;
+    }
     if (name == 'country') {
       const addressquery = { [name]: value };
       setAddress(addressquery);
@@ -67,7 +70,8 @@ const UseEditLocation = () => {
         setAddress({ [name]: estandarName });
       } else if (response.length > 1) {
         setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option) => ({
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
           name: option.name,
           display_name: option.display_name,
         }));
@@ -85,7 +89,8 @@ const UseEditLocation = () => {
         setAddress({ country: address.country, [name]: estandarName });
       } else if (response.length > 1) {
         setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option) => ({
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
           name: option.name,
           display_name: option.display_name,
         }));
@@ -111,7 +116,8 @@ const UseEditLocation = () => {
         });
       } else if (response.length > 1) {
         setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option) => ({
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
           name: option.name,
           display_name: option.display_name,
         }));
@@ -157,25 +163,29 @@ const UseEditLocation = () => {
 
   const handleCheck = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.checked ? e.target.value : '';
-    setAddress({ ...address, [currentName]: newValue });
-    if (currentName == 'address') {
+    const updatedAddress = { ...address, [currentName]: newValue };
+    setAddress(updatedAddress);
+
+    if (currentName === 'address' && newValue) {
       const freeAddress = `${newValue} ${address.city} ${address.state} ${address.country}`;
       const responseGoogle = await geocodeAddress(freeAddress);
-      const corde = {
-        lat: String(responseGoogle[0].geometry.location.lat()),
-        long: String(responseGoogle[0].geometry.location.lng()),
-      };
-      setAddress({
-        ...address,
-        address: responseGoogle[0].formatted_address,
-      });
-      setCorder(corde);
-      setMyCoworking({
-        ...Mycoworking,
-        ...address,
-        address: responseGoogle[0].formatted_address,
-        ...corde,
-      });
+      if (responseGoogle.length > 0) {
+        const corde = {
+          lat: String(responseGoogle[0].geometry.location.lat()),
+          long: String(responseGoogle[0].geometry.location.lng()),
+        };
+        setAddress({
+          ...address,
+          address: responseGoogle[0].formatted_address,
+        });
+        setCorder(corde);
+        setMyCoworking({
+          ...Mycoworking,
+          ...updatedAddress,
+          address: responseGoogle[0].formatted_address,
+          ...corde,
+        });
+      }
     }
   };
 
