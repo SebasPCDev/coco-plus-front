@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { formProfileCompany } from '@/utils/arraysforms/profileCompany';
@@ -15,8 +16,48 @@ const CompanyProfile = () => {
     handleChange,
     handleChangePhone,
     handleCancel,
-    handleSubmit,
   } = useCompanyProfile();
+
+  const [touchedFields, setTouchedFields] = useState<{ [key: string]: boolean }>({});
+
+  const handleBlur = (name: string) => {
+    setTouchedFields((prevTouchedFields) => ({
+      ...prevTouchedFields,
+      [name]: true,
+    }));
+
+    const untouchedFields = formProfileCompany
+      .map(({ name }) => name)
+      .filter((fieldName) => !touchedFields[fieldName]);
+
+    const newTouchedFields = untouchedFields.reduce(
+      (acc, fieldName) => ({
+        ...acc,
+        [fieldName]: true,
+      }),
+      touchedFields,
+    );
+
+    setTouchedFields(newTouchedFields);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const requiredFieldsFilled = formProfileCompany.every(
+      ({ name, required }) => {
+        if (required) {
+          return Boolean(companyProfile[name as keyof ICompanyProfile]);
+        }
+        return true;
+      },
+    );
+
+    if (!requiredFieldsFilled) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
+  };
 
   return (
     <form
@@ -27,73 +68,71 @@ const CompanyProfile = () => {
         Perfil de la Empresa
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {formProfileCompany.map(
-          ({ name, label, type, placeholder, required }) => (
-            <div
-              key={name}
-              className={`flex flex-col ${
-                ['message', 'position'].includes(name) ? 'md:col-span-2' : ''
-              }`}
-            >
-              <label htmlFor={name} className="label-form">
-                {label}
-              </label>
-              {name === 'phone' || name === 'companyPhone' ? (
-                <PhoneInput
-                  defaultCountry="ar"
+        {formProfileCompany.map(({ name, label, type, placeholder, required }) => (
+          <div
+            key={name}
+            className={`flex flex-col ${['message', 'position'].includes(name) ? 'md:col-span-2' : ''}`}
+          >
+            <label htmlFor={name} className="label-form">
+              {label}
+            </label>
+            {name === 'phone' || name === 'companyPhone' ? (
+              <PhoneInput
+                defaultCountry="ar"
+                name={name}
+                value={companyProfile[name as keyof ICompanyProfile].toString()}
+                onChange={(phone) => handleChangePhone(name, phone)}
+                onBlur={() => handleBlur(name)}
+              />
+            ) : name === 'size' ? (
+              <div className="relative">
+                <select
                   name={name}
-                  value={companyProfile[
-                    name as keyof ICompanyProfile
-                  ].toString()}
-                  onChange={(phone) => handleChangePhone(name, phone)}
-                />
-              ) : name === 'size' ? (
-                <div className="relative">
-                  <select
-                    name={name}
-                    required={required}
-                    className="input-form"
-                    onChange={handleChange}
-                    value={companyProfile[name as keyof ICompanyProfile]}
-                  >
-                    <option value="">Selecciona una cantidad</option>
-                    {COMPANY_SIZE.map((size) => (
-                      <option key={size.id} value={size.id}>
-                        {size.value}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg
-                      className="h-4 w-4 fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              ) : (
-                <input
-                  type={type}
-                  name={name}
-                  placeholder={placeholder}
                   required={required}
                   className="input-form"
-                  onChange={handleChange}
-                  value={companyProfile[name as keyof ICompanyProfile]}
-                />
-              )}
-              <p className="input-error">
+                  onChange={(event) => handleChange(name, event.target.value)}
+                  value={companyProfile[name as keyof ICompanyProfile].toString()}
+                >
+                  <option value="">Selecciona una cantidad</option>
+                  {COMPANY_SIZE.map((size) => (
+                    <option key={size.id} value={size.id}>
+                      {size.value}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="h-4 w-4 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <input
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                className="input-form"
+                onChange={(event) => handleChange(name, event.target.value)}
+                onBlur={() => handleBlur(name)}
+                value={companyProfile[name as keyof ICompanyProfile].toString()}
+              />
+            )}
+            {touchedFields[name] && (
+              <p className="input-error text-red-600">
                 {companyProfileError[name as keyof ICompanyProfileFormError]}
               </p>
-            </div>
-          ),
-        )}
+            )}
+          </div>
+        ))}
       </div>
 
       <div className="mt-8 flex justify-between">
-        <button onClick={handleCancel} className="btn btn-cancel">
+        <button type="button" onClick={handleCancel} className="btn btn-cancel">
           Cancelar
         </button>
         <button className="btn btn-confirm" type="submit">
@@ -103,4 +142,5 @@ const CompanyProfile = () => {
     </form>
   );
 };
+
 export default CompanyProfile;

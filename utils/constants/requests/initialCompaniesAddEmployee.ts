@@ -2,21 +2,31 @@ import IAddEmployeeInfo from "@/utils/types/requests/companiesFormAddEmployeeInt
 import IAddMembersErrorInfo from "@/utils/types/requests/companiesFormAddEmployeeErrorInterface";
 
 export const INITIAL_COMPANIES_ADD_EMPLOYEE_INFO: IAddEmployeeInfo = {
-  firstName: '',
-  lastName: '',
+  name: '',
+  lastname: '',
   email: '',
   phone: '',
   identification: '',
-  jobRole: '',
-  monthlyTokenLimit: undefined,
+  position: '',
+  role: '',
+  status: '',
+  passes: 0,
+  passesAvailable: 0,
+  companyId: "",
 };
 
 export const INITIAL_COMPANIES_INFO_ADD_EMPLOYEE_ERROR: IAddMembersErrorInfo = {
-  firstName: '',
-  lastName: '',
+  name: '',
+  lastname: '',
   email: '',
   phone: '',
   identification: '',
-  jobRole: '',
-  monthlyTokenLimit: '',
+  /* role: '', */
+  position: '',
+  /* status: '', */
+  passes: "", 
+  /* passesAvailable: 0, */
+  /* companyId: "", */ 
 };
+
+

@@ -1,12 +1,17 @@
 interface IAddEmployeeInfo {
-    firstName: string;
-    lastName: string;
+    name: string;
+    lastname: string;
     email: string;
     phone: string;
     identification: string;
-    jobRole: string;
-    monthlyTokenLimit?: number;
+    position: string;
+    role: string;
+    status: string;
+    passes: number;
+    passesAvailable?: number;
+    companyId: string;
   }
   
   export default IAddEmployeeInfo;
+
   
