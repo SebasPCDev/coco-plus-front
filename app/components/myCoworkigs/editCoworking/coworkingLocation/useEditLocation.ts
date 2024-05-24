@@ -42,7 +42,7 @@ const UseEditLocation = () => {
       city: Mycoworking?.city,
       address: Mycoworking?.address,
     });
-  }, []);
+  }, [, Mycoworking]);
   
   useEffect(() => {
     console.log('este es mi coworking context', Mycoworking);
