@@ -65,41 +65,6 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
               </div>
             </div>
 
-            {/* <div className=" col-span-2 rounded-lg border  p-4 shadow-sm xl:col-span-1">
-              {arrayCoworkingUbdateInfo.map((info) => {
-                return (
-                  <div key={info.name} className="flex">
-                    <p>
-                      <strong>{info.label}:</strong>
-                    </p>
-                    <input
-                      onChange={handleChange}
-                      className=" bg-gray-100"
-                      type="text"
-                      value={coworking[info.name] || ''}
-                      name={info.name}
-                    />
-                  </div>
-                );
-              })}
-              <div className="flex gap-4">
-                <p>
-                  <strong>Status:</strong>
-                </p>
-                <div className="flex gap-4">
-                  <CoworkingStatus status={coworking.status} />
-                  {coworking.status === 'pending' && (
-                    <button
-                      onClick={onClickActivate}
-                      className="rounded-lg bg-red-500 p-2 text-white"
-                    >
-                      Activar
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div> */}
-
             <EditCoworkingLocation coworking={coworking} />
             <button
               onClick={handleClick}
