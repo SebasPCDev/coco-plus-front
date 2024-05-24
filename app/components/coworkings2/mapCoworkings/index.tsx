@@ -57,7 +57,9 @@ const MapCoworking = ({ filter, coworkings }) => {
   const responseMarker = async () => {
     if (coworkings) {
       const arrayMarkersCoworkings = coworkings.map(async (coworking) => {
-        if (coworking.country) {
+        if (coworking.lat && coworking.long) {
+          return { lat: Number(coworking.lat), lng: Number(coworking.long) };
+        } else if (coworking.country) {
           const location = await geocodeAddress(
             `${coworking.city}, ${coworking.state}, ${coworking.country}`,
           );

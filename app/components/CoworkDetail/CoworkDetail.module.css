@@ -189,7 +189,6 @@
   .mapatitulo{
     color: #303030;
     padding: 2rem;
-    margin: 10rem 2rem 2rem 0;
     border-top: 1px solid #b3b3b3;
   }
   
@@ -200,6 +199,10 @@
     border-radius: 21px;
     box-shadow:  -9px -9px 30px #c2c2c2,
                9px 9px 30px #ffffff;
+  }
+
+  .googlemapslink{
+    margin-bottom: 4rem;
   }
   
   @media screen and (min-width: 754px) {

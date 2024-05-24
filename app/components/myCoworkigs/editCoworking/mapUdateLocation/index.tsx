@@ -45,7 +45,7 @@ const UpdatedLocationMap = () => {
 
   const handleClick = (ev) => {
     const { lat, lng } = ev.detail.latLng;
-    setMyCoworking({ ...Mycoworking, lat: String(lat), long: String(lng)});
+    setMyCoworking({ ...Mycoworking, lat: String(lat), long: String(lng) });
     console.log(lat, lng);
   };
 
@@ -57,8 +57,6 @@ const UpdatedLocationMap = () => {
       style={{ width: '100%', height: '500px' }}
     >
       <Marker position={location} />
-      <Marker position={{ lat: 29.4, lng: -81.3 }} />
-      <Marker position={{ lat: 29.3, lng: -81.4 }} />
     </Map>
   );
 };
