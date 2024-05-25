@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Modal from '../../Modals/ModalNewUser';
 import useImagesContent from './useImagesContent';
 
-const ImagesContent = ({ coworking }: { coworking: any }) => {
+const ImagesContent = ({ coworking, getData }: { coworking: any; getData: any }) => {
   const { isModalOpen, handleFileChange, handleSubmit, onModalClick } =
-    useImagesContent({ coworking: coworking } );
+    useImagesContent({ coworking: coworking, getData: getData });
 
   return (
     <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg xl:w-1/3">
@@ -18,7 +18,9 @@ const ImagesContent = ({ coworking }: { coworking: any }) => {
       </button>
       <Modal isOpen={isModalOpen} onClose={onModalClick}>
         <form onSubmit={handleSubmit} action="">
-          <label htmlFor="image" className="label-form">Agrega la Imagen</label>
+          <label htmlFor="image" className="label-form">
+            Agrega la Imagen
+          </label>
           <input
             onChange={handleFileChange}
             type="file"

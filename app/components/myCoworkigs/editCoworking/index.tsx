@@ -9,12 +9,8 @@ import useEdidtCoworking from './useEdidtCoworking';
 import arrayCoworkingUbdateInfo from '@/utils/arraysforms/arrayCoworkingUbdateInfo';
 
 export default function MyCoworkingDetailEdit({ id }: { id: string }) {
-  const {
-    handleClick,
-    handleChange,
-    coworking,
-    onClickActivate
-  } = useEdidtCoworking({ id: id });
+  const { handleClick, handleChange, coworking, onClickActivate, getData } =
+    useEdidtCoworking({ id: id });
   
 
   return (
@@ -72,11 +68,15 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
             >
               Actualizar Info
             </button>
-            <CoworkingReceptionists coworking={coworking} id={id} />
+            <CoworkingReceptionists
+              coworking={coworking}
+              id={id}
+              getData={getData}
+            />
           </div>
         </div>
         {/* Contenedor 2 */}
-        <ImagesContent coworking={coworking} />
+        <ImagesContent coworking={coworking} getData={getData} />
       </div>
     </div>
   );

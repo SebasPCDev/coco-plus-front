@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useUserContext } from '@/app/components/context';
 import { useRouter } from 'next/navigation';
 import PutImageThumbnail from '@/utils/puts/putImageThumbnail';
-const useImagesContent = ({ coworking }: { coworking: any }) => {
+const useImagesContent = ({ coworking, getData }: { coworking: any , getData: any }) => {
   const router = useRouter();
   const id = coworking.id;
   const { token } = useUserContext();
@@ -30,6 +30,10 @@ const useImagesContent = ({ coworking }: { coworking: any }) => {
         token,
         imageThumbnail,
       });
+
+      if (response.status === 200) {
+        getData();
+      }
     } catch (error) {
       alert(error.response.data.message);
     } finally {

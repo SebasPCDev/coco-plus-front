@@ -14,10 +14,9 @@ const INITIAL_CAMERA: MapCameraProps = {
 };
 
 const MapCoworking = ({ filter, coworkings }) => {
-  const [location, setLocation] = useState<any>(INITIAL_CAMERA);
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
-  const [cameraProps, setCameraProps] =
-    useState<MapCameraProps>(INITIAL_CAMERA);
+  const [cameraProps, setCameraProps] = useState<MapCameraProps>(INITIAL_CAMERA);
+  
 
   useEffect(() => {}, [filter]);
 
@@ -29,6 +28,8 @@ const MapCoworking = ({ filter, coworkings }) => {
       const centerMap = await geocodeAddress(
         `${filter.city}, ${filter.state}, ${filter.country}`,
       );
+      console.log(centerMap);
+
       const lat = await centerMap[0].geometry.location.lat();
       const lng = await centerMap[0].geometry.location.lng();
       if (filter.city) {
@@ -59,8 +60,9 @@ const MapCoworking = ({ filter, coworkings }) => {
           return { lat: Number(coworking.lat), lng: Number(coworking.long) };
         } else if (coworking.country) {
           const location = await geocodeAddress(
-            `${coworking.city}, ${coworking.state}, ${coworking.country}`,
+            `${coworking.address} ,${coworking.city}, ${coworking.state}, ${coworking.country}`,
           );
+          console.log(location);
           const lat = await location[0].geometry.location.lat();
           const lng = await location[0].geometry.location.lng();
           return { lat: Number(lat), lng: Number(lng) };
