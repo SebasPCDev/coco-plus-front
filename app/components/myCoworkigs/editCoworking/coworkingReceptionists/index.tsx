@@ -5,7 +5,7 @@ import Modal from '../../Modals/ModalNewUser';
 import UseCoworkingReceptionists from './useCoworkingReceptionists';
 
 
-const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string }) => {
+const CoworkingReceptionists = ({ coworking, id , getData }: { coworking: any, id: string, getData: any }) => {
   
   const {
     newUserForm,
@@ -13,7 +13,7 @@ const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string 
     handleClickNewUser,
     isModalOpen,
     setIsModalOpen,
-  } = UseCoworkingReceptionists({ id });
+  } = UseCoworkingReceptionists({ id , getData});
  
 
   
