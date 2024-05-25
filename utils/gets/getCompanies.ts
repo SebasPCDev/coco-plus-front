@@ -12,6 +12,8 @@ const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
 const GetCompanies = async ({ token, params }: IParams) => {
   const url = `${urlBase}/companies?page=${params?.page}&status=${params?.status}`;
+  console.log(url);
+  
   try {
     const response = await axios.get(url, {
       headers: {
