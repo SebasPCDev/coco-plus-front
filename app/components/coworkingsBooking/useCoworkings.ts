@@ -3,11 +3,13 @@ import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import getCountriesfilter from '@/utils/gets/countriesFilter';
 import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
 import getoptions from '@/utils/gets/getoptionsFilter';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import page from '../coworkings/page';
 
 const useCoworkings = () => {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { replace } = useRouter();
   const [totalCoworkings, setTotalCoworkings] = useState(0);
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
   const [countries, setCountries] = useState<any[]>([]);
@@ -68,13 +70,19 @@ const useCoworkings = () => {
   }, [filter]);
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (params.get('state') === '') params.delete('state');
+    if (params.get('city') === '') params.delete('city');
     const { name, value } = event.target;
     const newfilter = { country: '', state: '', city: '', page: 1, limit: 3 };
     if (name === 'country') {
       newfilter.country = value;
       newfilter.state = '';
       newfilter.city = '';
-
+      params.set('country', event.target.value);
+      params.delete('state');
+      params.delete('city');
       setCities([]);
       setStates([]);
     }
@@ -82,6 +90,8 @@ const useCoworkings = () => {
       newfilter.country = filter.country;
       newfilter.state = value;
       newfilter.city = '';
+      params.set('state', event.target.value);
+      params.delete('city');
 
       setCities([]);
     }
@@ -89,8 +99,14 @@ const useCoworkings = () => {
       newfilter.country = filter.country;
       newfilter.state = filter.state;
       newfilter.city = value;
+      params.set('city', event.target.value);
     }
+    if (params.get('country') === '') params.delete('country');
+    if (params.get('state') === '') params.delete('state');
+    if (params.get('city') === '') params.delete('city');
+
     setFilter(newfilter);
+    replace(`${pathname}?${params.toString()}`);
   };
 
   return {
@@ -100,6 +116,7 @@ const useCoworkings = () => {
     cities,
     handleChange,
     totalCoworkings,
+    filter,
   };
 };
 export default useCoworkings;

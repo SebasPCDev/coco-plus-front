@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-
 import useCoworkings from './useCoworkings';
 import Coworking from './coworking';
 import SearchCoworking from './searchCoworking';

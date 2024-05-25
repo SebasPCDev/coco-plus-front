@@ -4,13 +4,18 @@ import useCoworkingsForm from '../requests/coworkingsForm/useCoworkingsForm';
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import MapCoworking from '@/app/dashboard/employee/mapCoworkings';
 
 export default function CoworkingBookingForm({
   coworking,
   token,
+  filter,
+  coworkings,
 }: {
   coworking: IResponseCoworking;
   token: string | undefined;
+  filter: { country: string; state: string; city: string };
+  coworkings: IResponseCoworking;
 }) {
   const { generateTimeOptions } = useCoworkingsForm();
   const currentDate = new Date().toISOString().split('T')[0];
@@ -88,45 +93,49 @@ export default function CoworkingBookingForm({
   return (
     <div
       className={
-        coworking.id
-          ? 'mx-auto mt-10 w-[25rem] py-5 text-center transition-opacity duration-300 ease-in-out xl:mx-0 xl:p-0 xl:text-start '
-          : 'opacity-0'
+        'mx-auto mb-5 w-full py-5 text-center transition-opacity duration-300 ease-in-out xl:mx-0 xl:p-0 xl:text-start '
       }
     >
-      <h2 className="text-2xl font-bold">Reservar Coworking</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mt-5 flex flex-col justify-center gap-4 p-5 md:w-full md:text-center">
-          <div>
-            <label htmlFor="name" className="label-form text-start">
-              Fecha
-            </label>
-            <input
-              type="date"
-              name="name"
-              min={currentDate}
-              id="name"
-              placeholder="Nombre"
-              className={'input-form w-full'}
-              onChange={handleChangeDate}
-              disabled={coworking.id ? false : true}
-            />
+      <div>
+        <h2 className="text-2xl font-bold">Reservar Coworking</h2>
+        <form onSubmit={handleSubmit}>
+          <div className=" flex flex-col  gap-4  md:w-full md:text-center">
+            <div className="mt-5 flex max-w-[25rem] flex-col justify-start gap-2">
+              <div>
+                <label htmlFor="name" className="label-form mb-2 text-start">
+                  Fecha
+                </label>
+                <input
+                  type="date"
+                  name="name"
+                  min={currentDate}
+                  id="name"
+                  placeholder="Nombre"
+                  className={'input-form'}
+                  onChange={handleChangeDate}
+                />
+              </div>
+              <label className="label-form text-start">Hora</label>
+              <select className="input-form" onChange={handleChangeTime}>
+                <option value="">Selecciona una hora</option>
+                {generateTimeOptions().map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex justify-center xl:justify-start">
+              <button className="btn btn-confirm" type="submit">
+                Reservar
+              </button>
+            </div>
           </div>
-          <select className="input-form" onChange={handleChangeTime}>
-            <option value="">Selecciona una hora</option>
-            {generateTimeOptions().map((time) => (
-              <option key={time} value={time}>
-                {time}
-              </option>
-            ))}
-          </select>
-
-          <div className="flex justify-center xl:justify-start">
-            <button className="btn btn-confirm" type="submit">
-              Reservar
-            </button>
-          </div>
+        </form>
+        <div className="mt-4">
+          <MapCoworking filter={filter} coworkings={coworkings.coworking} />
         </div>
-      </form>
+      </div>
     </div>
   );
 }
