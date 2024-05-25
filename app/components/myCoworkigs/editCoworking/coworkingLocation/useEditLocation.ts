@@ -105,6 +105,8 @@ const UseEditLocation = () => {
       };
       setAddress(addressquery);
       const response = await GetAddressByParams({ address: addressquery });
+      console.log(response);
+
       if (response.length == 0) {
         alert('no se encontraron resultados  buelva a ingresar un ' + name);
       } else if (response.length == 1) {
@@ -201,7 +203,6 @@ const UseEditLocation = () => {
     currentName,
     setCurrentName,
     setCorder,
-    
   };
 };
 
