@@ -57,6 +57,8 @@ const MapCoworking = ({ filter, coworkings }) => {
           zoom: 5,
         }));
       }
+    } else {
+      setCameraProps(INITIAL_CAMERA);
     }
   };
   const responseMarker = async () => {
@@ -83,9 +85,7 @@ const MapCoworking = ({ filter, coworkings }) => {
   }, [coworkings]);
 
   useEffect(() => {
-    console.log(filter);
     responseCenter();
-    console.log(coworkings);
   }, [filter]);
 
   return (

@@ -67,6 +67,14 @@ const roles: Roles = {
       icon: HomeIcon,
     },
   ],
+  coworking: [
+    { name: 'Home', href: '/dashboard/coworking', icon: HomeIcon },
+    {
+      name: 'Mis Reservas',
+      href: '/dashboard/coworking/bookingsList',
+      icon: DocumentDuplicateIcon,
+    },
+  ],
 };
 
 export default roles;
