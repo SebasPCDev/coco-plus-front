@@ -1,9 +1,7 @@
 import { cookies } from 'next/headers';
-import {
-  InactiveCompany,
-  UpdateCompany,
-} from '../../Buttons/dashboardSuperadmin/buttons';
+import { InactiveCompany, UpdateCompany, } from '../../Buttons/dashboardSuperadmin/buttons';
 import CompanyStatus from '../../Status/dashboardSuperadmin/statusCompany';
+import styles from "./tableCompany.module.css"
 
 export default function CompaniesTable({
   companiesRawData,
@@ -21,43 +19,62 @@ export default function CompaniesTable({
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-          {/* <div className="md:hidden">
-            {invoices?.map((invoice) => (
+
+
+
+
+        <div className="md:hidden">
+            {companiesRawData?.companies?.map((company: any) => (
               <div
-                key={invoice.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                key={company.id}
+                className={styles.gralContainer}
               >
-                <div className="flex items-center justify-between border-b pb-4">
-                  <div>
+                <div className={styles.titleAndContItemsContainer}>
+                  
                     <div className="mb-2 flex items-center">
-                      <Image
-                        src={invoice.image_url}
-                        className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      />
-                      <p>{invoice.name}</p>
+                      <p className="font-bold">{company.name}</p>
                     </div>
-                    <p className=" text-gray-500">{invoice.email}</p>
-                  </div>
-                  <InvoiceStatus status={invoice.status} />
+                    <div className={styles.itemsContainerAndStatus}>
+                      <div className={styles.itemResponsiveTableContainer}>
+                        <div className={styles.itemFlexTableContainer}>
+                          <p className=" text-gray-700"><b>Email: <br/></b>{company.email}</p>
+                          <p className=" text-gray-700"><b>Telefono: <br/></b>{company.phone}</p>
+                        </div>
+                        <div className={styles.itemFlexTableContainer}>
+                          <p className=" text-gray-700"><b>Beneficiarios: <br/></b>{company.quantityBeneficiaries}</p>
+                          <p className=" text-gray-700"><b>Sector: <br/></b>{company.businessSector}</p>
+                        </div>
+                        <div className={styles.itemFlexTableContainer}>
+                          <p className=" text-gray-700"><b>Tamaño: <br/></b>{company.size}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.statusContainer}>
+                    <CompanyStatus status={company.status} />
+                    </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
-                  <div>
-                    <p className="text-xl font-medium">
-                      {formatCurrency(invoice.amount)}
-                    </p>
-                    <p>{formatDateToLocal(invoice.date)}</p>
-                  </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={invoice.id} />
-                    <DeleteInvoice id={invoice.id} />
+                    <UpdateCompany id={company.id} />
+                    <InactiveCompany id={company.id} token={token} />
                   </div>
                 </div>
               </div>
             ))}
-          </div> */}
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
           <table className="hidden min-w-full text-sm text-gray-900 md:table">
             <thead className="rounded-lg text-center  font-normal">
               <tr>
