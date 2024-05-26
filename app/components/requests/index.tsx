@@ -180,6 +180,8 @@ export default function Requests() {
                   <h2 className="font-semibold md:text-xl">
                     {item.name} {item.lastname}
                   </h2>
+                  <br />
+                  <p className="text-gray-700"><b>Tipo:</b> {item.type == "coworking" ? <b style={{color: "#004906"}}>Coworking</b> : item.type == "company" && <b style={{color: "#5c3000"}}>Empresa</b>}</p>
                   <p className="text-gray-700"><b>Email:</b> {item.email}</p>
                   <p className="text-gray-700"><b>Telefono:</b> {item.phone}</p>
                   <p className="text-gray-700"><b>Creado el: </b> 
@@ -200,6 +202,7 @@ export default function Requests() {
                   <h2 className={styles.bigTitle}>
                     <b>{item.position} <br /> {item.companyName}</b>
                   </h2>
+                  <br />
                   <p className="text-gray-700"><b>Email: </b>{item.companyEmail}</p>
                   <p className="text-gray-700"><b>Telefono: </b>{item.companyPhone}</p>
                   <p className="text-gray-700"><b>Direcion: </b>{item.address}</p>
