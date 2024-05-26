@@ -1,16 +1,17 @@
 'use client';
-import statusHandler from '@/utils/queryFilterHandler/statusHandler';
-import { CheckCircleIcon } from '@heroicons/react/24/outline';
+import roleHandler from '@/utils/queryFilterHandler/roleHandler';
+import { CheckCircleIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-export default function StatusHandler() {
+
+export default function RoleHandler() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(searchParams);
-    params.set('status', event.target.value);
-    if (params.get('status') === 'null') params.delete('status');
+    params.set('role', event.target.value);
+    if (params.get('role') === 'null') params.delete('role');
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -18,7 +19,6 @@ export default function StatusHandler() {
 
   return (
     <div className="my-4 flex gap-8 px-[1.5rem] text-sm">
-      <p className="flex items-center font-bold">Filtrar por:</p>
       <div className="relative rounded-full border-2 border-gray-300">
         <select
           name="status"
@@ -28,15 +28,15 @@ export default function StatusHandler() {
           defaultValue={searchParams.get('status')?.toString()}
         >
           <option value="null" className="text-gray-400">
-            Estado
+            Rol
           </option>
-          {statusHandler[typeEntity].map((status) => (
-            <option key={status.name} value={status.name}>
-              {status.value}
+          {roleHandler[typeEntity].map((role) => (
+            <option key={role.name} value={role.name}>
+              {role.value}
             </option>
           ))}
         </select>
-        <CheckCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+        <UserGroupIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
       </div>
     </div>
   );

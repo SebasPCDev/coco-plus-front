@@ -16,9 +16,12 @@ const CompanyProfile = () => {
     handleChange,
     handleChangePhone,
     handleCancel,
+    handleSubmit,
   } = useCompanyProfile();
 
-  const [touchedFields, setTouchedFields] = useState<{ [key: string]: boolean }>({});
+  const [touchedFields, setTouchedFields] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const handleBlur = (name: string) => {
     setTouchedFields((prevTouchedFields) => ({
@@ -41,24 +44,6 @@ const CompanyProfile = () => {
     setTouchedFields(newTouchedFields);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const requiredFieldsFilled = formProfileCompany.every(
-      ({ name, required }) => {
-        if (required) {
-          return Boolean(companyProfile[name as keyof ICompanyProfile]);
-        }
-        return true;
-      },
-    );
-
-    if (!requiredFieldsFilled) {
-      alert('Por favor, completa todos los campos requeridos.');
-      return;
-    }
-  };
-
   return (
     <form
       className="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-lg"
@@ -68,10 +53,12 @@ const CompanyProfile = () => {
         Perfil de la Empresa
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {formProfileCompany.map(({ name, label, type, placeholder, required }) => (
+        {formProfileCompany.map(({ name, label, type, placeholder }) => (
           <div
             key={name}
-            className={`flex flex-col ${['message', 'position'].includes(name) ? 'md:col-span-2' : ''}`}
+            className={`flex flex-col ${
+              ['message', 'position'].includes(name) ? 'md:col-span-2' : ''
+            }`}
           >
             <label htmlFor={name} className="label-form">
               {label}
@@ -88,10 +75,11 @@ const CompanyProfile = () => {
               <div className="relative">
                 <select
                   name={name}
-                  required={required}
                   className="input-form"
                   onChange={(event) => handleChange(name, event.target.value)}
-                  value={companyProfile[name as keyof ICompanyProfile].toString()}
+                  value={companyProfile[
+                    name as keyof ICompanyProfile
+                  ].toString()}
                 >
                   <option value="">Selecciona una cantidad</option>
                   {COMPANY_SIZE.map((size) => (
@@ -115,7 +103,6 @@ const CompanyProfile = () => {
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                required={required}
                 className="input-form"
                 onChange={(event) => handleChange(name, event.target.value)}
                 onBlur={() => handleBlur(name)}

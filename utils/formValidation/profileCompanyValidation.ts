@@ -1,27 +1,37 @@
 import { ICompanyProfile } from '../types/companies/companyProfileInterface';
 import ICompanyProfileFormError from '../types/companies/companyProfileFormError';
 
-export default function profileCompanyValidation(values: ICompanyProfile): ICompanyProfileFormError {
+export default function profileCompanyValidation(
+  values: ICompanyProfile,
+): ICompanyProfileFormError {
   let errors: ICompanyProfileFormError = {};
   if (!values.name) {
-    errors.name = "Requerido";
-  } else if (!/^(?=\S)(?!.*[^\x20-\x7E])(?=.{3,50}$)[a-zA-Z ]+$/.test(values.name)) {
-    errors.name = "El nombre es inválido";
+    errors.name = 'El nombre es requerido';
+  } else if (
+    !/^(?=\S)(?!.*[^\x20-\x7E])(?=.{3,50}$)[a-zA-Z ]+$/.test(values.name)
+  ) {
+    errors.name = 'El nombre es inválido';
   } else if (!/^\s*(\+\d{1,3}\s*)?\d{9,15}\s*$/.test(values.phone)) {
-    errors.phone = "Debe tener entre 11 y 15 caracteres";
+    errors.phone = 'El teléfono debe tener entre 11 y 15 caracteres';
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = "Requerido";
-  }
-  else if (!values.quantityBeneficiaries && values.quantityBeneficiaries !== 0) {
-    errors.quantityBeneficiaries = "Requerido";
-  } else if (isNaN(values.quantityBeneficiaries) || values.quantityBeneficiaries < 0) {
-    errors.quantityBeneficiaries = "Mínimo un beneficiario";
+    errors.email = 'El email es requerido';
+  } else if (
+    !values.quantityBeneficiaries &&
+    values.quantityBeneficiaries !== 0
+  ) {
+    errors.quantityBeneficiaries = 'La cantidad de beneficiarios es requerida';
+  } else if (
+    isNaN(values.quantityBeneficiaries) ||
+    values.quantityBeneficiaries <= 0
+  ) {
+    errors.quantityBeneficiaries = 'Debe tener mínimo un beneficiario';
   } else if (!values.businessSector) {
-    errors.businessSector = "Requerido";
+    errors.businessSector = 'Debe definir un sector empresarial';
   } else if (!/^.{2,50}$/.test(values.businessSector)) {
-    errors.businessSector = "Requerido";
+    errors.businessSector =
+      'El sector empresarial debe tener entre 2 y 50 caracteres';
   } else if (!values.size) {
-    errors.size = "Requerido";
+    errors.size = 'Debe definir el tamaño de la empresa';
   }
 
   return errors;

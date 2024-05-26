@@ -2,6 +2,7 @@
 import { ChangeStatusCompany, ChangeStatusCoworking } from '@/app/lib/actions';
 import {
   DocumentMinusIcon,
+  EyeIcon,
   PencilIcon,
   PlusIcon,
   XCircleIcon,
@@ -222,7 +223,7 @@ export function UpdateUser({ id }: { id: string }) {
   return (
     <Link
       href={`users/edit/${id}`}
-      className="rounded-md border p-2 hover:bg-gray-100"
+      className="rounded-md  p-2 hover:bg-gray-200"
     >
       <PencilIcon className="w-8" />
     </Link>
@@ -232,10 +233,23 @@ export function UpdateUser({ id }: { id: string }) {
 export function InactiveUser({ id }: { id: string }) {
   return (
     <>
-      <button className="rounded-md border p-2 hover:bg-gray-100">
+      <button className="rounded-md  p-2 hover:bg-gray-200">
         <span className="sr-only">Delete</span>
         <DocumentMinusIcon className="w-8" />
       </button>
+    </>
+  );
+}
+
+export function UserDescription({ id }: { id: string }) {
+  return (
+    <>
+      <Link href={`users/${id}`}>
+        <button className="rounded-md border p-2 hover:bg-gray-200">
+          <span className="sr-only">Description</span>
+          <EyeIcon className="w-8" />
+        </button>
+      </Link>
     </>
   );
 }

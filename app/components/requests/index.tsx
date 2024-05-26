@@ -14,16 +14,18 @@ import CompanyStatus from '../Status/dashboardSuperadmin/statusCompany';
 import CoworkingStatus from '../Status/dashboardSuperadmin/statusCoworking';
 import DeclineRequest from '@/utils/posts/putDeclineRequest';
 import Swal from 'sweetalert2';
-import styles from "./reqests.module.css"
+import styles from './reqests.module.css';
+import { StatusRequest } from '@/utils/types/requests/statusRequest';
+import RequestStatus from '../Status/dashboardSuperadmin/statusRequest';
 
 export default function Requests() {
-
   const { token } = useUserContext();
   const [params, setParams] = useState({
     status: null,
     type: null,
   });
   const [requests, setRequests] = useState<IResponseRequest[]>([]);
+  console.log(requests);
 
   const getDarata = async () => {
     const response = await GetRequests({ token, params });
@@ -115,21 +117,20 @@ export default function Requests() {
     }
   };
 
-  const transformDate = (date: any)=>{
-
-    const opcionesDeFormato : any = {
+  const transformDate = (date: any) => {
+    const opcionesDeFormato: any = {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
-  };
+      second: '2-digit',
+    };
 
     const newDate = new Date(date);
     const formatedDate = newDate.toLocaleDateString('es-ES', opcionesDeFormato);
     return formatedDate;
-  }
+  };
 
   return (
     <div className="md: flex w-full flex-col text-sm md:col-span-4">
@@ -171,42 +172,60 @@ export default function Requests() {
       <div className="flex flex-col justify-between rounded-xl bg-gray-50">
         <div className={styles.gralContItem}>
           {requests.map((item, i) => (
-            <div
-              key={item.id}
-              className={styles.itemReqContainer}
-            >
+            <div key={item.id} className={styles.itemReqContainer}>
               <div className={styles.responsiveContainerInfoRequests}>
                 <div className="mb-2">
                   <h2 className="font-semibold md:text-xl">
                     {item.name} {item.lastname}
                   </h2>
                   <br />
-                  <p className="text-gray-700"><b>Tipo:</b> {item.type == "coworking" ? <b style={{color: "#004906"}}>Coworking</b> : item.type == "company" && <b style={{color: "#5c3000"}}>Empresa</b>}</p>
-                  <p className="text-gray-700"><b>Email:</b> {item.email}</p>
-                  <p className="text-gray-700"><b>Telefono:</b> {item.phone}</p>
-                  <p className="text-gray-700"><b>Creado el: </b> 
-                    {
-                      transformDate(item.dateCreated)
-                    }
+                  <p className="text-gray-700">
+                    <b>Tipo:</b>{' '}
+                    {item.type == 'coworking' ? (
+                      <b style={{ color: '#004906' }}>Coworking</b>
+                    ) : (
+                      item.type == 'company' && (
+                        <b style={{ color: '#5c3000' }}>Empresa</b>
+                      )
+                    )}
                   </p>
                   <p className="text-gray-700">
-                    <strong>Estado: </strong>{' '}
-                    {item.type === 'company' ? (
-                      <CompanyStatus status={item.status} />
-                    ) : (
-                      <CoworkingStatus status={item.status} />
-                    )}
+                    <b>Email:</b> {item.email || 'No disponible'}
+                  </p>
+                  <p className="text-gray-700">
+                    <b>Telefono:</b> {item.phone}
+                  </p>
+                  <p className="text-gray-700">
+                    <b>Fecha de solicitud: </b>
+                    {transformDate(item.dateCreated)}
+                  </p>
+                  <p className="mt-5 text-gray-700">
+                    <RequestStatus status={item.status!} />
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
                   <h2 className={styles.bigTitle}>
-                    <b>{item.position} <br /> {item.companyName}</b>
+                    <b>
+                      {item.position} <br /> {item.companyName}
+                    </b>
                   </h2>
                   <br />
-                  <p className="text-gray-700"><b>Email: </b>{item.companyEmail}</p>
-                  <p className="text-gray-700"><b>Telefono: </b>{item.companyPhone}</p>
-                  <p className="text-gray-700"><b>Direcion: </b>{item.address}</p>
-                  <p className="text-gray-700"><b>Web: </b>{item.website}</p>
+                  <p className="text-gray-700">
+                    <b>Email: </b>
+                    {item.companyEmail || 'No diligenciado'}
+                  </p>
+                  <p className="text-gray-700">
+                    <b>Telefono: </b>
+                    {item.companyPhone || 'No diligenciado'}
+                  </p>
+                  <p className="text-gray-700">
+                    <b>Direcion: </b>
+                    {item.address || 'No diligenciado'}
+                  </p>
+                  <p className="text-gray-700">
+                    <b>Web: </b>
+                    {item.website || 'No diligenciado'}
+                  </p>
                 </div>
                 <div className="mt-2">
                   <p className="text-gray-700">
@@ -222,7 +241,7 @@ export default function Requests() {
                   onClick={handleDecline}
                   className={`${
                     item.status !== 'close'
-                      ? 'mt-4 w-40 rounded-lg bg-custom-tertiary px-6 py-3 font-bold text-custom-secondary hover:bg-custom-primary hover:text-custom-primary'
+                      ? 'mt-4 w-40 rounded-lg bg-custom-tertiary px-6 py-3 font-bold text-custom-secondary hover:bg-custom-primary hover:text-custom-secondary'
                       : 'btn btn-disabled'
                   }`}
                   id={item.id}
