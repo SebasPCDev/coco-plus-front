@@ -7,15 +7,15 @@ import Swal from 'sweetalert2';
 import MapCoworking from '@/app/dashboard/employee/mapCoworkings';
 
 export default function CoworkingBookingForm({
-  coworking,
+  currentCoworking,
   token,
   filter,
-  coworkings,
+  allCoworkings,
 }: {
-  coworking: IResponseCoworking;
+  currentCoworking: IResponseCoworking;
   token: string | undefined;
   filter: { country: string; state: string; city: string };
-  coworkings: IResponseCoworking;
+  allCoworkings: IResponseCoworking;
 }) {
   const { generateTimeOptions } = useCoworkingsForm();
   const currentDate = new Date().toISOString().split('T')[0];
@@ -25,7 +25,7 @@ export default function CoworkingBookingForm({
 
   const handleChangeTime = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    const openingTime = coworking.open;
+    const openingTime = currentCoworking.open as string;
     validateTime(value, openingTime);
   };
 
@@ -40,7 +40,7 @@ export default function CoworkingBookingForm({
 
     if (selectedMinutes < openingMinutes) {
       setErrorsTime([
-        `La hora seleccionada no está disponible en  ${coworking.name}`,
+        `La hora seleccionada no está disponible en  ${currentCoworking.name}`,
       ]);
     } else {
       setErrorsTime([]);
@@ -62,10 +62,10 @@ export default function CoworkingBookingForm({
         confirmButtonText: 'Sí',
         cancelButtonText: 'No',
       }).then(async (result) => {
-        if (result.isConfirmed && coworking.id) {
+        if (result.isConfirmed && currentCoworking.id) {
           try {
             const response = await postBooking({
-              coworkingId: coworking.id,
+              coworkingId: currentCoworking.id,
               reservationTime: selectedTime,
               reservationDate: selectedDate,
               token: token,
@@ -93,16 +93,16 @@ export default function CoworkingBookingForm({
   return (
     <div
       className={
-        'mx-auto mb-5 w-full py-5 text-center transition-opacity duration-300 ease-in-out xl:mx-0 xl:p-0 xl:text-start '
+        'mx-auto mb-5 py-5 text-center transition-opacity duration-300 ease-in-out xl:mx-0 xl:p-0 xl:text-start '
       }
     >
       <div>
         <h2 className="text-2xl font-bold">Reservar Coworking</h2>
         <form onSubmit={handleSubmit}>
-          <div className=" flex flex-col  gap-4  md:w-full md:text-center">
-            <div className="mt-5 flex max-w-[25rem] flex-col justify-start gap-2">
+          <div className=" flex flex-col items-center gap-4 md:w-full xl:items-start 2xl:text-start">
+            <div className="mt-5 flex min-w-[25rem] flex-col gap-2">
               <div>
-                <label htmlFor="name" className="label-form mb-2 text-start">
+                <label htmlFor="name" className="label-form mb-2 ">
                   Fecha
                 </label>
                 <input
@@ -115,7 +115,7 @@ export default function CoworkingBookingForm({
                   onChange={handleChangeDate}
                 />
               </div>
-              <label className="label-form text-start">Hora</label>
+              <label className="label-form ">Hora</label>
               <select className="input-form" onChange={handleChangeTime}>
                 <option value="">Selecciona una hora</option>
                 {generateTimeOptions().map((time) => (
@@ -132,8 +132,8 @@ export default function CoworkingBookingForm({
             </div>
           </div>
         </form>
-        <div className="mt-4">
-          <MapCoworking filter={filter} coworkings={coworkings.coworking} />
+        <div className="mt-4 hidden xl:block">
+          <MapCoworking filter={filter} allCoworkings={allCoworkings} />
         </div>
       </div>
     </div>
