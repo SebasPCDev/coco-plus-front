@@ -2,12 +2,21 @@ import { useState } from 'react';
 import { useUserContext } from '@/app/components/context';
 import { useRouter } from 'next/navigation';
 import PutImageThumbnail from '@/utils/puts/putImageThumbnail';
-const useImagesContent = ({ coworking, getData }: { coworking: any , getData: any }) => {
+import PutImagesCoworking from '@/utils/puts/putImagesCoworking';
+const useImagesContent = ({
+  coworking,
+  getData,
+}: {
+  coworking: any;
+  getData: any;
+}) => {
   const router = useRouter();
   const id = coworking.id;
   const { token } = useUserContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [isModalImagesOpen, setIsModalImagesOpen] = useState(false);
 
   const onModalClick = () => {
     setIsModalOpen(!isModalOpen);
@@ -42,12 +51,50 @@ const useImagesContent = ({ coworking, getData }: { coworking: any , getData: an
     }
   };
 
+  const onModalImagesClick = () => {
+    setIsModalImagesOpen(!isModalImagesOpen);
+  };
+  const handleFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setSelectedFiles(Array.from(event.target.files));
+    }
+  };
+  const handleSubmitfiles = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (selectedFiles.length === 0) return;
+
+    const formData = new FormData();
+    selectedFiles.forEach((file) => {
+      formData.append('image', file);
+    });
+
+    try {
+      const response = await PutImagesCoworking({
+        id,
+        token,
+        formData,
+      });
+
+      if (response.status === 200) {
+        getData();
+      }
+    } catch (error) {
+      alert(error.response.data.message);
+    } finally {
+      setIsModalOpen(false);
+      // Cierra el modal después de enviar las imágenes
+    }
+  };
+
   return {
     isModalOpen,
-
     handleFileChange,
     handleSubmit,
     onModalClick,
+    onModalImagesClick,
+    handleFilesChange,
+    handleSubmitfiles,
+    isModalImagesOpen,
   };
 };
 
