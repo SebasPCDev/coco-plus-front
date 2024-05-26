@@ -1,0 +1,59 @@
+.filterContainer{
+    display: flex;
+    flex-direction: row;
+    padding: .7rem 1.3rem;
+    gap: 1rem;
+}
+
+.filterContainer div{
+    height: 90%;
+}
+
+.responsiveContainerInfoRequests{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gralContItem{
+    padding: 1rem;
+    margin-block: 1rem;
+}
+
+.itemReqContainer{
+    background: rgb(224,231,224);
+    background: linear-gradient(335deg, rgb(227, 229, 227) 0%, rgb(228, 237, 221) 100%);
+    border: 1px solid #9e9e9e;
+    border-radius: .7rem;
+    padding: 1rem;
+    margin-block: .7rem;
+}
+
+.responsiveContainerInfoRequests div{
+    width: 33%;
+}
+
+.bigTitle{
+    font-size: 1rem;
+    color: #002902;
+}
+
+.updateNowCont{
+    display: flex;
+    flex-direction: row;
+    gap: .3rem;
+    padding: 1rem;
+}
+
+
+@media screen and (max-width: 850px) {
+    .responsiveContainerInfoRequests{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .responsiveContainerInfoRequests div{
+        width: 100%;
+    }
+}
