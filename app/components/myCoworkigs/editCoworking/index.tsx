@@ -15,13 +15,9 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
 
   return (
     <div className="container mx-auto p-4">
-      <input
-        onChange={handleChange}
-        className="  mb-4 bg-gray-100 text-center text-4xl font-bold"
-        type="text"
-        value={coworking.name || 'Nombre del Coworking'}
-        name="name"
-      />
+      <h1 className="mb-4 py-4 bg-gray-100 text-center text-4xl font-bold">
+        {coworking.name || 'Nombre del Coworking'}
+      </h1>
       <div className="flex flex-col xl:flex-row">
         {/* Contenedor 1 */}
         <div className="mt-4 max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:mt-0 xl:w-2/3">
@@ -64,7 +60,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
             <EditCoworkingLocation coworking={coworking} />
             <button
               onClick={handleClick}
-              className="mt-4 block w-full rounded-lg border bg-gray-100 md:w-1/2"
+              className="mx-auto w-1/2 rounded bg-custom-primary px-4 py-2 text-white"
             >
               Actualizar Info
             </button>
