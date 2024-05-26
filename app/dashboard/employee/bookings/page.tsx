@@ -1,5 +1,4 @@
 import CoworkingBookingForm from '@/app/components/coworkingBookingForm';
-import MapCoworking from '../mapCoworkings/index';
 import CoworkingsBooking from '@/app/components/coworkingsBooking';
 import GetCoworkingDetail from '@/utils/gets/getCoworkingDetail';
 import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
@@ -24,20 +23,23 @@ export default async function Page({
   const state = searchParams?.state || '';
   const city = searchParams?.city || '';
   const filter = { country, state, city };
-  const coworking = await GetCoworkingDetail(id);
-  const coworkings = await GetCoworkingsFilter({ filter: filter });
+  let currentCoworking = null;
+  if (id) {
+    currentCoworking = await GetCoworkingDetail(id);
+  }
+  const allCoworkings = await GetCoworkingsFilter({ filter: filter });
 
   return (
-    <div className="gap-4 xl:grid xl:grid-cols-2 xl:grid-rows-1">
-      <div>
+    <div className="flex w-full flex-col-reverse xl:flex-row">
+      <div className="xl:w-3/5">
         <CoworkingsBooking />
       </div>
-      <div className="mt-10 px-2">
+      <div className="mt-10 px-2 xl:mr-3 xl:flex xl:w-2/5 xl:justify-start">
         <CoworkingBookingForm
-          coworking={coworking}
+          currentCoworking={currentCoworking}
           token={token}
           filter={filter}
-          coworkings={coworkings.coworking}
+          allCoworkings={allCoworkings.coworking}
         />
       </div>
     </div>

@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { use, useCallback, useEffect, useState } from 'react';
 import {
   Map,
   MapCameraChangedEvent,
@@ -7,19 +7,27 @@ import {
   Marker,
 } from '@vis.gl/react-google-maps';
 import { geocodeAddress } from '@/utils/geocodeAdressAndReverse';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const INITIAL_CAMERA: MapCameraProps = {
   center: { lat: -17.797610035031738, lng: -63.52392568413111 },
   zoom: 3,
 };
-
-const MapCoworking = ({ filter, coworkings }) => {
-  const [location, setLocation] = useState<any>(INITIAL_CAMERA);
+const MapCoworking = ({
+  filter,
+  allCoworkings,
+}: {
+  filter: any;
+  allCoworkings: any;
+}) => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const params = new URLSearchParams(searchParams);
+  const [data, setData] = useState<any>([{}]);
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
-
-  useEffect(() => {}, [filter]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
     setCameraProps(ev.detail);
@@ -54,41 +62,58 @@ const MapCoworking = ({ filter, coworkings }) => {
       setCameraProps(INITIAL_CAMERA);
     }
   };
+
   const responseMarker = async () => {
-    if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map(async (coworking) => {
-        if (coworking.lat && coworking.long) {
-          return { lat: Number(coworking.lat), lng: Number(coworking.long) };
-        } else if (coworking.country) {
-          const location = await geocodeAddress(
-            `${coworking.city}, ${coworking.state}, ${coworking.country}`,
-          );
-          const lat = await location[0].geometry.location.lat();
-          const lng = await location[0].geometry.location.lng();
-          return { lat: Number(lat), lng: Number(lng) };
-        }
-      });
+    if (allCoworkings) {
+      const arrayMarkersCoworkings = allCoworkings.map(
+        async (coworking: any) => {
+          if (coworking.lat && coworking.long) {
+            return { lat: Number(coworking.lat), lng: Number(coworking.long) };
+          } else if (coworking.country) {
+            const location = await geocodeAddress(
+              `${coworking.city}, ${coworking.state}, ${coworking.country}`,
+            );
+            const lat = await location[0].geometry.location.lat();
+            const lng = await location[0].geometry.location.lng();
+            return { lat: Number(lat), lng: Number(lng) };
+          }
+        },
+      );
 
       setMarkersCoworking(await Promise.all(arrayMarkersCoworkings));
     }
   };
 
   useEffect(() => {
-    responseMarker();
-  }, [coworkings]);
+    const timeou = async () => {
+      setTimeout(async () => {
+        await responseCenter();
+        await responseMarker();
+      }, 300);
+    };
+    timeou();
+  }, [filter]);
 
   useEffect(() => {
-    if (filter.country) responseCenter();
-  }, [filter]);
+    params.delete('country');
+    params.delete('state');
+    params.delete('city');
+    params.delete('id');
+    replace(`${pathname}?${params.toString()}`);
+  }, []);
 
   return (
     <Map
       {...cameraProps}
       onCameraChanged={handleCameraChange}
-      style={{ width: '100%', height: '400px' }}
+      style={{
+        width: '100%',
+        height: '300px',
+      }}
+      reuseMaps={true}
     >
-      {markersCoworking &&
-        markersCoworking.map((marker, index) => (
+      {markersCoworking.length > 0 &&
+        markersCoworking.map((marker: any, index: any) => (
           <Marker key={index} position={marker} />
         ))}
     </Map>
