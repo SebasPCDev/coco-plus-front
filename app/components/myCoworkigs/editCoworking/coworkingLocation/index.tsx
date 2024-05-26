@@ -22,7 +22,7 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
 
   return (
     <div className="col-span-2 rounded-lg border p-4 shadow-sm md:col-span-1">
-      <h2 className="mb-4 text-xl font-semibold">Address</h2>
+      <h2 className="mb-4 text-xl font-semibold">Ubicación</h2>
       <div className="space-y-4">
         {arrayLocation.map((location) => (
           <div key={location.name} className="flex items-center">
