@@ -47,7 +47,7 @@ const useImagesContent = ({
       alert(error.response.data.message);
     } finally {
       setIsModalOpen(false);
-      // Cierra el modal después de enviar la imagen
+      
     }
   };
 
@@ -80,10 +80,7 @@ const useImagesContent = ({
       }
     } catch (error) {
       alert(error.response.data.message);
-    } finally {
-      setIsModalOpen(false);
-      // Cierra el modal después de enviar las imágenes
-    }
+    
   };
 
   return {
