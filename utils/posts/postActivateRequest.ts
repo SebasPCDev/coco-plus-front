@@ -23,16 +23,14 @@ const PostActivateRequest = async ({
       },
     });
 
-    console.log("RESPONSE", response);
-
     return response.data;
   } catch (error: any) {
-    console.log("ERRROR", error);
-    let message = ''
+    console.log('ERRROR', error);
+    let message = '';
     if (error.response.data.message) {
       message = error.response.data.message;
     } else {
-      message = error.message
+      message = error.message;
     }
     throw message;
   }

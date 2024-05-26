@@ -17,7 +17,6 @@ export default async function PageCompanies({
 }) {
   const cookie = cookies();
   const token = cookie.get('token')?.value;
-
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const status = searchParams?.status || '';
