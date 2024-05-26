@@ -14,8 +14,10 @@ import CompanyStatus from '../Status/dashboardSuperadmin/statusCompany';
 import CoworkingStatus from '../Status/dashboardSuperadmin/statusCoworking';
 import DeclineRequest from '@/utils/posts/putDeclineRequest';
 import Swal from 'sweetalert2';
+import styles from "./reqests.module.css"
 
 export default function Requests() {
+
   const { token } = useUserContext();
   const [params, setParams] = useState({
     status: null,
@@ -113,9 +115,25 @@ export default function Requests() {
     }
   };
 
+  const transformDate = (date: any)=>{
+
+    const opcionesDeFormato : any = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+  };
+
+    const newDate = new Date(date);
+    const formatedDate = newDate.toLocaleDateString('es-ES', opcionesDeFormato);
+    return formatedDate;
+  }
+
   return (
     <div className="md: flex w-full flex-col text-sm md:col-span-4">
-      <div className="my-4 flex gap-8 text-sm">
+      <div className={styles.filterContainer}>
         <p className="flex items-center font-bold">Filtrar por:</p>
         <div className="relative rounded-full border-2 border-gray-300">
           <select
@@ -150,24 +168,27 @@ export default function Requests() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-        <div className="bg-white px-6">
+      <div className="flex flex-col justify-between rounded-xl bg-gray-50">
+        <div className={styles.gralContItem}>
           {requests.map((item, i) => (
             <div
               key={item.id}
-              className={clsx('flex flex-col py-4', {
-                'border-t': i !== 0,
-              })}
+              className={styles.itemReqContainer}
             >
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className={styles.responsiveContainerInfoRequests}>
                 <div className="mb-2">
                   <h2 className="font-semibold md:text-xl">
                     {item.name} {item.lastname}
                   </h2>
-                  <p className="text-gray-500">{item.email}</p>
-                  <p className="text-gray-500">{item.phone}</p>
-                  <p className="text-gray-500">
-                    <strong>Estado de la solicitud:</strong>{' '}
+                  <p className="text-gray-700"><b>Email:</b> {item.email}</p>
+                  <p className="text-gray-700"><b>Telefono:</b> {item.phone}</p>
+                  <p className="text-gray-700"><b>Creado el: </b> 
+                    {
+                      transformDate(item.dateCreated)
+                    }
+                  </p>
+                  <p className="text-gray-700">
+                    <strong>Estado: </strong>{' '}
                     {item.type === 'company' ? (
                       <CompanyStatus status={item.status} />
                     ) : (
@@ -176,25 +197,21 @@ export default function Requests() {
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
-                  <h2 className=" font-medium md:text-xl">
-                    {item.position} - {item.companyName}
+                  <h2 className={styles.bigTitle}>
+                    <b>{item.position} <br /> {item.companyName}</b>
                   </h2>
-                  <p className="text-gray-500">{item.companyEmail}</p>
-                  <p className="text-gray-500">{item.companyPhone}</p>
-                  <p className="text-gray-500">{item.address}</p>
-                  <p className="text-gray-500">{item.website}</p>
+                  <p className="text-gray-700"><b>Email: </b>{item.companyEmail}</p>
+                  <p className="text-gray-700"><b>Telefono: </b>{item.companyPhone}</p>
+                  <p className="text-gray-700"><b>Direcion: </b>{item.address}</p>
+                  <p className="text-gray-700"><b>Web: </b>{item.website}</p>
                 </div>
                 <div className="mt-2">
-                  <p className="text-gray-500">
-                    <strong>Message:</strong> {item.message}
+                  <p className="text-gray-700">
+                    <strong>Mensaje:</strong> {item.message}
                   </p>
-                  <p className="text-gray-500">
-                    <strong>Observation:</strong> {item.observation}
+                  <p className="text-gray-700">
+                    <strong>Observación :</strong> {item.observation}
                   </p>
-
-                  {/* <p className="text-gray-500">
-                    <strong>Type:</strong> {item.type}
-                  </p> */}
                 </div>
               </div>
               <div className="flex gap-3">
@@ -227,9 +244,9 @@ export default function Requests() {
             </div>
           ))}
         </div>
-        <div className="flex items-center pb-2 pt-6">
-          <ArrowPathIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-gray-500">Actualizado justo ahora</h3>
+        <div className={styles.updateNowCont}>
+          <ArrowPathIcon className="h-5 w-5 text-gray-700" />
+          <h3 className="ml-2 text-gray-700">Actualizado justo ahora</h3>
         </div>
       </div>
     </div>
