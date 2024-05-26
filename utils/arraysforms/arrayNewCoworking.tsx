@@ -3,21 +3,21 @@ export const arrayNewCoworkingForm = [
     name: 'name',
     label: 'Nombre',
     type: 'text',
-    placeholder: 'Name',
+    placeholder: 'Nombre',
     required: true,
   },
   {
     name: 'phone',
     label: 'Teléfono',
     type: 'text',
-    placeholder: 'Phone',
+    placeholder: 'Teléfono',
     required: true,
   },
   {
     name: 'email',
-    label: 'Correo electronico',
+    label: 'Correo electrónico',
     type: 'email',
-    placeholder: 'Email',
+    placeholder: 'Correo electrónico',
     required: true,
   },
   {
@@ -64,17 +64,16 @@ export const arrayNewCoworkingForm = [
   },
   {
     name: 'capacity',
-    label: 'Cantidad de boxes',
+    label: 'Cantidad de puestos de trabajo',
     type: 'number',
-    placeholder: 'Cantidad de boxes',
+    placeholder: '',
     required: false,
   },
   {
     name: 'message',
     label: 'Mensaje',
     type: 'text',
-    placeholder: 'Message',
+    placeholder: 'Mensaje',
     required: false,
   },
 ];
-

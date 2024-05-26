@@ -81,7 +81,8 @@ const useImagesContent = ({
     } catch (error) {
       alert(error.response.data.message);
     
-  };
+    };
+  }
 
   return {
     isModalOpen,

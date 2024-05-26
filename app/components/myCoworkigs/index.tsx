@@ -18,12 +18,15 @@ export default async function MyCoworkigs() {
 
   return (
     <div className="mx-auto">
-      <Link href="/dashboard/adminCoworking/myCoworkings/create">
-        <button className="left-0 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">
-          Add Coworking
-        </button>
-      </Link>
-      <h1 className="mb-10 mt-4 text-center text-4xl">My Coworkings</h1>
+      <div className="my-4 flex justify-end">
+        <Link href="/dashboard/adminCoworking/myCoworkings/create">
+          <button className=" rounded bg-custom-primary px-4 py-2 text-white hover:bg-green-600">
+            Añadir Coworking
+          </button>
+        </Link>
+      </div>
+
+      <h1 className="mb-10 mt-4 text-center text-4xl">Mis Coworkings</h1>
       <div className="mt-6 flow-root w-full">
         <div className="inline-block min-w-full align-middle">
           <div className="founded-lg bg-gray-50 p-2 md:pt-0">
@@ -31,31 +34,31 @@ export default async function MyCoworkigs() {
               <thead className="rounded-lg text-center  font-normal">
                 <tr>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Name
+                    Nombre
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Phone
+                    Teléfono
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Email
+                    Correo Electrónico
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Open
+                    Apertura
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Close
+                    Cierre
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Address
+                    Ubicación
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Capacity
+                    Capacidad
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Status
+                    Estado
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Actions
+                    Acciones
                   </th>
                 </tr>
               </thead>

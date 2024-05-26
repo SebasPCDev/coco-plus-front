@@ -11,7 +11,7 @@ const HeaderRight = async () => {
 
   return (
     <>
-      <div className='hidden lg:block'>
+      <div className="hidden lg:block">
         {user ? (
           // Desktop
           <div className="flex items-center gap-3">
@@ -21,11 +21,10 @@ const HeaderRight = async () => {
           <Link href="/login">
             <button className="flex rounded-full bg-custom-primary px-4 py-2 text-xl font-bold text-gray-900 hover:bg-custom-tertiary">
               <RiUserLine color="#111827" />
-              <span className='ml-4'>Login</span>
+              <span className="ml-4">Iniciar sesión</span>
             </button>
           </Link>
-        )
-        }
+        )}
       </div>
       {/* Mobile */}
       <HeaderMenuMobile user={user} />
