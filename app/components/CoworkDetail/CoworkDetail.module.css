@@ -1,5 +1,9 @@
 
-  .contenedor { padding-inline: 20px; }
+  .contenedor { 
+    padding-inline: 20px; 
+    display: flex;
+    flex-direction: column;
+  }
   
   .btn {
     background: rgb(255,68,0);
@@ -41,7 +45,7 @@
     font-weight: 500;
   }
   
-  .section { padding-block: 35px; }
+  .section { padding-block-end: 35px; }
   
   .section-buscador{
     padding-block: 5px;
@@ -68,11 +72,19 @@
   /*producto independiente*/
   
   .contproducto{
+    max-width: 1200px;
+    padding-top: 8rem;
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:center;
-    gap: 3.7rem;
+    justify-content: center;
+    gap: 2.7rem;
+  }
+
+  .containerStyles{
+    width: 21rem;
+    height: 22rem;
   }
 
   /*=================================================*/
@@ -204,13 +216,29 @@
   .googlemapslink{
     margin-bottom: 4rem;
   }
+
+
+  .budgetexp {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3em;
+  }
+  
+  .budgetexp .value {
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  
+  .budgetexp .label {
+    font-size: 1.5em;
+    color: #072e00;
+  }
   
   @media screen and (min-width: 754px) {
   
     /*Producto independiente*/
   
     .imagenesdeslizable {
-      height: 38rem;
       margin: 1rem 0 0 0 ;
       display: grid;
       align-content: center;
@@ -239,8 +267,12 @@
   
   
   @media screen and (min-width: 820px) {
+
+    .contproducto{
+      padding-top: 4rem;
+    }
+
     .imagenesdeslizable {
-      height: 38rem;
       margin: 1rem 0 0 0 ;
       display: grid;
       align-content: center;
@@ -272,6 +304,8 @@
     }
   
     .contproducto{
+      max-width: 1200px;
+      margin-inline: auto;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -287,7 +321,6 @@
     .principalopcionesbusqueda { max-width: 900px; }
   
     .imagenesdeslizable {
-      height: 43rem;
       margin: 1rem 0 0 0 ;
       display: grid;
       align-content: center;
@@ -307,6 +340,11 @@
       height: 32rem;
       margin-bottom: 2rem;
     }
+
+    .containerStyles{
+      width: 27rem;
+      height: 27rem;
+    }
   }
   
   @media (min-width: 1200px) {
@@ -315,6 +353,27 @@
     .principalcontenido { padding-inline: calc(50% - 560px); }
   
     .prodmin.textoseccion { max-width: unset; }
+
+    .containerStyles{
+      width: 33rem;
+      height: 28rem;
+    }
+
+    .budgetexp {
+      display: flex;
+      flex-direction: row;
+      gap: 1.3em;
+    }
+    
+    .budgetexp .value {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    
+    .budgetexp .label {
+      font-size: 1.5em;
+      color: #072e00;
+    }
   
   }
   
@@ -333,8 +392,8 @@
     flex-direction: column;
     justify-content: center;
     gap: 1.2em;
-    background: #eeeeee;
-    box-shadow: #091e4240 0px 1px 1px, #091e4221 0px 0px 1px 1px;
+    background: rgb(210,210,210);
+    background: linear-gradient(335deg, rgba(210,210,210,0) 37%, rgba(185,185,185,0.6867121848739496) 100%);
     border-radius: 10px;
     padding: 2em;
     max-width: 39em;
@@ -365,36 +424,6 @@
     color: #0c5000;
   }
   
-  .budgetexp {
-    display: flex;
-    gap: 3em;
-  }
-  
-  .budgetexp .value {
-    font-size: 1.5em;
-    font-weight: 600;
-  }
-  
-  .budgetexp .label {
-    font-size: 1.5em;
-    color: #072e00;
-  }
-  
-  .cardbtn {
-    border: none;
-    font-size: 1.5em;
-    background-color: green;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 6px;
-    padding: 0.6em 1em;
-  }
-  
-  .cardbtn:hover {
-    background-color: #026602;
-  }
-  
   .tags article {
     display: flex;
     flex-wrap: wrap;
@@ -412,4 +441,9 @@
   .contenedor,
   .principalopcionesbusqueda{
     margin-inline: auto;
+  }
+
+  .imgContDeslizable{
+    width: 100%;
+    height: 100%;
   }

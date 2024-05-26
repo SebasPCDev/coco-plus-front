@@ -3,8 +3,12 @@ import { useEffect, useState } from 'react';
 import styles from './CoworkDetail.module.css';
 import getCowork from '../coworkings/[id]/getCowork';
 import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
-import MapCoworking from '../coworkings2/mapCoworkings';
-import MapSingleItem from './MapSingleItem';
+
+import MapCoworking from "../coworkings2/mapCoworkings";
+import MapSingleItem from "./MapSingleItem";
+import Cookie from "js-cookie"
+import Link from "next/link";
+
 
 const slides = [
   {
@@ -29,11 +33,6 @@ const slides = [
   },
 ];
 
-const containerStyles: any = {
-  width: '500px',
-  height: '400px',
-  margin: '0 auto',
-};
 
 const slideStyles: any = {
   width: '100%',
@@ -45,32 +44,36 @@ const slideStyles: any = {
 };
 
 const rightArrowStyles: any = {
-  position: 'absolute',
-  top: '50%',
-  transform: 'translate(0, -50%)',
-  right: '32px',
-  fontSize: '45px',
-  color: '#0f4b00',
-  background: '#efefefcf',
-  border: '1px solid #fff',
-  borderRadius: '7px',
-  padding: '7px',
+
+  position: "absolute",
+  top: "50%",
+  transform: "translate(0, -50%)",
+  right: "12px",
+  fontSize: "45px",
+  color: "#0d4300",
+  background: "#efefef",
+  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.849);",
+  border: "1px solid #959595",
+  borderRadius: "50%",
+  padding: "7px",
   zIndex: 1,
   cursor: 'pointer',
   marginRight: '-2.4rem',
 };
 
 const leftArrowStyles: any = {
-  position: 'absolute',
-  top: '50%',
-  transform: 'translate(0, -50%)',
-  left: '32px',
-  fontSize: '45px',
-  color: '#0f4b00',
-  background: '#efefefcf',
-  border: '1px solid #fff',
-  borderRadius: '7px',
-  padding: '7px',
+
+  position: "absolute",
+  top: "50%",
+  transform: "translate(0, -50%)",
+  left: "12px",
+  fontSize: "45px",
+  color: "#0d4300",
+  background: "#efefef",
+  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.849);",
+  border: "1px solid #959595",
+  borderRadius: "50%",
+  padding: "7px",
   zIndex: 1,
   cursor: 'pointer',
   marginLeft: '-2.4rem',
@@ -95,9 +98,25 @@ const dotStyle: any = {
 };
 
 export const CoworkDetail = ({ id }: { id: string }) => {
+
+  const user = Cookie.get('user');
+
+  const [role, setRole] = useState(null)
+
+  useEffect(()=>{
+    if(user) {
+      const userObject = JSON.parse(user);
+      const newRole = userObject.role;
+      setRole(newRole)
+    }
+  }, [user])
+
+
   const [cowork, setCowork] = useState<Coworking | null>(null);
 
   useEffect(() => {
+    console.log(user);
+    
     const fetchCowork = async () => {
       try {
         const item = await getCowork(id);
@@ -134,40 +153,26 @@ export const CoworkDetail = ({ id }: { id: string }) => {
   return (
     <>
       <main>
-        <section
-          className={`${styles.section} ${styles.prodmin}`}
-          aria-label="prodmin"
-        >
-          <div className={`{styles.contenedor} ${styles.contproducto}`}>
-            <div className={styles.imagenesdeslizable}>
+
+        <section className={`${styles.section} ${styles.prodmin}`} aria-label="prodmin">
+          <div className={styles.contproducto}>
+
               {/* =============== swiper IMAGENES-DESLIZABLE THUMBNAIL ===============  */}
               <div className={styles.imagenesdeslizable__overflow}>
-                <div className="" style={containerStyles}>
+                <div className={styles.containerStyles}>
                   <div style={sliderStyles}>
                     <div>
                       <div onClick={goToPrevious} style={leftArrowStyles}>
-                        ❰
+                      <svg height="36" viewBox="0 0 24 24" fill="none" stroke="#0d4300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                       </div>
                       <div onClick={goToNext} style={rightArrowStyles}>
-                        ❱
+                      <svg height="36" viewBox="0 0 24 24" fill="none" stroke="#0d4300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                       </div>
                     </div>
                     <div style={slideStylesWidthBackground}></div>
-                    <div style={dotsContainerStyles}>
-                      {slides.map((slide, slideIndex) => (
-                        <div
-                          style={dotStyle}
-                          key={slideIndex}
-                          onClick={() => goToSlide(slideIndex)}
-                        >
-                          ●
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             {cowork && (
               <div className={styles.prodmincontent}>
                 <h2
@@ -180,7 +185,6 @@ export const CoworkDetail = ({ id }: { id: string }) => {
                 <article className={styles.jobcard}>
                   <div>
                     <p className={styles.texttitle}>{cowork.address}</p>
-                    <p className={styles.postdate}>Posted on 23 Dec, 2023</p>
                   </div>
 
                   <div className={styles.budgetexp}>
@@ -214,9 +218,13 @@ export const CoworkDetail = ({ id }: { id: string }) => {
                   </div>
 
                   <div>
-                    <a href="/job/<%= job._id %>">
-                      <button className={styles.cardbtn}>Reservar</button>
-                    </a>
+                      { role == "employee" &&   
+                      <Link href="#" >
+                        <button className="btn btn-confirm">
+                          Reservar
+                        </button>
+                      </Link>
+                      }
                   </div>
                 </article>
               </div>
@@ -224,12 +232,16 @@ export const CoworkDetail = ({ id }: { id: string }) => {
           </div>
         </section>
         <section className={styles.mapadireccion}>
-          <div className={styles.contenedor}>
-            <h2 className={styles.mapatitulo}>Nueva Ubicacion</h2>
-            <div className={styles.googlemapslink}>
-              <MapSingleItem item={cowork} />
+
+          {cowork && 
+            <div className={styles.contenedor}>
+              <h2 className={styles.mapatitulo}>Ubicacion: {cowork.country}, {cowork.state}, {cowork.city}</h2>
+              <div className={styles.googlemapslink}>
+                <MapSingleItem item={cowork}/>
+              </div>
+
             </div>
-          </div>
+          }
         </section>
       </main>
     </>

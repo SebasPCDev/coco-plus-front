@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { useUserContext } from '../../../context';
 import PostNewUserReceptCoworking from '@/utils/posts/postNewUserReceptCoworking';
 import { initialNewReceptionistForm } from '@/utils/constants/editCoworking/addRecceptionists/initialNewReceptionistForm';
-const UseCoworkingReceptionists = ({ id }: { id: string }) => {
+const UseCoworkingReceptionists = ({
+  id,
+  getData,
+}: {
+  id: string;
+  getData: any;
+}) => {
   const { token } = useUserContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUserForm, setNewUserForm] = useState({
@@ -22,7 +28,7 @@ const UseCoworkingReceptionists = ({ id }: { id: string }) => {
     });
 
     setIsModalOpen(false);
-    //   getData();
+    getData();
   };
   return {
     newUserForm,
