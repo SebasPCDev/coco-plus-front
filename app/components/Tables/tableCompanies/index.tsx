@@ -1,7 +1,11 @@
 import { cookies } from 'next/headers';
-import { InactiveCompany, UpdateCompany, } from '../../Buttons/dashboardSuperadmin/buttons';
+import {
+  InactiveCompany,
+  UpdateCompany,
+} from '../../Buttons/dashboardSuperadmin/buttons';
 import CompanyStatus from '../../Status/dashboardSuperadmin/statusCompany';
-import styles from "./tableCompany.module.css"
+import styles from './tableCompany.module.css';
+import CompanyStatusFunction from '../../Status/dashboardSuperadmin/statusCompany';
 
 export default function CompaniesTable({
   companiesRawData,
@@ -19,39 +23,56 @@ export default function CompaniesTable({
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-
-
-
-
-        <div className="md:hidden">
+          <div className="md:hidden">
             {companiesRawData?.companies?.map((company: any) => (
-              <div
-                key={company.id}
-                className={styles.gralContainer}
-              >
+              <div key={company.id} className={styles.gralContainer}>
                 <div className={styles.titleAndContItemsContainer}>
-                  
-                    <div className="mb-2 flex items-center">
-                      <p className="font-bold">{company.name}</p>
-                    </div>
-                    <div className={styles.itemsContainerAndStatus}>
-                      <div className={styles.itemResponsiveTableContainer}>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Email: <br/></b>{company.email}</p>
-                          <p className=" text-gray-700"><b>Telefono: <br/></b>{company.phone}</p>
-                        </div>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Beneficiarios: <br/></b>{company.quantityBeneficiaries}</p>
-                          <p className=" text-gray-700"><b>Sector: <br/></b>{company.businessSector}</p>
-                        </div>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Tamaño: <br/></b>{company.size}</p>
-                        </div>
+                  <div className="mb-2 flex items-center">
+                    <p className="font-bold">{company.name}</p>
+                  </div>
+                  <div className={styles.itemsContainerAndStatus}>
+                    <div className={styles.itemResponsiveTableContainer}>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Email: <br />
+                          </b>
+                          {company.email}
+                        </p>
+                        <p className=" text-gray-700">
+                          <b>
+                            Telefono: <br />
+                          </b>
+                          {company.phone}
+                        </p>
+                      </div>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Beneficiarios: <br />
+                          </b>
+                          {company.quantityBeneficiaries}
+                        </p>
+                        <p className=" text-gray-700">
+                          <b>
+                            Sector: <br />
+                          </b>
+                          {company.businessSector}
+                        </p>
+                      </div>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Tamaño: <br />
+                          </b>
+                          {company.size}
+                        </p>
                       </div>
                     </div>
-                    <div className={styles.statusContainer}>
+                  </div>
+                  <div className={styles.statusContainer}>
                     <CompanyStatus status={company.status} />
-                    </div>
+                  </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div className="flex justify-end gap-2">
@@ -62,19 +83,6 @@ export default function CompaniesTable({
               </div>
             ))}
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
           <table className="hidden min-w-full text-sm text-gray-900 md:table">
             <thead className="rounded-lg text-center  font-normal">
               <tr>
@@ -97,7 +105,7 @@ export default function CompaniesTable({
                   Tamaño Empresa
                 </th>
                 <th scope="col" className=" py-5 font-medium">
-                  Status
+                  Estado
                 </th>
                 <th scope="col" className="relative py-1 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -132,7 +140,7 @@ export default function CompaniesTable({
                   </td>
 
                   <td className="max-w-[150px] truncate whitespace-nowrap  py-1">
-                    <CompanyStatus status={company.status} />
+                    <CompanyStatusFunction status={company.status} />
                   </td>
                   <td className="whitespace-nowrap py-1 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

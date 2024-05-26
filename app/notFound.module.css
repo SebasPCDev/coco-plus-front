@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Reddit+Mono:wght@200..900&family=Teachers:ital,wght@0,400..800;1,400..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    background: rgb(240,240,240);
+    background: linear-gradient(129deg, rgba(240,240,240,1) 0%, rgb(213, 232, 168) 100%); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notFoundContainer{
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.imgContainer{
+    width: 33rem;
+}
+
+.InfoTextNotFoundContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.InfoTextNotFoundContainer h1{
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 6rem;
+    line-height: 5rem;
+    color: #1a2528;
+}
+
+.InfoTextNotFoundContainer h2{
+    font-size: 2rem;
+}
+
+.goHomebtn{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-self: center;
+    justify-content: center;
+    padding: .7rem;
+    border-radius: 8px;
+    background-color: #1a2528;
+    color: #c0dc7f;
+    width: 10rem;
+}
+
+.InfoTextNotFoundContainer p{
+    width: 30rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .imgContainer{
+        width: 27rem;
+    }
+    
+}
+
+@media screen and (max-width: 950px) {
+    .imgContainer{
+        width: 21rem;
+    }   
+
+    .InfoTextNotFoundContainer h1{
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .notFoundContainer{
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .imgContainer{
+        width: 21rem;
+    }   
+
+    .InfoTextNotFoundContainer{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .InfoTextNotFoundContainer h1{
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+
+    .InfoTextNotFoundContainer p{
+        width: 23rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .InfoTextNotFoundContainer h2{
+        font-size: 1.6rem;
+    }
+}

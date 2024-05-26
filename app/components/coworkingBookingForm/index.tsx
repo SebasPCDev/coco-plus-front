@@ -132,9 +132,9 @@ export default function CoworkingBookingForm({
             </div>
           </div>
         </form>
-        <div className="mt-4 hidden xl:block">
+        {/* <div className="mt-4 hidden xl:block">
           <MapCoworking filter={filter} allCoworkings={allCoworkings} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

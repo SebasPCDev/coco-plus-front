@@ -1,3 +1,5 @@
+import { Role } from './users/usersRoles';
+
 interface IUser {
   id: string;
   name: string;
@@ -8,7 +10,7 @@ interface IUser {
   position: string;
   recoveryToken: string | null;
   activationDate: string | null;
-  role: string;
+  role: Role;
   status: string;
 }
 
