@@ -1,6 +1,5 @@
 'use client';
 
-
 import CoworkingStatus from '../statusCoworking.tsx';
 import EditCoworkingLocation from './coworkingLocation';
 import CoworkingReceptionists from './coworkingReceptionists';
@@ -11,11 +10,10 @@ import arrayCoworkingUbdateInfo from '@/utils/arraysforms/arrayCoworkingUbdateIn
 export default function MyCoworkingDetailEdit({ id }: { id: string }) {
   const { handleClick, handleChange, coworking, onClickActivate, getData } =
     useEdidtCoworking({ id: id });
-  
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="mb-4 py-4 bg-gray-100 text-center text-4xl font-bold">
+      <h1 className="mb-4 bg-gray-100 py-4 text-center text-4xl font-bold">
         {coworking.name || 'Nombre del Coworking'}
       </h1>
       <div className="flex flex-col xl:flex-row">
@@ -62,7 +60,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
               onClick={handleClick}
               className="mx-auto w-1/2 rounded bg-custom-primary px-4 py-2 text-white"
             >
-              Actualizar Info
+              Actualizar Informacion
             </button>
             <CoworkingReceptionists
               coworking={coworking}
