@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from './navbarHome';
-import SectionTitle from './sectionTitle';
-import WorkspaceGrid from './workspaceGrid';
-import TopPicksList from './topPicksList';
-import Footer from './footerHome';
+import Navbar from './primerHome/navbarHome';
+import SectionTitle from './primerHome/sectionTitle';
+import WorkspaceGrid from './primerHome/workspaceGrid';
+import TopPicksList from './primerHome/topPicksList';
+import Footer from './primerHome/footerHome';
 
 const HomePage: React.FC = () => {
   return (

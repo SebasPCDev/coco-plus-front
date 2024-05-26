@@ -1,6 +1,7 @@
 import React from 'react';
 import TopPickCard from '../topPickCard';
 
+
 const topPicks = [
   {
     image: 'https://www.sharespace.work/cdn-cgi/image/format=auto,fit=scale-down,width=1920/files/Venues/photo/994/61854928c31b9.jpg',
