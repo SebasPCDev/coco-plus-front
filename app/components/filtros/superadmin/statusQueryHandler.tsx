@@ -16,7 +16,7 @@ export default function StatusHandler() {
   };
 
   return (
-    <div className="my-4 flex gap-8 text-sm">
+    <div className="my-4 flex gap-8 text-sm px-[1.5rem]">
       <p className="flex items-center font-bold">Filtrar por:</p>
       <div className="relative rounded-full border-2 border-gray-300">
         <select
