@@ -14,6 +14,7 @@ export const Coworkings3: React.FC = () => {
     handleChange,
     filter,
     cameraPropsNew,
+    FilterMap,
   } = useCoworkings();
 
   return (
@@ -29,7 +30,11 @@ export const Coworkings3: React.FC = () => {
         handleChange={handleChange}
       />
 
-      <MapCoworking coworkings={coworkings} cameraPropsNew={cameraPropsNew} />
+      <MapCoworking
+        coworkings={coworkings}
+        cameraPropsNew={cameraPropsNew}
+        FilterMap={FilterMap}
+      />
 
       <main className="mt-20 w-full">
         <section className="flex flex-wrap justify-center gap-4">

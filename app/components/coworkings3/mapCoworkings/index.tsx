@@ -12,7 +12,7 @@ const INITIAL_CAMERA: MapCameraProps = {
   zoom: 3,
 };
 
-const MapCoworking = ({ coworkings, cameraPropsNew }) => {
+const MapCoworking = ({ coworkings, cameraPropsNew, FilterMap }) => {
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
@@ -25,6 +25,8 @@ const MapCoworking = ({ coworkings, cameraPropsNew }) => {
   }, [cameraPropsNew]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
+    FilterMap(ev.detail.bounds);
+
     setCameraProps(ev.detail);
   };
 
