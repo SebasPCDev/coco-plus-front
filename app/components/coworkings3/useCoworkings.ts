@@ -6,6 +6,7 @@ import getoptionsFilterLocations from '@/utils/gets/getOptionFilterAndLocation';
 import getAllCoworkings from '@/utils/gets/getCoworkingsAll';
 
 const useCoworkings = () => {
+  const [Allcoworkings, setAllCoworkings] = useState<IResponseCoworking[]>([]);
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
   const [countries, setCountries] = useState<any[]>([]);
   const [states, setStates] = useState<any[]>([]);
@@ -28,8 +29,10 @@ const useCoworkings = () => {
       setCountries(options);
     }
   };
+
   const getCowokings = async () => {
     const currentcoworkings = await getAllCoworkings();
+    setAllCoworkings(currentcoworkings);
     setCoworkings(currentcoworkings);
   };
 
@@ -81,6 +84,20 @@ const useCoworkings = () => {
     }
     setFilter(newfilter);
   };
+  const FilterMap = async (bounds) => {
+    const { south, west, north, east } = bounds;
+
+    const filteredCoworkings = Allcoworkings.filter((coworking) => {
+      return (
+        Number(coworking.lat) >= south &&
+        Number(coworking.lat) <= north &&
+        Number(coworking.long) >= west &&
+        Number(coworking.long) <= east
+      );
+    });
+
+    setCoworkings(filteredCoworkings);
+  };
 
   return {
     coworkings,
@@ -90,6 +107,7 @@ const useCoworkings = () => {
     handleChange,
     filter,
     cameraPropsNew,
+    FilterMap,
   };
 };
 export default useCoworkings;
