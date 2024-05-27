@@ -1,11 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { useState, useEffect } from 'react';
-
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
-import getCountriesfilter from '@/utils/gets/countriesFilter';
-import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
-import getoptions from '@/utils/gets/getoptionsFilter';
 import getoptionsFilterLocations from '@/utils/gets/getOptionFilterAndLocation';
 import getAllCoworkings from '@/utils/gets/getCoworkingsAll';
 
@@ -22,9 +18,6 @@ const useCoworkings = () => {
 
   const getOptions = async () => {
     const options = await getoptionsFilterLocations({ filter });
-    console.log(filter);
-
-    console.log(options);
 
     if (filter.city) {
     } else if (filter.state) {
@@ -48,15 +41,10 @@ const useCoworkings = () => {
 
   useEffect(() => {
     getOptions();
-    console.log(cameraPropsNew);
-    console.log(filter);
-    
-    
   }, [filter]);
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value} = event.target;
-    console.log(name, value);
+    const { name, value } = event.target;
     const newfilter = { country: '', state: '', city: '' };
     if (name === 'country') {
       const country = countries.find((country) => country.id == value);
@@ -92,9 +80,6 @@ const useCoworkings = () => {
       newfilter.city = value;
     }
     setFilter(newfilter);
-    console.log('filter', filter);
-    console.log('newfilter', newfilter);
-    console.log(coworkings);
   };
 
   return {
