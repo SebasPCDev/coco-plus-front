@@ -49,12 +49,22 @@ const useCoworkings = () => {
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     const newfilter = { country: '', state: '', city: '' };
+
     if (name === 'country') {
-      const country = countries.find((country) => country.id == value);
-      setCameraPropsNew({
-        center: { lat: Number(country?.lat), lng: Number(country?.long) },
-        zoom: 5,
-      });
+      if (value) {
+        const country = countries.find(
+          (country) => country.id === Number(value),
+        );
+        setCameraPropsNew({
+          center: { lat: Number(country?.lat), lng: Number(country?.long) },
+          zoom: 5,
+        });
+      } else {
+        setCameraPropsNew({
+          center: { lat: -17.797610035031738, lng: -63.52392568413111 },
+          zoom: 3,
+        });
+      }
       newfilter.country = value;
       newfilter.state = '';
       newfilter.city = '';
@@ -62,22 +72,28 @@ const useCoworkings = () => {
       setStates([]);
     }
     if (name === 'state') {
-      const state = states.find((state) => state.id == value);
-      setCameraPropsNew({
-        center: { lat: Number(state?.lat), lng: Number(state?.long) },
-        zoom: 7,
-      });
+      if (value) {
+        const state = states.find((state) => state.id == value);
+        setCameraPropsNew({
+          center: { lat: Number(state?.lat), lng: Number(state?.long) },
+          zoom: 7,
+        });
+      }
+
       newfilter.country = filter.country;
       newfilter.state = value;
       newfilter.city = '';
       setCities([]);
     }
     if (name === 'city') {
-      const city = cities.find((city) => city.id == value);
-      setCameraPropsNew({
-        center: { lat: Number(city?.lat), lng: Number(city?.long) },
-        zoom: 12,
-      });
+      if (value) {
+        const city = cities.find((city) => city.id == value);
+        setCameraPropsNew({
+          center: { lat: Number(city?.lat), lng: Number(city?.long) },
+          zoom: 12,
+        });
+      }
+
       newfilter.country = filter.country;
       newfilter.state = filter.state;
       newfilter.city = value;

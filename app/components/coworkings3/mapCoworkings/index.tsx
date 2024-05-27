@@ -18,7 +18,6 @@ const MapCoworking = ({ coworkings, cameraPropsNew, FilterMap }) => {
     useState<MapCameraProps>(INITIAL_CAMERA);
 
   useEffect(() => {
-    console.log(cameraPropsNew);
     setCameraProps((prevProps) => ({
       ...prevProps,
       ...cameraPropsNew,
