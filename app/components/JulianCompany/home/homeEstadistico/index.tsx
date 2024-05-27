@@ -42,7 +42,7 @@ const Home: React.FC = () => {
           title="Beneficiarios"
           description={`Cantidad de empleados beneficiados: ${employees.length}`}
           number={employees.length}
-          percentage={75}
+          percentage={employees.length}
         />
         <StatisticCard
           image="/images/meeting-rooms.jpg"

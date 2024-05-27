@@ -16,6 +16,7 @@ const CompanyProfile = () => {
     handleChange,
     handleChangePhone,
     handleCancel,
+    handleSubmit
   } = useCompanyProfile();
 
   const [touchedFields, setTouchedFields] = useState<{ [key: string]: boolean }>({});
@@ -41,23 +42,7 @@ const CompanyProfile = () => {
     setTouchedFields(newTouchedFields);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const requiredFieldsFilled = formProfileCompany.every(
-      ({ name, required }) => {
-        if (required) {
-          return Boolean(companyProfile[name as keyof ICompanyProfile]);
-        }
-        return true;
-      },
-    );
-
-    if (!requiredFieldsFilled) {
-      alert('Por favor, completa todos los campos requeridos.');
-      return;
-    }
-  };
+  
 
   return (
     <form

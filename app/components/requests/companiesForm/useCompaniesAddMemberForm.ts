@@ -58,7 +58,7 @@ const useCompaniesFormAddEmployee = () => {
       companiesInfoAddEmployee.status = 'active';
       companiesInfoAddEmployee.passes = Number(companiesInfoAddEmployee.passes);
       companiesInfoAddEmployee.passesAvailable = Number(
-        companiesInfoAddEmployee.passes,
+      companiesInfoAddEmployee.passes,
       );
       console.log(profile);
       console.log(companiesInfoAddEmployee);

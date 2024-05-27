@@ -51,10 +51,10 @@ export interface ElementForm {
     },
     {
       name: 'passes',
-      label: 'Límite de pases mensuales (opcional)',
+      label: 'Límite de pases mensuales',
       type: 'number',
       placeholder: 'Límite de pases mensuales',
-      required: false,
+      required: true,
     },
   ];
   

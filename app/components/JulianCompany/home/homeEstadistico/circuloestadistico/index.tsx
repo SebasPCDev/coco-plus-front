@@ -16,7 +16,7 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ image, title, description
   return (
     <div className="relative bg-white shadow rounded-lg overflow-hidden w-64 h-96">
       <div className="relative">
-        <img src='https://www.appliedglobal.com/wp-content/uploads/How-to-Create-a-Modern-Meeting-Room-Setup-2048x1152.png' alt={title} className="w-full h-48 object-cover" />
+        <img src='/cocoproject/fdonegroVerdeLima.png' alt={title} className="w-full h-48 object-cover" />
         <div className="absolute inset-0 flex items-center justify-center">
           <svg className="w-32 h-32">
             <circle
