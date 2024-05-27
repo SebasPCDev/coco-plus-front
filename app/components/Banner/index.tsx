@@ -1,26 +1,29 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import styles from "./Banner.module.css"
 
 export const Banner = () => {
+  const url = process.env.NEXT_PUBLIC_FRONT_URL;
+
   return (
-    <section className="pt-[65px] lg:pt-0 relative w-full bg-[url('/cocoproject/coco-banner.jpg')] bg-no-repeat bg-cover bg-center -z-10" aria-label="hero">
-      <div className='absolute w-full h-full bg-black/60 z-0'></div>
-      <div className="max-w-[1024px] relative w-full h-full py-16 px-10 md:px-10 mx-auto md:mx-70 z-10">
+    <section className={styles.sectionHeroCont} aria-label="hero">
+      <div className='absolute w-full h-full z-0'></div>
+      <div className={styles.TextAndButtonInfo}>
 
         <Image
-          className="w-44 md:w-60"
+          className={styles.logoBanner}
           src="/cocoproject/logo-slogan.png"
           alt="logo"
           width={150}
           height={150}
           style={{ filter: 'invert(100%) brightness(200%)' }}
         />
-
-        <h1 className="text-3xl md:text-6xl font-Outfit font-normal text-white mt-8">
-          Connecting <span className='inline bg-gradient-to-r from-[#c0dc7f] from-10% to-[#63e8a1] to-90% text-transparent bg-clip-text'>Coworkings</span>, <br />
-          Connecting <span className='inline bg-gradient-to-r from-[#c0dc7f] from-10% to-[#63e8a1] to-90% text-transparent bg-clip-text'>Companies</span><br />
-          and more.</h1>
-
-        <p className='text-2xl md:text-4xl font-Outfit font-normal text-white mt-12'>Connecting Coworkings & Companies</p>
+        <br />
+        <h1 className={styles.hTitleSlogan}>Conecting Coworkings, conectieng Companies And more</h1>
+        <br />
+        <p className={styles.pTextSlogan}>Conectamos empresas con espacios de coworking, impulsando un modelo laboral híbrido y mejorando el bienestar de tus colaboradores. <b>Innovación, creatividad e impacto positivo</b>.</p>
+        <br />
+        <div className={styles.gradientBottomCont}></div>
       </div>
 
     </section>
