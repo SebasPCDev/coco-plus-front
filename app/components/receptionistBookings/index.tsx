@@ -19,10 +19,10 @@ const ReceptionistBookings = () => {
       setId(id);
 
       const bookings = await GetBookingsById({ token, id });
+      console.log(bookings);
+
       setBookings(bookings);
-      
     }
-    
   };
 
   useEffect(() => {
@@ -30,10 +30,15 @@ const ReceptionistBookings = () => {
   }, [token]);
 
   return (
-      <div className={'mt-5'}>
-          <h1>Recepcionistas</h1>
-       
-      <BookingList bookings={bookings} token={token} id={id} fetchData={fetchData} />
+    <div className={'mt-5'}>
+      <h1>Recepcionistas</h1>
+
+      <BookingList
+        bookings={bookings}
+        token={token}
+        id={id}
+        fetchData={fetchData}
+      />
     </div>
   );
 };

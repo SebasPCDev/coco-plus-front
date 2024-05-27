@@ -80,8 +80,8 @@ const useCompanyProfile = () => {
           });
           return;
         }
-        const response = await updProfileCompany(companyProfile.id, data);
         data.status = CompanyStatus.COMPLETED;
+        const response = await updProfileCompany(companyProfile.id, data);
         await Swal.fire({
           title: 'Perfil modificado',
           // text: 'Perfil modificado',
