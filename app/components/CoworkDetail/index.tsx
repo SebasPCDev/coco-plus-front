@@ -4,35 +4,9 @@ import styles from './CoworkDetail.module.css';
 import getCowork from '../coworkings/[id]/getCowork';
 import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
 
-import MapCoworking from "../coworkings2/mapCoworkings";
 import MapSingleItem from "./MapSingleItem";
 import Cookie from "js-cookie"
 import Link from "next/link";
-
-
-const slides = [
-  {
-    url: 'https://www.thedigitalnomad.asia/wp-content/uploads/2022/02/Coworking-spaces.jpeg',
-    title: 'Imagen cowork 1',
-  },
-  {
-    url: 'https://coworkingmag.com/wp-content/uploads/sites/76/2019/07/district-28-e1563430078466.jpg',
-    title: 'boat',
-  },
-  {
-    url: 'https://dr3h7ptpe31k5.cloudfront.net/Assets/images/2333/Creative-Serviced-Office-Taipei-Zhongzheng-District-119-Chongqing-South-Road-583741.jpg',
-    title: 'Imagen cowork 2',
-  },
-  {
-    url: 'https://officehub.s3-ap-southeast-2.amazonaws.com/Assets/images/2333/Creative-Serviced-Office-Taipei-Zhongzheng-District-119-Chongqing-South-Road-728863.jpg',
-    title: 'Imagen cowork 3',
-  },
-  {
-    url: 'https://assets-global.website-files.com/605baba32d94435376625d33/650cb9a6f4a5283dccb4288d_ho_chi_minh_city_cowork-sharespace_vietnam.jpg',
-    title: 'Imagen cowork 4',
-  },
-];
-
 
 const slideStyles: any = {
   width: '100%',
@@ -134,11 +108,11 @@ export const CoworkDetail = ({ id }: { id: string }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? cowork?.images.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
   const goToNext = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === cowork?.images.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -147,7 +121,7 @@ export const CoworkDetail = ({ id }: { id: string }) => {
   };
   const slideStylesWidthBackground = {
     ...slideStyles,
-    backgroundImage: `url(${slides[currentIndex].url})`,
+    backgroundImage: `url(${cowork?.images[currentIndex].secure_url})`,
   };
 
   return (
@@ -177,7 +151,7 @@ export const CoworkDetail = ({ id }: { id: string }) => {
               <div className={styles.prodmincontent}>
                 <h2
                   style={{ marginBottom: '1rem' }}
-                  className={`${styles.h2} ${styles.sectiontitle}`}
+                  className={`font-semibold ${styles.h2} ${styles.sectiontitle}`}
                 >
                   {cowork.name}
                 </h2>
@@ -231,6 +205,27 @@ export const CoworkDetail = ({ id }: { id: string }) => {
             )}
           </div>
         </section>
+
+        <section className={styles.amenities}>
+          <div className={styles.amTitle}>
+            <h2>
+              Comodidades:
+            </h2>
+          </div>
+            <div className={styles.ammContainer}>
+              { cowork &&
+                cowork.amenities.map((amenitie)=>{
+                  return(
+                    <div className={`${styles.ammItem}`}>
+                      <h3 className=' font-bold '>{amenitie.name}</h3>
+                      <p>{amenitie.description}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
+        </section>
+
         <section className={styles.mapadireccion}>
 
           {cowork && 
