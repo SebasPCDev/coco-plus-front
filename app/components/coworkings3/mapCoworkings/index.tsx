@@ -18,7 +18,6 @@ const MapCoworking = ({ coworkings, cameraPropsNew }) => {
     useState<MapCameraProps>(INITIAL_CAMERA);
 
   useEffect(() => {
-    console.log(cameraPropsNew);
     setCameraProps((prevProps) => ({
       ...prevProps,
       ...cameraPropsNew,
@@ -26,8 +25,6 @@ const MapCoworking = ({ coworkings, cameraPropsNew }) => {
   }, [cameraPropsNew]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
-    console.log(ev);
-
     setCameraProps(ev.detail);
   };
 

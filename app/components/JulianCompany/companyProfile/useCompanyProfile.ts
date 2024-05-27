@@ -66,7 +66,7 @@ const useCompanyProfile = () => {
     e.preventDefault();
     const { id, totalPasses, ...data } = companyProfile;
 
-    if (data.status === CompanyStatus.ACEPTED) {
+    if (data.status === CompanyStatus.ACCEPTED) {
       const errors = profileCompanyValidation(companyProfile);
       try {
         if (Object.keys(errors).length !== 0) {

@@ -20,7 +20,7 @@ export const getForInfoCompanies = async (token: string) => {
       (company: any) => company.status === 'active',
     ).length;
     const activePercentage = (activeCount / total) * 100;
-    return Math.round(activePercentage);
+    return total;
   } catch (error) {
     console.error('Error al obtener los datos de las empresas:', error);
     throw error;

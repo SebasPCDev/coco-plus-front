@@ -12,7 +12,7 @@ export default function CompanyStatusFunction({ status }: { status: string }) {
           'bg-gray-100 text-gray-500': status === CompanyStatus.PENDING,
           'bg-green-500 text-white': status === CompanyStatus.ACTIVE,
           'bg-red-500 text-white': status === CompanyStatus.INACTIVE,
-          'bg-orange-500 text-white': status === CompanyStatus.ACEPTED,
+          'bg-orange-500 text-white': status === CompanyStatus.ACCEPTED,
           'bg-purple-500 text-white': status === CompanyStatus.COMPLETED,
         },
       )}
@@ -35,7 +35,7 @@ export default function CompanyStatusFunction({ status }: { status: string }) {
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
-      {status === CompanyStatus.ACEPTED ? (
+      {status === CompanyStatus.ACCEPTED ? (
         <>
           Aceptado
           <CheckIcon className="ml-1 w-4 text-white" />

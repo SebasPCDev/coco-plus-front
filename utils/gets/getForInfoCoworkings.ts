@@ -20,7 +20,7 @@ export const getForInfoCoworkings = async (token: string) => {
       (company: any) => company.status === 'active',
     ).length;
     const activePercentageCow = (activeCount / total) * 100;
-    return Math.round(activePercentageCow);
+    return total;
   } catch (error) {
     console.error('Error al obtener los datos de las empresas:', error);
     throw error;
