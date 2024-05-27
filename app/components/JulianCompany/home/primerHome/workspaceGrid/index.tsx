@@ -1,6 +1,7 @@
 import React from 'react';
 import WorkspaceCard from '../workspaceCard';
 
+
 const workspaceOptions = [
   {
     image: 'https://www.wework.com/es-LA/ideas/wp-content/uploads/sites/15/2019/11/Web_150DPI-20191106_WeWork_Gateway-1-Salt-Lake-City_004-1120x630.jpg',

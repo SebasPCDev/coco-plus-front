@@ -7,7 +7,7 @@ import { formDataCompanies } from "@/utils/arraysforms/companysForm";
 import ICompaniesInfo from "@/utils/types/requests/companiesFormInterface";
 import useCompaniesForm from './useCompaniesForm';
 import { COMPANY_SIZE } from '@/utils/types/requests/companySize.enum';
-import Footer from '@/app/components/JulianCompany/home/footerHome';
+import Footer from '@/app/components/JulianCompany/home/primerHome/footerHome';
 
 
 const CompaniesForm = () => {
