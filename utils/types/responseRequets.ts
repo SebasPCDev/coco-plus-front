@@ -4,6 +4,7 @@ interface IResponseRequest {
   lastname: string | null;
   phone: string | null;
   email: string | null;
+  dateCreated: string | null;
   identification: string | null;
   position: string | null;
   companyName: string | null;

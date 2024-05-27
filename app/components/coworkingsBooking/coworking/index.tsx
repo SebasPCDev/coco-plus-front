@@ -82,7 +82,6 @@ const Coworking = ({ coworking }: { coworking: IResponseCoworking }) => {
                 {coworking.country} - {coworking.state}
               </p>
               <p>{coworking.city}</p>
-              <p>{coworking.address}</p>
             </div>
           </main>
           <footer>

@@ -1,0 +1,119 @@
+/* "pt-[65px] lg:pt-0 relative w-full bg-[url('/cocoproject/coco-banner.jpg')] bg-no-repeat bg-cover bg-center -z-10" */
+
+.sectionHeroCont{
+    padding-top: 65px;
+    position: relative;
+    width: 100%;
+    background-image: url('/cocoproject/coco-banner.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.TextAndButtonInfo{
+  padding: 5rem;
+  background: rgb(26,37,40);
+  background: linear-gradient(72deg, rgb(26, 37, 40) 0%, rgb(24, 39, 13) 19%, rgb(29, 42, 45) 60%, rgb(192, 220, 127) 60%, rgba(221,221,221,0) 100%);
+}
+
+.logoBanner{
+    width: 15rem;
+}
+
+.hTitleSlogan{
+    font-size: 2rem;
+    color: #e1e1e1;
+    max-width: 53%;
+}
+
+.pTextSlogan{
+    font-size: 1.3rem;
+    color: #cfcfcf;
+    max-width: 45%;
+}
+
+.viewSpacesButton{
+    padding: 1rem;
+    border-radius: 12px;
+    color: #1a2528;
+    background-color: #c0dc7f ;
+}
+
+.gradientBottomCont{
+    width: 40%;
+    height: .7rem;
+    background: rgb(190,217,127);
+    background: linear-gradient(266deg, rgba(190,217,127,1) 0%, rgba(192,220,127,0) 100%); 
+    border-radius: 1rem;
+    margin-block: 1rem;
+}
+
+@media screen and (max-width: 1100px){
+    .TextAndButtonInfo{
+        background: rgb(26,37,40);
+        background: linear-gradient(72deg, rgb(26, 37, 40) 0%, rgb(24, 39, 13) 19%, rgb(29, 42, 45) 60%, rgb(192, 220, 127) 60%, rgba(221,221,221,0) 100%);
+      }
+}
+
+@media screen and (min-width: 1024px){
+    .sectionHeroCont{
+        padding-top: 0px;
+    }
+}
+
+
+@media screen and (max-width: 950px){
+    .logoBanner{
+        width: 13rem;
+    }
+    .TextAndButtonInfo{
+        background: rgb(26,37,40);
+        background: linear-gradient(72deg, rgb(26, 37, 40) 0%, rgb(24, 39, 13) 19%, rgb(29, 42, 45) 67%, rgb(192, 220, 127) 67%, rgba(221,221,221,0) 100%);
+      }
+}
+
+@media screen and (max-width: 750px){
+
+    .logoBanner{
+        width: 11rem;
+    }
+
+    .TextAndButtonInfo{
+        padding: 3rem;
+        background: #1a2528;
+        background: linear-gradient(73deg, rgba(26,37,40,0.969625350140056) 0%, rgba(26,37,40,0.958420868347339) 17%, rgba(26,37,40,0.938813025210084) 34%, rgba(26,37,40,0.927608543417367) 54%, rgba(26,37,40,0.7791491596638656) 75%, rgba(26,37,40,0.23853291316526615) 100%);
+    }
+
+    .hTitleSlogan{
+        font-size: 2rem;
+        color: #e1e1e1;
+        max-width: 100%;
+    }
+
+    .pTextSlogan{
+        font-size: 1.3rem;
+        color: #cfcfcf;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .TextAndButtonInfo{
+        padding: 3rem;
+        background: #1a2528;
+        background: linear-gradient(80deg, rgba(26, 37, 40, 0.975) 0%, rgba(26, 37, 40, 0.975) 17%, rgba(26, 37, 40, 0.959) 34%, rgba(26,37,40,0.927608543417367) 54%, rgba(26, 37, 40, 0.86) 75%, rgba(26, 37, 40, 0.405) 100%);
+    }
+
+    .hTitleSlogan{
+        display: none;
+    }
+
+    .gradientBottomCont{
+        width: 80%;
+        height: .7rem;
+        background: rgb(190,217,127);
+        background: linear-gradient(266deg, rgba(190,217,127,1) 0%, rgba(192,220,127,0) 100%); 
+        border-radius: 1rem;
+        margin-block: 1rem;
+    }
+}

@@ -2,23 +2,23 @@ const arrayLocation = [
   {
     name: 'country',
     type: 'text',
-    placeholder: 'Country',
+    placeholder: 'País',
   },
   {
     name: 'state',
     type: 'text',
-    placeholder: 'State',
+    placeholder: 'Estado',
   },
   {
     name: 'city',
     type: 'text',
-    placeholder: 'City',
+    placeholder: 'Ciudad',
   },
   {
     name: 'address',
     type: 'text',
-    placeholder: 'Address',
+    placeholder: 'Dirección',
   },
 ];
 
-export default arrayLocation
+export default arrayLocation;

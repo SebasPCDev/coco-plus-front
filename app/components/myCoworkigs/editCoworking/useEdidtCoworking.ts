@@ -89,6 +89,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     setNewInfo,
     newInfo,
     onClickActivate,
+    getData
   };
 };
 

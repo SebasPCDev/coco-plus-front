@@ -1,8 +1,7 @@
 'use client';
-
+import statusHandler from '@/utils/queryFilterHandler/statusHandler';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-
 export default function StatusHandler() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -15,8 +14,10 @@ export default function StatusHandler() {
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const typeEntity = pathname.split('/').pop() || '';
+
   return (
-    <div className="my-4 flex gap-8 text-sm">
+    <div className="my-4 flex gap-8 px-[1.5rem] text-sm">
       <p className="flex items-center font-bold">Filtrar por:</p>
       <div className="relative rounded-full border-2 border-gray-300">
         <select
@@ -29,9 +30,11 @@ export default function StatusHandler() {
           <option value="null" className="text-gray-400">
             Estado
           </option>
-          <option value="active">Activo</option>
-          <option value="inactive">Inactivo</option>
-          <option value="pending">Pendiente</option>
+          {statusHandler[typeEntity].map((status) => (
+            <option key={status.name} value={status.name}>
+              {status.value}
+            </option>
+          ))}
         </select>
         <CheckCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
       </div>

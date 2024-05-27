@@ -1,37 +1,38 @@
-"use client";
+'use client';
 import arrayFormNewUserCoworking from '@/utils/arraysforms/NewUserRecepCoworking';
 import InfoUsersAdmins from '../../MyCoworkingDetail/componentsDetail/users';
 import Modal from '../../Modals/ModalNewUser';
 import UseCoworkingReceptionists from './useCoworkingReceptionists';
 
-
-const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string }) => {
-  
+const CoworkingReceptionists = ({
+  coworking,
+  id,
+  getData,
+}: {
+  coworking: any;
+  id: string;
+  getData: any;
+}) => {
   const {
     newUserForm,
     handlechangeNewUser,
     handleClickNewUser,
     isModalOpen,
     setIsModalOpen,
-  } = UseCoworkingReceptionists({ id });
- 
+  } = UseCoworkingReceptionists({ id, getData });
 
-  
   return (
     <div className="col-span-2 rounded-lg border p-4 shadow-sm">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="mt-4 block w-full rounded-lg border bg-gray-100 md:w-1/2"
+        className="mx-auto w-1/2 rounded bg-custom-primary px-4 py-2 text-white"
       >
         Agregar Recepcionista
       </button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {arrayFormNewUserCoworking.map((field) => (
-          <div key={field.name} className="flex flex-col">
-            <label
-              htmlFor={field.name}
-              className="label-form"
-            >
+          <div key={field.name} className="mb-4  flex flex-col">
+            <label htmlFor={field.name} className="label-form">
               {field.label}
             </label>
             <input
@@ -40,13 +41,13 @@ const CoworkingReceptionists = ({ coworking, id }: { coworking: any, id: string 
               type={field.type}
               value={(newUserForm as any)[field.name]} // TypeScript might need this cast
               onChange={handlechangeNewUser}
-              className="rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded border bg-gray-100 p-2"
             />
           </div>
         ))}
 
         <button
-          className="rounded bg-custom-primary px-4 py-2 text-white"
+          className="mx-auto w-1/2 rounded bg-custom-primary px-4 py-2 text-white"
           onClick={handleClickNewUser}
         >
           Crear usuario

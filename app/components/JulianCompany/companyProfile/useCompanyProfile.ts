@@ -1,8 +1,11 @@
-"use client";
+'use client';
 
 import updProfileCompany from '@/utils/api/company/updProfileCompany';
 import getProfile from '@/utils/api/users/getProfile';
-import { INITIAL_PROFILE_COMPANY, INITIAL_PROFILE_COMPANY_ERROR } from '@/utils/constants/companies/initialProfileCompany';
+import {
+  INITIAL_PROFILE_COMPANY,
+  INITIAL_PROFILE_COMPANY_ERROR,
+} from '@/utils/constants/companies/initialProfileCompany';
 import { ICompanyProfile } from '@/utils/types/companies/companyProfileInterface';
 import ICompanyProfileFormError from '@/utils/types/companies/companyProfileFormError';
 import { CompanyStatus } from '@/utils/types/companies/companyStatus.enum';
@@ -11,35 +14,35 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import profileCompanyValidation from '@/utils/formValidation/profileCompanyValidation';
 
-
 const useCompanyProfile = () => {
   const router = useRouter();
-  const [companyProfile, setCompanyProfile] = useState<ICompanyProfile>(INITIAL_PROFILE_COMPANY);
+  const [companyProfile, setCompanyProfile] = useState<ICompanyProfile>(
+    INITIAL_PROFILE_COMPANY,
+  );
   const [companyProfileError, setCompanyProfileError] =
     useState<ICompanyProfileFormError>(INITIAL_PROFILE_COMPANY_ERROR);
 
   const getData = async () => {
     try {
       const data = await getProfile();
-      setCompanyProfile(data.employee.company)
+      setCompanyProfile(data.employee.company);
     } catch (error: any) {
       await Swal.fire({
-        title: "Error obteniendo los datos",
+        title: 'Error obteniendo los datos',
         text: error,
-        icon: "error",
+        icon: 'error',
       });
     }
-  }
+  };
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const errors = profileCompanyValidation(companyProfile);
     setCompanyProfileError(errors);
   }, [companyProfile]);
-
 
   const handleChange = (name: string, value: string) => {
     setCompanyProfile((prevProfile) => ({
@@ -47,7 +50,6 @@ const useCompanyProfile = () => {
       [name]: value,
     }));
   };
-  
 
   const handleChangePhone = (name: string, value: string) => {
     setCompanyProfile({
@@ -57,38 +59,53 @@ const useCompanyProfile = () => {
   };
 
   const handleCancel = () => {
-    router.push("/dashboard/adminCompany");
-  }
+    router.push('/dashboard/adminCompany/');
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { id, totalPasses, ...data } = companyProfile
+    const { id, totalPasses, ...data } = companyProfile;
 
-    if (data.status === CompanyStatus.ACEPTED) {
+    if (data.status === CompanyStatus.ACCEPTED) {
       const errors = profileCompanyValidation(companyProfile);
-      if (Object.keys(errors).length === 0) {
-        data.status = CompanyStatus.COMPLETED
+      try {
+        if (Object.keys(errors).length !== 0) {
+          await Swal.fire({
+            title: 'Error en los campos',
+            text: `${errors.name || ''} ${errors.phone || ''} ${
+              errors.businessSector || ''
+            } ${errors.size || ''} ${errors.quantityBeneficiaries || ''}`,
+            icon: 'error',
+            width: '32em',
+          });
+          return;
+        }
+        data.status = CompanyStatus.COMPLETED;
+        const response = await updProfileCompany(companyProfile.id, data);
+        await Swal.fire({
+          title: 'Perfil modificado',
+          // text: 'Perfil modificado',
+          icon: 'success',
+          width: '32em',
+        });
+        router.push('/dashboard/adminCompany');
+      } catch (error: any) {
+        Swal.fire({
+          title: 'Error enviando la solicitud',
+          text: error,
+          icon: 'error',
+        });
       }
     }
+  };
 
-    try {
-      const response = await updProfileCompany(companyProfile.id, data);
-      await Swal.fire({
-        title: 'Perfil modificado',
-        // text: 'Perfil modificado',
-        icon: 'success',
-        width: '32em'
-      });
-      router.push("/dashboard/adminCompany");
-    } catch (error: any) {
-      Swal.fire({
-        title: "Error enviando la solicitud",
-        text: error,
-        icon: "error",
-      });
-    }
-  }
-
-  return { companyProfile, handleChange, handleChangePhone, companyProfileError, handleCancel, handleSubmit }
-}
-export default useCompanyProfile
+  return {
+    companyProfile,
+    handleChange,
+    handleChangePhone,
+    companyProfileError,
+    handleCancel,
+    handleSubmit,
+  };
+};
+export default useCompanyProfile;
