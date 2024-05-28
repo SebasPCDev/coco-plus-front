@@ -78,10 +78,10 @@ export default async function MyCoworkigs() {
                       {coworking.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
-                      {coworking.open}
+                      {coworking.open.slice(0, 5)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
-                      {coworking.close}
+                      {coworking.close.slice(0, 5)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
                       {coworking.address}

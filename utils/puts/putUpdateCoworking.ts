@@ -16,6 +16,7 @@ interface ICoworking {
   capacity?: number;
   message?: string;
   status?: string | null;
+  amenities?: string[];
 }
 
 const PutUpdateCoworking = async ({
@@ -26,7 +27,9 @@ const PutUpdateCoworking = async ({
   id: string | undefined;
   newInfo: ICoworking;
   token: string | undefined;
-}) => {
+  }) => {
+  console.log('newInfo', newInfo);
+  
   const url = `${urlBase}/coworkings/${id}`;
   const response = await axios.put(url, newInfo, {
     headers: {
