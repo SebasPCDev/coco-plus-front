@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import styles from './CoworkDetail.module.css';
 import getCowork from '../coworkings/[id]/getCowork';
 import { Coworking } from '@/utils/types/editCoworking/editInfo/editCoworkingInterfaces';
-
 import MapSingleItem from "./MapSingleItem";
 import Cookie from "js-cookie"
 import Link from "next/link";
+import { juegos, salon, futbol, sauna, parrilla, gimnasio, piscina } from './amenitieIcons';
 
 const slideStyles: any = {
   width: '100%',
@@ -26,7 +26,7 @@ const rightArrowStyles: any = {
   fontSize: "45px",
   color: "#0d4300",
   background: "#efefef",
-  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.849);",
+  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.402);",
   border: "1px solid #959595",
   borderRadius: "50%",
   padding: "7px",
@@ -44,7 +44,7 @@ const leftArrowStyles: any = {
   fontSize: "45px",
   color: "#0d4300",
   background: "#efefef",
-  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.849);",
+  boxShadow: "0px 0px 27px -7px rgba(0, 0, 0, 0.552);",
   border: "1px solid #959595",
   borderRadius: "50%",
   padding: "7px",
@@ -72,6 +72,8 @@ const dotStyle: any = {
 };
 
 export const CoworkDetail = ({ id }: { id: string }) => {
+
+  let icon = null;
 
   const user = Cookie.get('user');
 
@@ -124,6 +126,22 @@ export const CoworkDetail = ({ id }: { id: string }) => {
     backgroundImage: `url(${cowork?.images[currentIndex].secure_url})`,
   };
 
+
+
+  const formattedOpen = (open : any)=>{
+    const formattedOpendData = open.substring(0, 5)
+    return formattedOpendData;
+  }
+
+  const formattedClose = (close : any)=>{
+    const formattedClosedData = close.substring(0, 5)
+    return formattedClosedData;
+  }
+
+  // const formattedOpen = cowork.open ? cowork.open.substring(0, 5) : '';
+  // const formattedClose = cowork.close ? cowork.close.substring(0, 5) : '';
+
+
   return (
     <>
       <main>
@@ -131,8 +149,8 @@ export const CoworkDetail = ({ id }: { id: string }) => {
         <section className={`${styles.section} ${styles.prodmin}`} aria-label="prodmin">
           <div className={styles.contproducto}>
 
-              {/* =============== swiper IMAGENES-DESLIZABLE THUMBNAIL ===============  */}
-              <div className={styles.imagenesdeslizable__overflow}>
+            {cowork && 
+            <div className={styles.imagenesdeslizable__overflow}>
                 <div className={styles.containerStyles}>
                   <div style={sliderStyles}>
                     <div>
@@ -146,7 +164,8 @@ export const CoworkDetail = ({ id }: { id: string }) => {
                     <div style={slideStylesWidthBackground}></div>
                   </div>
                 </div>
-              </div>
+            </div>
+            }
             {cowork && (
               <div className={styles.prodmincontent}>
                 <h2
@@ -163,15 +182,15 @@ export const CoworkDetail = ({ id }: { id: string }) => {
 
                   <div className={styles.budgetexp}>
                     <div>
-                      <p className={styles.value}>Apertura</p>
-                      <p className={styles.label}>{cowork.open}</p>
+                      <p className={` font-bold ${styles.value}`}>Apertura</p>
+                      <p className={styles.label}>{formattedOpen(cowork.open)}</p>
                     </div>
                     <div>
-                      <p className={styles.value}>Cierre</p>
-                      <p className={styles.label}>{cowork.open}</p>
+                      <p className={` font-bold ${styles.value}`}>Cierre</p>
+                      <p className={styles.label}>{formattedClose(cowork.close)}</p>
                     </div>
                     <div>
-                      <p className={styles.value}>Capacidad</p>
+                      <p className={` font-bold ${styles.value}`}>Capacidad</p>
                       <p className={styles.label}>{cowork.capacity}</p>
                     </div>
                   </div>
@@ -186,8 +205,8 @@ export const CoworkDetail = ({ id }: { id: string }) => {
 
                   <div className={styles.tags}>
                     <article>
-                      <p>{cowork.phone}</p>
-                      <p>{cowork.email}</p>
+                      <p> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#074400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {cowork.phone}</p>
+                      <p> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#074400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> {cowork.email}</p>
                     </article>
                   </div>
 
@@ -206,8 +225,10 @@ export const CoworkDetail = ({ id }: { id: string }) => {
           </div>
         </section>
 
+        { cowork &&  
         <section className={styles.amenities}>
-          <div className={styles.amTitle}>
+          <div className="">
+                      <div className={styles.amTitle}>
             <h2>
               Comodidades:
             </h2>
@@ -218,13 +239,15 @@ export const CoworkDetail = ({ id }: { id: string }) => {
                   return(
                     <div className={`${styles.ammItem}`}>
                       <h3 className=' font-bold '>{amenitie.name}</h3>
-                      <p>{amenitie.description}</p>
+                      {amenitie.name}
                     </div>
                   )
                 })
               }
             </div>
+          </div>
         </section>
+        }
 
         <section className={styles.mapadireccion}>
 
