@@ -73,3 +73,26 @@ export async function putDataCoworking({
   revalidatePath('/dashboard/superadmin/coworkings');
   redirect('/dashboard/superadmin/coworkings');
 }
+
+export async function checkInBookingUser({
+  token,
+  modifiedData,
+  id,
+}: {
+  id: string;
+  token?: string;
+  modifiedData: {};
+}) {
+  const response = await fetch(`http://localhost:3000/coworkings/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(modifiedData),
+  });
+  const data = await response.json();
+
+  revalidatePath('/dashboard/superadmin/coworkings');
+  redirect('/dashboard/superadmin/coworkings');
+}

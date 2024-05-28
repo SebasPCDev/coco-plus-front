@@ -1,5 +1,5 @@
 'use client';
-import { use, useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Map,
   MapCameraChangedEvent,
