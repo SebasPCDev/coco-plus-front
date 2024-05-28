@@ -62,7 +62,12 @@ const roles: Roles = {
   employee: [
     { name: 'Perfil', href: '/dashboard/employee/profile', icon: HomeIcon },
     {
-      name: 'Gestionar Reservas',
+      name: 'Historial Reservas',
+      href: '/dashboard/employee/bookingsHistory',
+      icon: HomeIcon,
+    },
+    {
+      name: 'Nueva Reserva',
       href: '/dashboard/employee/bookings',
       icon: HomeIcon,
     },

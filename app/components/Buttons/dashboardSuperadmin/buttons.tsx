@@ -1,6 +1,7 @@
 'use client';
 import { ChangeStatusCompany, ChangeStatusCoworking } from '@/app/lib/actions';
 import {
+  CheckCircleIcon,
   DocumentMinusIcon,
   EyeIcon,
   PencilIcon,
@@ -244,12 +245,21 @@ export function InactiveUser({ id }: { id: string }) {
 export function UserDescription({ id }: { id: string }) {
   return (
     <>
-      <Link href={`users/${id}`}>
-        <button className="rounded-md border p-2 hover:bg-gray-200">
-          <span className="sr-only">Description</span>
-          <EyeIcon className="w-8" />
-        </button>
-      </Link>
+      <button className="rounded-md border p-2 hover:bg-gray-200">
+        <span className="sr-only">Description</span>
+        <EyeIcon className="w-8" />
+      </button>
+    </>
+  );
+}
+
+export function CheckInEmployee({ id }: { id: string }) {
+  return (
+    <>
+      <button className="rounded-md border p-2 hover:bg-gray-200">
+        <span className="sr-only">Description</span>
+        <CheckCircleIcon className="w-8 text-green-500" />
+      </button>
     </>
   );
 }
