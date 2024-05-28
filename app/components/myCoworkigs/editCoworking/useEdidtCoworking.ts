@@ -100,11 +100,30 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     const newInfo = {
       status: 'active',
     };
-    try {
-      const response = await PutUpdateCoworking({ id, newInfo, token });
-      await getData();
-    } catch (error) {
-      alert(error.response.data.message);
+
+    const result = await Swal.fire({
+      title: 'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const response = await PutUpdateCoworking({ id, newInfo, token });
+        await getData();
+        Swal.fire({
+          title: 'Coworking activado',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      } catch (error) {
+        alert(error.response?.data?.message || 'Error al actualizar el estado');
+      }
     }
   };
 
