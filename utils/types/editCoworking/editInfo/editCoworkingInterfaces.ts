@@ -16,6 +16,11 @@ export interface Image {
   id: string;
   secure_url: string;
 }
+export interface IAmenitie {
+  description: string;
+  id: string;
+  name: string;
+}
 
 export interface Coworking {
   id: string;
@@ -35,5 +40,6 @@ export interface Coworking {
   status: string;
   thumbnail: string | null;
   user: User[];
+  amenities: IAmenitie[];
   images: Image[];
 }

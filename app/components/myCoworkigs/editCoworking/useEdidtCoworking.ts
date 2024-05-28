@@ -11,11 +11,37 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   const { Mycoworking, setMyCoworking } = useMyCoworkingContext();
   const { token } = useUserContext();
   const [newInfo, setNewInfo] = useState({});
+  const [arrayIdAmenities, setArrayIdAmenities] = useState<string[]>([]);
 
   const [coworking, setCoworking] = useState<Coworking>(initialCoworking);
 
+  useEffect(() => {
+    console.log('coworking', coworking);
+    if (coworking.amenities) {
+      const arrayIds = coworking.amenities.map((amenity: any) => amenity.id);
+      console.log('arrayIds', arrayIds);
+
+      setArrayIdAmenities(arrayIds);
+    }
+  }, [coworking]);
+
+  useEffect(() => {
+    setNewInfo({
+      ...newInfo,
+      amenitiesIds: arrayIdAmenities,
+    });
+    console.log('arrayIdAmenities', arrayIdAmenities);
+    console.log('newInfo', newInfo);
+    
+  }, [arrayIdAmenities]);
+
   const getData = async () => {
     const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
+    console.log(
+      'esto es lo que me trae la peticion de coworking',
+      coworkingData,
+    );
+
     setCoworking(coworkingData);
     setMyCoworking(coworkingData);
   };
@@ -74,11 +100,30 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     const newInfo = {
       status: 'active',
     };
-    try {
-      const response = await PutUpdateCoworking({ id, newInfo, token });
-      await getData();
-    } catch (error) {
-      alert(error.response.data.message);
+
+    const result = await Swal.fire({
+      title: 'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const response = await PutUpdateCoworking({ id, newInfo, token });
+        await getData();
+        Swal.fire({
+          title: 'Coworking activado',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      } catch (error) {
+        alert(error.response?.data?.message || 'Error al actualizar el estado');
+      }
     }
   };
 
@@ -89,7 +134,9 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     setNewInfo,
     newInfo,
     onClickActivate,
-    getData
+    getData,
+    arrayIdAmenities,
+    setArrayIdAmenities,
   };
 };
 

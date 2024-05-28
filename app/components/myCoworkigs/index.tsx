@@ -1,13 +1,7 @@
-import { MyCoworkingProvider } from './myCoworkingConstext';
 import GetProfile from '@/utils/gets/getProfile';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import {
-  DocumentMinusIcon,
-  EyeIcon,
-  PencilIcon,
-  PlusIcon,
-} from '@heroicons/react/24/outline';
+import { EyeIcon, PencilIcon } from '@heroicons/react/24/outline';
 import CoworkingStatus from './statusCoworking.tsx';
 
 export default async function MyCoworkigs() {
@@ -78,10 +72,10 @@ export default async function MyCoworkigs() {
                       {coworking.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
-                      {coworking.open}
+                      {coworking.open.slice(0, 5)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
-                      {coworking.close}
+                      {coworking.close.slice(0, 5)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
                       {coworking.address}
