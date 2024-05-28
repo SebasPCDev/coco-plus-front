@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useUserContext } from '../../context';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import generateTimeOptions from '@/utils/timeoptions/generateTimeOptions';
+
 
 const CoworkingForm = () => {
   const router = useRouter();
@@ -28,17 +30,7 @@ const CoworkingForm = () => {
 
   const { token } = useUserContext();
   const [formData, setFormData] = useState(initialState);
-  const generateTimeOptions = () => {
-    const options: string[] = []; // Aquí especificamos que options es un array de strings
-    for (let hour = 6; hour < 24; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const formattedHour = hour.toString().padStart(2, '0');
-        const formattedMinute = minute.toString().padStart(2, '0');
-        options.push(`${formattedHour}:${formattedMinute}`);
-      }
-    }
-    return options;
-  };
+ 
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

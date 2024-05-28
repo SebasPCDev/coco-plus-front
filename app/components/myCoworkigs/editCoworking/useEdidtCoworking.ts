@@ -11,11 +11,37 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   const { Mycoworking, setMyCoworking } = useMyCoworkingContext();
   const { token } = useUserContext();
   const [newInfo, setNewInfo] = useState({});
+  const [arrayIdAmenities, setArrayIdAmenities] = useState<string[]>([]);
 
   const [coworking, setCoworking] = useState<Coworking>(initialCoworking);
 
+  useEffect(() => {
+    console.log('coworking', coworking);
+    if (coworking.amenities) {
+      const arrayIds = coworking.amenities.map((amenity: any) => amenity.id);
+      console.log('arrayIds', arrayIds);
+
+      setArrayIdAmenities(arrayIds);
+    }
+  }, [coworking]);
+
+  useEffect(() => {
+    setNewInfo({
+      ...newInfo,
+      amenitiesIds: arrayIdAmenities,
+    });
+    console.log('arrayIdAmenities', arrayIdAmenities);
+    console.log('newInfo', newInfo);
+    
+  }, [arrayIdAmenities]);
+
   const getData = async () => {
     const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
+    console.log(
+      'esto es lo que me trae la peticion de coworking',
+      coworkingData,
+    );
+
     setCoworking(coworkingData);
     setMyCoworking(coworkingData);
   };
@@ -89,7 +115,9 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     setNewInfo,
     newInfo,
     onClickActivate,
-    getData
+    getData,
+    arrayIdAmenities,
+    setArrayIdAmenities,
   };
 };
 
