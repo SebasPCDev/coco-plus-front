@@ -5,8 +5,8 @@ import Service from '../Service';
 import Coworkings from '../coworkings2';
 import Coworkings3 from '../coworkings3';
 
-import Footer from '../JulianCompany/home/primerHome/footerHome';
 import MapCoworking from '../coworkings2/mapCoworkings';
+import Footer from '../Footer';
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
         <Service />
         <Coworkings3 />
       </main>
-      <Footer />
+      <Footer/>
     </div>
   );
 };
