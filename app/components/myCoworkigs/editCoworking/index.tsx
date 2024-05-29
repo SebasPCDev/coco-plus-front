@@ -10,7 +10,6 @@ import arrayCoworkingUbdateInfo from '@/utils/arraysforms/arrayCoworkingUbdateIn
 import generateTimeOptions from '@/utils/timeoptions/generateTimeOptions';
 
 export default function MyCoworkingDetailEdit({ id }: { id: string }) {
-  
   const {
     handleClick,
     handleChange,
@@ -20,10 +19,6 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
     arrayIdAmenities,
     setArrayIdAmenities,
   } = useEdidtCoworking({ id: id });
-
-  
-
- 
 
   return (
     <div className="container mx-auto p-4">
@@ -81,8 +76,6 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                   arrayIdAmenities={arrayIdAmenities}
                   setArrayIdAmenities={setArrayIdAmenities}
                 />
-
-               
               </div>
               <div className="mt-4 flex items-center gap-4">
                 <p>
@@ -90,14 +83,21 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                 </p>
                 <div className="flex items-center gap-4">
                   <CoworkingStatus status={coworking.status} />
-                  {coworking.status === 'pending' && (
-                    <button
-                      onClick={onClickActivate}
-                      className="rounded-lg bg-red-500 p-2 text-white"
-                    >
-                      Activar
-                    </button>
-                  )}
+                  {coworking.country &&
+                    coworking.state &&
+                    coworking.city &&
+                    coworking.address &&
+                    coworking.lat &&
+                    coworking.long &&
+                    coworking.thumbnail &&
+                    coworking.status === 'pending' && (
+                      <button
+                        onClick={onClickActivate}
+                        className="rounded-lg bg-red-500 p-2 text-white"
+                      >
+                        Activar
+                      </button>
+                    )}
                 </div>
               </div>
             </div>
