@@ -4,6 +4,30 @@ import GetAddressByParams from '@/utils/gets/apiNominatim/getByParams';
 import GetAddressFree from '@/utils/gets/apiNominatim/getAadressFree';
 import { useMyCoworkingContext } from '../../myCoworkingConstext';
 import { geocodeAddress } from '@/utils/geocodeAdressAndReverse';
+import getoptionsFilterLocations from '@/utils/gets/getOptionFilterAndLocation';
+interface ResponseItem {
+  place_id?: number;
+  licence?: string;
+  osm_type?: string;
+  osm_id?: number;
+  lat?: string;
+  lon?: string;
+  class?: string;
+  type?: string;
+  place_rank?: number;
+  importance?: number;
+  addresstype?: string;
+  name?: string;
+  display_name?: string;
+  boundingbox?: string[];
+}
+interface IAddress {
+  country?: string;
+  state?: string;
+  city?: string;
+  address?: string;
+}
+
 const UseEditLocation = () => {
   const { setMyCoworking, Mycoworking } = useMyCoworkingContext();
   const [options, setOptions] = useState<any>([]);
@@ -12,28 +36,124 @@ const UseEditLocation = () => {
   const [address, setAddress] = useState<IAddress>({});
   const [corder, setCorder] = useState({});
 
-  interface ResponseItem {
-    place_id?: number;
-    licence?: string;
-    osm_type?: string;
-    osm_id?: number;
-    lat?: string;
-    lon?: string;
-    class?: string;
-    type?: string;
-    place_rank?: number;
-    importance?: number;
-    addresstype?: string;
-    name?: string;
-    display_name?: string;
-    boundingbox?: string[];
-  }
-  interface IAddress {
-    country?: string;
-    state?: string;
-    city?: string;
-    address?: string;
-  }
+  const [countries, setCountries] = useState<any[]>([]);
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
+  const [filter, setFilter] = useState({ country: '', state: '', city: '' });
+  const [cameraPropsNew, setCameraPropsNew] = useState({
+    center: { lat: -17.797610035031738, lng: -63.52392568413111 },
+    zoom: 3,
+  });
+  const [optionRender, setOptionRender] = useState('address');
+
+  const getOptions = async () => {
+    const options = await getoptionsFilterLocations({ filter });
+
+    if (filter.city) {
+    } else if (filter.state) {
+      setCities(options.cities);
+    } else if (filter.country) {
+      setStates(options.states);
+    } else {
+      setCountries(options);
+    }
+  };
+
+  useEffect(() => {
+    getOptions();
+  }, [filter]);
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
+
+  const handleChangeform = async (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const { name, value } = event.target;
+    const newfilter = { country: '', state: '', city: '' };
+    const newAdress = { country: '', state: '', city: '', address: '' };
+    console.log(filter);
+    let current = '';
+
+    if (name === 'country') {
+      if (value === '0') {
+        setOptionRender('oterCountry');
+      } else if (value) {
+        setOptionRender('address');
+        const country = countries.find(
+          (country) => country.id === Number(value),
+        );
+        current = country.name;
+        setCameraPropsNew({
+          center: { lat: Number(country?.lat), lng: Number(country?.long) },
+          zoom: 5,
+        });
+      } else {
+        setCameraPropsNew({
+          center: { lat: -17.797610035031738, lng: -63.52392568413111 },
+          zoom: 3,
+        });
+      }
+      newAdress.country = current;
+      newAdress.state = '';
+      newAdress.city = '';
+      newAdress.address = '';
+
+      newfilter.country = value;
+      newfilter.state = '';
+      newfilter.city = '';
+      setCities([]);
+      setStates([]);
+    }
+    if (name === 'state') {
+      if (value === '0') {
+        setOptionRender('oterState');
+      } else if (value) {
+        setOptionRender('address');
+        const state = states.find((state) => state.id == value);
+        current = state.name;
+        setCameraPropsNew({
+          center: { lat: Number(state?.lat), lng: Number(state?.long) },
+          zoom: 7,
+        });
+      }
+
+      newAdress.country = address.country;
+      newAdress.state = current;
+      newAdress.city = '';
+      newAdress.address = '';
+
+      newfilter.country = filter.country;
+      newfilter.state = value;
+      newfilter.city = '';
+      setCities([]);
+    }
+    if (name === 'city') {
+      if (value === '0') {
+        setOptionRender('oterCity');
+      } else if (value) {
+        setOptionRender('address');
+        const city = cities.find((city) => city.id == value);
+        current = city.name;
+        setCameraPropsNew({
+          center: { lat: Number(city?.lat), lng: Number(city?.long) },
+          zoom: 12,
+        });
+      }
+      newAdress.country = address.country;
+      newAdress.state = address.state;
+      newAdress.city = current;
+      newAdress.address = '';
+
+      newfilter.country = filter.country;
+      newfilter.state = filter.state;
+      newfilter.city = value;
+    }
+    setAddress(newAdress);
+    setFilter(newfilter);
+    // setMyCoworking({ ...Mycoworking, ...newAdress });
+  };
 
   useEffect(() => {
     setAddress({
@@ -53,80 +173,14 @@ const UseEditLocation = () => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
   };
+
   const handleBlur = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
     if (value == '') {
       return;
     }
-    if (name == 'country') {
-      const addressquery = { [name]: value };
-      setAddress(addressquery);
-      const response = await GetAddressByParams({ address: addressquery });
-      if (response.length == 0) {
-        alert('no se encontraron resultados  buelva a ingresar un ' + name);
-      } else if (response.length == 1) {
-        const estandarName = response[0].name;
-        setAddress({ [name]: estandarName });
-      } else if (response.length > 1) {
-        setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option, index) => ({
-          idex: index,
-          name: option.name,
-          display_name: option.display_name,
-        }));
-        setOptions(options);
-        setIsModalOpen(true);
-      }
-    } else if (name == 'state') {
-      const addressquery = { country: address.country, [name]: value };
-      setAddress(addressquery);
-      const response = await GetAddressByParams({ address: addressquery });
-      if (response.length == 0) {
-        alert('no se encontraron resultados  buelva a ingresar un ' + name);
-      } else if (response.length == 1) {
-        const estandarName = response[0].name;
-        setAddress({ country: address.country, [name]: estandarName });
-      } else if (response.length > 1) {
-        setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option, index) => ({
-          idex: index,
-          name: option.name,
-          display_name: option.display_name,
-        }));
-        setOptions(options);
-        setIsModalOpen(true);
-      }
-    } else if (name == 'city') {
-      const addressquery = {
-        country: address.country,
-        state: address.state,
-        [name]: value,
-      };
-      setAddress(addressquery);
-      const response = await GetAddressByParams({ address: addressquery });
-      console.log(response);
-
-      if (response.length == 0) {
-        alert('no se encontraron resultados  buelva a ingresar un ' + name);
-      } else if (response.length == 1) {
-        const estandarName = response[0].name;
-        setAddress({
-          country: address.country,
-          state: address.state,
-          [name]: estandarName,
-        });
-      } else if (response.length > 1) {
-        setCurrentName(name);
-        const options = (response as ResponseItem[]).map((option, index) => ({
-          idex: index,
-          name: option.name,
-          display_name: option.display_name,
-        }));
-        setOptions(options);
-        setIsModalOpen(true);
-      }
-    } else if (name == 'address') {
+    if (name == 'address') {
       setAddress({ ...address, [name]: value });
       const freeAddress = `${value} ${address.city} ${address.state} ${address.country}`;
       const responseGoogle = await geocodeAddress(freeAddress);
@@ -162,7 +216,6 @@ const UseEditLocation = () => {
       }
     }
   };
-
   const handleCheck = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.checked ? e.target.value : '';
     const updatedAddress = { ...address, [currentName]: newValue };
@@ -203,6 +256,12 @@ const UseEditLocation = () => {
     currentName,
     setCurrentName,
     setCorder,
+    cameraPropsNew,
+    countries,
+    states,
+    cities,
+    handleChangeform,
+    optionRender,
   };
 };
 
