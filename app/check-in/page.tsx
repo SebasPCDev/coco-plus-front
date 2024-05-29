@@ -1,1 +1,1 @@
-export { default } from '@/app/components/auth/checkIn'; 
+export { default } from '@/app/components/auth/checkInByEmail'; 
