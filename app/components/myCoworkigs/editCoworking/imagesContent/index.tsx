@@ -5,17 +5,13 @@ import useImagesContent from './useImagesContent';
 import { useState } from 'react';
 import ModalImages from '../../Modals/ModalAddImages';
 
-
 const ImagesContent = ({
   coworking,
   getData,
 }: {
   coworking: any;
   getData: any;
-  }) => {
-  
-
-
+}) => {
   const {
     isModalOpen,
     handleFileChange,
@@ -32,7 +28,7 @@ const ImagesContent = ({
       <h2 className="mb-2 text-xl font-semibold">Imagen de Portada</h2>
       <button
         onClick={onModalClick}
-        className=" mx-auto my-2 block w-full rounded bg-custom-primary px-4 py-2 text-white"
+        className="w-full btn btn-confirm "
       >
         {coworking.thumbnail ? 'Cambiar Imagen' : 'Agregar Imagen'}
       </button>
@@ -58,10 +54,7 @@ const ImagesContent = ({
                   file:text-blue-700
                   hover:file:bg-blue-100"
             />
-            <button
-              type="submit"
-              className="w-full rounded bg-custom-primary px-4 py-2 text-white hover:bg-blue-700"
-            >
+            <button type="submit" className="btn btn-confirm">
               Agregar Imagen
             </button>
           </form>
@@ -80,10 +73,7 @@ const ImagesContent = ({
 
       <h2 className="my-4 text-xl font-semibold">Imágenes Secundarias</h2>
       <div className="flex flex-col space-y-4">
-        <button
-          onClick={onModalImagesClick}
-          className="mx-auto mb-4 mt-2 block w-full rounded bg-custom-primary px-4 py-2 text-white"
-        >
+        <button onClick={onModalImagesClick} className="btn btn-confirm">
           Agregar Imágenes
         </button>
         <ModalImages isOpen={isModalImagesOpen} onClose={onModalImagesClick}>
@@ -103,10 +93,7 @@ const ImagesContent = ({
                 multiple
                 className="mb-4 block w-full text-sm text-gray-500 file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
               />
-              <button
-                type="submit"
-                className="w-full rounded bg-custom-primary px-4 py-2 text-white hover:bg-blue-700"
-              >
+              <button type="submit" className="btn btn-confirm">
                 Agregar Imágenes
               </button>
             </form>
