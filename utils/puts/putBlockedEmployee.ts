@@ -1,18 +1,19 @@
 import axios from 'axios';
 const urlBase = process.env.NEXT_PUBLIC_API_URL;
 
-const PutBlockedEmployee = async ({
+const PutStatusEmployee = async ({
   companyId,
   userId,
   token,
   status,
 }: {
-  companyId: string | undefined;  
+  companyId: string | undefined;
   userId: string;
   token: string | undefined;
   status: string;
 }) => {
-const block = status === 'blocked' ? {status: 'active'} : {status: 'blocked'};
+  const block =
+    status === 'blocked' ? { status: 'active' } : { status: 'blocked' };
   const url = `${urlBase}/companies/${companyId}/update-employee/${userId}`;
   console.log(url);
 
@@ -34,4 +35,4 @@ const block = status === 'blocked' ? {status: 'active'} : {status: 'blocked'};
   }
 };
 
-export default PutBlockedEmployee;
+export default PutStatusEmployee;

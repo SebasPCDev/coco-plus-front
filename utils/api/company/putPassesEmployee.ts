@@ -1,9 +1,16 @@
-import IAddEmployeeInfo from '@/utils/types/requests/companiesFormAddEmployeeInterface';
 import { axiosApi } from '../api';
 
-const putPassesEmployee = async (data: any) => {
+const putPassesEmployee = async (
+  companyId: string,
+  userId: string,
+  newPasses: number,
+) => {
   try {
-    const response = await axiosApi.put(`/companyId/update-employee/${data.id}`);
+    console.log('entre');
+    const response = await axiosApi.put(
+      `/companies/${companyId}/update-employee/${userId}`,
+      { passes: newPasses },
+    );
     return response.data;
   } catch (error: any) {
     let message = '';

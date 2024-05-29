@@ -7,8 +7,7 @@ import 'react-international-phone/style.css';
 import { formDataCoworkings } from "@/utils/arraysforms/coworkingsForms";
 import ICoworkingsInfo from "@/utils/types/requests/coworkingsFormInterface";
 import useCoworkingsForm from './useCoworkingsForm';
-import Footer from '@/app/components/JulianCompany/home/primerHome/footerHome';
-
+import Footer from '../../Footer';
 
 const CoworkingsForm = () => {
 

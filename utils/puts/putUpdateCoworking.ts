@@ -27,23 +27,22 @@ const PutUpdateCoworking = async ({
   id: string | undefined;
   newInfo: ICoworking;
   token: string | undefined;
-  }) => {
+}) => {
   console.log('newInfo', newInfo);
-  
+
   const url = `${urlBase}/coworkings/${id}`;
-  const response = await axios.put(url, newInfo, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
 
-  return response.data;
+  try {
+    const response = await axios.put(url, newInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  // try {
-
-  // } catch (error) {
-  //   console.error('Error al activar el coworking:', error);
-  // }
+    return response.data;
+  } catch (error) {
+    console.error('Error al activar el coworking:', error);
+  }
 };
 
 export default PutUpdateCoworking;

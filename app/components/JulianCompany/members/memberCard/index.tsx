@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { useUserContext } from '@/app/components/context';
-import PutBlockedEmployee from '@/utils/puts/putBlockedEmployee';
 import Modal from '@/app/components/JulianCompany/modal';
 import Swal from 'sweetalert2';
+import putPassesEmployee from '@/utils/api/company/putPassesEmployee';
+import { useRouter } from 'next/navigation';
+import PutStatusEmployee from '@/utils/puts/putBlockedEmployee';
 
 interface MemberCardProps {
   userId: string;
@@ -12,7 +14,7 @@ interface MemberCardProps {
   photoUrl: string;
   name: string;
   email: string;
-  role: 'Admin' | 'Empleado';
+  role: string;
   identification: string;
   passes: number;
   passesAvailable: number | null;
@@ -31,29 +33,48 @@ const MemberCard: React.FC<MemberCardProps> = ({
   passesAvailable,
   status,
 }) => {
-  console.log(userId, companyId)
   const [newPasses, setNewPasses] = useState(0);
   const { token, user } = useUserContext();
-  const handleBlockClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleStatusClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('Bloquear');
-    try {
-      const response = await PutBlockedEmployee({
-        companyId,
-        userId,
-        token,
-        status,
-      });
-      console.log(response);
-      /* setIsBlocked("blocked"); */
-    } catch (error: any) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error,
-      });
-      console.error('Error blocking employee:', error);
-    }
+    console.log(status);
+    Swal.fire({
+      title:
+        status === 'active'
+          ? `¿Estás seguro de querer bloquear a ${name}?`
+          : `¿Estás seguro de querer activar a ${name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: status === 'active' ? 'Bloquear' : 'Activar',
+    }).then(async (result) => {
+      if (result.isConfirmed && token) {
+        try {
+          const response = await PutStatusEmployee({
+            companyId,
+            userId,
+            token,
+            status,
+          });
+          await Swal.fire(
+            `Se ha bloqueado a ${name} correctamente`,
+            '',
+            'success',
+          );
+          window.location.reload();
+        } catch (error: any) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+          console.error('Error blocking employee:', error);
+        }
+      }
+    });
   };
 
   const handleActivateClick = async () => {
@@ -75,22 +96,46 @@ const MemberCard: React.FC<MemberCardProps> = ({
     setNewPasses(Number(value));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = async () => {
-      try {
-        
-        
-      } catch (error: any) {
-        
+    Swal.fire({
+      title: `¿Estás seguro de querer cambiar el número de pases de ${name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Cambiar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await putPassesEmployee(
+            companyId,
+            userId,
+            newPasses,
+          );
+          await Swal.fire(
+            `Se ha cambiado el número de pases de ${name} a ${newPasses} correctamente`,
+            '',
+            'success',
+          );
+          setIsModalOpen(false);
+          window.location.reload();
+        } catch (error) {
+          Swal.fire('Error', error, 'error');
+        }
       }
-    }    
-    
-    console.log('enviando formulario');
-  };  
+    });
+  };
 
   return (
-    <div className="flex flex-col justify-between rounded-lg bg-white p-4 shadow-md">
+    <div
+      className={
+        status === 'blocked'
+          ? 'flex flex-col justify-between rounded-lg bg-red-50 p-4 shadow-md'
+          : 'flex flex-col justify-between rounded-lg bg-white p-4 shadow-md'
+      }
+    >
       <div className="flex">
         <div className="flex items-start space-x-4 break-all">
           <img
@@ -128,22 +173,34 @@ const MemberCard: React.FC<MemberCardProps> = ({
         <Modal isOpen={isModalOpen} onClose={onModalClick}>
           <form onSubmit={handleSubmit}>
             <label htmlFor="">Cantidad de pases</label>
-            <input className="rounded-full bg-gray-300" type="number" onChange={handleChange} name={name} />
-            <button className='btn btn-confirm' type='submit'>Confirmar</button>
+            <input
+              className="rounded-full bg-gray-300"
+              type="number"
+              onChange={handleChange}
+              name={name}
+            />
+            <button className="btn btn-confirm" type="submit">
+              Confirmar
+            </button>
           </form>
         </Modal>
-        <button
-          onClick={onModalClick}
-          className="text-md my-4 mr-4 rounded-full bg-custom-primary px-4 py-1 font-semibold text-custom-secondary hover:bg-custom-secondary hover:text-custom-primary"
-        >
-          Pases
-        </button>
-        <button
-          className="text-md my-4 mr-4 rounded-full bg-gray-300 px-4 py-1 font-semibold text-custom-secondary hover:bg-red-500 hover:text-white"
-          onClick={status ? handleBlockClick : handleActivateClick}
-        >
-          {status === 'active' ? 'Bloquear' : 'Activar'}
-        </button>
+        {role === 'employee' && (
+          <button
+            onClick={onModalClick}
+            className="text-md my-4 mr-4 rounded-full bg-custom-primary px-4 py-1 font-semibold text-custom-secondary hover:bg-custom-secondary hover:text-custom-primary"
+          >
+            Pases
+          </button>
+        )}
+
+        {role === 'employee' && (
+          <button
+            className="text-md my-4 mr-4 rounded-full bg-gray-300 px-4 py-1 font-semibold text-custom-secondary hover:bg-red-500 hover:text-white"
+            onClick={handleStatusClick}
+          >
+            {status === 'active' ? 'Bloquear' : 'Activar'}
+          </button>
+        )}
       </div>
     </div>
   );

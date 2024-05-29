@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import CoworkingStatus from '../statusCoworking.tsx';
 import EditAmenities from './CoworkingAmenities';
 import EditCoworkingLocation from './coworkingLocation';
@@ -103,10 +104,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
             </div>
 
             <EditCoworkingLocation coworking={coworking} />
-            <button
-              onClick={handleClick}
-              className="mx-auto w-1/2 rounded bg-custom-primary px-4 py-2 text-white"
-            >
+            <button onClick={handleClick} className="btn btn-confirm">
               Actualizar Informacion
             </button>
             <CoworkingReceptionists
