@@ -4,10 +4,10 @@ import { arrayNewCoworkingForm } from '@/utils/arraysforms/arrayNewCoworking';
 import generateTimeOptions from '@/utils/timeoptions/generateTimeOptions';
 import useCreateCoworking from './useCreateCoworking';
 
-
 const CoworkingForm = () => {
-  const { formData, setFormData, handleChange, handleSubmit }=useCreateCoworking();
-  
+  const { formData, setFormData, handleChange, handleSubmit } =
+    useCreateCoworking();
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="mb-4 text-2xl font-semibold">Crear Nuevo Coworking</h2>

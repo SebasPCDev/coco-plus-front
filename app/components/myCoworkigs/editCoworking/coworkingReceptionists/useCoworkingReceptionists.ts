@@ -19,7 +19,7 @@ const UseCoworkingReceptionists = ({
     const { name, value } = e.target;
     setNewUserForm({ ...newUserForm, [name]: value });
   };
-  const handleClickNewUser = async (e: MouseEvent) => {
+  const handleClickNewUser = async (e: any) => {
     e.preventDefault();
 
     const response = await PostNewUserReceptCoworking({

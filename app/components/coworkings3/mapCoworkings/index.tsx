@@ -12,7 +12,15 @@ const INITIAL_CAMERA: MapCameraProps = {
   zoom: 3,
 };
 
-const MapCoworking = ({ coworkings, cameraPropsNew, FilterMap }) => {
+const MapCoworking = ({
+  coworkings,
+  cameraPropsNew,
+  FilterMap,
+}: {
+  coworkings: any;
+  cameraPropsNew: any;
+  FilterMap: any;
+}) => {
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
@@ -32,7 +40,7 @@ const MapCoworking = ({ coworkings, cameraPropsNew, FilterMap }) => {
 
   const responseMarker = async () => {
     if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map(async (coworking) => {
+      const arrayMarkersCoworkings = coworkings.map(async (coworking: any) => {
         if (coworking.lat && coworking.long) {
           return { lat: Number(coworking.lat), lng: Number(coworking.long) };
         }
@@ -53,7 +61,7 @@ const MapCoworking = ({ coworkings, cameraPropsNew, FilterMap }) => {
       style={{ width: '100%', height: '500px' }}
     >
       {markersCoworking &&
-        markersCoworking.map((marker, index) => (
+        markersCoworking.map((marker: any, index: any) => (
           <Marker key={index} position={marker} />
         ))}
     </Map>

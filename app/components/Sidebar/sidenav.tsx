@@ -41,7 +41,7 @@ export default function SideNav() {
         className={`bg-custom-fourth shadow-md ${styles.buttonAndLogoResponsive}`}
       >
         <Link onClick={handleOnLinked} href="/" className="LogoResponsive">
-          <div className="">
+          <div className=""> 
             <CocoLogo />
           </div>
         </Link>

@@ -1,8 +1,10 @@
 import { ICompanyProfileUpdDto } from '@/utils/types/companies/companyProfileInterface';
 import { axiosApi } from '../api';
 
-const updProfileCompany = async (id: string, changes: ICompanyProfileUpdDto) => {
-
+const updProfileCompany = async (
+  id: string,
+  changes: ICompanyProfileUpdDto,
+) => {
   changes.quantityBeneficiaries = Number(changes.quantityBeneficiaries);
 
   try {

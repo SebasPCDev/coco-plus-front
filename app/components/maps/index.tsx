@@ -24,14 +24,15 @@ const ControlledMap = () => {
     setCameraProps(ev.detail);
     console.log(ev);
   };
-  const handleClick = (ev) => { 
+  const handleClick = (ev: any) => {
     console.log(ev);
-  }
+  };
 
   return (
     <Map
       {...cameraProps}
-      onCameraChanged={handleCameraChange} onClick={handleClick}
+      onCameraChanged={handleCameraChange}
+      onClick={handleClick}
       style={{ width: '100%', height: '500px' }}
     >
       <Marker position={{ lat: 29.5, lng: -81.2 }} />

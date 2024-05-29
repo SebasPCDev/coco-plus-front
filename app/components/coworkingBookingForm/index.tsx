@@ -4,7 +4,7 @@ import useCoworkingsForm from '../requests/coworkingsForm/useCoworkingsForm';
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import MapCoworking from '@/app/dashboard/employee/mapCoworkings';
+import MapCoworking from '@/app/dashboard/employee/bookings/mapCoworkings';
 
 export default function CoworkingBookingForm({
   currentCoworking,
