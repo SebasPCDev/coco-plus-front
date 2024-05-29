@@ -1,4 +1,8 @@
-export const putDataUser = async (token: string, modifiedData, id: string) => {
+export const putDataUser = async (
+  token: string,
+  modifiedData: any,
+  id: string,
+) => {
   try {
     const urlBase = process.env.NEXT_PUBLIC_API_URL;
 

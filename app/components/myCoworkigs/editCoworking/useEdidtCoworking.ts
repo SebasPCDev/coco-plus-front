@@ -13,7 +13,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   const [newInfo, setNewInfo] = useState({});
   const [arrayIdAmenities, setArrayIdAmenities] = useState<string[]>([]);
 
-  const [coworking, setCoworking] = useState<Coworking>(initialCoworking);
+  const [coworking, setCoworking] = useState<any>(initialCoworking);
 
   useEffect(() => {
     console.log('coworking', coworking);
@@ -32,7 +32,6 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     });
     console.log('arrayIdAmenities', arrayIdAmenities);
     console.log('newInfo', newInfo);
-    
   }, [arrayIdAmenities]);
 
   const getData = async () => {
@@ -46,7 +45,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     setMyCoworking(coworkingData);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     e.preventDefault();
     const { name, value } = e.target;
 
@@ -102,7 +101,8 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     };
 
     const result = await Swal.fire({
-      title: 'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
+      title:
+        'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si',

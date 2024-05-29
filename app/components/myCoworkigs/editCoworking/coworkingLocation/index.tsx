@@ -46,7 +46,7 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2 className="mb-4 text-xl font-bold">Seleccionar Opciones</h2>
         <div className="space-y-2">
-          {options.map((option) => (
+          {options.map((option: any) => (
             <div key={option.id} className="flex items-center">
               <input
                 type="checkbox"

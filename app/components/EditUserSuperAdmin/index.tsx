@@ -5,7 +5,7 @@ import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
-export const EditUserSuperAdmin = ({ id }) => {
+export const EditUserSuperAdmin = ({ id }: { id: string }) => {
   const router = useRouter();
   const token = Cookie.get('token');
 
@@ -68,7 +68,7 @@ export const EditUserSuperAdmin = ({ id }) => {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Actualizar',
     }).then(async (result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && token) {
         try {
           const updatedData = await putDataUserEmployee(
             token,

@@ -80,10 +80,15 @@ export const EditCoworkSuperAdmin = ({ id }: { id: string }) => {
   const handleClick = async (event: any) => {
     event.preventDefault();
 
-    const modifiedData = {};
+    type NewDataType = typeof newData;
+    const modifiedData: Partial<NewDataType> = {};
+
     for (const key in newData) {
-      if (newData[key] !== '' && newData[key] !== 0) {
-        modifiedData[key] = newData[key];
+      if (newData.hasOwnProperty(key)) {
+        const value = newData[key as keyof NewDataType];
+        if (value !== '') {
+          modifiedData[key as keyof NewDataType] = value;
+        }
       }
     }
 

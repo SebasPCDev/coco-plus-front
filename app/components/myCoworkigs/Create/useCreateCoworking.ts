@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 const useCreateCoworking = () => {
   const router = useRouter();
-  const initialState = {
+  const initialState: any = {
     name: '',
     phone: '',
     email: '',
@@ -62,7 +62,7 @@ const useCreateCoworking = () => {
           return;
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       alert(error.response.data.message);
     }
   };
