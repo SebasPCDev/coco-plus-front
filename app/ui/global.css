@@ -156,3 +156,10 @@ body {
 .search-icon-booking {
   @apply pointer-events-none absolute right-4 top-1/2 w-6 -translate-y-1/2 transform text-slate-700 transition-transform duration-300 group-hover:rotate-45;
 }
+
+/* linear gradien for footer */
+
+.gradient-footer{
+  background: rgb(39,59,37);
+  background: linear-gradient(36deg, rgba(39,59,37,1) 0%, rgba(25,35,39,1) 100%); 
+}
