@@ -34,8 +34,6 @@ const SearchCoworking = ({
             País
           </option>
           {countries.map((country, index) => {
-            console.log(country);
-            
             const { id, name } = country;
             return (
               <option
@@ -47,8 +45,7 @@ const SearchCoworking = ({
                 {name}
               </option>
             );
-            
-          } )}
+          })}
         </select>
       </div>
       <div className="group relative w-[300px]">
@@ -63,8 +60,6 @@ const SearchCoworking = ({
             Estado/Provincia
           </option>
           {states?.map((state, index) => {
-            console.log(state);
-            
             const { id, name } = state;
             return (
               <option
@@ -92,8 +87,6 @@ const SearchCoworking = ({
             Ciudad
           </option>
           {cities.map((city, index) => {
-            console.log(city);
-            
             const { id, name } = city;
             return (
               <option
