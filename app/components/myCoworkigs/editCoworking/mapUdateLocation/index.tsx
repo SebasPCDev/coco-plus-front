@@ -14,7 +14,7 @@ const INITIAL_CAMERA: MapCameraProps = {
   zoom: 17,
 };
 
-const UpdatedLocationMap = () => {
+const UpdatedLocationMap = ({ cameraPropsNew }) => {
   const { Mycoworking, setMyCoworking } = useMyCoworkingContext();
   const [location, setLocation] = useState<any>({
     lat: Number(Mycoworking.lat),
@@ -23,7 +23,16 @@ const UpdatedLocationMap = () => {
 
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
+  
+  useEffect(() => {
+    setCameraProps((prevProps) => ({
+        ...prevProps,
+        ...cameraPropsNew,
+      }));
 
+      
+    
+  }, [cameraPropsNew]);
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
     setCameraProps(ev.detail);
     console.log(ev);
