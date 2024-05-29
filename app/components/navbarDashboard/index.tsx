@@ -2,10 +2,10 @@
 import styles from './navbarDashboard.module.css';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useUserContext } from '../context';
 import tradRoles from '@/utils/types/users/usersRoles';
+import { UserSession } from '@/app/lib/definitions';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -18,9 +18,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function NavbarDashboard() {
-  const { user } = useUserContext();
-
+export default function NavbarDashboard({ user }: { user: UserSession }) {
   return (
     <Disclosure
       as="nav"

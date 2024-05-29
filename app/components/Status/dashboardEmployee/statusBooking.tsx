@@ -1,7 +1,5 @@
 import { BookingStatus } from '@/utils/types/bookings/bookingStatus.enum';
-import { CompanyStatus } from '@/utils/types/companies/companyStatus.enum';
 import { CheckIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/outline';
-
 import clsx from 'clsx';
 
 export default function BookingStatusFunction({ status }: { status: string }) {

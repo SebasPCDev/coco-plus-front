@@ -1,7 +1,16 @@
 'use client';
-import { ChangeStatusCompany, ChangeStatusCoworking } from '@/app/lib/actions';
+import {
+  ChangeStatusCompany,
+  ChangeStatusCoworking,
+  approveBookingCoworking,
+  cancelBookingCoworking,
+  cancelBookingUser,
+  checkInBookingCoworking,
+  checkInBookingUser,
+} from '@/app/lib/actions';
 import {
   CheckCircleIcon,
+  DocumentCheckIcon,
   DocumentMinusIcon,
   EyeIcon,
   PencilIcon,
@@ -253,12 +262,249 @@ export function UserDescription({ id }: { id: string }) {
   );
 }
 
-export function CheckInEmployee({ id }: { id: string }) {
+export function CheckInEmployee({
+  id,
+  confirmUser,
+  status,
+}: {
+  id: string;
+  confirmUser: boolean;
+  status: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer realizar el check-in?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Check-in',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          checkInBookingUser({ id });
+          Swal.fire(`Se ha realizado el check-in correctamente`, '', 'success');
+        } catch (error: any) {
+          Swal.fire('Error', error, 'error');
+        }
+      }
+    });
+  };
   return (
     <>
-      <button className="rounded-md border p-2 hover:bg-gray-200">
+      <button
+        onClick={handleClick}
+        className={
+          confirmUser || status !== 'active'
+            ? 'cursor-not-allowed rounded-md border p-2 opacity-50 hover:bg-gray-200'
+            : 'rounded-md border p-2 hover:bg-lime-100'
+        }
+        disabled={confirmUser || status !== 'active'}
+      >
+        <span className="sr-only">CheckIn</span>
+        <CheckCircleIcon
+          className={
+            confirmUser ? 'w-8 cursor-not-allowed' : 'w-8 text-green-500 '
+          }
+        />
+      </button>
+    </>
+  );
+}
+
+export function CancelBookingUser({
+  id,
+  status,
+}: {
+  id: string;
+  status: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer cancelar la reserva?',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#222B2D',
+      cancelButtonText: '',
+      confirmButtonText: 'Si, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          cancelBookingUser({ id });
+          Swal.fire(`Se ha cancelado la reserva correctamente`, '', 'success');
+        } catch (error: any) {
+          Swal.fire('Error', error, 'error');
+        }
+      }
+    });
+  };
+  return (
+    <>
+      <button
+        onClick={handleClick}
+        className={
+          status === 'user_canceled' ||
+          status === 'coworking_canceled' ||
+          status === 'completed' ||
+          status === 'no_show'
+            ? 'cursor-not-allowed rounded-md border p-2 opacity-50 hover:bg-gray-200'
+            : 'rounded-md border p-2 hover:bg-gray-200'
+        }
+        disabled={
+          status === 'user_canceled' ||
+          status === 'coworking_canceled' ||
+          status === 'completed' ||
+          status === 'no_show'
+        }
+      >
         <span className="sr-only">Description</span>
-        <CheckCircleIcon className="w-8 text-green-500" />
+        <XCircleIcon className="w-8 text-red-600" />
+      </button>
+    </>
+  );
+}
+
+export function CheckInCoworking({
+  id,
+  confirmCoworking,
+  status,
+}: {
+  id: string;
+  confirmCoworking: boolean;
+  status: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer realizar el check-in?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Check-in',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          checkInBookingCoworking({ id });
+          Swal.fire(`Se ha realizado el check-in correctamente`, '', 'success');
+        } catch (error: any) {
+          Swal.fire('Error', error, 'error');
+        }
+      }
+    });
+  };
+  return (
+    <>
+      <button
+        onClick={handleClick}
+        className={
+          confirmCoworking || status !== 'active'
+            ? 'cursor-not-allowed rounded-md border p-2 opacity-50 hover:bg-gray-200'
+            : 'rounded-md border p-2 hover:bg-lime-100'
+        }
+        disabled={confirmCoworking || status !== 'active'}
+      >
+        <span className="sr-only">CheckIn</span>
+        <CheckCircleIcon
+          className={
+            confirmCoworking ? 'w-8 cursor-not-allowed' : 'w-8 text-green-500 '
+          }
+        />
+      </button>
+    </>
+  );
+}
+
+export function CancelBookingCoworking({
+  id,
+  status,
+}: {
+  id: string;
+  status: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer cancelar la reserva?',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#222B2D',
+      cancelButtonText: '',
+      confirmButtonText: 'Si, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          cancelBookingCoworking({ id });
+          Swal.fire(`Se ha cancelado la reserva correctamente`, '', 'success');
+        } catch (error: any) {
+          Swal.fire('Error', error, 'error');
+        }
+      }
+    });
+  };
+  return (
+    <>
+      <button
+        onClick={handleClick}
+        className={
+          status === 'user_canceled' ||
+          status === 'coworking_canceled' ||
+          status === 'completed' ||
+          status === 'no_show'
+            ? 'cursor-not-allowed rounded-md border p-2 opacity-50 hover:bg-gray-200'
+            : 'rounded-md border p-2 hover:bg-gray-200'
+        }
+        disabled={
+          status === 'user_canceled' ||
+          status === 'coworking_canceled' ||
+          status === 'completed' ||
+          status === 'no_show'
+        }
+      >
+        <span className="sr-only">Description</span>
+        <XCircleIcon className="w-8 text-red-600" />
+      </button>
+    </>
+  );
+}
+
+export function ApproveBooking({
+  bookingId,
+  coworkId,
+}: {
+  bookingId: string;
+  coworkId: string;
+}) {
+  const handleClick = () => {
+    Swal.fire({
+      title: '¿Estás seguro de aprobar esta reserva?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aprobar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          approveBookingCoworking({ coworkId, bookingId });
+          Swal.fire(`Se ha realizado el check-in correctamente`, '', 'success');
+        } catch (error: any) {
+          Swal.fire('Error', error, 'error');
+        }
+      }
+    });
+  };
+  return (
+    <>
+      <button
+        onClick={handleClick}
+        className={'rounded-md border p-2 hover:bg-lime-100'}
+      >
+        <span className="sr-only">Approve</span>
+        <DocumentCheckIcon className={'w-8 cursor-pointer text-green-500'} />
       </button>
     </>
   );
