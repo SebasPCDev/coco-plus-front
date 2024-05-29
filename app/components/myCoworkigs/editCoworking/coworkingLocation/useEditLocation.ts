@@ -94,7 +94,7 @@ const UseEditLocation = () => {
         current = country.name;
         setCameraPropsNew({
           center: { lat: Number(country?.lat), lng: Number(country?.long) },
-          zoom: 5,
+          zoom: 6,
         });
       } else {
         setCameraPropsNew({
@@ -123,7 +123,7 @@ const UseEditLocation = () => {
         current = state.name;
         setCameraPropsNew({
           center: { lat: Number(state?.lat), lng: Number(state?.long) },
-          zoom: 7,
+          zoom: 10,
         });
       }
 
@@ -146,7 +146,7 @@ const UseEditLocation = () => {
         current = city.name;
         setCameraPropsNew({
           center: { lat: Number(city?.lat), lng: Number(city?.long) },
-          zoom: 12,
+          zoom: 15,
         });
       }
       newAdress.country = address.country;
@@ -230,8 +230,7 @@ const UseEditLocation = () => {
       const response = await GetAddressByParams({ address: addressquery });
       if (response.length == 0) {
         alert('no se encontraron resultados  buelva a ingresar un ' + name);
-      } else if (response.length >0) {
-
+      } else if (response.length > 0) {
         const newState = {
           name: response[0].name,
           lat: response[0].lat,
@@ -243,15 +242,14 @@ const UseEditLocation = () => {
             lat: Number(response[0].lat),
             lng: Number(response[0].lon),
           },
-          zoom: 7,
+          zoom: 9,
         });
         console.log(newState);
-        
+
         const ResponsePostState = await postState({ newState });
         console.log(ResponsePostState);
-        
+
         setStateId(ResponsePostState.id);
-        
 
         const estandarName = response[0].name;
 
@@ -285,13 +283,13 @@ const UseEditLocation = () => {
           lat: response[0].lat,
           long: response[0].lon,
           stateId: StateId,
-        }
+        };
         setCameraPropsNew({
           center: {
             lat: Number(response[0].lat),
             lng: Number(response[0].lon),
           },
-          zoom: 12,
+          zoom: 14,
         });
         const ResponsePostCity = await postCity({ newCity });
         const estandarName = response[0].name;
@@ -322,6 +320,13 @@ const UseEditLocation = () => {
       if (responseGoogle.length == 0) {
         alert('no se encontraron resultados  buelva a ingresar un ' + name);
       } else if (responseGoogle.length == 1) {
+        setCameraPropsNew({
+          center: {
+            lat: Number(responseGoogle[0].geometry.location.lat()),
+            lng: Number(responseGoogle[0].geometry.location.lng()),
+          },
+          zoom: 17,
+        });
         const corde = {
           lat: String(responseGoogle[0].geometry.location.lat()),
           long: String(responseGoogle[0].geometry.location.lng()),
@@ -361,6 +366,13 @@ const UseEditLocation = () => {
           lat: String(responseGoogle[0].geometry.location.lat()),
           long: String(responseGoogle[0].geometry.location.lng()),
         };
+        setCameraPropsNew({
+          center: {
+            lat: Number(responseGoogle[0].geometry.location.lat()),
+            lng: Number(responseGoogle[0].geometry.location.lng()),
+          },
+          zoom: 17,
+        });
         setAddress({
           ...address,
           address: responseGoogle[0].formatted_address,
