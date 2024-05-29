@@ -14,9 +14,7 @@ export default async function MyCoworkigs() {
     <div className="mx-auto">
       <div className="my-4 flex justify-end">
         <Link href="/dashboard/adminCoworking/myCoworkings/create">
-          <button className=" rounded bg-custom-primary px-4 py-2 text-white hover:bg-green-600">
-            Añadir Coworking
-          </button>
+          <button className=" btn btn-confirm">Añadir Coworking</button>
         </Link>
       </div>
 

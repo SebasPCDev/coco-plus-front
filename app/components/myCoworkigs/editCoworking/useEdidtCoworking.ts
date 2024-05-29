@@ -71,26 +71,28 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   }, [Mycoworking]);
 
   const handleClick = async () => {
-    Swal.fire({
+    const result = await Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Guardar',
       denyButtonText: `No'No guardar`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('guardado', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info');
-        return;
-      }
     });
-    const response = await PutUpdateCoworking({ id, newInfo, token });
-    await getData();
-    console.log(newInfo);
+    if (result.isConfirmed) {
+      try {
+        const response = await PutUpdateCoworking({ id, newInfo, token });
+        await getData();
+        console.log(newInfo);
 
-    console.log(response);
+        console.log(response);
+        Swal.fire('guardado', '', 'success');
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info');
+      return;
+    }
   };
 
   useEffect(() => {
