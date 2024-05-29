@@ -43,6 +43,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
     setCoworking(coworkingData);
     setMyCoworking(coworkingData);
+    return coworkingData.status;
   };
 
   const handleChange = (e: any) => {
@@ -93,7 +94,23 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   };
 
   useEffect(() => {
-    getData();
+    const checkStatus = async () => {
+      const status = await getData();
+      if (status === 'pending') {
+        Swal.fire({
+          title:
+            'Este coworking aún no se encuentra activado, diligencie la información de la ubicación y una foto de portada para poder activarlo.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No',
+          confirmButtonColor: '#222B2D',
+          cancelButtonColor: '#d33',
+        });
+      }
+    };
+
+    checkStatus();
   }, []);
   const onClickActivate = async () => {
     const newInfo = {

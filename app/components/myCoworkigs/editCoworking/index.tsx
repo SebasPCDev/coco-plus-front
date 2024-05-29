@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import CoworkingStatus from '../statusCoworking.tsx';
 import EditAmenities from './CoworkingAmenities';
 import EditCoworkingLocation from './coworkingLocation';
@@ -19,6 +20,8 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
     arrayIdAmenities,
     setArrayIdAmenities,
   } = useEdidtCoworking({ id: id });
+
+
 
   return (
     <div className="container mx-auto p-4">
