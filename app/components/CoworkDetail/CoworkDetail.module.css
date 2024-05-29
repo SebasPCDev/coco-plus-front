@@ -5,16 +5,7 @@
     flex-direction: column;
   }
   
-  .btn {
-    background: rgb(255,68,0);
-    background: linear-gradient(323deg, rgb(228, 61, 0) 0%, rgb(235, 172, 0) 100%);
-    color: hsl(0, 0%, 100%);
-    font-weight: 500;
-    max-width: max-content;
-    padding: 12px 28px;
-    box-shadow:  -5px -5px 10px #b6b6b6,
-               5px 5px 10px #ededed;
-  }
+
   
   .btn:is(:hover, :focus) { background-color: hsl(142, 72%, 29%); }
   
@@ -61,7 +52,10 @@
     object-fit: cover;
   }
   
-  .sectiontitle { color: hsl(224, 34%, 13%); }
+  .sectiontitle { 
+    color: hsl(224, 34%, 13%); 
+    
+  }
   
   .textoseccion { line-height: 1.6; }
   
@@ -225,12 +219,12 @@
   }
   
   .budgetexp .value {
-    font-size: 1.5em;
+    font-size: 1.1rem;
     font-weight: 600;
   }
   
   .budgetexp .label {
-    font-size: 1.5em;
+    font-size: 1rem;
     color: #072e00;
   }
   
@@ -263,6 +257,47 @@
       width: 37rem;
     }
     
+  }
+
+  .amenities{
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    width: 85%;
+    max-width: 1200px;
+    background-color: #e4e4e4;
+    border: 1px solid #bbbbbb;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+  }
+
+  .ammContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 1rem;
+  }
+
+  .amTitle h2{
+    margin-bottom: 1rem;
+  }
+
+  .ammItem{
+    background: #d8ebd8;
+    border: 1px solid #98b498;
+    border-radius: .3rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
+
+  .ammItem h3{
+    padding: 5px;
+    border-bottom: 1px solid #98b498;
+    margin-bottom: 10px;
   }
   
   
@@ -315,6 +350,15 @@
     
   }
   
+  @media screen and (max-width: 720px) {
+    .ammContainer{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+
   @media (min-width: 1030px) {
   
     .contenedor,
@@ -366,12 +410,12 @@
     }
     
     .budgetexp .value {
-      font-size: 1.5em;
+      font-size: 1.2rem;
       font-weight: 600;
     }
     
     .budgetexp .label {
-      font-size: 1.5em;
+      font-size: 1.1rem;
       color: #072e00;
     }
   
@@ -431,6 +475,11 @@
   }
   
   .tags p {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
     padding: 0.2em 0.5em;
     font-size: 13px;

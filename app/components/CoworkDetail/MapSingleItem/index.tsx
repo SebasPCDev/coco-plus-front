@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Map, MapCameraChangedEvent, MapCameraProps, Marker } from '@vis.gl/react-google-maps';
+import {
+  Map,
+  MapCameraChangedEvent,
+  MapCameraProps,
+  Marker,
+} from '@vis.gl/react-google-maps';
 import { geocodeAddress } from '@/utils/geocodeAdressAndReverse';
 
 const INITIAL_CAMERA: MapCameraProps = {
@@ -8,9 +13,10 @@ const INITIAL_CAMERA: MapCameraProps = {
   zoom: 5,
 };
 
-const MapSingleItem = ({ item }) => {
-  const [markerPosition, setMarkerPosition] = useState(null);
-  const [cameraProps, setCameraProps] = useState<MapCameraProps>(INITIAL_CAMERA);
+const MapSingleItem = ({ item }: { item: any }) => {
+  const [markerPosition, setMarkerPosition] = useState(null as any | null);
+  const [cameraProps, setCameraProps] =
+    useState<MapCameraProps>(INITIAL_CAMERA);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
     setCameraProps(ev.detail);
@@ -18,7 +24,9 @@ const MapSingleItem = ({ item }) => {
 
   const setMapLocation = async () => {
     if (item && item.country) {
-      const location = await geocodeAddress(`${item.city || ''}, ${item.state || ''}, ${item.country}`);
+      const location = await geocodeAddress(
+        `${item.city || ''}, ${item.state || ''}, ${item.country}`,
+      );
       const lat = location[0].geometry.location.lat();
       const lng = location[0].geometry.location.lng();
       setMarkerPosition({ lat: Number(lat), lng: Number(lng) });

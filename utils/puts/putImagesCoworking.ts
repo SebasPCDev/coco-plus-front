@@ -9,8 +9,9 @@ const PutImagesCoworking = async ({
   formData: FormData;
   token: string | undefined;
 }) => {
+  const url = process.env.NEXT_PUBLIC_API_URL
   const response = await axios.put(
-    `http://localhost:3000/files/upload-image-coworking/${id}`,
+    `${url}/files/upload-image-coworking/${id}`,
     formData,
     {
       headers: {

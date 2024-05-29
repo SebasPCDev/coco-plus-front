@@ -100,7 +100,7 @@ const useCoworkings = () => {
     }
     setFilter(newfilter);
   };
-  const FilterMap = async (bounds) => {
+  const FilterMap = async (bounds: any) => {
     const { south, west, north, east } = bounds;
 
     const filteredCoworkings = Allcoworkings.filter((coworking) => {

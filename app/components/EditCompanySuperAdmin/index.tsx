@@ -5,7 +5,7 @@ import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
-export const EditCompanySuperAdmin = ({ id }) => {
+export const EditCompanySuperAdmin = ({ id }: { id: string }) => {
   const router = useRouter();
   const token = Cookie.get('token');
 
@@ -45,7 +45,8 @@ export const EditCompanySuperAdmin = ({ id }) => {
       return;
     }
 
-    const modifiedData = {};
+    const modifiedData: Partial<typeof newData> = {};
+
     for (const key in newData) {
       if (newData[key] !== '' && newData[key] !== 0) {
         modifiedData[key] = newData[key];

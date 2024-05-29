@@ -1,3 +1,4 @@
+import { Role } from '@/utils/types/users/usersRoles';
 
 export type UserSession = {
   id: string;
@@ -9,15 +10,15 @@ export type UserSession = {
   position: string;
   recoveryToken: string;
   activationDate: Date;
-  role: string;
+  role: Role;
   status: string;
   expiresAt: Date;
-}
+};
 
 export type SessionPayload = {
   user: UserSession;
   token: string;
-}
+};
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.

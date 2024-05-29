@@ -1,1 +1,1 @@
-export {default} from '@/app/components/receptionistBookings';
+export { default } from '@/app/components/receptionistBookings';
