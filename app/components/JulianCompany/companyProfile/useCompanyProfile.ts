@@ -64,6 +64,7 @@ const useCompanyProfile = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const { id, totalPasses, ...data } = companyProfile;
 
     if (data.status === CompanyStatus.ACCEPTED) {
@@ -96,6 +97,13 @@ const useCompanyProfile = () => {
           icon: 'error',
         });
       }
+    } else {
+      Swal.fire({
+        title: 'Error en los campos',
+        text: 'No tienes permiso para esto',
+        icon: 'error',
+        width: '32em',
+      });
     }
   };
 
