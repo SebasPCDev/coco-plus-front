@@ -291,8 +291,13 @@ export const CoworksRoute: React.FC = () => {
           {coworkings.map((cowork) => {
             return (
               <li key={cowork.name}>
-                <Link
+                {/* <Link
                   href={`http://localhost:3001/coworkings/${cowork.id}`}
+                >
+                  <CoworkCard cowork={cowork} />
+                </Link> */}
+                <Link
+                  href={`/coworkings/${cowork.id}`}
                 >
                   <CoworkCard cowork={cowork} />
                 </Link>

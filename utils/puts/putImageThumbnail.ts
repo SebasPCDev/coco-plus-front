@@ -9,8 +9,10 @@ const PutImageThumbnail = async ({
   imageThumbnail: FormData;
   token: string | undefined;
 }) => {
+  const url = process.env.NEXT_PUBLIC_API_URL
+
   const response = await axios.put(
-    `http://localhost:3000/files/upload-thumbnail-coworking/${id}`,
+    `${url}/files/upload-thumbnail-coworking/${id}`,
     imageThumbnail,
     {
       headers: {
