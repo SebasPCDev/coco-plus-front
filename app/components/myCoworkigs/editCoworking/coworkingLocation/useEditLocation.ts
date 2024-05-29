@@ -5,6 +5,10 @@ import GetAddressFree from '@/utils/gets/apiNominatim/getAadressFree';
 import { useMyCoworkingContext } from '../../myCoworkingConstext';
 import { geocodeAddress } from '@/utils/geocodeAdressAndReverse';
 import getoptionsFilterLocations from '@/utils/gets/getOptionFilterAndLocation';
+import normalizeString from '@/utils/normalize/normalizeString';
+import postCountry from '@/utils/posts/Geography/postCountry';
+import postState from '@/utils/posts/Geography/postState';
+import postCity from '@/utils/posts/Geography/postCity';
 interface ResponseItem {
   place_id?: number;
   licence?: string;
@@ -45,6 +49,8 @@ const UseEditLocation = () => {
     zoom: 3,
   });
   const [optionRender, setOptionRender] = useState('address');
+  const [CountryId, setCountryId] = useState(0);
+  const [StateId, setStateId] = useState(0);
 
   const getOptions = async () => {
     const options = await getoptionsFilterLocations({ filter });
@@ -84,6 +90,7 @@ const UseEditLocation = () => {
         const country = countries.find(
           (country) => country.id === Number(value),
         );
+        setCountryId(Number(value));
         current = country.name;
         setCameraPropsNew({
           center: { lat: Number(country?.lat), lng: Number(country?.long) },
@@ -112,6 +119,7 @@ const UseEditLocation = () => {
       } else if (value) {
         setOptionRender('address');
         const state = states.find((state) => state.id == value);
+        setStateId(Number(value));
         current = state.name;
         setCameraPropsNew({
           center: { lat: Number(state?.lat), lng: Number(state?.long) },
@@ -180,7 +188,127 @@ const UseEditLocation = () => {
     if (value == '') {
       return;
     }
-    if (name == 'address') {
+    if (name == 'country') {
+      const addressquery = { [name]: value };
+      setAddress(addressquery);
+
+      const response = await GetAddressByParams({ address: addressquery });
+      if (response.length == 0) {
+        alert('no se encontraron resultados  buelva a ingresar un ' + name);
+      } else if (response.length == 1) {
+        const estandarName = response[0].name;
+        const newCountry = {
+          name: estandarName,
+          lat: response[0].lat,
+          long: response[0].lon,
+        };
+        setCameraPropsNew({
+          center: {
+            lat: Number(response[0].lat),
+            lng: Number(response[0].lon),
+          },
+          zoom: 5,
+        });
+        const ResponsePostCountry = await postCountry({ newCountry });
+        setCountryId(ResponsePostCountry.id);
+
+        setAddress({ [name]: estandarName });
+      } else if (response.length > 1) {
+        setCurrentName(name);
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
+          name: option.name,
+          display_name: option.display_name,
+        }));
+        setOptions(options);
+        setIsModalOpen(true);
+      }
+    } else if (name == 'state') {
+      const addressquery = { country: address.country, [name]: value };
+      setAddress(addressquery);
+      const response = await GetAddressByParams({ address: addressquery });
+      if (response.length == 0) {
+        alert('no se encontraron resultados  buelva a ingresar un ' + name);
+      } else if (response.length == 1) {
+
+        const newState = {
+          name: response[0].name,
+          lat: response[0].lat,
+          long: response[0].lon,
+          countryId: CountryId,
+        };
+        setCameraPropsNew({
+          center: {
+            lat: Number(response[0].lat),
+            lng: Number(response[0].lon),
+          },
+          zoom: 7,
+        });
+        console.log(newState);
+        
+        const ResponsePostState = await postState({ newState });
+        console.log(ResponsePostState);
+        
+        setStateId(ResponsePostState.id);
+        
+
+        const estandarName = response[0].name;
+
+        setAddress({ country: address.country, [name]: estandarName });
+      } else if (response.length > 1) {
+        setCurrentName(name);
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
+          name: option.name,
+          display_name: option.display_name,
+        }));
+        setOptions(options);
+        setIsModalOpen(true);
+      }
+    } else if (name == 'city') {
+      const addressquery = {
+        country: address.country,
+        state: address.state,
+        [name]: value,
+      };
+      setAddress(addressquery);
+      const response = await GetAddressByParams({ address: addressquery });
+      console.log(response);
+
+      if (response.length == 0) {
+        alert('no se encontraron resultados  buelva a ingresar un ' + name);
+      } else if (response.length == 1) {
+        const newCity = {
+          name: response[0].name,
+          lat: response[0].lat,
+          long: response[0].lon,
+          stateId: StateId,
+        }
+        setCameraPropsNew({
+          center: {
+            lat: Number(response[0].lat),
+            lng: Number(response[0].lon),
+          },
+          zoom: 12,
+        });
+        const ResponsePostCity = await postCity({ newCity });
+        const estandarName = response[0].name;
+        setAddress({
+          country: address.country,
+          state: address.state,
+          [name]: estandarName,
+        });
+      } else if (response.length > 1) {
+        setCurrentName(name);
+        const options = (response as ResponseItem[]).map((option, index) => ({
+          idex: index,
+          name: option.name,
+          display_name: option.display_name,
+        }));
+        setOptions(options);
+        setIsModalOpen(true);
+      }
+    } else if (name == 'address') {
       setAddress({ ...address, [name]: value });
       const freeAddress = `${value} ${address.city} ${address.state} ${address.country}`;
       const responseGoogle = await geocodeAddress(freeAddress);
@@ -219,6 +347,7 @@ const UseEditLocation = () => {
   const handleCheck = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.checked ? e.target.value : '';
     const updatedAddress = { ...address, [currentName]: newValue };
+    const freeAddress = `${newValue} ${address.city} ${address.state} ${address.country}`;
     setAddress(updatedAddress);
 
     if (currentName === 'address' && newValue) {
