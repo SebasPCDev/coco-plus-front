@@ -4,7 +4,6 @@ import Modal from '../../myCoworkigs/Modals/ModalNewUser';
 import ReactStars from 'react-rating-stars-component';
 import postReview from '@/utils/posts/postReviews';
 import { useUserContext } from '../../context';
-import getProfile from '@/utils/api/users/getProfile';
 import GetBooking from '@/utils/gets/getBooking';
 
 export function WriteReviewButton({ id }: { id: string }) {
