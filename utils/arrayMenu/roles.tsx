@@ -83,6 +83,11 @@ const roles: Roles = {
       href: '/dashboard/coworking/bookingsList',
       icon: BookOpenIcon,
     },
+    {
+      name: 'Mis Reseñas',
+      href: '/dashboard/coworking/myReviews',
+      icon: BookOpenIcon,
+    },
   ],
 };
 
