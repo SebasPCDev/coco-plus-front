@@ -13,9 +13,9 @@ export default async function MyCoworkingDetail({ id }: { id: string }) {
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-4 text-center text-4xl font-bold">{coworking.name}</h1>
-      <div className="flex  flex-col  md:flex-row">
+      <div className="flex flex-col xl:flex-row">
         {/* contenedor 1*/}
-        <div className="mt-4 max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:mt-0 md:w-2/3">
+        <div className="mt-4 max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:mt-0 xl:w-2/3">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {<InfoCoworking coworking={coworking} />}
 
@@ -28,8 +28,8 @@ export default async function MyCoworkingDetail({ id }: { id: string }) {
           </div>
         </div>
         {/* contenedor 2 */}
-        <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:w-1/3">
-          <h2 className=" mb-2 text-xl font-semibold">imagen portada</h2>
+        <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg xl:w-1/3">
+          <h2 className=" mb-2 text-xl font-semibold">Imagen portada</h2>
 
           {coworking.thumbnail && (
             <Image

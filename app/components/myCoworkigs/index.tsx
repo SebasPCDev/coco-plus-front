@@ -25,12 +25,67 @@ export default async function MyCoworkigs() {
           <button className=" btn btn-confirm">Añadir Coworking</button>
         </Link>
       </div>
-
       <div className="mt-6 flow-root w-full">
         <div className="inline-block min-w-full align-middle">
           <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-            <table className="hidden min-w-full text-gray-900 md:table">
-              <thead className="rounded-lg text-center  font-normal">
+            <div className="xl:hidden ">
+              {MyCoworkings?.map((coworking: any) => (
+                <div
+                  key={coworking.id}
+                  className="mb-2 rounded-md bg-white p-4"
+                >
+                  <div className="flex items-center justify-between border-b pb-4">
+                    <div className="w-full">
+                      <div className="mb-2 flex items-center justify-between">
+                        <p className="font-bold">{coworking.name}</p>
+                        <CoworkingStatus status={coworking.status} />
+                      </div>
+                      <div>
+                        <p className=" text-gray-500">{coworking.email}</p>
+                      </div>
+                      <div className="grid sm:grid-cols-2 sm:grid-rows-2">
+                        <p className=" text-gray-500">
+                          <strong>Hora de apertura: </strong>
+                          {coworking.open.slice(0, 5)}
+                        </p>
+                        <p className="text-gray-500">
+                          <strong>Capacidad: </strong>
+                          {coworking.capacity}
+                        </p>
+                        <p className=" text-gray-500">
+                          <strong>Hora de Cierre: </strong>
+                          {coworking.close.slice(0, 5)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex w-full items-center justify-between pt-4">
+                    <div className="flex justify-end gap-2">
+                      <Link
+                        href={
+                          '/dashboard/adminCoworking/myCoworkings/edit/' +
+                          coworking.id
+                        }
+                        className="rounded-md border p-2 hover:bg-gray-100"
+                      >
+                        <PencilIcon className="w-8" />
+                      </Link>
+                      <Link
+                        href={
+                          '/dashboard/adminCoworking/myCoworkings/' +
+                          coworking.id
+                        }
+                        className="rounded-md border p-2 hover:bg-gray-100"
+                      >
+                        <EyeIcon className="w-8" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <table className="hidden min-w-full text-gray-900 xl:table">
+              <thead className="rounded-lg text-center font-normal">
                 <tr>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                     Nombre

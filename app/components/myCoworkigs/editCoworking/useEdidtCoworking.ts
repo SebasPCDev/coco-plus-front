@@ -119,7 +119,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
     const result = await Swal.fire({
       title:
-        'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
+        '¿Deseas activar el coworking? Una vez activado, los usuarios podrán visualizarlo y solicitar reservas',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si',

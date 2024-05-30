@@ -17,7 +17,7 @@ export default function StatusHandler() {
   const typeEntity = pathname.split('/').pop() || '';
 
   return (
-    <div className="my-4 flex gap-8 px-[1.5rem] text-sm">
+    <div className="my-4 flex flex-col gap-8 px-[1.5rem] text-sm sm:flex-row">
       <p className="flex items-center font-bold">Filtrar por:</p>
       <div className="relative rounded-full border-2 border-gray-300">
         <select
