@@ -2,13 +2,21 @@ import Header from '../header';
 import Banner from '../Banner';
 import HeaderMain from '../mainHeader';
 import Service from '../Service';
-import Coworkings from '../coworkings2';
-import Coworkings3 from '../coworkings3';
+// import Coworkings from '../coworkings2';
+import Coworkings3 from '../coworkings4';
 
-import MapCoworking from '../coworkings2/mapCoworkings';
+// import MapCoworking from '../coworkings2/mapCoworkings';
 import Footer from '../Footer';
+import getCountries from '@/utils/api/geography/getCountries';
+import getStates from '@/utils/api/geography/getStates';
+import getCities from '@/utils/api/geography/getCities';
 
-const Home = () => {
+const Home = async () => {
+
+  const allCountries = await getCountries();
+  const allStates = await getStates();
+  const allCities = await getCities();
+
   return (
     <div>
       <Header />
@@ -16,9 +24,9 @@ const Home = () => {
       <main className="mx-auto max-w-[1024px] p-10">
         <HeaderMain />
         <Service />
-        <Coworkings3 />
+        <Coworkings3 allCountries={allCountries} allStates={allStates} allCities={allCities} />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
