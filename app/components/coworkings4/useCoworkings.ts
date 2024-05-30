@@ -49,6 +49,7 @@ const useCoworkings = ({ allCountries, allStates, allCities }) => {
         });
       } else {
         setStates([]);
+        setCities([]);
         setCameraPropsNew({
           center: { lat: -17.797610035031738, lng: -63.52392568413111 },
           zoom: 3,
