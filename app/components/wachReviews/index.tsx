@@ -46,10 +46,12 @@ const ListReviews = () => {
   return (
     <div>
       {reviews.map((review) => (
-        <ReviewCard key={review.id} review={review} getAllReviews={getAllReviews} />
+        <ReviewCard
+          key={review.id}
+          review={review}
+          getAllReviews={getAllReviews}
+        />
       ))}
-
-      <h1>Aquí se verán las reseñas</h1>
     </div>
   );
 };

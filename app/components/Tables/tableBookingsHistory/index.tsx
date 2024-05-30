@@ -8,6 +8,7 @@ import WriteReviewButton from '../../Buttons/employes/WriteRevie';
 
 export default async function BookingsHistory() {
   const currentUser = await getProfile();
+
   return (
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
       <div className="flex justify-start gap-4">

@@ -23,6 +23,7 @@ const ReviewCard = ({ review, getAllReviews }) => {
 
     const response = await putResCoworkings({ id, respuesta, token });
     getAllReviews();
+    setContestar(false);
   };
 
   const { coworking_rating, date, comment, res_coworking, id } = review;
@@ -48,7 +49,7 @@ const ReviewCard = ({ review, getAllReviews }) => {
         <button
           type="button"
           onClick={handleContestar}
-          className="rounded-lg bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="btn btn-confirm"
         >
           Contestar
         </button>
@@ -64,7 +65,7 @@ const ReviewCard = ({ review, getAllReviews }) => {
           <button
             type="button"
             onClick={handleClick}
-            className="rounded-lg bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="btn btn-confirm"
             disabled={!res} // Disable submit button if response is empty
           >
             Enviar
