@@ -4,6 +4,7 @@ import {
   CancelBookingUser,
   CheckInEmployee,
 } from '../../Buttons/dashboardSuperadmin/buttons';
+import WriteReviewButton from '../../Buttons/employes/WriteRevie';
 
 export default async function BookingsHistory() {
   const currentUser = await getProfile();
@@ -157,6 +158,9 @@ export default async function BookingsHistory() {
                         />
                       ) : (
                         ''
+                      )}
+                      {booking.status === 'completed' && (
+                        <WriteReviewButton id={booking.id} />
                       )}
                     </div>
                   </td>
