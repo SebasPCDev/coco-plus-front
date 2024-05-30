@@ -2,7 +2,6 @@ import Header from '../header';
 import Banner from '../Banner';
 import HeaderMain from '../mainHeader';
 import Service from '../Service';
-// import Coworkings from '../coworkings2';
 import Coworkings3 from '../coworkings4';
 
 // import MapCoworking from '../coworkings2/mapCoworkings';
