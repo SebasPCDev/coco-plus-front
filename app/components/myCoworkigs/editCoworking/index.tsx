@@ -101,11 +101,13 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                 </div>
               </div>
             </div>
+            <div>
+              <EditCoworkingLocation coworking={coworking} />
+              <button onClick={handleClick} className="btn btn-confirm">
+                Actualizar Informacion
+              </button>
+            </div>
 
-            <EditCoworkingLocation coworking={coworking} />
-            <button onClick={handleClick} className="btn btn-confirm">
-              Actualizar Informacion
-            </button>
             <CoworkingReceptionists
               coworking={coworking}
               id={id}

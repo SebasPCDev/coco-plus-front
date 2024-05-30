@@ -33,18 +33,34 @@ const homeReceptionists = async () => {
           title="Reservas Efectivas "
           description={`Cantidad de reservas efectivas:`}
           number={bookingsComplete.length}
-          percentage={Math.floor(
-            (bookingsComplete.length * 100) / bookings.bookings.length,
-          )}
+          percentage={
+            isNaN(
+              Math.floor(
+                (bookingsComplete.length * 100) / bookings.bookings.length,
+              ),
+            )
+              ? 0
+              : Math.floor(
+                  (bookingsComplete.length * 100) / bookings.bookings.length,
+                )
+          }
         />
         <StatisticCard
           image="/images/private-offices.jpg"
           title="Reservas Canceladas"
           description={`Cantidad de reservas canceladas:`}
           number={bookingsComplete.length}
-          percentage={Math.floor(
-            (bookingsCanceled.length * 100) / bookings.bookings.length,
-          )}
+          percentage={
+            isNaN(
+              Math.floor(
+                (bookingsCanceled.length * 100) / bookings.bookings.length,
+              ),
+            )
+              ? 0
+              : Math.floor(
+                  (bookingsCanceled.length * 100) / bookings.bookings.length,
+                )
+          }
         />
       </div>
     </div>

@@ -12,7 +12,7 @@ export default async function UsersTable({ usersData }: { usersData: any }) {
     <div className="mt-6 flow-root w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden ">
+          <div className="xl:hidden ">
             {usersData?.users?.map((user: any) => (
               <div key={user.id} className="mb-2 rounded-md bg-white p-4">
                 <div className="flex items-center justify-between border-b pb-4">
@@ -45,7 +45,7 @@ export default async function UsersTable({ usersData }: { usersData: any }) {
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-sm text-gray-900 md:table">
+          <table className="hidden min-w-full text-sm text-gray-900 xl:table">
             <thead className="rounded-lg text-center font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">

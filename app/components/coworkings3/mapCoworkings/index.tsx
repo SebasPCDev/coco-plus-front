@@ -58,7 +58,7 @@ const MapCoworking = ({
     <Map
       {...cameraProps}
       onCameraChanged={handleCameraChange}
-      style={{ width: '100%', height: '500px' }}
+      style={{ width: '100%', height: '500px', marginTop: '20px' }}
     >
       {markersCoworking &&
         markersCoworking.map((marker: any, index: any) => (
