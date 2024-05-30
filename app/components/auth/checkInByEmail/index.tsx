@@ -10,7 +10,6 @@ const CheckInbyEmail = ({ searchParams }: { searchParams: { token: string } }) =
   const [checkIn, setCheckIn] = useState(false);
 
   useEffect(() => {
-    console.log("Token", token);
     const checkIn = async () => {
       try {
         const response = await putCheckInByEmail(token)
