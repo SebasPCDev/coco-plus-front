@@ -30,9 +30,6 @@ const useCoworkings = ({ allCountries, allStates, allCities }) => {
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
-
-    console.log("Value", value);
-
     if (name === 'country') {
       if (value) {
         // Filter States
