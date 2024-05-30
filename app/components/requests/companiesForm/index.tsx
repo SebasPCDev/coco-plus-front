@@ -22,7 +22,7 @@ const CompaniesForm = () => {
   return (
     <>
       <form
-        className="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-lg"
+        className="mx-auto max-w-4xl rounded-lg bg-white p-8 pt-[100px] shadow-lg lg:my-5 lg:pt-0"
         onSubmit={handleSubmit}
       >
         <h1 className="col-span-2 mb-8 text-center text-4xl font-bold">
