@@ -28,11 +28,13 @@ export const Coworkings3 = ({ allCountries, allStates, allCities }) => {
         handleChange={handleChange}
       />
 
-      <MapCoworking
-        coworkings={coworkings}
-        cameraPropsNew={cameraPropsNew}
-        FilterMap={FilterMap}
-      />
+      <div className='mt-12'>
+        <MapCoworking
+          coworkings={coworkings}
+          cameraPropsNew={cameraPropsNew}
+          FilterMap={FilterMap}
+        />
+      </div>
 
       <main className="mt-20 h-[1000px] w-full overflow-y-auto">
         <section className="flex flex-wrap justify-center gap-4">
