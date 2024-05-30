@@ -45,8 +45,8 @@ export default function NavbarDashboard({ user }: { user: UserSession }) {
                       <Image
                         width={48}
                         height={64}
-                        className="rounded-full border-2 border-custom-primary transition duration-300 ease-in-out hover:scale-110"
-                        src="/customers/evil-rabbit.png"
+                        className="rounded-full border-2 border-white transition duration-300 ease-in-out hover:scale-110"
+                        src="/cocoproject/user.svg"
                         alt=""
                       />
                     </Menu.Button>

@@ -40,21 +40,31 @@ const useCreateCoworking = () => {
     setFormData(toSet);
   };
 
+  const handleChangePhone = (name: string, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await PostNewCoworking({ formData, token });
-
       await Swal.fire({
-        title: 'seguro deseasn crear este coworking?',
-        showDenyButton: true,
+        title: 'Estás seguro de crear este Coworking?',
         showCancelButton: true,
-        confirmButtonText: 'si, crear',
-        denyButtonText: `no`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire('Se ha creado', '', 'success');
+        confirmButtonText: 'Crear',
+        confirmButtonColor: '#4caf50',
+        reverseButtons: true,
+        denyButtonText: `Cancelar`,
+      }).then(async (result) => {
+        if (result.isConfirmed && token) {
+          const response = await PostNewCoworking({ formData, token });
+          Swal.fire(
+            `Se ha creado el coworking ${formData.name}`,
+            '',
+            'success',
+          );
           router.push('/dashboard/adminCoworking/myCoworkings');
         } else if (result.isDenied) {
           Swal.fire('se cancelo', '', 'info');
@@ -63,11 +73,21 @@ const useCreateCoworking = () => {
         }
       });
     } catch (error: any) {
-      alert(error.response.data.message);
+      Swal.fire({
+        title: 'Error enviando la solicitud',
+        text: error.response.data.message,
+        icon: 'error',
+      });
     }
   };
 
-  return { formData, setFormData, handleChange, handleSubmit };
+  return {
+    formData,
+    setFormData,
+    handleChange,
+    handleSubmit,
+    handleChangePhone,
+  };
 };
 
 export default useCreateCoworking;
