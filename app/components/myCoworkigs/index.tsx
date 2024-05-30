@@ -1,7 +1,11 @@
 import GetProfile from '@/utils/gets/getProfile';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { EyeIcon, PencilIcon } from '@heroicons/react/24/outline';
+import {
+  ClipboardDocumentListIcon,
+  EyeIcon,
+  PencilIcon,
+} from '@heroicons/react/24/outline';
 import CoworkingStatus from './statusCoworking.tsx';
 
 export default async function MyCoworkigs() {
@@ -12,13 +16,16 @@ export default async function MyCoworkigs() {
 
   return (
     <div className="mx-auto">
-      <div className="my-4 flex justify-end">
+      <div className="my-4 flex justify-between">
+        <div className="flex items-center">
+          <ClipboardDocumentListIcon className="w-14" />
+          <h1 className="text-3xl font-bold">Lista de Coworkings</h1>
+        </div>
         <Link href="/dashboard/adminCoworking/myCoworkings/create">
           <button className=" btn btn-confirm">Añadir Coworking</button>
         </Link>
       </div>
 
-      <h1 className="mb-10 mt-4 text-center text-4xl">Mis Coworkings</h1>
       <div className="mt-6 flow-root w-full">
         <div className="inline-block min-w-full align-middle">
           <div className="founded-lg bg-gray-50 p-2 md:pt-0">
@@ -40,9 +47,7 @@ export default async function MyCoworkigs() {
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                     Cierre
                   </th>
-                  <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Ubicación
-                  </th>
+
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                     Capacidad
                   </th>
@@ -75,9 +80,7 @@ export default async function MyCoworkigs() {
                     <td className="whitespace-nowrap px-3 py-3">
                       {coworking.close.slice(0, 5)}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
-                      {coworking.address}
-                    </td>
+
                     <td className="whitespace-nowrap px-3 py-3">
                       {coworking.capacity}
                     </td>

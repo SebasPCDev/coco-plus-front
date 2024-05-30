@@ -9,8 +9,17 @@ export default async function BookingsHistory() {
   const currentUser = await getProfile();
   return (
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
-      <h2>Pases: {currentUser.employee.passes}</h2>
-      <h2>Pases Disponible: {currentUser.employee.passesAvailable}</h2>
+      <div className="flex justify-start gap-4">
+        <h2 className=" p-3 text-center">
+          <strong>Total de Pases</strong> <br></br>{' '}
+          {currentUser.employee.passes}
+        </h2>
+        <h2 className="p-3 text-center">
+          <strong>Total de Pases Disponibles </strong> <br></br>{' '}
+          {currentUser.employee.passesAvailable}
+        </h2>
+      </div>
+
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
           <div className="xl:hidden ">

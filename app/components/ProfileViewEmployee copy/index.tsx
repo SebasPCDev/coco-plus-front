@@ -5,10 +5,8 @@ import { Card } from '@/app/ui/dashboard/cards';
 import { getDataUserEmployee } from './getDataUserEmployee';
 import putDataUserEmployee from './putDataUserEmployee';
 import Swal from 'sweetalert2';
-import { EnvelopeIcon, PencilIcon, TvIcon } from '@heroicons/react/24/outline';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
-import StatusHandler from '../filtros/superadmin/statusQueryHandler';
+import { PencilIcon } from '@heroicons/react/24/outline';
+
 import UserStatus from '../Status/dashboardSuperadmin/statusUser';
 
 export const ProfileViewEmployee = () => {
@@ -106,6 +104,7 @@ export const ProfileViewEmployee = () => {
         const token: any = Cookie.get('token');
         if (token) {
           const data: any = await getDataUserEmployee(token);
+          console.log(data);
           setUserData(data);
         } else {
           setError('No se encontró el token');
@@ -246,7 +245,10 @@ export const ProfileViewEmployee = () => {
                     <div className="min-w-[15rem]">
                       <Card
                         title="Pases Utilizados"
-                        value={lastCowork}
+                        value={
+                          userData.employee.passes -
+                          userData.employee.passesAvailable
+                        }
                         type="customers"
                       />
                     </div>
