@@ -10,7 +10,6 @@ export default async function ReceptionistBookings() {
 
   return (
     <div className={'mt-5'}>
-      <h1>Recepcionistas</h1>
       <BookingList
         bookings={bookings.bookings}
         coworkId={user.coworkings[0].id}

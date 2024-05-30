@@ -26,12 +26,7 @@ const ImagesContent = ({
   return (
     <div className="max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg xl:w-1/3">
       <h2 className="mb-2 text-xl font-semibold">Imagen de Portada</h2>
-      <button
-        onClick={onModalClick}
-        className="w-full btn btn-confirm "
-      >
-        {coworking.thumbnail ? 'Cambiar Imagen' : 'Agregar Imagen'}
-      </button>
+
       <Modal isOpen={isModalOpen} onClose={onModalClick}>
         <div className="rounded-lg bg-white p-6 shadow-lg">
           <form onSubmit={handleSubmit} action="">
@@ -70,6 +65,9 @@ const ImagesContent = ({
           className="rounded-lg shadow-sm"
         />
       )}
+      <button onClick={onModalClick} className="btn btn-confirm mb-4 w-full">
+        {coworking.thumbnail ? 'Cambiar Imagen' : 'Agregar Imagen'}
+      </button>
 
       <h2 className="my-4 text-xl font-semibold">Imágenes Secundarias</h2>
       <div className="flex flex-col space-y-4">

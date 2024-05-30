@@ -15,11 +15,11 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
   const [coworking, setCoworking] = useState<any>(initialCoworking);
 
+  console.log(Mycoworking);
+
   useEffect(() => {
-    console.log('coworking', coworking);
     if (coworking.amenities) {
       const arrayIds = coworking.amenities.map((amenity: any) => amenity.id);
-      console.log('arrayIds', arrayIds);
 
       setArrayIdAmenities(arrayIds);
     }
@@ -30,17 +30,10 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
       ...newInfo,
       amenitiesIds: arrayIdAmenities,
     });
-    console.log('arrayIdAmenities', arrayIdAmenities);
-    console.log('newInfo', newInfo);
   }, [arrayIdAmenities]);
 
   const getData = async () => {
     const coworkingData = await GetCoworkingDetailForAdmin({ id, token });
-    console.log(
-      'esto es lo que me trae la peticion de coworking',
-      coworkingData,
-    );
-
     setCoworking(coworkingData);
     setMyCoworking(coworkingData);
     return coworkingData.status;
@@ -49,6 +42,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
   const handleChange = (e: any) => {
     e.preventDefault();
     const { name, value } = e.target;
+    console.log(value);
 
     if (name === 'capacity') {
       setCoworking({ ...coworking, [name]: Number(value) });
@@ -72,26 +66,29 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
   const handleClick = async () => {
     const result = await Swal.fire({
-      title: 'Do you want to save the changes?',
+      title: 'Estás seguro de guardar los cambios?',
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: 'Guardar',
-      denyButtonText: `No'No guardar`,
+      denyButtonText: `Cancelar`,
+      confirmButtonColor: '#222B2D',
+      reverseButtons: true,
     });
     if (result.isConfirmed) {
       try {
         const response = await PutUpdateCoworking({ id, newInfo, token });
+        console.log(response);
         await getData();
         console.log(newInfo);
 
         console.log(response);
-        Swal.fire('guardado', '', 'success');
+        Swal.fire('Se han actualizado los datos con éxito', '', 'success');
       } catch (error) {
-        alert(error.response.data.message);
+        Swal.fire(
+          `Error al actualizar los datos ${error.response.data.message}`,
+          '',
+          'error',
+        );
       }
-    } else if (result.isDenied) {
-      Swal.fire('Changes are not saved', '', 'info');
-      return;
     }
   };
 
@@ -113,6 +110,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     };
 
     checkStatus();
+    console.log(newInfo);
   }, []);
   const onClickActivate = async () => {
     const newInfo = {
@@ -121,7 +119,7 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
 
     const result = await Swal.fire({
       title:
-        'deseasActivar el coworking? una vez activado los usuarios podra visualizarlo y solicitar reservaciones',
+        '¿Deseas activar el coworking? Una vez activado, los usuarios podrán visualizarlo y solicitar reservas',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si',

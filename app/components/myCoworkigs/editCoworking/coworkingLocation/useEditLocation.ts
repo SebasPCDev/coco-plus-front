@@ -69,9 +69,7 @@ const UseEditLocation = () => {
     getOptions();
   }, [filter]);
 
-  useEffect(() => {
-    console.log(address);
-  }, [address]);
+  useEffect(() => {}, [address]);
 
   const handleChangeform = async (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -79,7 +77,7 @@ const UseEditLocation = () => {
     const { name, value } = event.target;
     const newfilter = { country: '', state: '', city: '' };
     const newAdress = { country: '', state: '', city: '', address: '' };
-    console.log(filter);
+
     let current = '';
 
     if (name === 'country') {

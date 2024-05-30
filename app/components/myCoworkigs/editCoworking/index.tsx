@@ -27,7 +27,6 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
         {coworking.name || 'Nombre del Coworking'}
       </h1>
       <div className="flex flex-col xl:flex-row">
-        {/* Contenedor 1 */}
         <div className="mt-4 max-h-[80vh] w-full overflow-y-auto rounded-lg bg-white p-4 shadow-lg md:mt-0 xl:w-2/3">
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
             <div className="col-span-2 rounded-lg border p-4 shadow-sm xl:col-span-1">
@@ -42,7 +41,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                         id={info.name}
                         name={info.name}
                         required={info.required}
-                        value={coworking[info.name] || ''}
+                        value={coworking[info.name].slice(0, 5) || ''}
                         onChange={handleChange}
                         className="block w-full rounded-lg border px-4 py-4 shadow focus:border-blue-500 focus:outline-none"
                       >
@@ -80,7 +79,7 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
               </div>
               <div className="mt-4 flex items-center gap-4">
                 <p>
-                  <strong>Status:</strong>
+                  <strong>Estado:</strong>
                 </p>
                 <div className="flex items-center gap-4">
                   <CoworkingStatus status={coworking.status} />
@@ -102,11 +101,13 @@ export default function MyCoworkingDetailEdit({ id }: { id: string }) {
                 </div>
               </div>
             </div>
+            <div>
+              <EditCoworkingLocation coworking={coworking} />
+              <button onClick={handleClick} className="btn btn-confirm">
+                Actualizar Informacion
+              </button>
+            </div>
 
-            <EditCoworkingLocation coworking={coworking} />
-            <button onClick={handleClick} className="btn btn-confirm">
-              Actualizar Informacion
-            </button>
             <CoworkingReceptionists
               coworking={coworking}
               id={id}

@@ -23,15 +23,12 @@ const UpdatedLocationMap = ({ cameraPropsNew }) => {
 
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
-  
+
   useEffect(() => {
     setCameraProps((prevProps) => ({
-        ...prevProps,
-        ...cameraPropsNew,
-      }));
-
-      
-    
+      ...prevProps,
+      ...cameraPropsNew,
+    }));
   }, [cameraPropsNew]);
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
     setCameraProps(ev.detail);
@@ -63,7 +60,7 @@ const UpdatedLocationMap = ({ cameraPropsNew }) => {
       {...cameraProps}
       onCameraChanged={handleCameraChange}
       onClick={handleClick}
-      style={{ width: '100%', height: '500px' }}
+      style={{ width: '100%', height: '400px', marginTop: '20px' }}
     >
       <Marker position={location} />
     </Map>

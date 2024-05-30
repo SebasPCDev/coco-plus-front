@@ -21,7 +21,7 @@ const Home = async () => {
     <div>
       <Header />
       <Banner />
-      <main className="mx-auto max-w-[1024px] p-10">
+      <main className="mx-auto max-w-[1100px] p-10">
         <HeaderMain />
         <Service />
         <Coworkings3 allCountries={allCountries} allStates={allStates} allCities={allCities} />

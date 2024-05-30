@@ -28,7 +28,6 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
 
   return (
     <div className="col-span-2 rounded-lg border p-4 shadow-sm md:col-span-1">
-      {optionRender}
       <h2 className="mb-4 text-xl font-semibold">Ubicación</h2>
       <div className="space-y-4">
         <div className="flex items-center">
@@ -45,10 +44,7 @@ const EditCoworkingLocation = ({ coworking }: { coworking: any }) => {
               ---Seleccionar Pais---
             </option>
             {countries.map((country, index) => {
-              console.log(country);
-
               const { id, name } = country;
-
               return (
                 <option
                   className="w-3/4 rounded border bg-gray-100 p-2"

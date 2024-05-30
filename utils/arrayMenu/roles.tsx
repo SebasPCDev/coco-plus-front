@@ -5,6 +5,10 @@ import {
   BookOpenIcon,
   ArchiveBoxIcon,
   BookmarkIcon,
+  UserCircleIcon,
+  UsersIcon,
+  PlusCircleIcon,
+  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
 
 import { Roles } from '../types/rolesNavLinkInterface';
@@ -34,50 +38,55 @@ const roles: Roles = {
     },
   ],
   adminCoworking: [
-    { name: 'Home', href: '/dashboard/adminCoworking', icon: HomeIcon },
+    { name: 'Inicio', href: '/dashboard/adminCoworking', icon: HomeIcon },
     {
       name: 'Mis Coworkings',
       href: '/dashboard/adminCoworking/myCoworkings',
-      icon: DocumentDuplicateIcon,
+      icon: BuildingOffice2Icon,
     },
     {
-      name: 'Mis Reservas',
+      name: 'Historial Reservas',
       href: '/dashboard/adminCoworking/bookingsList',
-      icon: DocumentDuplicateIcon,
+      icon: BookOpenIcon,
     },
   ],
   adminCompany: [
-    { name: 'Home', href: '/dashboard/adminCompany', icon: HomeIcon },
+    { name: 'Inicio', href: '/dashboard/adminCompany', icon: HomeIcon },
     {
       name: 'Perfil empresa',
       href: '/dashboard/adminCompany/companyProfile',
-      icon: DocumentDuplicateIcon,
+      icon: UserCircleIcon,
     },
     {
       name: 'Empleados',
       href: '/dashboard/adminCompany/empleados',
-      icon: DocumentDuplicateIcon,
+      icon: UsersIcon,
     },
   ],
   employee: [
-    { name: 'Perfil', href: '/dashboard/employee/profile', icon: HomeIcon },
+    { name: 'Inicio', href: '/dashboard/employee/profile', icon: HomeIcon },
     {
       name: 'Historial Reservas',
       href: '/dashboard/employee/bookingsHistory',
-      icon: HomeIcon,
+      icon: BookOpenIcon,
     },
     {
       name: 'Nueva Reserva',
       href: '/dashboard/employee/bookings',
-      icon: HomeIcon,
+      icon: PlusCircleIcon,
     },
   ],
   coworking: [
-    { name: 'Home', href: '/dashboard/coworking', icon: HomeIcon },
+    { name: 'Inicio', href: '/dashboard/coworking', icon: HomeIcon },
     {
-      name: 'Mis Reservas',
+      name: 'Historial Reservas',
       href: '/dashboard/coworking/bookingsList',
-      icon: DocumentDuplicateIcon,
+      icon: BookOpenIcon,
+    },
+    {
+      name: 'Mis Reseñas',
+      href: '/dashboard/coworking/myReviews',
+      icon: BookOpenIcon,
     },
   ],
 };

@@ -1,69 +1,86 @@
-"use client";
-
-import React, { useContext, useEffect, useState } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import StatisticCard from './circuloestadistico';
 import { useUserContext } from '@/app/components/context';
 import GetProfile from '@/utils/gets/getProfile';
 import GetCompany from '@/utils/gets/getCompany';
-import MemberCard from '../../members/memberCard';
-
 
 const Home: React.FC = () => {
   const [employees, setEmployees] = useState([]);
   const [passesAvailable, setPassesAvailable] = useState(0);
+  const [passes, setPasses] = useState(0);
+  const [passesCosumed, setPassesCosumed] = useState(0);
   const { token } = useUserContext();
+  const [company, setCompany] = useState<any>({});
 
   useEffect(() => {
     const getData = async () => {
       const profile = await GetProfile({ token });
-
       const companyId = profile?.employee.company?.id;
-
       const company = await GetCompany({ companyId, token });
-
+      setCompany(company);
       setEmployees(company.employees);
+      const totalPassesAvailable = company.employees.reduce(
+        (total: number, employee: any) => total + employee.passesAvailable,
+        0,
+      );
+      const totalPasses = company.employees.reduce(
+        (total: number, employee: any) => total + employee.passes,
+        0,
+      );
 
-      const totalPassesAvailable = company.employees.reduce((total: number, employee: any) => total + employee.passesAvailable, 0);
+      const totalPassesCosumed = company.employees.reduce(
+        (total: number, employee: any) =>
+          total + (employee.passes - employee.passesAvailable),
+        0,
+      );
       setPassesAvailable(totalPassesAvailable);
-      
+      setPasses(company.totalPasses);
+      setPassesCosumed(totalPassesCosumed);
     };
     getData();
   }, []);
 
   return (
-    <div className="flex flex-col justify-content items-center p-8">
-      <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold">Home</h1>
-      </header>
+    <div className="justify-content flex flex-col items-center p-8">
+      <header className="mb-8 text-center"></header>
 
-      <div className="flex flex-wrap justify-center gap-8 w-full max-w-6xl">
+      <div className="flex w-full max-w-6xl flex-wrap justify-center gap-8">
         <StatisticCard
           image="/images/hot-desks.jpg"
           title="Beneficiarios"
-          description={`Cantidad de empleados beneficiados: ${employees.length}`}
+          description={`Cantidad de empleados beneficiados: `}
           number={employees.length}
-          percentage={employees.length}
+          percentage={(employees.length * 100) / company.quantityBeneficiaries}
         />
         <StatisticCard
           image="/images/meeting-rooms.jpg"
-          title="Pases disponibles"
-          description={`Cantidad de pases disponibles:`}
-          number={300}
-          percentage={60}
+          title="Total de pases "
+          description={`Cantidad de pases asignados a la empresa:`}
+          number={passes}
+          percentage={100}
         />
         <StatisticCard
           image="/images/private-offices.jpg"
           title="Pases asignados"
-          description={`Cantidad de pases asignados: ${passesAvailable}`}
+          description={`Cantidad de pases asignados a empleados:`}
           number={passesAvailable}
-          percentage={70}
+          percentage={
+            isNaN(Math.floor((passesAvailable * 100) / passes))
+              ? 0
+              : Math.floor((passesAvailable * 100) / passes)
+          }
         />
         <StatisticCard
           image="/images/event-spaces.jpg"
-          title="Pases consumidos"
-          description={`Cantidad de pases consumidos: ${passesAvailable}`}
-          number={passesAvailable}
-          percentage={80}
+          title="Total pases usados"
+          description={`Cantidad de pases consumidos:`}
+          number={passesCosumed}
+          percentage={
+            isNaN(Math.floor((passesCosumed * 100) / passesAvailable))
+              ? 0
+              : Math.floor((passesCosumed * 100) / passesAvailable)
+          }
         />
       </div>
     </div>

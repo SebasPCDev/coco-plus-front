@@ -1,3 +1,5 @@
+import CoworkingStatus from '../../../statusCoworking.tsx';
+
 const InfoCoworking = ({ coworking }: any) => {
   return (
     <>
@@ -32,7 +34,7 @@ const InfoCoworking = ({ coworking }: any) => {
           <strong>Capacidad:</strong> {coworking.capacity}
         </p>
         <p>
-          <strong>Estado:</strong> {coworking.status}
+          <strong>Estado:</strong> <CoworkingStatus status={coworking.status} />
         </p>
       </div>
     </>
