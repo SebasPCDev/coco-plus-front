@@ -1,6 +1,10 @@
-import { UpdateCoworking, InactiveCoworking, ChangeStatus, } from '@/app/components/Buttons/dashboardSuperadmin/buttons';
+import {
+  UpdateCoworking,
+  InactiveCoworking,
+  ChangeStatus,
+} from '@/app/components/Buttons/dashboardSuperadmin/buttons';
 import CoworkingStatus from '@/app/components/Status/dashboardSuperadmin/statusCoworking';
-import styles from "./tableCoworkings.module.css"
+import styles from './tableCoworkings.module.css';
 import { cookies } from 'next/headers';
 
 export default async function CoworkingsTable({
@@ -20,38 +24,62 @@ export default async function CoworkingsTable({
     <div className="mt-6 flow-root min-h-[28rem] w-full overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
         <div className="founded-lg bg-gray-50 p-2 md:pt-0">
-
-
-          <div className="md:hidden">
+          <div className="xl:hidden">
             {coworkingsData?.coworking?.map((coworking: any) => (
-              <div
-                key={coworking.id}
-                className={styles.gralContainer}
-              >
+              <div key={coworking.id} className={styles.gralContainer}>
                 <div className={styles.titleAndContItemsContainer}>
-                  
-                    <div className="mb-2 flex items-center">
-                      <p className="font-bold">{coworking.name}</p>
-                    </div>
-                    <div className={styles.itemsContainerAndStatus}>
-                      <div className={styles.itemResponsiveTableContainer}>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Email: <br/></b>{coworking.email}</p>
-                          <p className=" text-gray-700"><b>Telefono: <br/></b>{coworking.phone}</p>
-                        </div>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Pais: <br/></b>{coworking.country}</p>
-                          <p className=" text-gray-700"><b>Estado: <br/></b>{coworking.state}</p>
-                        </div>
-                        <div className={styles.itemFlexTableContainer}>
-                          <p className=" text-gray-700"><b>Ciudad: <br/></b>{coworking.city}</p>
-                          <p className=" text-gray-700"><b>Capacidad: <br/></b>{coworking.capacity}</p>
-                        </div>
+                  <div className="mb-2 flex items-center">
+                    <p className="font-bold">{coworking.name}</p>
+                  </div>
+                  <div className={styles.itemsContainerAndStatus}>
+                    <div className={styles.itemResponsiveTableContainer}>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Email: <br />
+                          </b>
+                          {coworking.email}
+                        </p>
+                        <p className=" text-gray-700">
+                          <b>
+                            Telefono: <br />
+                          </b>
+                          {coworking.phone}
+                        </p>
+                      </div>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Pais: <br />
+                          </b>
+                          {coworking.country}
+                        </p>
+                        <p className=" text-gray-700">
+                          <b>
+                            Estado: <br />
+                          </b>
+                          {coworking.state}
+                        </p>
+                      </div>
+                      <div className={styles.itemFlexTableContainer}>
+                        <p className=" text-gray-700">
+                          <b>
+                            Ciudad: <br />
+                          </b>
+                          {coworking.city}
+                        </p>
+                        <p className=" text-gray-700">
+                          <b>
+                            Capacidad: <br />
+                          </b>
+                          {coworking.capacity}
+                        </p>
                       </div>
                     </div>
-                    <div className={styles.statusContainer}>
-                      <CoworkingStatus status={coworking.status} />
-                    </div>
+                  </div>
+                  <div className={styles.statusContainer}>
+                    <CoworkingStatus status={coworking.status} />
+                  </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div className="flex justify-end gap-2">
@@ -62,7 +90,7 @@ export default async function CoworkingsTable({
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full  text-sm text-gray-900 md:table">
+          <table className="hidden min-w-full  text-sm text-gray-900 xl:table">
             <thead className="rounded-lg text-center  font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">

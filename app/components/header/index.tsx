@@ -3,9 +3,8 @@ import HeaderCenter from './headercenter';
 import HeaderRight from './headerRight';
 
 const Header = () => {
-
   return (
-    <header className="fixed w-full h-[65px] lg:h-auto lg:relative flex flex-row items-center justify-between bg-zinc-950 font-sans shadow pr-10 z-50">
+    <header className="font-sans fixed z-50 flex h-[65px] w-full flex-row items-center justify-between bg-zinc-950 pr-10 shadow lg:relative lg:h-auto">
       <HeaderLeft />
       <HeaderCenter />
       <HeaderRight />

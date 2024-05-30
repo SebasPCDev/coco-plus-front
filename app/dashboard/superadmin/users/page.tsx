@@ -27,7 +27,7 @@ export default async function UsersTablePage({
     <>
       <div>
         <div>
-          <div className="flex flex-row">
+          <div className="flex w-[15rem] flex-col sm:w-full sm:flex-row">
             <StatusHandler />
             <RoleHandler />
           </div>
