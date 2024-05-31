@@ -26,7 +26,17 @@ const MapCoworking = ({
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
+  const INITIAL_CAMERA2: MapCameraProps = {
+    center: { lat: -17.797610035031738, lng: -63.52392568413111 },
+    zoom: 3.5,
+  };
   const [selectMarker, setSelectMarker] = useState<any>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCameraProps(INITIAL_CAMERA2);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     setCameraProps((prevProps) => ({
@@ -42,39 +52,34 @@ const MapCoworking = ({
   };
 
   const responseMarker = async () => {
-    const arrayMarkersCoworkings = await coworkings
-      .map((coworking: any) => {
-        if (coworking.lat && coworking.long) {
-          return {
-            position: {
-              lat: Number(coworking.lat),
-              lng: Number(coworking.long),
-            },
-            icon: {
-              url: '/markerCoco.png',
-              scaledSize: new window.google.maps.Size(35, 50),
-            },
-            name: coworking.name,
-            id: coworking.id,
-            open: coworking.open,
-            close: coworking.close,
-            thumbnail: coworking.thumbnail,
-          };
-        }
-      })
-      .filter((marker) => marker.position);
-
-    console.log('arraycoworkings' + arrayMarkersCoworkings);
-    setMarkersCoworking(arrayMarkersCoworkings);
+    if (coworkings.length > 0 && coworkings) {
+      const arrayMarkersCoworkings = await coworkings
+        .map((coworking: any) => {
+          if (coworking.lat && coworking.long) {
+            return {
+              position: {
+                lat: Number(coworking.lat),
+                lng: Number(coworking.long),
+              },
+              icon: {
+                url: '/markerCoco.png',
+                scaledSize: new window.google.maps.Size(35, 50),
+              },
+              name: coworking.name,
+              id: coworking.id,
+              open: coworking.open,
+              close: coworking.close,
+              thumbnail: coworking.thumbnail,
+            };
+          }
+        })
+        .filter((marker) => marker.position);
+      setMarkersCoworking(arrayMarkersCoworkings);
+    }
   };
 
   useEffect(() => {
-    const test = async () => {
-      const data = await responseMarker();
-      return data;
-    };
-    test();
-    console.log('coworkings' + coworkings);
+    responseMarker();
   }, [coworkings]);
 
   return (
