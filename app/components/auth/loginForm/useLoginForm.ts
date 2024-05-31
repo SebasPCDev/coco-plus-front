@@ -16,7 +16,7 @@ const useLoginForm = () => {
     email: '',
     password: '',
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [LoginFormError, setLoginFormError] = useState<ILoginErrorForm>({
     email: '',
