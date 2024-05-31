@@ -3,6 +3,7 @@ import { axiosApi } from '../api';
 const getCountries = async () => {
   try {
     const response = await axiosApi.get('/countries');
+    console.log("response", response);
     return response.data;
   } catch (error: any) {
     let message = '';

@@ -4,10 +4,16 @@ import React, { useState, useEffect } from 'react';
 import IResponseCoworking from '@/utils/types/coworkingsResponse';
 // import getoptionsFilterLocations from '@/utils/gets/getOptionFilterAndLocation';
 import getAllCoworkings from '@/utils/gets/getCoworkingsAll';
+import getCountries from '@/utils/api/geography/getCountries';
+import getStates from '@/utils/api/geography/getStates';
+import getCities from '@/utils/api/geography/getCities';
 
-const useCoworkings = ({ allCountries, allStates, allCities }) => {
+const useCoworkings = () => {
   const [Allcoworkings, setAllCoworkings] = useState<IResponseCoworking[]>([]);
   const [coworkings, setCoworkings] = useState<IResponseCoworking[]>([]);
+  const [allCountries, setAllCountries] = useState([]);
+  const [allStates, setAllStates] = useState<any[]>([]);
+  const [allCities, setAllCities] = useState<any[]>([]);
   const [states, setStates] = useState<any[]>([]);
   const [cities, setCities] = useState<any[]>([]);
   const [current, setCurrent] = useState(
@@ -18,14 +24,20 @@ const useCoworkings = ({ allCountries, allStates, allCities }) => {
     zoom: 3,
   });
 
-  const getCowokings = async () => {
+  const getInitialData = async () => {
     const currentcoworkings = await getAllCoworkings();
     setAllCoworkings(currentcoworkings);
     setCoworkings(currentcoworkings);
+    const allCountries = await getCountries();
+    const allStates = await getStates();
+    const allCities = await getCities();
+    setAllCountries(allCountries);
+    setAllStates(allStates);
+    setAllCities(allCities);
   };
 
   useEffect(() => {
-    getCowokings();
+    getInitialData();
   }, [])
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -115,6 +127,9 @@ const useCoworkings = ({ allCountries, allStates, allCities }) => {
     handleChange,
     cameraPropsNew,
     FilterMap,
+    allCountries,
+    allStates,
+    allCities
   };
 };
 export default useCoworkings;

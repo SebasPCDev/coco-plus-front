@@ -5,7 +5,7 @@ import Coworking from './coworking';
 import SearchCoworking from './searchCoworking';
 import MapCoworking from './mapCoworkings';
 
-export const Coworkings3 = ({ allCountries, allStates, allCities }) => {
+export const Coworkings3 = () => {
   const {
     coworkings,
     handleChange,
@@ -13,7 +13,8 @@ export const Coworkings3 = ({ allCountries, allStates, allCities }) => {
     states,
     cities,
     FilterMap,
-  } = useCoworkings({ allCountries, allStates, allCities });
+    allCountries
+  } = useCoworkings();
 
   return (
     <section className="-mt-[65px] pt-[65px] lg:mt-0 lg:pt-0" id="coworkings">
