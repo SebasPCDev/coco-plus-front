@@ -5,6 +5,7 @@ import {
   MapCameraChangedEvent,
   MapCameraProps,
   Marker,
+  InfoWindow,
 } from '@vis.gl/react-google-maps';
 
 const INITIAL_CAMERA: MapCameraProps = {
@@ -46,7 +47,18 @@ const MapCoworking = ({
     if (coworkings) {
       const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
         if (coworking.lat && coworking.long) {
-          return { lat: Number(coworking.lat), lng: Number(coworking.long) };
+          return {
+            position: {
+              lat: Number(coworking.lat),
+              lng: Number(coworking.long),
+            },
+            title: coworking.name,
+
+            icon: {
+              url: '/markerCoco.png',
+              scaledSize: new window.google.maps.Size(35, 50),
+            },
+          };
         }
       });
 
@@ -66,7 +78,12 @@ const MapCoworking = ({
     >
       {markersCoworking &&
         markersCoworking.map((marker: any, index: any) => (
-          <Marker key={index} position={marker} />
+          <Marker
+            key={index}
+            position={marker.position}
+            title={marker.title}
+            icon={marker.icon}
+          />
         ))}
     </Map>
   );

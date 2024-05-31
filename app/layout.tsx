@@ -9,7 +9,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
+      <link rel="icon" href="markerCoco.png" type="image/x-icon" />
       <UserProvider>
         <MapProvider>
           <body className={`${montserrat.className} antialiased`}>
