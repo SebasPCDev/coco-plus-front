@@ -10,6 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <title>Coco+</title>
       <link rel="icon" href="faviconcoco.ico" type="image/x-icon" />
       <UserProvider>
         <MapProvider>
