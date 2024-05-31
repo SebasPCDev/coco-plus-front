@@ -20,7 +20,7 @@ const PostNewUserReceptCoworking = async ({
 
     return response.data;
   } catch (error) {
-    console.error('Error al activar el coworking:', error);
+    return error.response.data;
   }
 };
 

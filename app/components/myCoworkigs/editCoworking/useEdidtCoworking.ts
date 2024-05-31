@@ -76,12 +76,14 @@ const useEdidtCoworking = ({ id }: { id: string }) => {
     if (result.isConfirmed) {
       try {
         const response = await PutUpdateCoworking({ id, newInfo, token });
-        console.log(response);
         await getData();
-        console.log(newInfo);
 
-        console.log(response);
-        Swal.fire('Se han actualizado los datos con éxito', '', 'success');
+        Swal.fire({
+          title: 'Se han actualizado los datos con éxito',
+          showConfirmButton: false,
+          timer: 1500,
+          icon: 'success',
+        });
       } catch (error) {
         Swal.fire(
           `Error al actualizar los datos ${error.response.data.message}`,

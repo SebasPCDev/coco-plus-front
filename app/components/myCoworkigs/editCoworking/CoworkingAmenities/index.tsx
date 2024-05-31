@@ -44,7 +44,7 @@ const EditAmenities = ({
               value={amenitie.name}
               checked={arrayIdAmenities.includes(amenitie.id)}
               onChange={() => handleCheckboxChange(amenitie.id)}
-              className="block rounded-lg border bg-gray-100 p-2.5 text-sm text-custom-primary focus:border-blue-500"
+              className="block rounded-lg border bg-gray-100 p-2.5 text-sm text-custom-secondary focus:border-custom-primary"
             />
             <label htmlFor={amenitie.name}>{amenitie.name}</label>
           </div>
