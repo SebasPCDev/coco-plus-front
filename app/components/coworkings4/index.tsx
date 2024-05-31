@@ -40,7 +40,7 @@ export const Coworkings3 = () => {
       <main className="mt-20 h-[1000px] w-full overflow-y-auto">
         <section className="flex flex-wrap justify-center gap-4">
           {coworkings.map((coworking) => {
-            return <Coworking key={coworking.id} coworking={coworking} />;
+            return <Coworking key={coworking.id} coworking={coworking}  />;
           })}
         </section>
       </main>
