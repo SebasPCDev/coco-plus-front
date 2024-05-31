@@ -6,7 +6,6 @@ import {
   MapCameraProps,
   Marker,
   InfoWindow,
-  
 } from '@vis.gl/react-google-maps';
 import Link from 'next/link';
 
@@ -56,6 +55,10 @@ const MapCoworking = ({
                 lat: Number(coworking.lat),
                 lng: Number(coworking.long),
               },
+              icon: {
+                url: '/markerCoco.png',
+                scaledSize: new window.google.maps.Size(35, 50),
+              },
               name: coworking.name,
               id: coworking.id,
               open: coworking.open,
@@ -87,6 +90,7 @@ const MapCoworking = ({
             key={index}
             position={marker.position}
             onClick={() => setSelectMarker(marker)}
+            icon={marker.icon}
           />
         ))}
       {selectMarker && (
