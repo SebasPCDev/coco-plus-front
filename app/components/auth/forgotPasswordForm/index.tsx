@@ -1,9 +1,10 @@
 "use client"
 import Link from 'next/link';
 import useForgotPassForm from './useForgotPassForm';
+import Spinner2 from '../../shared/Spinner2';
 
 const ForgotPassForm = () => {
-  const { email, emailError, handleChange, handleSubmit } = useForgotPassForm();
+  const { email, emailError, loading, handleChange, handleSubmit } = useForgotPassForm();
   return (
     <div className="relative h-screen w-full bg-[url('../../public/LoginMobile.png')] bg-cover bg-center md:bg-[url('../../public/FondoLoginCoco1.png')]">
       <div className="flex justify-center items-center h-full w-full md:w-1/2">
@@ -12,6 +13,7 @@ const ForgotPassForm = () => {
           className="flex flex-col gap-4 rounded-2xl bg-custom-white mx-10 md:ml-12 px-8 pb-8 pt-6 shadow-lg max-w-[400px] w-full"
           onSubmit={handleSubmit}
         >
+          {loading && <Spinner2 />}
           <h1 className="m-6 text-center text-2xl font-bold text-gray-800">
             Recuperar contraseña
           </h1>

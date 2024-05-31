@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ILoginForm from '@/utils/types/auth/loginFormInterface';
 import useLoginForm from './useLoginForm';
 import Link from 'next/link';
-import Spinner from '../../shared/Spinner';
+import Spinner2 from '../../shared/Spinner2';
 
 const LoginForm = () => {
   const { LoginForm, LoginFormError, loading, handleChange, handleSubmit } = useLoginForm();
@@ -24,7 +24,7 @@ const LoginForm = () => {
             className="relative flex flex-col gap-4 rounded-2xl bg-custom-white mx-10 md:ml-12 px-8 pb-8 pt-6 shadow-lg max-w-[400px] w-full"
             onSubmit={handleSubmit}
           >
-            {loading && <Spinner />}
+            {loading && <Spinner2 />}
             <h1 className="m-6 text-center text-2xl font-bold text-gray-800">
               Iniciar Sesión
             </h1>
