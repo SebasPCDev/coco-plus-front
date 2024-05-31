@@ -68,6 +68,10 @@ const MapCoworking = ({
   };
 
   useEffect(() => {
+    responseMarker();
+  }, []);
+
+  useEffect(() => {
     const test = async () => {
       await responseMarker();
     };
