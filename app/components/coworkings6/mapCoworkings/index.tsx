@@ -45,7 +45,6 @@ const MapCoworking = ({
     console.log('markers', coworkings);
     const arrayMarkersCoworkings = await coworkings.map((coworking: any) => {
       if (coworking.lat && coworking.long) {
-        console.log(coworking);
         return {
           position: {
             lat: Number(coworking.lat),
@@ -65,6 +64,7 @@ const MapCoworking = ({
     });
     console.log('esto es después del map' + arrayMarkersCoworkings);
     setMarkersCoworking(arrayMarkersCoworkings);
+    console.log(markersCoworking);
   };
 
   useEffect(() => {
