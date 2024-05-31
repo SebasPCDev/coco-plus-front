@@ -47,10 +47,9 @@ const MapCoworking = ({
       const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
         if (coworking.lat && coworking.long) {
           return {
-            position: {
-              lat: Number(coworking.lat),
-              lng: Number(coworking.long),
-            },
+            lat: Number(coworking.lat),
+            lng: Number(coworking.long),
+
           };
         }
       });
@@ -71,7 +70,13 @@ const MapCoworking = ({
     >
       {markersCoworking &&
         markersCoworking.map((marker: any, index: any) => (
-          <Marker key={index} position={marker.position}  />
+          <Marker
+            key={index}
+            position={{
+              lat: Number(marker.lat),
+              lng: Number(marker.lng),
+            }} 
+          />
         ))}
     </Map>
   );
