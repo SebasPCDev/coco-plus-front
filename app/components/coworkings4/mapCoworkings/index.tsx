@@ -44,13 +44,13 @@ const MapCoworking = ({
 
   const responseMarker = () => {
     if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map( (coworking: any) => {
+      const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
         if (coworking.lat && coworking.long) {
           return { lat: Number(coworking.lat), lng: Number(coworking.long) };
         }
       });
 
-      setMarkersCoworking( Promise.all(arrayMarkersCoworkings));
+      setMarkersCoworking(arrayMarkersCoworkings);
     }
   };
 
