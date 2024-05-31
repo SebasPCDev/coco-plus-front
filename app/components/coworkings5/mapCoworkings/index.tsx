@@ -43,9 +43,9 @@ const MapCoworking = ({
     setCameraProps(ev.detail);
   };
 
-  const responseMarker = () => {
+  const responseMarker = async () => {
     if (coworkings.length > 0) {
-      const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
+      const arrayMarkersCoworkings = coworkings.map(async (coworking: any) => {
         if (coworking.lat && coworking.long) {
           return {
             position: {
@@ -56,13 +56,13 @@ const MapCoworking = ({
 
             icon: {
               url: '/markerCoco.png',
-              // scaledSize: new window.google.maps.Size(35, 50),
+              scaledSize: new window.google.maps.Size(35, 50),
             },
           };
         }
       });
 
-      setMarkersCoworking(arrayMarkersCoworkings);
+      setMarkersCoworking(await Promise.all(arrayMarkersCoworkings));
       console.log(arrayMarkersCoworkings);
     }
   };
