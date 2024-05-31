@@ -42,26 +42,29 @@ const MapCoworking = ({
   };
 
   const responseMarker = () => {
-    if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
-        if (coworking.lat && coworking.long) {
-          return {
-            position: {
-              lat: Number(coworking.lat),
-              lng: Number(coworking.long),
-            },
-            icon: {
-              url: '/markerCoco.png',
-              scaledSize: new window.google.maps.Size(35, 50),
-            },
-            name: coworking.name,
-            id: coworking.id,
-            open: coworking.open,
-            close: coworking.close,
-            thumbnail: coworking.thumbnail,
-          };
-        }
-      });
+    if (coworkings.length > 0) {
+      const arrayMarkersCoworkings = coworkings
+        .map((coworking: any) => {
+          if (coworking.lat && coworking.long) {
+            return {
+              position: {
+                lat: Number(coworking.lat),
+                lng: Number(coworking.long),
+              },
+              icon: {
+                url: '/markerCoco.png',
+                scaledSize: new window.google.maps.Size(35, 50),
+              },
+              name: coworking.name,
+              id: coworking.id,
+              open: coworking.open,
+              close: coworking.close,
+              thumbnail: coworking.thumbnail,
+            };
+          }
+        })
+        .filter((marker) => marker.position);
+      console.log(arrayMarkersCoworkings);
       setMarkersCoworking(arrayMarkersCoworkings);
     }
   };
@@ -79,7 +82,7 @@ const MapCoworking = ({
       onCameraChanged={handleCameraChange}
       style={{ width: '100%', height: '500px' }}
     >
-      {markersCoworking &&
+      {markersCoworking.length > 0 &&
         markersCoworking.map((marker: any, index: any) => (
           <Marker
             key={index}
