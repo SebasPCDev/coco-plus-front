@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const INITIAL_CAMERA: MapCameraProps = {
   center: { lat: -17.797610035031738, lng: -63.52392568413111 },
-  zoom: 3,
+  zoom: 4,
 };
 
 const MapCoworking = ({
