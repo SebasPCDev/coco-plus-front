@@ -42,36 +42,34 @@ const MapCoworking = ({
   };
 
   const responseMarker = async () => {
-    console.log('markers', coworkings);
-    const arrayMarkersCoworkings = await coworkings.map((coworking: any) => {
-      if (coworking.lat && coworking.long) {
-        return {
-          position: {
-            lat: Number(coworking.lat),
-            lng: Number(coworking.long),
-          },
-          icon: {
-            url: '/markerCoco.png',
-            scaledSize: new window.google.maps.Size(35, 50),
-          },
-          name: coworking.name,
-          id: coworking.id,
-          open: coworking.open,
-          close: coworking.close,
-          thumbnail: coworking.thumbnail,
-        };
-      }
-    });
+    const arrayMarkersCoworkings = await coworkings
+      .map((coworking: any) => {
+        if (coworking.lat && coworking.long) {
+          return {
+            position: {
+              lat: Number(coworking.lat),
+              lng: Number(coworking.long),
+            },
+            icon: {
+              url: '/markerCoco.png',
+              scaledSize: new window.google.maps.Size(35, 50),
+            },
+            name: coworking.name,
+            id: coworking.id,
+            open: coworking.open,
+            close: coworking.close,
+            thumbnail: coworking.thumbnail,
+          };
+        }
+      })
+      .filter((marker) => marker.position);
     console.log('esto es después del map' + arrayMarkersCoworkings);
     setMarkersCoworking(arrayMarkersCoworkings);
-    console.log(markersCoworking);
   };
 
   useEffect(() => {
-    const test = async () => {
-      await responseMarker();
-    };
-    test();
+    responseMarker();
+    console.log(markersCoworking);
   }, [coworkings]);
 
   return (
