@@ -44,7 +44,7 @@ const MapCoworking = ({
   };
 
   const responseMarker = () => {
-    if (coworkings) {
+    if (coworkings.length > 0) {
       const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
         if (coworking.lat && coworking.long) {
           return {
@@ -76,7 +76,7 @@ const MapCoworking = ({
       onCameraChanged={handleCameraChange}
       style={{ width: '100%', height: '500px' }}
     >
-      {markersCoworking &&
+      {markersCoworking.length > 0 &&
         markersCoworking.map((marker: any, index: any) => (
           <Marker
             key={index}
