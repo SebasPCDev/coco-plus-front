@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <link rel="icon" href="markerCoco.png" type="image/x-icon" />
+      <link rel="icon" href="faviconcoco.ico" type="image/x-icon" />
       <UserProvider>
         <MapProvider>
           <body className={`${montserrat.className} antialiased`}>
