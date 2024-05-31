@@ -41,9 +41,10 @@ const MapCoworking = ({
     setCameraProps(ev.detail);
   };
 
-  const responseMarker = () => {
+  const responseMarker = async () => {
+    console.log('markers', coworkings);
     if (coworkings.length > 0) {
-      const arrayMarkersCoworkings = coworkings
+      const arrayMarkersCoworkings = await coworkings
         .map((coworking: any) => {
           if (coworking.lat && coworking.long) {
             return {
@@ -64,7 +65,6 @@ const MapCoworking = ({
           }
         })
         .filter((marker) => marker.position);
-      console.log(arrayMarkersCoworkings);
       setMarkersCoworking(arrayMarkersCoworkings);
     }
   };
