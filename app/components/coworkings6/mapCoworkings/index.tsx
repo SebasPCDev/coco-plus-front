@@ -77,43 +77,48 @@ const MapCoworking = ({
   }, [coworkings]);
 
   return (
-    <Map
-      {...cameraProps}
-      onCameraChanged={handleCameraChange}
-      style={{ width: '100%', height: '500px' }}
-    >
-      {markersCoworking.length > 0 &&
-        markersCoworking.map((marker: any, index: any) => (
-          <Marker
-            key={index}
-            position={marker.position}
-            onClick={() => setSelectMarker(marker)}
-            icon={marker.icon}
-          />
-        ))}
-      {selectMarker && (
-        <InfoWindow
-          position={selectMarker.position}
-          onCloseClick={() => setSelectMarker(null)}
+    <>
+      {markersCoworking.length > 0 && (
+        <Map
+          {...cameraProps}
+          onCameraChanged={handleCameraChange}
+          style={{ width: '100%', height: '500px' }}
         >
-          <div className="w-56 rounded-lg bg-white">
-            <img
-              src={selectMarker.thumbnail}
-              alt={selectMarker.name}
-              className=" w-full rounded-md"
+          {markersCoworking.map((marker: any, index: any) => (
+            <Marker
+              key={index}
+              position={marker.position}
+              onClick={() => setSelectMarker(marker)}
+              icon={marker.icon}
             />
-            <h2 className="mb-2 text-xl font-semibold">{selectMarker.name}</h2>
-            <p className="mb-2 text-sm text-gray-600">
-              <strong>Horario:</strong> {selectMarker.open} -{' '}
-              {selectMarker.close}
-            </p>
-            <Link href={`/coworkings/${selectMarker.id}`} passHref>
-              <button className="btn btn-confirm">Ver Detalles</button>
-            </Link>
-          </div>
-        </InfoWindow>
+          ))}
+          {selectMarker && (
+            <InfoWindow
+              position={selectMarker.position}
+              onCloseClick={() => setSelectMarker(null)}
+            >
+              <div className="w-56 rounded-lg bg-white">
+                <img
+                  src={selectMarker.thumbnail}
+                  alt={selectMarker.name}
+                  className=" w-full rounded-md"
+                />
+                <h2 className="mb-2 text-xl font-semibold">
+                  {selectMarker.name}
+                </h2>
+                <p className="mb-2 text-sm text-gray-600">
+                  <strong>Horario:</strong> {selectMarker.open} -{' '}
+                  {selectMarker.close}
+                </p>
+                <Link href={`/coworkings/${selectMarker.id}`} passHref>
+                  <button className="btn btn-confirm">Ver Detalles</button>
+                </Link>
+              </div>
+            </InfoWindow>
+          )}
+        </Map>
       )}
-    </Map>
+    </>
   );
 };
 
