@@ -24,6 +24,7 @@ const MapCoworking = ({
   const [markersCoworking, setMarkersCoworking] = useState<any>([]);
   const [cameraProps, setCameraProps] =
     useState<MapCameraProps>(INITIAL_CAMERA);
+  
 
   useEffect(() => {
     setCameraProps((prevProps) => ({
@@ -46,11 +47,7 @@ const MapCoworking = ({
     if (coworkings) {
       const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
         if (coworking.lat && coworking.long) {
-          return {
-            lat: Number(coworking.lat),
-            lng: Number(coworking.long),
-
-          };
+          return { lat: Number(coworking.lat), lng: Number(coworking.long) };
         }
       });
 
@@ -72,10 +69,8 @@ const MapCoworking = ({
         markersCoworking.map((marker: any, index: any) => (
           <Marker
             key={index}
-            position={{
-              lat: Number(marker.lat),
-              lng: Number(marker.lng),
-            }} 
+            position={marker}
+            onClick={() => console.log(marker)}
           />
         ))}
     </Map>
