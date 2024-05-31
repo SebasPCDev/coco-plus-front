@@ -1,9 +1,8 @@
 import { axiosApi } from '../api';
 
-const getAllUsers = async (url?: string) => {
+const getAllCoworkings = async () => {
   try {
-    const response = await axiosApi.get(`/users${url || ''}`);
-    console.log("response", response.data);
+    const response = await axiosApi.get(`/coworkings/all`);
     return response.data;
   } catch (error: any) {
     let message = '';
@@ -16,4 +15,4 @@ const getAllUsers = async (url?: string) => {
   }
 };
 
-export default getAllUsers;
+export default getAllCoworkings;

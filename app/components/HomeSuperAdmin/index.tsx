@@ -1,9 +1,12 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+// 'use client';
+import React from 'react';
 import ProgressCircle from '@/app/components/JulianCompany/home/homeEstadistico/2ProgressCircle';
 import styles from './HomeSuperAdmin.module.css';
-import { fetchSuperadminStats } from './SuperadminStats';
 import Link from 'next/link';
+import getAllCoworkings from '@/utils/api/coworkings/getAllCoworkings';
+import getAllCompanies from '@/utils/api/company/getAllCompanies';
+import getAllRequests from '@/utils/api/requests/getAllrequests';
+import getAllUsers from '@/utils/api/users/getAllUsers';
 
 interface Stat {
   label: any;
@@ -14,26 +17,47 @@ interface Stat {
   link?: any;
 }
 
-export const HomeSuperAdmin = () => {
-  const [superadminStats, setSuperadminStats] = useState<Stat[]>([]);
+export const HomeSuperAdmin = async () => {
+  const allCoworkings = await getAllCoworkings();
+  const allCoworkingsActive = allCoworkings.filter(coworking => coworking.status === 'active')
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const stats = await fetchSuperadminStats();
-        if (superadminStats.length === 0) setSuperadminStats(stats);
-      } catch (error) {
-        console.error(
-          'Error al obtener las estadísticas del superadministrador:',
-          error,
-        );
-      }
-    };
+  const allCompanies = await getAllCompanies();
+  const allCompaniesActive = allCompanies.filter(company => company.status === 'active')
 
-    fetchData();
-  }, []);
+  const allRequests = await getAllRequests();
+  const allRequestsPending = allRequests.filter(requests => requests.status === 'pending')
 
-  console.log(superadminStats);
+  const allUsers = await getAllUsers();
+
+  const superadminStats: Stat[] = [
+    {
+      label: 'Coworkings Activos',
+      value: allCoworkingsActive.length,
+      progress: false,
+      link: '/dashboard/superadmin/coworkings',
+    },
+    {
+      label: 'Empresas Activas',
+      value: allCompaniesActive.length,
+      progress: false,
+      link: '/dashboard/superadmin/companies',
+    },
+    {
+      label: 'Usuarios registrados',
+      value: allUsers.users.length,
+      link: '/dashboard/superadmin/users',
+    },
+    {
+      label: 'Total de Solicitudes',
+      value: allRequests.length,
+      link: '/dashboard/superadmin/requests',
+    },
+    {
+      label: 'Total de Solicitudes Pendientes',
+      value: allRequestsPending.length,
+      link: '/dashboard/superadmin/requests',
+    },
+  ];
 
   return (
     <div className={styles.gralgridtextcont}>
