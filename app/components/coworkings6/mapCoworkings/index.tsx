@@ -36,6 +36,7 @@ const MapCoworking = ({
   }, [cameraPropsNew]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
+    console.log('movi la camara' + ev);
     FilterMap(ev.detail.bounds);
 
     setCameraProps(ev.detail);
@@ -63,13 +64,8 @@ const MapCoworking = ({
         }
       })
       .filter((marker) => marker.position);
-    console.log('esto es después del map' + arrayMarkersCoworkings);
     setMarkersCoworking(arrayMarkersCoworkings);
   };
-
-  useEffect(() => {
-    responseMarker();
-  }, []);
 
   useEffect(() => {
     const test = async () => {

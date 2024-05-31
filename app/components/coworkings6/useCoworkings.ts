@@ -16,12 +16,14 @@ const useCoworkings = () => {
   const [allCities, setAllCities] = useState<any[]>([]);
   const [states, setStates] = useState<any[]>([]);
   const [cities, setCities] = useState<any[]>([]);
-  const [current, setCurrent] = useState(
-    { countryId: undefined, stateId: undefined, cityId: undefined }
-  );
+  const [current, setCurrent] = useState({
+    countryId: undefined,
+    stateId: undefined,
+    cityId: undefined,
+  });
   const [cameraPropsNew, setCameraPropsNew] = useState({
     center: { lat: -17.797610035031738, lng: -63.52392568413111 },
-    zoom: 3,
+    zoom: 5,
   });
 
   const getInitialData = async () => {
@@ -38,7 +40,7 @@ const useCoworkings = () => {
 
   useEffect(() => {
     getInitialData();
-  }, [])
+  }, []);
 
   const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -47,7 +49,7 @@ const useCoworkings = () => {
         // Filter States
         const states = allStates.filter((state) => state.countryId === +value);
         setStates(states);
-        setCurrent({ ...current, countryId: value })
+        setCurrent({ ...current, countryId: value });
         setCities([]);
 
         // Center Map
@@ -70,7 +72,7 @@ const useCoworkings = () => {
         // Filter cities
         const state = states.find((state) => state.id == value);
         const cities = allCities.filter((city) => city.stateId === +value);
-        setCurrent({ ...current, stateId: value })
+        setCurrent({ ...current, stateId: value });
         setCities(cities);
 
         // Center Map
@@ -80,7 +82,9 @@ const useCoworkings = () => {
         });
       } else {
         setCities([]);
-        const country = allCountries.find((country) => country.id === +current.countryId);
+        const country = allCountries.find(
+          (country) => country.id === +current.countryId,
+        );
         setCameraPropsNew({
           center: { lat: Number(country?.lat), lng: Number(country?.long) },
           zoom: 5,
@@ -90,13 +94,15 @@ const useCoworkings = () => {
     if (name === 'city') {
       if (value) {
         const city = cities.find((city) => city.id == value);
-        setCurrent({ ...current, cityId: value })
+        setCurrent({ ...current, cityId: value });
         setCameraPropsNew({
           center: { lat: Number(city?.lat), lng: Number(city?.long) },
           zoom: 12,
         });
       } else {
-        const state = allStates.find((state) => state.id === +current.countryId);
+        const state = allStates.find(
+          (state) => state.id === +current.countryId,
+        );
         setCameraPropsNew({
           center: { lat: Number(state?.lat), lng: Number(state?.long) },
           zoom: 7,
@@ -129,7 +135,7 @@ const useCoworkings = () => {
     FilterMap,
     allCountries,
     allStates,
-    allCities
+    allCities,
   };
 };
 export default useCoworkings;
