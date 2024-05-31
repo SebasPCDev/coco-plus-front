@@ -23,7 +23,7 @@ const useCoworkings = () => {
   });
   const [cameraPropsNew, setCameraPropsNew] = useState({
     center: { lat: -17.797610035031738, lng: -63.52392568413111 },
-    zoom: 5,
+    zoom: 3,
   });
 
   const getInitialData = async () => {

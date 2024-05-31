@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const INITIAL_CAMERA: MapCameraProps = {
   center: { lat: -17.797610035031738, lng: -63.52392568413111 },
-  zoom: 7,
+  zoom: 3,
 };
 
 const MapCoworking = ({
@@ -64,12 +64,15 @@ const MapCoworking = ({
         }
       })
       .filter((marker) => marker.position);
+
+    console.log('arraycoworkings' + arrayMarkersCoworkings);
     setMarkersCoworking(arrayMarkersCoworkings);
   };
 
   useEffect(() => {
     const test = async () => {
-      await responseMarker();
+      const data = await responseMarker();
+      return data;
     };
     test();
     console.log(markersCoworking);
