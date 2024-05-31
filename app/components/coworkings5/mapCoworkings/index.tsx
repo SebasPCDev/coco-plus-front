@@ -56,7 +56,7 @@ const MapCoworking = ({
 
             icon: {
               url: '/markerCoco.png',
-              scaledSize: new window.google.maps.Size(35, 50),
+              // scaledSize: new window.google.maps.Size(35, 50),
             },
           };
         }
@@ -77,7 +77,7 @@ const MapCoworking = ({
       onCameraChanged={handleCameraChange}
       style={{ width: '100%', height: '500px' }}
     >
-      {/* {markersCoworking.length > 0 &&
+      {markersCoworking.length > 0 &&
         markersCoworking.map((marker: any, index: any) => (
           <Marker
             key={index}
@@ -85,7 +85,7 @@ const MapCoworking = ({
             title={marker.title}
             icon={marker.icon}
           />
-        ))} */}
+        ))}
     </Map>
   );
 };

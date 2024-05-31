@@ -62,7 +62,7 @@ const MapCoworking = ({
     >
       {markersCoworking &&
         markersCoworking.map((marker: any, index: any) => (
-          <Marker key={index} position={marker} />
+          <Marker key={index} position={marker}  />
         ))}
     </Map>
   );
