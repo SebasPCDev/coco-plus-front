@@ -20,6 +20,7 @@ const Logout = () => {
         cancelButtonText: 'No',
         confirmButtonColor: '#222B2D',
         cancelButtonColor: '#d33',
+        reverseButtons: true,
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({

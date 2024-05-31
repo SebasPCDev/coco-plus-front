@@ -41,7 +41,7 @@ export default function NavbarDashboard({ user }: { user: UserSession }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800  focus:outline-none ">
+                    <Menu.Button className="relative flex cursor-default rounded-full bg-gray-800 focus:outline-none ">
                       <Image
                         width={48}
                         height={64}
@@ -51,7 +51,7 @@ export default function NavbarDashboard({ user }: { user: UserSession }) {
                       />
                     </Menu.Button>
                   </div>
-                  <Transition
+                  {/* <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
                     enterFrom="transform opacity-0 scale-95"
@@ -89,7 +89,7 @@ export default function NavbarDashboard({ user }: { user: UserSession }) {
                         )}
                       </Menu.Item>
                     </Menu.Items>
-                  </Transition>
+                  </Transition> */}
                 </Menu>
               </div>
             </div>

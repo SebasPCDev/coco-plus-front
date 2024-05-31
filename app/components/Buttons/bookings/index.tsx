@@ -1,9 +1,7 @@
 'use client';
-import { ChangeStatusCompany, ChangeStatusCoworking } from '@/app/lib/actions';
+
 import PutConfirmBooking from '@/utils/puts/putConfirmBooking';
 import { RiCheckLine } from '@remixicon/react';
-
-import Link from 'next/link';
 import Swal from 'sweetalert2';
 
 export function ConfirmBooking({
@@ -19,13 +17,14 @@ export function ConfirmBooking({
 }) {
   const handleClick = () => {
     Swal.fire({
-      title: '¿Estás seguro de querer aceptar la reseva?',
+      title: '¿Estás seguro de querer aceptar la reserva?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#222B2D',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Confirmar',
+      reverseButtons: true,
     })
       .then((result) => {
         if (result.isConfirmed) {

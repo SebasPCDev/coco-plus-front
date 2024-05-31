@@ -16,22 +16,26 @@ const UseCoworkingReceptionists = ({
     ...initialNewReceptionistForm,
     coworkingId: id,
   });
-  const handlechangeNewUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlechangeNewUser = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setNewUserForm({ ...newUserForm, [name]: value });
   };
   const handleClickNewUser = async (e: any) => {
     e.preventDefault();
     const result = await Swal.fire({
-      title: 'crearas un nuevo Recepcionostar para el Coworking?',
+      title: '¿Deseas confirmar la creación del nuevo usuario?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
       confirmButtonColor: '#222B2D',
       cancelButtonColor: '#d33',
+      reverseButtons: true,
     });
-
     if (result.isConfirmed) {
       try {
         const response = await PostNewUserReceptCoworking({
@@ -41,7 +45,7 @@ const UseCoworkingReceptionists = ({
         await getData();
         Swal.fire({
           title:
-            'se ha creado un nuevo recepcionista para este coworking, las credeciales de acceso fueron enviadas  a su correo',
+            'Se ha creado un nuevo recepcionista para este coworking, las credeciales de acceso fueron enviadas a su correo electrónico',
           icon: 'success',
           timer: 4000,
           showConfirmButton: false,

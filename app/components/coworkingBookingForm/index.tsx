@@ -59,8 +59,11 @@ export default function CoworkingBookingForm({
       Swal.fire({
         title: '¿Estás seguro de reservar?',
         showCancelButton: true,
-        confirmButtonText: 'Sí',
-        cancelButtonText: 'No',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#222B2D',
+        cancelButtonColor: '#d33',
+        reverseButtons: true,
       }).then(async (result) => {
         if (result.isConfirmed && currentCoworking.id) {
           try {
@@ -77,15 +80,30 @@ export default function CoworkingBookingForm({
               'success',
             );
           } catch (error: any) {
-            Swal.fire('Error', error, 'error');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.response.data.message,
+              confirmButtonColor: '#222B2D',
+            });
           }
         }
       });
     } else {
       if (errorsTime.length) {
-        Swal.fire('Error', errorsTime[0], 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorsTime[0],
+          confirmButtonColor: '#222B2D',
+        });
       } else {
-        Swal.fire('Error', 'Selecciona una fecha y hora', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Seleccione una fecha y hora',
+          confirmButtonColor: '#222B2D',
+        });
       }
     }
   };

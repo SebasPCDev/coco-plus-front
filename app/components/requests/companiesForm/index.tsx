@@ -24,6 +24,7 @@ const CompaniesForm = () => {
       <form
         className="mx-auto max-w-4xl rounded-lg bg-white p-8 pt-[100px] shadow-lg lg:my-5 lg:pt-0"
         onSubmit={handleSubmit}
+        noValidate
       >
         <h1 className="col-span-2 mb-8 text-center text-4xl font-bold">
           Soy una Empresa
@@ -95,7 +96,11 @@ const CompaniesForm = () => {
         </div>
 
         <div className="mt-8 flex justify-between">
-          <button onClick={handleCancel} className="btn btn-cancel">
+          <button
+            onClick={handleCancel}
+            className="btn btn-cancel"
+            type="button"
+          >
             Cancelar
           </button>
           <button className="btn btn-confirm" type="submit">

@@ -1,8 +1,10 @@
 import PostNewCoworking from '@/utils/posts/postNewCoworking';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserContext } from '../../context';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import newCoworkingValidation from '@/utils/formValidation/newCoworkingValidation';
+import ICoworkingsErrorInfo from '@/utils/types/requests/coworkingFormErrorInterface';
 const useCreateCoworking = () => {
   const router = useRouter();
   const initialState: any = {
@@ -24,6 +26,12 @@ const useCreateCoworking = () => {
 
   const { token } = useUserContext();
   const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState({} as ICoworkingsErrorInfo);
+
+  useEffect(() => {
+    const errors = newCoworkingValidation(formData);
+    setErrors(errors);
+  }, [formData]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -49,22 +57,33 @@ const useCreateCoworking = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const errors = newCoworkingValidation(formData);
+    if (Object.keys(errors).length > 0) {
+      Swal.fire({
+        title: 'Error en el formulario',
+        text: 'Por favor revisa los campos marcados en rojo',
+        icon: 'error',
+      });
+      return;
+    }
     try {
       await Swal.fire({
         title: 'Estás seguro de crear este Coworking?',
         showCancelButton: true,
-        confirmButtonText: 'Crear',
-        confirmButtonColor: '#4caf50',
+        confirmButtonText: 'Confirmar',
+        confirmButtonColor: '#222B2D',
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#d33',
         reverseButtons: true,
-        denyButtonText: `Cancelar`,
       }).then(async (result) => {
         if (result.isConfirmed && token) {
           const response = await PostNewCoworking({ formData, token });
-          Swal.fire(
-            `Se ha creado el coworking ${formData.name}`,
-            '',
-            'success',
-          );
+          Swal.fire({
+            title: `Se ha creado el coworking ${formData.name}`,
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false,
+          });
           router.push('/dashboard/adminCoworking/myCoworkings');
         } else if (result.isDenied) {
           Swal.fire('se cancelo', '', 'info');
@@ -87,6 +106,7 @@ const useCreateCoworking = () => {
     handleChange,
     handleSubmit,
     handleChangePhone,
+    errors,
   };
 };
 

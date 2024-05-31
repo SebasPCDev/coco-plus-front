@@ -23,6 +23,8 @@ const useCompaniesForm = () => {
   const [companiesInfoError, setCompaniesInfoError] =
     useState<ICompaniesErrorInfo>(INITIAL_COMPANIES_INFO_ERROR);
 
+  const [trigger, setTrigger] = useState<boolean>(false);
+
   useEffect(() => {
     const errors = companyValidation(companiesInfo);
     setCompaniesInfoError(errors);
@@ -54,7 +56,16 @@ const useCompaniesForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const errors = companyValidation(companiesInfo);
+    if (Object.keys(errors).length > 0) {
+      Swal.fire({
+        title: 'Error en el formulario',
+        text: `Por favor, complete los campos correctamente`,
+        icon: 'error',
+        confirmButtonColor: '#222B2D',
+      });
+      return;
+    }
     try {
       const response = await PostCompany(companiesInfo);
       Swal.fire({
