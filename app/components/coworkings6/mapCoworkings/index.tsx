@@ -47,21 +47,23 @@ const MapCoworking = ({
 
   const responseMarker = () => {
     if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
-        if (coworking.lat && coworking.long) {
-          return {
-            position: {
-              lat: Number(coworking.lat),
-              lng: Number(coworking.long),
-            },
-            name: coworking.name,
-            id: coworking.id,
-            open: coworking.open,
-            close: coworking.close,
-            thumbnail: coworking.thumbnail,
-          };
-        }
-      });
+      const arrayMarkersCoworkings = coworkings
+        .map((coworking: any) => {
+          if (coworking.lat && coworking.long) {
+            return {
+              position: {
+                lat: Number(coworking.lat),
+                lng: Number(coworking.long),
+              },
+              name: coworking.name,
+              id: coworking.id,
+              open: coworking.open,
+              close: coworking.close,
+              thumbnail: coworking.thumbnail,
+            };
+          }
+        })
+        .filter((marker) => marker.position);
       setMarkersCoworking(arrayMarkersCoworkings);
 
       console.log(arrayMarkersCoworkings);
