@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import Cookie from 'js-cookie';
-import {  HandleLogout } from '@/actions/auth';
+import { HandleLogout } from '@/actions/auth';
 import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
 import IChangePassErrorForm from '@/utils/types/auth/changePassFormErrorInterface';
 import changePassValidation from '@/utils/formValidation/changePassValidatio';
@@ -10,18 +10,18 @@ import recoveryPassword from '@/utils/api/auth/recoveryPassword';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '../../context';
 
-
 const useRecoveryPasswordForm = (token: string) => {
   const router = useRouter();
   const { setUser, setToken } = useUserContext();
   const [changePassForm, setChangePassForm] = useState<IChangePassForm>({
     password: '',
-    confPassword: ''
+    confPassword: '',
   });
-  const [changePassFormError, setChangePassFormError] = useState<IChangePassErrorForm>({
-    password: '',
-    confPassword: ''
-  });
+  const [changePassFormError, setChangePassFormError] =
+    useState<IChangePassErrorForm>({
+      password: '',
+      confPassword: '',
+    });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
 
@@ -41,42 +41,51 @@ const useRecoveryPasswordForm = (token: string) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!token) 
+    if (!token)
       Swal.fire({
         icon: 'error',
         title: 'Token Inválido',
         // text: data.error,
-       });
-    
+      });
+
     const errors = changePassValidation(changePassForm);
     setChangePassFormError(errors);
-    
+
     if (errors.password || errors.confPassword) return;
 
     try {
-      const data = await recoveryPassword(token, changePassForm.password)
+      const data = await recoveryPassword(token, changePassForm.password);
       await Swal.fire({
-         icon: 'success',
-         title: 'Contraseña modificada',
-         showConfirmButton: false,
-         width: '450px',
-         timer: 2000,
-        }); 
-        HandleLogout();
-        setToken(undefined);
-        setUser(undefined);
-        Cookie.remove('token');
-        Cookie.remove('user');
-        router.push('/');
+        icon: 'success',
+        title: 'Contraseña modificada',
+        showConfirmButton: false, //ARREGLADO
+        width: '450px',
+        timer: 2000,
+      });
+      HandleLogout();
+      setToken(undefined);
+      setUser(undefined);
+      Cookie.remove('token');
+      Cookie.remove('user');
+      router.push('/');
     } catch (error: any) {
-         Swal.fire({
-         icon: 'error',
-         title: 'Error mModificando la contraseña',
-         text: error,
-       });
+      Swal.fire({
+        icon: 'error',
+        title: 'Error mModificando la contraseña',
+        text: error,
+      });
     }
   };
 
-  return { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword, togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility }
-}
-export default useRecoveryPasswordForm
+  return {
+    changePassForm,
+    changePassFormError,
+    handleChange,
+    handleSubmit,
+    showPassword,
+    togglePasswordVisibility,
+    showConfPassword,
+    toggleConfPasswordVisibility,
+  };
+};
+export default useRecoveryPasswordForm;

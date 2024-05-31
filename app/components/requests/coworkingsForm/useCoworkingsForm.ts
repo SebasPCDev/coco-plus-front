@@ -52,6 +52,16 @@ const useCoworkingsForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const errors = coworkingValidation(coworkingInfo);
+    if (Object.keys(errors).length > 0) {
+      Swal.fire({
+        title: 'Error en el formulario',
+        text: 'Por favor, complete los campos correctamente',
+        icon: 'error',
+        confirmButtonColor: '#222B2D',
+      });
+      return;
+    }
     try {
       const response = await PostCoworkings(coworkingInfo);
       Swal.fire({

@@ -30,11 +30,12 @@ const MemberForm: React.FC = () => {
 
   return (
     <>
-      <form className="container mx-auto py-8" onSubmit={handleSubmit}>
-        <h2 className="mb-3 mt-4 text-lg font-semibold">Nuevo Empleado</h2>
-
+      <form
+        className="container mx-auto py-8"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div>
-          <h3 className="mb-1 mt-4 text-lg font-semibold">Nombre</h3>
           <div className="grid grid-cols-2 gap-4">
             {formDataCompaniesAddEmployee
               .slice(0, 2)

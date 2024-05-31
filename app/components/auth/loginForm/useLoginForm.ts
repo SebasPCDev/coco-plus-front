@@ -41,7 +41,7 @@ const useLoginForm = () => {
       await Swal.fire({
         icon: 'success',
         title: 'Bienvenido',
-        showConfirmButton: false,
+        showConfirmButton: false, //ARREGLADO
         width: '450px',
         timer: 2000,
       });
@@ -54,10 +54,11 @@ const useLoginForm = () => {
         icon: 'error',
         title: 'Error',
         text: 'Usuario o contraseña incorrectos',
+        confirmButtonColor: '#222B2D',
       });
     }
   };
 
-  return { LoginForm, LoginFormError, handleChange, handleSubmit }
-}
-export default useLoginForm
+  return { LoginForm, LoginFormError, handleChange, handleSubmit };
+};
+export default useLoginForm;

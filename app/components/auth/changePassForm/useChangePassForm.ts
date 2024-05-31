@@ -9,18 +9,18 @@ import IChangePassForm from '@/utils/types/auth/changePassFormInterface';
 import IChangePassErrorForm from '@/utils/types/auth/changePassFormErrorInterface';
 import changePassValidation from '@/utils/formValidation/changePassValidatio';
 
-
 const useChangePassForm = () => {
   const router = useRouter();
   const { setUser, setToken } = useUserContext();
   const [changePassForm, setChangePassForm] = useState<IChangePassForm>({
     password: '',
-    confPassword: ''
+    confPassword: '',
   });
-  const [changePassFormError, setChangePassFormError] = useState<IChangePassErrorForm>({
-    password: '',
-    confPassword: ''
-  });
+  const [changePassFormError, setChangePassFormError] =
+    useState<IChangePassErrorForm>({
+      password: '',
+      confPassword: '',
+    });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
 
@@ -51,7 +51,7 @@ const useChangePassForm = () => {
       await Swal.fire({
         icon: 'success',
         title: 'Contraseña modificada',
-        showConfirmButton: false,
+        showConfirmButton: false, //ARREGLADO
         width: '450px',
         timer: 2000,
       });
@@ -62,7 +62,6 @@ const useChangePassForm = () => {
       Cookie.remove('token');
       Cookie.remove('user');
       router.push('/');
-
     } else {
       Swal.fire({
         icon: 'error',
@@ -72,6 +71,15 @@ const useChangePassForm = () => {
     }
   };
 
-  return { changePassForm, changePassFormError, handleChange, handleSubmit, showPassword, togglePasswordVisibility, showConfPassword, toggleConfPasswordVisibility }
-}
-export default useChangePassForm
+  return {
+    changePassForm,
+    changePassFormError,
+    handleChange,
+    handleSubmit,
+    showPassword,
+    togglePasswordVisibility,
+    showConfPassword,
+    toggleConfPasswordVisibility,
+  };
+};
+export default useChangePassForm;

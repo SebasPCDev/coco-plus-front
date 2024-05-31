@@ -70,7 +70,9 @@ export const ProfileViewEmployee = () => {
           showCancelButton: true,
           confirmButtonColor: '#222B2D',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, actualizar!',
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar',
+          reverseButtons: true,
         }).then((result: any) => {
           if (result.isConfirmed) {
             Swal.fire({

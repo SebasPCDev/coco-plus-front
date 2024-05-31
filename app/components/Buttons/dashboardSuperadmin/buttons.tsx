@@ -324,11 +324,12 @@ export function CancelBookingUser({
     Swal.fire({
       title: '¿Estás seguro de querer cancelar la reserva?',
       icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#222B2D',
-      cancelButtonText: '',
-      confirmButtonText: 'Si, cancelar',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar', //ARREGLADO
+      confirmButtonText: 'Confirmar',
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         try {
@@ -428,11 +429,12 @@ export function CancelBookingCoworking({
     Swal.fire({
       title: '¿Estás seguro de querer cancelar la reserva?',
       icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#222B2D',
-      cancelButtonText: '',
-      confirmButtonText: 'Si, cancelar',
+      showCancelButton: true,
+      confirmButtonColor: '#222B2D',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar', //ARREGLADO
+      confirmButtonText: 'Confirmar',
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         try {
@@ -486,6 +488,7 @@ export function ApproveBooking({
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Aprobar',
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         try {
@@ -509,4 +512,3 @@ export function ApproveBooking({
     </>
   );
 }
-

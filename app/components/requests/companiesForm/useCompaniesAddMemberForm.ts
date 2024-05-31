@@ -58,24 +58,19 @@ const useCompaniesFormAddEmployee = () => {
       companiesInfoAddEmployee.status = 'active';
       companiesInfoAddEmployee.passes = Number(companiesInfoAddEmployee.passes);
       companiesInfoAddEmployee.passesAvailable = Number(
-      companiesInfoAddEmployee.passes,
+        companiesInfoAddEmployee.passes,
       );
-      console.log(profile);
-      console.log(companiesInfoAddEmployee);
       const response = await createEmployee(companiesInfoAddEmployee);
-      console.log(response);
       Swal.fire({
-        title: 'Empleado creado',
-        /* text: '', */
+        title: 'Empleado creado satisfactoriamente',
         icon: 'success',
         width: '32em',
       });
       router.push('/dashboard/adminCompany/empleados');
     } catch (error: any) {
-      console.error('Error al enviar la solicitud:', error);
       Swal.fire({
         title: 'Error enviando la solicitud',
-        text: error,
+        text: 'Revise los campos marcados en rojo',
         icon: 'error',
       });
     }

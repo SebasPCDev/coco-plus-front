@@ -6,6 +6,7 @@ import useCreateCoworking from './useCreateCoworking';
 import { useRouter } from 'next/navigation';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import ICoworkingsErrorInfo from '@/utils/types/requests/coworkingFormErrorInterface';
 
 const CoworkingForm = () => {
   const {
@@ -14,6 +15,7 @@ const CoworkingForm = () => {
     handleChange,
     handleSubmit,
     handleChangePhone,
+    errors,
   } = useCreateCoworking();
   const router = useRouter();
 
@@ -75,6 +77,9 @@ const CoworkingForm = () => {
                   className="input-form"
                 />
               )}
+              <p className="input-error">
+                {errors[section.name] as keyof ICoworkingsErrorInfo}
+              </p>
             </div>
           </div>
         ))}
