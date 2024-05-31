@@ -42,15 +42,15 @@ const MapCoworking = ({
     setCameraProps(ev.detail);
   };
 
-  const responseMarker = async () => {
+  const responseMarker = () => {
     if (coworkings) {
-      const arrayMarkersCoworkings = coworkings.map(async (coworking: any) => {
+      const arrayMarkersCoworkings = coworkings.map( (coworking: any) => {
         if (coworking.lat && coworking.long) {
           return { lat: Number(coworking.lat), lng: Number(coworking.long) };
         }
       });
 
-      setMarkersCoworking(await Promise.all(arrayMarkersCoworkings));
+      setMarkersCoworking( Promise.all(arrayMarkersCoworkings));
     }
   };
 
