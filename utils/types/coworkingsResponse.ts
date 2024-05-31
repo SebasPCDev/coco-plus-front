@@ -17,4 +17,4 @@ interface IResponseCoworking {
   thumbnail: string | null;
 }
 
-export default IResponseCoworking
+export default IResponseCoworking;

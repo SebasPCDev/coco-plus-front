@@ -33,12 +33,6 @@ const MapCoworking = ({
   const [selectMarker, setSelectMarker] = useState<any>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCameraProps(INITIAL_CAMERA2);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
     setCameraProps((prevProps) => ({
       ...prevProps,
       ...cameraPropsNew,
@@ -52,7 +46,7 @@ const MapCoworking = ({
   };
 
   const responseMarker = async () => {
-    if (coworkings.length > 0 && coworkings) {
+    if (coworkings.length > 0) {
       const arrayMarkersCoworkings = await coworkings
         .map((coworking: any) => {
           if (coworking.lat && coworking.long) {
@@ -60,6 +54,22 @@ const MapCoworking = ({
               position: {
                 lat: Number(coworking.lat),
                 lng: Number(coworking.long),
+              },
+              icon: {
+                url: '/markerCoco.png',
+                scaledSize: new window.google.maps.Size(35, 50),
+              },
+              name: coworking.name,
+              id: coworking.id,
+              open: coworking.open,
+              close: coworking.close,
+              thumbnail: coworking.thumbnail,
+            };
+          } else {
+            return {
+              position: {
+                lat: -31.417967,
+                lng: -64.184203,
               },
               icon: {
                 url: '/markerCoco.png',
@@ -89,14 +99,15 @@ const MapCoworking = ({
         onCameraChanged={handleCameraChange}
         style={{ width: '100%', height: '500px' }}
       >
-        {markersCoworking.map((marker: any, index: any) => (
-          <Marker
-            key={index}
-            position={marker.position}
-            onClick={() => setSelectMarker(marker)}
-            icon={marker.icon}
-          />
-        ))}
+        {markersCoworking &&
+          markersCoworking.map((marker: any, index: any) => (
+            <Marker
+              key={index}
+              position={marker.position}
+              onClick={() => setSelectMarker(marker)}
+              icon={marker.icon}
+            />
+          ))}
         {selectMarker && (
           <InfoWindow
             position={selectMarker.position}

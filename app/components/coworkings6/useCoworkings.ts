@@ -28,8 +28,11 @@ const useCoworkings = () => {
 
   const getInitialData = async () => {
     const currentcoworkings = await getAllCoworkings();
+    const coworkings = currentcoworkings.filter(
+      (coworking) => coworking.status === 'active',
+    );
     setAllCoworkings(currentcoworkings);
-    setCoworkings(currentcoworkings);
+    setCoworkings(coworkings);
     const allCountries = await getCountries();
     const allStates = await getStates();
     const allCities = await getCities();
