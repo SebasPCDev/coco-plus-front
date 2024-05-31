@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 const useForgotPassForm = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -23,8 +24,9 @@ const useForgotPassForm = () => {
     }
 
     try {
-      const response = await forgotPassword(email);
-      console.log('response', response);
+      setLoading(true);
+      await forgotPassword(email);
+      setLoading(false);
       /* recovery-password */
       await Swal.fire({
         icon: 'success',
@@ -42,7 +44,7 @@ const useForgotPassForm = () => {
     }
   };
 
-  return { email, emailError, handleChange, handleSubmit };
+  return { email, emailError, loading, handleChange, handleSubmit };
 };
 
 export default useForgotPassForm;
