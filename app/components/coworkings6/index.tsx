@@ -13,7 +13,7 @@ export const Coworkings3 = () => {
     states,
     cities,
     FilterMap,
-    allCountries
+    allCountries,
   } = useCoworkings();
 
   return (
@@ -29,7 +29,7 @@ export const Coworkings3 = () => {
         handleChange={handleChange}
       />
 
-      <div className='mt-12'>
+      <div className="mt-12">
         <MapCoworking
           coworkings={coworkings}
           cameraPropsNew={cameraPropsNew}
