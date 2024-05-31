@@ -4,7 +4,6 @@ import getCountriesfilter from '@/utils/gets/countriesFilter';
 import GetCoworkingsFilter from '@/utils/gets/getCoworkingsFilter';
 import getoptions from '@/utils/gets/getoptionsFilter';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import page from '../coworkings/page';
 
 const useCoworkings = () => {
   const pathname = usePathname();

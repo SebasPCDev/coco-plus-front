@@ -2,10 +2,12 @@ import Header from '../header';
 import Banner from '../Banner';
 import HeaderMain from '../mainHeader';
 import Service from '../Service';
-import Coworkings3 from '../coworkings3';
-import Footer from '../Footer';
+import Coworkings3 from '../coworkings4';
 
-const Home = () => {
+// import MapCoworking from '../coworkings2/mapCoworkings';
+import Footer from '../Footer';
+const Home = async () => {
+
   return (
     <div>
       <Header />
