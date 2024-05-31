@@ -42,32 +42,28 @@ const MapCoworking = ({
   };
 
   const responseMarker = () => {
-    setTimeout(() => {
-      if (coworkings) {
-        const arrayMarkersCoworkings = coworkings
-          .map((coworking: any) => {
-            if (coworking.lat && coworking.long) {
-              return {
-                position: {
-                  lat: Number(coworking.lat),
-                  lng: Number(coworking.long),
-                },
-                icon: {
-                  url: '/markerCoco.png',
-                  scaledSize: new window.google.maps.Size(35, 50),
-                },
-                name: coworking.name,
-                id: coworking.id,
-                open: coworking.open,
-                close: coworking.close,
-                thumbnail: coworking.thumbnail,
-              };
-            }
-          })
-          .filter((marker) => marker.position);
-        setMarkersCoworking(arrayMarkersCoworkings);
-      }
-    }, 2000);
+    if (coworkings) {
+      const arrayMarkersCoworkings = coworkings.map((coworking: any) => {
+        if (coworking.lat && coworking.long) {
+          return {
+            position: {
+              lat: Number(coworking.lat),
+              lng: Number(coworking.long),
+            },
+            icon: {
+              url: '/markerCoco.png',
+              scaledSize: new window.google.maps.Size(35, 50),
+            },
+            name: coworking.name,
+            id: coworking.id,
+            open: coworking.open,
+            close: coworking.close,
+            thumbnail: coworking.thumbnail,
+          };
+        }
+      });
+      setMarkersCoworking(arrayMarkersCoworkings);
+    }
   };
 
   useEffect(() => {
