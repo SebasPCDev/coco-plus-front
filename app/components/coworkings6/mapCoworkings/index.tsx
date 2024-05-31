@@ -36,7 +36,6 @@ const MapCoworking = ({
   }, [cameraPropsNew]);
 
   const handleCameraChange = (ev: MapCameraChangedEvent) => {
-    console.log('movi la camara' + ev);
     FilterMap(ev.detail.bounds);
 
     setCameraProps(ev.detail);
@@ -75,7 +74,7 @@ const MapCoworking = ({
       return data;
     };
     test();
-    console.log(markersCoworking);
+    console.log('coworkings' + coworkings);
   }, [coworkings]);
 
   return (
