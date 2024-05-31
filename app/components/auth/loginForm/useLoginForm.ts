@@ -16,6 +16,7 @@ const useLoginForm = () => {
     email: '',
     password: '',
   });
+  const [loading, setLoading] = useState(true);
 
   const [LoginFormError, setLoginFormError] = useState<ILoginErrorForm>({
     email: '',
@@ -32,16 +33,18 @@ const useLoginForm = () => {
     setLoginFormError(errors);
     if (errors.email || errors.password) return;
 
+    setLoading(true);
     const data = await HandleLogin(LoginForm);
+    setLoading(false);
 
-    //const data = await PostLogin(LoginForm);
     if (!data.error) {
+
       setUser(data.user);
       setToken(data.token);
       await Swal.fire({
         icon: 'success',
         title: 'Bienvenido',
-        showConfirmButton: false, //ARREGLADO
+        showConfirmButton: false,
         width: '450px',
         timer: 2000,
       });
@@ -59,6 +62,6 @@ const useLoginForm = () => {
     }
   };
 
-  return { LoginForm, LoginFormError, handleChange, handleSubmit };
+  return { LoginForm, LoginFormError, loading, handleChange, handleSubmit };
 };
 export default useLoginForm;

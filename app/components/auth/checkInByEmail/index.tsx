@@ -3,7 +3,7 @@ import putCheckInByEmail from '@/utils/api/users/putCheckInByEmail';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import Spinner from '../../shared/Spinner';
+import SpinnerLine from '../../shared/SpinnerLine';
 
 const CheckInbyEmail = ({ searchParams }: { searchParams: { token: string } }) => {
   const token = searchParams.token;
@@ -37,7 +37,7 @@ const CheckInbyEmail = ({ searchParams }: { searchParams: { token: string } }) =
               <h1 className="m-6 text-center text-2xl font-bold text-gray-800">
                 Iniciando proceso de Check-in
               </h1>
-              <p className='h-20 mx-auto w-full mb-6'><Spinner /></p>
+              <p className='h-20 mx-auto w-full mb-6'><SpinnerLine /></p>
             </>
           ) : (
             <>
